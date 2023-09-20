@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using MauiApp1.Data;
+using Microsoft.Extensions.Logging;
 
 namespace MauiApp1;
 
@@ -18,6 +19,8 @@ public static class MauiProgram
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
+
+		builder.Services.AddSingleton<Database>();
 
 		return builder.Build();
 	}

@@ -60,10 +60,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="RolePage.xaml.cs">
+	    <DependentUpon>RolePage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiXaml Update="MauiPage1.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Roles.xaml">
+	  <MauiXaml Update="RolePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

@@ -1,7 +1,7 @@
 Workflow for our project:
  When working on an issue
 - Move the issue to in progress, and assign to yourself
-- Make a feature branch with the naming convention MAUI-APP#<your issue number>, push directly to there, NOT Develop or Master
+- Make a feature branch with the naming convention feature/MAUI-APP#<your issue number>, push directly to there, NOT Develop or Master
 - Make all commit messages verbose, so the whole team can understand what you have added 
 
 When moving your branch to Develop/Master:

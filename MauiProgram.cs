@@ -1,4 +1,5 @@
 ﻿using MauiApp1.Data;
+using MauiApp1.Services;
 using Microsoft.Extensions.Logging;
 
 namespace MauiApp1;
@@ -21,7 +22,8 @@ public static class MauiProgram
 #endif
 
 		builder.Services.AddSingleton<Database>();
+        builder.Services.AddSingleton<IContinentService, ContinentService>();
 
-		return builder.Build();
+        return builder.Build();
 	}
 }

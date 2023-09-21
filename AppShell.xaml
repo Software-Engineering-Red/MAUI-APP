@@ -10,19 +10,19 @@
     <TabBar>
         <ShellContent
             Title="Main"
-            ContentTemplate="{DataTemplate views:WelcomePage}"
+            ContentTemplate="{DataTemplate local:MainPage}"
             Icon="{OnPlatform 'icon_notes.png', iOS='icon_notes_ios.png', MacCatalyst='icon_notes_ios.png'}" />
 
         <ShellContent
             Title="Roles"
-            ContentTemplate="{DataTemplate views:RolePage}"
+            ContentTemplate="{DataTemplate local:RolePage}"
             Icon="{OnPlatform 'icon_about.png', iOS='icon_about_ios.png', MacCatalyst='icon_about_ios.png'}" />
-
+        
         <ShellContent
             Title="Continents"
             ContentTemplate="{DataTemplate views:ContinentPage}"
             Icon="{OnPlatform 'icon_continent.png', iOS='icon_continent_ios.png', MacCatalyst='icon_continent_ios.png'}" />
-
+        
     </TabBar>
 
 </Shell>

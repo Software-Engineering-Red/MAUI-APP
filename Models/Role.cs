@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 using SQLite;
 
 namespace MauiApp1.Models;
+[Table("Roles")]
 public class Role
 {
-    [PrimaryKey, AutoIncrement]
+    [MaxLength(250), Unique]
     public string Name { get; set; }
 }

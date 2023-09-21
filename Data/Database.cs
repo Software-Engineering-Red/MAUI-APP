@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using MauiApp1.Models;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace MauiApp1.Data
 
             _database = new SQLiteAsyncConnection(DatabaseSettings.DBPath, DatabaseSettings.Flags);
             // TODO: Create tables that we will use for project
+            _database.CreateTableAsync<Role>(); // Created Roles table within database
         }
     }
 }

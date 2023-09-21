@@ -8,10 +8,6 @@
     Shell.FlyoutBehavior="Disabled">
 
     <TabBar>
-        <ShellContent
-            Title="Main"
-            ContentTemplate="{DataTemplate local:MainPage}"
-            Icon="{OnPlatform 'icon_notes.png', iOS='icon_notes_ios.png', MacCatalyst='icon_notes_ios.png'}" />
 
         <ShellContent
             Title="Roles"

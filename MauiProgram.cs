@@ -23,6 +23,7 @@ public static class MauiProgram
 
 		builder.Services.AddSingleton<Database>();
         builder.Services.AddSingleton<ISkillService, SkillService>();
+        builder.Services.AddSingleton<IRoleService, RoleService>();
 
         return builder.Build();
 	}

@@ -18,7 +18,12 @@
             Title="Skill"
             ContentTemplate="{DataTemplate views:SkillPage}"
              />
-        
+
+        <ShellContent
+            Title="Role"
+            ContentTemplate="{DataTemplate views:RolesPage}"
+             /> 
+
     </TabBar>
 
 </Shell>

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MauiApp1.Models
 {
-    internal class Role
+    public class Role
     {
         public string Name { get; set; }
     }

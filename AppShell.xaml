@@ -10,8 +10,14 @@
     <TabBar>
 
         <ShellContent
+    Title="Welcome"
+    ContentTemplate="{DataTemplate views:WelcomePage}"
+    Icon="{OnPlatform 'icon_about.png', iOS='icon_about_ios.png', MacCatalyst='icon_about_ios.png'}" />
+
+
+        <ShellContent
             Title="Roles"
-            ContentTemplate="{DataTemplate local:RolePage}"
+            ContentTemplate="{DataTemplate views:RolePage}"
             Icon="{OnPlatform 'icon_about.png', iOS='icon_about_ios.png', MacCatalyst='icon_about_ios.png'}" />
         
         <ShellContent

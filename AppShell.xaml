@@ -15,8 +15,8 @@
             Icon="{OnPlatform 'icon_about.png', iOS='icon_about_ios.png', MacCatalyst='icon_about_ios.png'}" />
 
         <ShellContent
-            Title="Roles"
-            ContentTemplate="{DataTemplate views:RolePage}"
+            Title="Equipment"
+            ContentTemplate="{DataTemplate views:EquipmentPage}"
             Icon="{OnPlatform 'icon_about.png', iOS='icon_about_ios.png', MacCatalyst='icon_about_ios.png'}" />
         
         <ShellContent

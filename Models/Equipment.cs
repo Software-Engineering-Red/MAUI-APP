@@ -10,7 +10,7 @@ using System.Xml.Linq;
 
 namespace MauiApp1.Models
 {
-    public class Role : INotifyPropertyChanged
+    public class Equipment : INotifyPropertyChanged
     {
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }

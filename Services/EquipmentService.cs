@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MauiApp1.Services
 {
-    public class RoleService : IRoleService
+    public class EquipmentService : IEquipmentService
     {
 
         private SQLiteAsyncConnection _dbConnection;
@@ -21,31 +21,31 @@ namespace MauiApp1.Services
 
 
             _dbConnection = new SQLiteAsyncConnection(DatabaseSettings.DBPath, DatabaseSettings.Flags);
-            await _dbConnection.CreateTableAsync<Role>();
+            await _dbConnection.CreateTableAsync<Equipment>();
         }
 
-        public async Task<int> AddRole(Role role)
+        public async Task<int> AddEquipment(Equipment equipment)
         {
             await SetUpDb();
-            return await _dbConnection.InsertAsync(role);
+            return await _dbConnection.InsertAsync(equipment);
         }
 
-        public async Task<int> DeleteRole(Role role)
+        public async Task<int> DeleteEquipment(Equipment equipment)
         {
             await SetUpDb();
-            return await _dbConnection.DeleteAsync(role);
+            return await _dbConnection.DeleteAsync(equipment);
         }
 
-        public async Task<List<Role>> GetRoleList()
+        public async Task<List<Equipment>> GetEquipmentList()
         {
             await SetUpDb();
-            return await _dbConnection.Table<Role>().ToListAsync();
+            return await _dbConnection.Table<Equipment>().ToListAsync();
         }
 
-        public async Task<int> UpdateRole(Role role)
+        public async Task<int> UpdateEquipment(Equipment equipment)
         {
             await SetUpDb();
-            return await _dbConnection.UpdateAsync(role);
+            return await _dbConnection.UpdateAsync(equipment);
         }
     }
 }

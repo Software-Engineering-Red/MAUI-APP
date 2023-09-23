@@ -63,14 +63,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\EquipmentPage.xaml.cs">
+	    <DependentUpon>EquipmentPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\WelcomePage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Models\" />
-	  <Folder Include="Views\" />
 	</ItemGroup>
 
 	<ItemGroup>

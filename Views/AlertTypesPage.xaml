@@ -17,7 +17,7 @@
                     Clicked="DeleteButton_Clicked" />
         </Grid>
 
-        <ListView x:Name="ltv_alerttypes" Background="white" ItemSelected="ltv_alertypes_ItemSelected">
+        <ListView x:Name="ltv_alerttypes" Background="white" ItemSelected="ltv_alerttypes_ItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextCell TextColor="Black" Text="{Binding Name}"/>

@@ -9,9 +9,9 @@ namespace MauiApp1.Services
 {
     public interface IContinentService
     {
-        Task<List<Continent>> GetContinentList();
-        Task<int> AddContinent(Continent continent);
-        Task<int> DeleteContinent(Continent continent);
-        Task<int> UpdateContinent(Continent continent);
+        Task<List<BuildingType>> GetContinentList();
+        Task<int> AddContinent(BuildingType continent);
+        Task<int> DeleteContinent(BuildingType continent);
+        Task<int> UpdateContinent(BuildingType continent);
     }
 }

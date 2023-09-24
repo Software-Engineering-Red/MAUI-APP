@@ -6,9 +6,9 @@ using System.Collections.ObjectModel;
 namespace MauiApp1.Views;
 
 public partial class ContinentPage : ContentPage {
-    Continent selectedContinent = null;
+    BuildingType selectedContinent = null;
     IContinentService continentService;
-    ObservableCollection<Continent> continents = new ObservableCollection<Continent>();
+    ObservableCollection<BuildingType> continents = new ObservableCollection<BuildingType>();
 
     public ContinentPage() {
         InitializeComponent();
@@ -20,7 +20,7 @@ public partial class ContinentPage : ContentPage {
     }
 
     private async Task LoadContinents() {
-        continents = new ObservableCollection<Continent>(await continentService.GetContinentList());
+        continents = new ObservableCollection<BuildingType>(await continentService.GetContinentList());
         ltv_continents.ItemsSource = continents;
     }
 
@@ -28,7 +28,7 @@ public partial class ContinentPage : ContentPage {
         if (String.IsNullOrEmpty(txe_continent.Text)) return;
 
         if(selectedContinent == null) {
-            var continent = new Continent() { Name=txe_continent.Text};
+            var continent = new BuildingType() { Name=txe_continent.Text};
             continentService.AddContinent(continent);
             continents.Add(continent);
         } else {
@@ -58,7 +58,7 @@ public partial class ContinentPage : ContentPage {
     }
 
     private void ltv_continents_ItemSelected(object sender, SelectedItemChangedEventArgs e) {
-        selectedContinent = e.SelectedItem as Continent;
+        selectedContinent = e.SelectedItem as BuildingType;
         if (selectedContinent == null) return;
 
         txe_continent.Text = selectedContinent.Name;

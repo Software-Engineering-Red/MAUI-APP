@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MauiApp1.Services
 {
-    public class ContinentService : IContinentService {
+    public class BuildingTypeService : IBuildingTypeService {
 
         private SQLiteAsyncConnection _dbConnection;
 
@@ -22,24 +22,24 @@ namespace MauiApp1.Services
             await _dbConnection.CreateTableAsync<BuildingType>();
         }
 
-        public async Task<int> AddContinent(BuildingType continent) {
+        public async Task<int> AddBuildingType(BuildingType buildingType) {
             await SetUpDb();
-            return await _dbConnection.InsertAsync(continent);
+            return await _dbConnection.InsertAsync(buildingType);
         }
 
-        public async Task<int> DeleteContinent(BuildingType continent) {
+        public async Task<int> DeleteBuildingType(BuildingType buildingType) {
             await SetUpDb();
-            return await _dbConnection.DeleteAsync(continent);
+            return await _dbConnection.DeleteAsync(buildingType);
         }
 
-        public async Task<List<BuildingType>> GetContinentList() {
+        public async Task<List<BuildingType>> GetBuildingTypeList() {
             await SetUpDb();
             return await _dbConnection.Table<BuildingType>().ToListAsync();
         }
 
-        public async Task<int> UpdateContinent(BuildingType continent) {
+        public async Task<int> UpdateBuildingType(BuildingType buildingType) {
             await SetUpDb();
-            return await _dbConnection.UpdateAsync(continent);
+            return await _dbConnection.UpdateAsync(buildingType);
         }
     }
 }

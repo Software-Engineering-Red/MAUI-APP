@@ -54,18 +54,38 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="MauiPage1.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\BuildingTypePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\WelcomePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\BuildingTypePage.xaml.cs">
+	    <DependentUpon>BuildingTypePage.xaml</DependentUpon>
+    </Compile>
 	  <Compile Update="Views\RotaPage.xaml.cs">
 	    <DependentUpon>RotaPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\WelcomePage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
+		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.6" />
+		<PackageReference Include="SQLite" Version="3.13.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="MauiPage1.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Roles.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

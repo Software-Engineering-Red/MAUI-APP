@@ -19,25 +19,25 @@ namespace MauiApp1.Services
             
 
             _dbConnection = new SQLiteAsyncConnection(DatabaseSettings.DBPath, DatabaseSettings.Flags);
-            await _dbConnection.CreateTableAsync<BuildingType>();
+            await _dbConnection.CreateTableAsync<Continent>();
         }
 
-        public async Task<int> AddContinent(BuildingType continent) {
+        public async Task<int> AddContinent(Continent continent) {
             await SetUpDb();
             return await _dbConnection.InsertAsync(continent);
         }
 
-        public async Task<int> DeleteContinent(BuildingType continent) {
+        public async Task<int> DeleteContinent(Continent continent) {
             await SetUpDb();
             return await _dbConnection.DeleteAsync(continent);
         }
 
-        public async Task<List<BuildingType>> GetContinentList() {
+        public async Task<List<Continent>> GetContinentList() {
             await SetUpDb();
-            return await _dbConnection.Table<BuildingType>().ToListAsync();
+            return await _dbConnection.Table<Continent>().ToListAsync();
         }
 
-        public async Task<int> UpdateContinent(BuildingType continent) {
+        public async Task<int> UpdateContinent(Continent continent) {
             await SetUpDb();
             return await _dbConnection.UpdateAsync(continent);
         }

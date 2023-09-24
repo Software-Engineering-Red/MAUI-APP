@@ -74,7 +74,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Models\" />
 	  <Folder Include="Views\" />
 	  <Folder Include="Services\" />
 	</ItemGroup>

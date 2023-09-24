@@ -5,8 +5,8 @@
              Title="Organisation Page">
     <VerticalStackLayout Spacing="10" Margin="5">
         <Editor x:Name="txe_organisation"
-                Placeholder="Add a Skill"
-                HeightRequest="80"/>
+                Placeholder="Add Organisation"
+                HeightRequest="100"/>
 
         <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
             <Button Grid.Column="0" Text="Save"

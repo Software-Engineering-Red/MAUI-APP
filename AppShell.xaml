@@ -28,6 +28,10 @@
             ContentTemplate="{DataTemplate views:ContinentPage}"
             Icon="{OnPlatform 'icon_continent.png', iOS='icon_continent_ios.png', MacCatalyst='icon_continent_ios.png'}" />
         <ShellContent
+            Title="Building Types"
+            ContentTemplate="{DataTemplate views:BuildingTypePage}"
+            Icon="{OnPlatform 'icon_building.png', iOS='icon_building_ios.png', MacCatalyst='icon_continent_ios.png'}" /> 
+        <ShellContent
         Title="Organisations"
         ContentTemplate="{DataTemplate views:OrganisationPage}" />
     

@@ -5,72 +5,72 @@ using System.Collections.ObjectModel;
 
 namespace MauiApp1.Views;
 
-public partial class RolePage : ContentPage
+public partial class RotaPage : ContentPage
 {
-    Role selectedRole = null;
-    IRoleService roleService;
-    ObservableCollection<Role> roles = new ObservableCollection<Role>();
+    Rota selectedRota = null;
+    IRotaService rotaService;
+    ObservableCollection<Rota> rotas = new ObservableCollection<Rota>();
 
-    public RolePage()
+    public RotaPage()
     {
         InitializeComponent();
         this.BindingContext = this;
-        this.roleService = new RoleService();
+        this.rotaService = new RotaService();
 
-        Task.Run(async () => await LoadRoles());
-        txe_role.Text = "";
+        Task.Run(async () => await LoadRotas());
+        txe_rota.Text = "";
     }
 
-    private async Task LoadRoles()
+    private async Task LoadRotas()
     {
-        roles = new ObservableCollection<Role>(await roleService.GetRoleList());
-        ltv_roles.ItemsSource = roles;
+        rotas = new ObservableCollection<Rota>(await rotaService.GetRotaList());
+        ltv_rotas.ItemsSource = rotas;
     }
 
     private void SaveButton_Clicked(object sender, EventArgs e)
     {
-        if (String.IsNullOrEmpty(txe_role.Text)) return;
+        if (String.IsNullOrEmpty(txe_rota.Text)) return;
 
-        if (selectedRole == null)
+        if (selectedRota == null)
         {
-            var role = new Role() { Name = txe_role.Text };
-            roleService.AddRole(role);
-            roles.Add(role);
+            var rota = new Rota() { Name = txe_rota.Text };
+            rotaService.AddRota(rota);
+            rotas.Add(rota);
         }
         else
         {
-            selectedRole.Name = txe_role.Text;
-            roleService.UpdateRole(selectedRole);
-            var role = roles.FirstOrDefault(x => x.ID == selectedRole.ID);
-            role.Name = txe_role.Text;
+            selectedRota.Name = txe_rota.Text;
+            rotaService.UpdateRota(selectedRota);
+            var rota = rotas.FirstOrDefault(x => x.ID == selectedRota.ID);
+            rota.Name = txe_rota.Text;
         }
 
 
-        selectedRole = null;
-        ltv_roles.SelectedItem = null;
-        txe_role.Text = "";
+        selectedRota = null;
+        ltv_rotas.SelectedItem = null;
+        txe_rota.Text = "";
     }
 
     private async void DeleteButton_Clicked(object sender, EventArgs e)
     {
-        if (ltv_roles.SelectedItem == null)
+        if (ltv_rotas.SelectedItem == null)
         {
-            await Shell.Current.DisplayAlert("No Role Selected", "Select the role you want to delete from the list", "OK");
+            await Shell.Current.DisplayAlert("No Rota Selected", "Select the rota you want to delete from the list", "OK");
             return;
         }
 
-        await roleService.DeleteRole(selectedRole);
-        roles.Remove(selectedRole);
+        await rotaService.DeleteRota(selectedRota);
+        rotas.Remove(selectedRota);
 
-        ltv_roles.SelectedItem = null;
-        txe_role.Text = "";
+        ltv_rotas.SelectedItem = null;
+        txe_rota.Text = "";
     }
 
-    private void ltv_roles_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+    private void ltv_rotas_ItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
-        selectedRole = e.SelectedItem as Role;
-        if (selectedRole == null) return;
+        selectedRota = e.SelectedItem as Rota;
+        if (selectedRota == null) return;
 
-        txe_role.Text = selectedRole.Name;
+        txe_rota.Text = selectedRota.Name;
     }
 }

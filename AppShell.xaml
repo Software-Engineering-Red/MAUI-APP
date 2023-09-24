@@ -27,6 +27,10 @@
             Title="Continents"
             ContentTemplate="{DataTemplate views:ContinentPage}"
             Icon="{OnPlatform 'icon_continent.png', iOS='icon_continent_ios.png', MacCatalyst='icon_continent_ios.png'}" />
+        <ShellContent
+        Title="Organisations"
+        ContentTemplate="{DataTemplate views:OrganisationPage}" />
+    
     </TabBar>
 
 </Shell>

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace MauiApp1.Models
 {
+    [Table("operational_team_status")]
     public class OperationalTeamStatus : INotifyPropertyChanged
     {
         [PrimaryKey, AutoIncrement]

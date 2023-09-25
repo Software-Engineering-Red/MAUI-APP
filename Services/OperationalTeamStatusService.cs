@@ -15,6 +15,7 @@ namespace MauiApp1.Services
 
         public OperationalTeamStatusService()
         {
+
         }
 
         async Task Init()

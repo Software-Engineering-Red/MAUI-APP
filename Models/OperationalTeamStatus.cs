@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MauiApp1.Models
 {
-    internal class OperationalTeamStatus : INotifyPropertyChanged
+    public class OperationalTeamStatus : INotifyPropertyChanged
     {
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }

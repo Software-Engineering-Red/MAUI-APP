@@ -12,7 +12,7 @@ namespace MauiApp1.Services
         Task<int> AddStatus(OperationalTeamStatus status);
         Task<int> DeleteStatusAsync(OperationalTeamStatus status);
         Task<List<OperationalTeamStatus>> GetStatusesListAsync();
-        Task<OperationalTeamStatus> GetStatusAsync(string name);
+        Task<OperationalTeamStatus> GetStatusAsync(int id);
         Task<int> SaveStatusAsync(OperationalTeamStatus status);
         Task<int> UpdateStatusAsync(OperationalTeamStatus status);
 

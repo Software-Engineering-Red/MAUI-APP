@@ -35,7 +35,7 @@ namespace MauiApp1.Services
         public async Task<int> DeleteStatusAsync(OperationalTeamStatus status)
         {
             await Init();
-            return _dbConnection.DeleteAsync(status);
+            return await _dbConnection.DeleteAsync(status);
         }
         public async Task<List<OperationalTeamStatus>> GetStatusesListAsync()
         {
@@ -43,10 +43,10 @@ namespace MauiApp1.Services
             return await _dbConnection.Table<OperationalTeamStatus>().ToListAsync();
         }
 
-        public async Task<OperationalTeamStatus> GetStatusAsync(string name)
+        public async Task<OperationalTeamStatus> GetStatusAsync(int id)
         {
             await Init();
-            return await _dbConnection.Table<OperationalTeamStatus>().Where(i => i.Name == name).FirstOrDefaultAsync();
+            return await _dbConnection.Table<OperationalTeamStatus>().Where(i => i.ID == id).FirstOrDefaultAsync();
         }
 
         public async Task<int> SaveStatusAsync(OperationalTeamStatus status)

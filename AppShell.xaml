@@ -30,7 +30,11 @@
         <ShellContent
             Title="Building Types"
             ContentTemplate="{DataTemplate views:BuildingTypePage}"
-            Icon="{OnPlatform 'icon_building.png', iOS='icon_building_ios.png', MacCatalyst='icon_continent_ios.png'}" /> 
+            Icon="{OnPlatform 'icon_building.png', iOS='icon_building_ios.png', MacCatalyst='icon_continent_ios.png'}" />
+        <ShellContent
+            Title="Rooms Types"
+            ContentTemplate="{DataTemplate views:RoomTypePage}"
+            Icon="{OnPlatform 'icon_building.png', iOS='icon_building_ios.png', MacCatalyst='icon_continent_ios.png'}" />
     </TabBar>
 
 </Shell>

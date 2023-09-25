@@ -34,7 +34,7 @@ public partial class OperationalTeamStatusPage : ContentPage
         if (selectedStatus == null)
         {
             var status = new OperationalTeamStatus() { Name = txe_status.Text };
-            statusService.AddStatus(status);
+            statusService.SaveStatusAsync(status);
             statuses.Add(status);
         }
         else

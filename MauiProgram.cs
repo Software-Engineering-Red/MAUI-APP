@@ -24,7 +24,11 @@ public static class MauiProgram
 		builder.Services.AddSingleton<Database>();
         builder.Services.AddSingleton<IContinentService, ContinentService>();
         builder.Services.AddSingleton<ISkillService, SkillService>();
-        builder.Services.AddSingleton<ISystemTypeService, SystemTypeService>();
+    builder.Services.AddSingleton<ISystemTypeService, SystemTypeService>();
+
+
+        builder.Services.AddSingleton<IBuildingTypeService, BuildingTypeService>();
+
         return builder.Build();
 	}
 }

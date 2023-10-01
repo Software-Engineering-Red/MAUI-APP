@@ -57,6 +57,7 @@
 	  <MauiXaml Update="MauiPage1.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+      <MauiXaml Update="Views\AlertTypesPage.xaml">
 
 
 	  <MauiXaml Update="Views\BuildingTypePage.xaml">
@@ -83,6 +84,9 @@
 		<PackageReference Include="SQLite" Version="3.13.0" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Views\" />
+	</ItemGroup>
 	<ItemGroup>
 	  <MauiXaml Update="MauiPage1.xaml">
 	    <Generator>MSBuild:Compile</Generator>

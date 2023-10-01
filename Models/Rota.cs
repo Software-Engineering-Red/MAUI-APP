@@ -10,7 +10,7 @@ using System.Xml.Linq;
 
 namespace MauiApp1.Models
 {
-    public class Role : INotifyPropertyChanged
+    public class Rota : INotifyPropertyChanged
     {
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
@@ -29,7 +29,7 @@ namespace MauiApp1.Models
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
-    {
+        {
             if (EqualityComparer<T>.Default.Equals(field, value)) return false;
             field = value;
             OnPropertyChanged(propertyName);
@@ -37,4 +37,3 @@ namespace MauiApp1.Models
         }
     }
 }
-

@@ -1,41 +1,83 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             BackgroundColor="#252525"
              x:Class="MauiApp1.MainPage">
 
     <ScrollView>
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
+        <VerticalStackLayout Spacing="30" Padding="30,20" VerticalOptions="Center">
 
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
+            <!-- Title -->
+            <Label Text="Database Manager" FontSize="26" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" TextColor="White" />
 
-            <Label
-                Text="Hello, World!"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
+            <!-- Table selection -->
+            <Frame CornerRadius="10" Padding="20" BackgroundColor="#373737">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Select a table:" FontSize="20" FontAttributes="Bold" TextColor="White" />
+                    <Picker x:Name="TablePicker" SelectedIndexChanged="OnTableSelected" TextColor="White" BackgroundColor="#454545" />
+                </VerticalStackLayout>
+            </Frame>
 
-            <Label
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
+            <!-- Add record -->
+            <Frame CornerRadius="10" Padding="20" BackgroundColor="#373737">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="{Binding Source={x:Reference TablePicker}, Path=SelectedItem, StringFormat='Add a new record to {0}'}" 
+                           FontSize="20" 
+                           FontAttributes="Bold" 
+                           TextColor="White" />
+                    <Entry x:Name="AddRecordEntry" 
+                           Placeholder="{Binding Source={x:Reference TablePicker}, Path=SelectedItem, StringFormat='Enter new {0} record'}" 
+                           TextColor="White" 
+                           PlaceholderColor="#aaa" 
+                           BackgroundColor="#454545" />
+                    <Button Text="{Binding Source={x:Reference TablePicker}, Path=SelectedItem, StringFormat='Add Record to {0}'}" 
+                            Clicked="OnAddRecord" 
+                            BackgroundColor="#4CAF50" 
+                            TextColor="White" 
+                            CornerRadius="8" />
+                </VerticalStackLayout>
+            </Frame>
 
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
+            <!-- Display records -->
+            <Frame CornerRadius="10" Padding="20" BackgroundColor="#373737">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="{Binding Source={x:Reference TablePicker}, Path=SelectedItem, StringFormat='Records in {0}:'}" 
+                           FontSize="20" 
+                           FontAttributes="Bold" 
+                           TextColor="White" />
+                    <ListView x:Name="RecordsListView" ItemSelected="OnRecordSelected">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextCell Text="{Binding Value}" Detail="{Binding Key}" TextColor="White" DetailColor="#aaa" />
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Update and Delete -->
+            <Frame CornerRadius="10" Padding="20" BackgroundColor="#373737">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="{Binding Source={x:Reference TablePicker}, Path=SelectedItem, StringFormat='Manage {0} records'}" 
+                           FontSize="20" 
+                           FontAttributes="Bold" 
+                           TextColor="White" />
+                    <Entry x:Name="UpdateRecordEntry" 
+                           Placeholder="{Binding Source={x:Reference TablePicker}, Path=SelectedItem, StringFormat='Update {0} record'}" 
+                           TextColor="White" 
+                           PlaceholderColor="#aaa" 
+                           BackgroundColor="#454545" />
+                    <StackLayout Orientation="Horizontal" Spacing="15">
+                        <Button Text="Update Record" Clicked="OnUpdateRecord" BackgroundColor="#2196F3" TextColor="White" CornerRadius="8" />
+                        <Button Text="Delete Record" Clicked="OnDeleteRecord" BackgroundColor="#F44336" TextColor="White" CornerRadius="8" />
+                    </StackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+                        <!-- Test CRUD Operations -->
+            <Frame CornerRadius="10" Padding="20" BackgroundColor="#373737">
+                <Button Text="Test CRUD Operations" Clicked="OnTestCrudOperations" BackgroundColor="#607D8B" TextColor="White" CornerRadius="8" />
+            </Frame>
 
         </VerticalStackLayout>
     </ScrollView>
-
 </ContentPage>

@@ -29,7 +29,7 @@ public partial class RolesPage : ContentPage
         txe_role.Text = "";
     }
 
-    //! Task to laod roles into a variable
+    //! Task to load roles into a variable
     private async Task LoadRoles()
     {
         roles = new ObservableCollection<Role>(await roleService.GetRoleList());

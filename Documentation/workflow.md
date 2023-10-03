@@ -13,6 +13,14 @@
     <li>When creating a PR, get your code reviewed by at least two peers. Take into consideration any comments they make before moving forward. Moreover, click on "squash commit" when completing a PR to keep our repository uncluttered.</li>
 </ol>
 
+<h2>Administering Changes to The Master Branch</h2>
+<p>
+  The main administrators for changes to the master branch are Zsombor and Justin. These two are responsible for overseeing and managing updates or alterations made to the primary branch of our repository. 
+</p>
+<p>
+  If 24 hours elapse without any response or acknowledgement of a pertinent update or alteration, then any team member is permitted to step in and administer changes as needed to keep the development process running smoothly and efficiently.
+</p>
+
 <h2>Kanban Definition of Done:</h2>
 <ol>
     <li>Take into account all the acceptance criteria mentioned in the issue.</li>

@@ -1,4 +1,4 @@
-﻿    <?xml version="1.0" encoding="UTF-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Shell
     x:Class="MauiApp1.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -12,12 +12,13 @@
         <ShellContent
             Title="Welcome"
             ContentTemplate="{DataTemplate views:WelcomePage}"
-            Icon="{OnPlatform 'icon_about.png', iOS='icon_about_ios.png', MacCatalyst='icon_about_ios.png'}" />
+            ></ShellContent>
+            
 
         <ShellContent
             Title="Rotas"
             ContentTemplate="{DataTemplate views:RotaPage}"
-            Icon="{OnPlatform 'icon_about.png', iOS='icon_about_ios.png', MacCatalyst='icon_about_ios.png'}" />
+            ></ShellContent>
 
         <ShellContent
             Title="Skill"
@@ -29,16 +30,14 @@
 
         <ShellContent
             Title="Continents"
-            ContentTemplate="{DataTemplate views:ContinentPage}"
-            Icon="{OnPlatform 'icon_continent.png', iOS='icon_continent_ios.png', MacCatalyst='icon_continent_ios.png'}" />
-
-
-        
+            ContentTemplate="{DataTemplate views:ContinentPage}"></ShellContent>
+            
+     
 
         <ShellContent
             Title="Building Types"
             ContentTemplate="{DataTemplate views:BuildingTypePage}"
-            Icon="{OnPlatform 'icon_building.png', iOS='icon_building_ios.png', MacCatalyst='icon_continent_ios.png'}" /> 
+            ></ShellContent> 
 
         <ShellContent
             Title="System Type"

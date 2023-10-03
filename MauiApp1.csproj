@@ -1,5 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+	
 	<PropertyGroup>
 		<TargetFrameworks>net7.0-android;net7.0-ios;net7.0-maccatalyst</TargetFrameworks>
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
@@ -59,24 +59,50 @@
 	  </MauiXaml>
       <MauiXaml Update="Views\AlertTypesPage.xaml">
 	  </MauiXaml>
-
 	  <MauiXaml Update="Views\BuildingTypePage.xaml">
 	  </MauiXaml>
-        <MauiXaml Update="Views\SystemPage.xaml">
+        <MauiXaml Update="Views\ContinentPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+		<MauiXaml Update="Views\RolesPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\RotaPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\SkillPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\SystemPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>		
 	  <MauiXaml Update="Views\WelcomePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Views\BuildingTypePage.xaml.cs">
-	    <DependentUpon>BuildingTypePage.xaml</DependentUpon>
+	  <Compile Update="Views\AlertTypePage.xaml.cs">
+	    <DependentUpon>AlertTypePage.xaml</DependentUpon>
     </Compile>
-	  <Compile Update="Views\RotaPage.xaml.cs">
-	    <DependentUpon>RotaPage.xaml</DependentUpon>
+		<Compile Update="Views\BuildingTypePage.xaml.cs">
+			<DependentUpon>BuildingTypePage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\ContinentPage.xaml.cs">
+			<DependentUpon>ContinentPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\RolesPage.xaml.cs">
+			<DependentUpon>RolesPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\RotaPage.xaml.cs">
+			<DependentUpon>RotaPage.xaml</DependentUpon>
+		</Compile>
+	  <Compile Update="Views\SkillPage.xaml.cs">
+	    <DependentUpon>SkillPage.xaml</DependentUpon>
 	  </Compile>
+		<Compile Update="Views\SystemPage.xaml.cs">
+			<DependentUpon>SystemPage.xaml</DependentUpon>
+		</Compile>
 	  <Compile Update="Views\WelcomePage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
@@ -85,6 +111,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="Images\" />
 	  <Folder Include="Views\" />
 	</ItemGroup>
 	<ItemGroup>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiApp1.Views.OrganisationPage"
@@ -21,7 +21,7 @@
 
         </Grid>
         <Label Text="List of organizations:" />
-        <ListView x:Name="ltv_organisations" Background="white" ItemSelected="ltv_organisations_ItemSelected" HorizontalOptions="Center" VerticalOptions="Center">
+        <ListView x:Name="ltv_organisations" Background="white" ItemSelected="Ltv_organisations_ItemSelected" HorizontalOptions="Center" VerticalOptions="Center">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

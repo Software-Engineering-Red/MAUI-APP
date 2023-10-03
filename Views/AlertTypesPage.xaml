@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MauiApp1.Views.BuildingTypePage"
-             Title="ContinentPage">
+             x:Class="MauiApp1.Views.AlertTypesPage"
+             Title="AlertTypesPage">
     <VerticalStackLayout Spacing="10" Margin="5">
-        <Editor x:Name="txe_buildingtype"
-                Placeholder="Add a Building Type"
+        <Editor x:Name="txe_alert"
+                Placeholder="Add an alert type"
                 HeightRequest="100" />
 
         <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
@@ -17,12 +17,12 @@
                     Clicked="DeleteButton_Clicked" />
         </Grid>
 
-        <ListView x:Name="ltv_buildingtype" Background="white" ItemSelected="ltv_buildingtypes_ItemSelected">
+        <ListView x:Name="ltv_alerttypes" Background="white" ItemSelected="ltv_alerttypes_ItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextCell TextColor="Black" Text="{Binding Name}"/>
                 </DataTemplate>
-             </ListView.ItemTemplate>
+            </ListView.ItemTemplate>
         </ListView>
     </VerticalStackLayout>
 </ContentPage>

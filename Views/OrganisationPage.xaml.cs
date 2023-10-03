@@ -7,8 +7,8 @@ namespace MauiApp1.Views;
 public partial class OrganisationPage : ContentPage
 {
     Organisation selectedOrg = null;
-    IOrganisationService organisationService;
-    ObservableCollection<Organisation> orgs = new ObservableCollection<Organisation>();
+    readonly IOrganisationService organisationService;
+    ObservableCollection<Organisation> orgs = new();
     public OrganisationPage()
     {
         InitializeComponent();
@@ -66,7 +66,7 @@ public partial class OrganisationPage : ContentPage
         txe_organisation.Focus();
     }
 
-    private void ltv_organisations_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+    private void Ltv_organisations_ItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
         selectedOrg = e.SelectedItem as Organisation;
         if (selectedOrg == null) return;

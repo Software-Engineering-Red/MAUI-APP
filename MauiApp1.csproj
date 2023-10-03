@@ -111,8 +111,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Images\" />
-	  <Folder Include="Views\" />
+		<Folder Include="Images\" />
+		<Folder Include="Views\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <MauiXaml Update="MauiPage1.xaml">

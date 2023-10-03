@@ -15,7 +15,7 @@
 
 <h2> Merging Changes to The Master Branch</h2>
 <p>
-  If 24 hours elapse without any response or acknowledgement of a pertinent update or alteration, then any team member is permitted to step in and administer changes as needed to keep the development process running smoothly and efficiently.
+  If after chasing your buddy, 24 hours elapse without any response or acknowledgement of a pertinent update or alteration from your buddy, then send a request on Discord and any team member is permitted to step in and administer changes as needed to keep the development process running smoothly and efficiently.
 </p>
 
 <h2>Kanban Definition of Done:</h2>

@@ -58,10 +58,10 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
       <MauiXaml Update="Views\AlertTypesPage.xaml">
-
+	  </MauiXaml>
 
 	  <MauiXaml Update="Views\BuildingTypePage.xaml">
-
+	  </MauiXaml>
         <MauiXaml Update="Views\SystemPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

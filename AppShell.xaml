@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
 <Shell
     x:Class="MauiApp1.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -8,17 +8,16 @@
     Shell.FlyoutBehavior="Disabled">
 
     <TabBar>
-
-        <ShellContent
+        
+        <ShellContent 
             Title="Welcome"
             ContentTemplate="{DataTemplate views:WelcomePage}"
-            ></ShellContent>
-            
+            Icon="{OnPlatform 'icon_about.png', iOS='icon_about_ios.png', MacCatalyst='icon_about_ios.png'}" />
 
         <ShellContent
             Title="Rotas"
             ContentTemplate="{DataTemplate views:RotaPage}"
-            ></ShellContent>
+            Icon="{OnPlatform 'icon_about.png', iOS='icon_about_ios.png', MacCatalyst='icon_about_ios.png'}" />
 
         <ShellContent
             Title="Skill"
@@ -30,23 +29,25 @@
 
         <ShellContent
             Title="Continents"
-            ContentTemplate="{DataTemplate views:ContinentPage}"></ShellContent>
-            
-     
-
+            ContentTemplate="{DataTemplate views:ContinentPage}"
+            Icon="{OnPlatform 'icon_continent.png', iOS='icon_continent_ios.png', MacCatalyst='icon_continent_ios.png'}" />
+        
         <ShellContent
             Title="Building Types"
             ContentTemplate="{DataTemplate views:BuildingTypePage}"
-            ></ShellContent> 
+            Icon="{OnPlatform 'icon_building.png', iOS='icon_building_ios.png', MacCatalyst='icon_continent_ios.png'}" /> 
 
         <ShellContent
             Title="System Type"
-            ContentTemplate="{DataTemplate views:SystemPage}"
-            />
+            ContentTemplate="{DataTemplate views:SystemPage}"/>
 
         <ShellContent
             Title="Role"
             ContentTemplate="{DataTemplate views:RolesPage}" />
+    
+        <ShellContent
+                Title="Organisations"
+                ContentTemplate="{DataTemplate views:OrganisationPage}" />
     </TabBar>
 
 </Shell>

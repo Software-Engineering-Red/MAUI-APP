@@ -26,6 +26,7 @@ namespace MauiApp1.Services
         public async Task<int> AddContinent(Continent continent) {
             await SetUpDb();
             return await _dbConnection.InsertAsync(continent);
+             
         }
 
         public async Task<int> DeleteContinent(Continent continent) {

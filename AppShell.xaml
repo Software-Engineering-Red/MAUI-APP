@@ -8,21 +8,46 @@
     Shell.FlyoutBehavior="Disabled">
 
     <TabBar>
+        
+        <ShellContent 
+            Title="Welcome"
+            ContentTemplate="{DataTemplate views:WelcomePage}"
+            Icon="{OnPlatform 'icon_about.png', iOS='icon_about_ios.png', MacCatalyst='icon_about_ios.png'}" />
 
         <ShellContent
-            Title="Roles"
-            ContentTemplate="{DataTemplate local:RolePage}"
+            Title="Rotas"
+            ContentTemplate="{DataTemplate views:RotaPage}"
             Icon="{OnPlatform 'icon_about.png', iOS='icon_about_ios.png', MacCatalyst='icon_about_ios.png'}" />
-        
+
         <ShellContent
             Title="Skill"
-            ContentTemplate="{DataTemplate views:SkillPage}"
-             />
-        
+            ContentTemplate="{DataTemplate views:SkillPage}"/>
+
+        <ShellContent
+            Title="AlertTypes"
+            ContentTemplate="{DataTemplate views:AlertTypesPage}"/>
+
         <ShellContent
             Title="Continents"
             ContentTemplate="{DataTemplate views:ContinentPage}"
             Icon="{OnPlatform 'icon_continent.png', iOS='icon_continent_ios.png', MacCatalyst='icon_continent_ios.png'}" />
+        
+        <ShellContent
+            Title="Building Types"
+            ContentTemplate="{DataTemplate views:BuildingTypePage}"
+            Icon="{OnPlatform 'icon_building.png', iOS='icon_building_ios.png', MacCatalyst='icon_continent_ios.png'}" /> 
+
+        <ShellContent
+            Title="System Type"
+            ContentTemplate="{DataTemplate views:SystemPage}"/>
+
+        <ShellContent
+            Title="Role"
+            ContentTemplate="{DataTemplate views:RolesPage}" />
+    
+        <ShellContent
+                Title="Organisations"
+                ContentTemplate="{DataTemplate views:OrganisationPage}" />
 
         <ShellContent
             Title="Operational Team Status"

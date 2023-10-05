@@ -1,5 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+	
 	<PropertyGroup>
 		<TargetFrameworks>net7.0-android;net7.0-ios;net7.0-maccatalyst</TargetFrameworks>
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
@@ -30,9 +30,6 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-ios|AnyCPU'">
-	  <CreatePackage>false</CreatePackage>
-	</PropertyGroup>
 	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
@@ -60,6 +57,25 @@
 	  <MauiXaml Update="MauiPage1.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+      <MauiXaml Update="Views\AlertTypesPage.xaml">
+	  </MauiXaml>
+	  <MauiXaml Update="Views\BuildingTypePage.xaml">
+	  </MauiXaml>
+        <MauiXaml Update="Views\ContinentPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+		<MauiXaml Update="Views\RolesPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\RotaPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\SkillPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\SystemPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>		
 	  <MauiXaml Update="Views\OperationalTeamStatusPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -69,6 +85,27 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\AlertTypePage.xaml.cs">
+	    <DependentUpon>AlertTypePage.xaml</DependentUpon>
+    </Compile>
+		<Compile Update="Views\BuildingTypePage.xaml.cs">
+			<DependentUpon>BuildingTypePage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\ContinentPage.xaml.cs">
+			<DependentUpon>ContinentPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\RolesPage.xaml.cs">
+			<DependentUpon>RolesPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\RotaPage.xaml.cs">
+			<DependentUpon>RotaPage.xaml</DependentUpon>
+		</Compile>
+	  <Compile Update="Views\SkillPage.xaml.cs">
+	    <DependentUpon>SkillPage.xaml</DependentUpon>
+	  </Compile>
+		<Compile Update="Views\SystemPage.xaml.cs">
+			<DependentUpon>SystemPage.xaml</DependentUpon>
+		</Compile>
 	  <Compile Update="Views\WelcomePage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
@@ -76,6 +113,10 @@
 		<PackageReference Include="SQLite" Version="3.13.0" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<Folder Include="Images\" />
+		<Folder Include="Views\" />
+	</ItemGroup>
 	<ItemGroup>
 	  <MauiXaml Update="MauiPage1.xaml">
 	    <Generator>MSBuild:Compile</Generator>
@@ -85,7 +126,4 @@
 	  </MauiXaml>
 	</ItemGroup>
 
-	<ItemGroup>
-	  <None Remove="Services\" />
-	</ItemGroup>
 </Project>

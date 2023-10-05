@@ -23,7 +23,7 @@
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Padding="10">
-                            <Label FontSize="14" TextColor="Silver" Text="{Binding Name}"/>
+                            <Label FontSize="14" TextColor="Black" Text="{Binding Name}"/>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

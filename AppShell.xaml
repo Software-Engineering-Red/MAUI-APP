@@ -48,6 +48,12 @@
         <ShellContent
                 Title="Organisations"
                 ContentTemplate="{DataTemplate views:OrganisationPage}" />
+
+        <ShellContent
+            Title="Operational Team Status"
+            ContentTemplate="{DataTemplate views:OperationalTeamStatusPage}"
+            Icon="{OnPlatform 'icon_continent.png', iOS='icon_continent_ios.png', MacCatalyst='icon_continent_ios.png'}" />
+
     </TabBar>
 
 </Shell>

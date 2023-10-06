@@ -29,6 +29,8 @@ public static class MauiProgram
         builder.Services.AddSingleton<IBuildingTypeService, BuildingTypeService>();
         builder.Services.AddSingleton<IRoleService, RoleService>();
         builder.Services.AddSingleton<IOrganisationService, OrganisationService>();
+        builder.Services.AddSingleton<OperationalTeamStatusService>();
+
 
         return builder.Build();
 	}

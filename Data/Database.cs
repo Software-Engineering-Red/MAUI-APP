@@ -9,7 +9,7 @@ namespace MauiApp1.Data
 {
     public class Database
     {
-        private SQLiteAsyncConnection _database;
+        public SQLiteAsyncConnection _database;
 
         async Task Init()
         {

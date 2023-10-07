@@ -5,9 +5,25 @@ using System.Collections.ObjectModel;
 
 namespace MauiApp1.Views;
 
+
+/// <summary>
+/// A page containing logic for handling building types.
+/// </summary>
 public partial class BuildingTypePage : ContentPage {
+
+    /// <summary>
+    /// The currently selected building type.
+    /// </summary>
     BuildingType selectedBuildingType = null;
+
+    /// <summary>
+    /// An instance of the <see cref="IBuildingTypeService"/>.
+    /// </summary>
     IBuildingTypeService buildingTypeService;
+
+    /// <summary>
+    /// A list of available building types.
+    /// </summary>
     ObservableCollection<BuildingType> buildingTypes = new ObservableCollection<BuildingType>();
 
     public BuildingTypePage() {
@@ -15,15 +31,24 @@ public partial class BuildingTypePage : ContentPage {
         this.BindingContext = this;
         this.buildingTypeService = new BuildingTypeService();
 
-        Task.Run(async () => await LoadContinents());
+        Task.Run(async () => await LoadBuildingTypes());
         txe_buildingtype.Text = "";
     }
 
-    private async Task LoadContinents() {
+    /// <summary>
+    /// Load building types from the database.
+    /// </summary>
+    private async Task LoadBuildingTypes() {
         buildingTypes = new ObservableCollection<BuildingType>(await buildingTypeService.GetBuildingTypeList());
         ltv_buildingtype.ItemsSource = buildingTypes;
     }
 
+
+    /// <summary>
+    /// Event handler for the save button.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The arguments of the event.</param>
     private void SaveButton_Clicked(object sender, EventArgs e) {
         if (String.IsNullOrEmpty(txe_buildingtype.Text)) return;
 
@@ -44,6 +69,11 @@ public partial class BuildingTypePage : ContentPage {
         txe_buildingtype.Text = "";
     }
 
+    /// <summary>
+    /// Event handler for the delete button.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The arguments of the event.</param>
     private async void DeleteButton_Clicked(object sender, EventArgs e) {
         if(ltv_buildingtype.SelectedItem == null) {
             await Shell.Current.DisplayAlert("No Building Type Selected", "Select the building type you want to delete from the list", "OK");
@@ -57,6 +87,11 @@ public partial class BuildingTypePage : ContentPage {
         txe_buildingtype.Text = "";
     }
 
+    /// <summary>
+    /// Even handler for the building type list.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The arguments of the event.</param>
     private void ltv_buildingtypes_ItemSelected(object sender, SelectedItemChangedEventArgs e) {
         selectedBuildingType = e.SelectedItem as BuildingType;
         if (selectedBuildingType == null) return;

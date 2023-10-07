@@ -75,9 +75,6 @@
 		</MauiXaml>
 		<MauiXaml Update="Views\SkillPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Views\SystemPage.xaml">
-			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>		
 	  <MauiXaml Update="Views\OperationalTeamStatusPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>

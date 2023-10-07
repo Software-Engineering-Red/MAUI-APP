@@ -36,10 +36,6 @@
             ContentTemplate="{DataTemplate views:BuildingTypePage}"/>
         
         <ShellContent
-            Title="System Type"
-            ContentTemplate="{DataTemplate views:SystemPage}"/>
-
-        <ShellContent
             Title="Role"
             ContentTemplate="{DataTemplate views:RolesPage}" />
     
@@ -51,6 +47,8 @@
             Title="Operational Team Status"
             ContentTemplate="{DataTemplate views:OperationalTeamStatusPage}"
             Icon="{OnPlatform 'icon_continent.png', iOS='icon_continent_ios.png', MacCatalyst='icon_continent_ios.png'}" />
+        
+        <ShellContent
             Title="PositionStatusPage"
             ContentTemplate="{DataTemplate views:position_status}" />
 

@@ -115,6 +115,9 @@
 	  <Compile Update="Views\RotaPage.xaml.cs">
 	    <DependentUpon>RotaPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\EquipmentPage.xaml.cs">
+	    <DependentUpon>EquipmentPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\WelcomePage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
@@ -129,9 +132,6 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <MauiXaml Update="MauiPage1.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Roles.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

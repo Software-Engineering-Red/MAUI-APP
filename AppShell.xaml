@@ -11,7 +11,11 @@
         
         <ShellContent 
             Title="Welcome"
-            ContentTemplate="{DataTemplate views:WelcomePage}"
+            ContentTemplate="{DataTemplate views:WelcomePage}"/>
+
+        <ShellContent
+            Title="Equipment"
+            ContentTemplate="{DataTemplate views:EquipmentPage}"
             Icon="{OnPlatform 'icon_about.png', iOS='icon_about_ios.png', MacCatalyst='icon_about_ios.png'}" />
 
         <ShellContent

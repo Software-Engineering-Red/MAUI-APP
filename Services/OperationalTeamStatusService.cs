@@ -20,12 +20,12 @@ namespace MauiApp1.Services
         SQLiteAsyncConnection _dbConnection;
 
         /// <summary>
-        /// Constructor
+        /// Constructor without implementation
         /// </summary>
         public OperationalTeamStatusService(){}
 
         /// <summary>
-        /// Method that initiates Database Connection and creates Table
+        /// Initiates Database Connection and creates Table.
         /// </summary>
         /// <returns></returns>
         async Task Init()
@@ -38,7 +38,7 @@ namespace MauiApp1.Services
         }
 
         /// <summary>
-        /// Adds a instance of OperationalTeamStatus to the Database
+        /// Adds a instance of OperationalTeamStatus to the Database.
         /// </summary>
         /// <param name="status">Instance of OperationalTeamStatus to be added</param>
         /// <returns>Task promise to insert instance to Database</returns>
@@ -49,7 +49,7 @@ namespace MauiApp1.Services
         }
 
         /// <summary>
-        /// Deletes a certain instance of OperationalTeamStatus from the Database
+        /// Deletes a certain instance of OperationalTeamStatus from the Database.
         /// </summary>
         /// <param name="status">Instance of OperationalTeamStatus to be deleted</param>
         /// <returns>Task promise to delete Instance from Database</returns>
@@ -60,7 +60,7 @@ namespace MauiApp1.Services
         }
 
         /// <summary>
-        /// Gets a List of OperationalTeamStatus from Database
+        /// Gets a List of OperationalTeamStatus from Database.
         /// </summary>
         /// <returns>Task promise to get a List of OperationalTeamStatus</returns>
         public async Task<List<OperationalTeamStatus>> GetStatusesListAsync()
@@ -70,7 +70,7 @@ namespace MauiApp1.Services
         }
 
         /// <summary>
-        /// Gets instance of OperationalTeamStatus from Database via ID
+        /// Gets instance of OperationalTeamStatus from Database via ID.
         /// </summary>
         /// <param name="id">ID of certain Element</param>
         /// <returns>Task promise to get instance with ID from Database</returns>
@@ -81,7 +81,7 @@ namespace MauiApp1.Services
         }
 
         /// <summary>
-        /// Saves instance of OperationalTeamStatus to Database
+        /// Saves instance of OperationalTeamStatus to Database.
         /// </summary>
         /// <param name="status">Instance of OperationalTeamStatus to be saved</param>
         /// <returns>Task promise to save instance to Database</returns>
@@ -96,7 +96,7 @@ namespace MauiApp1.Services
 
 
         /// <summary>
-        /// Updates an entry of OperationalTeamStatus in Database
+        /// Updates an entry of OperationalTeamStatus in Database.
         /// </summary>
         /// <param name="status">entry of OperationalTeamStatus</param>
         /// <returns>Task promise to update certain Status</returns>

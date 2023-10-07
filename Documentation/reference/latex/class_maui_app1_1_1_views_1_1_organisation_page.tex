@@ -1,0 +1,117 @@
+\doxysection{Maui\+App1.\+Views.\+Organisation\+Page Class Reference}
+\hypertarget{class_maui_app1_1_1_views_1_1_organisation_page}{}\label{class_maui_app1_1_1_views_1_1_organisation_page}\index{MauiApp1.Views.OrganisationPage@{MauiApp1.Views.OrganisationPage}}
+
+
+Organisation\+Page class extending Content\+Page, responsible for functionality on Organisation\+Page view.  
+
+
+Inheritance diagram for Maui\+App1.\+Views.\+Organisation\+Page\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_maui_app1_1_1_views_1_1_organisation_page}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_maui_app1_1_1_views_1_1_organisation_page_a72371e3350cd11d488e98825103f3a74}\label{class_maui_app1_1_1_views_1_1_organisation_page_a72371e3350cd11d488e98825103f3a74} 
+{\bfseries Organisation\+Page} ()
+\begin{DoxyCompactList}\small\item\em Constructor class, setting the binding context and initiating the organisation serrvice, as well as loading the organisation list. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+async Task \mbox{\hyperlink{class_maui_app1_1_1_views_1_1_organisation_page_a351b94bb6d03ff9d9c4317250abbc5bc}{Load\+Organisations}} ()
+\begin{DoxyCompactList}\small\item\em Private method loading the Organisation list using organisation\+Service getter. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_maui_app1_1_1_views_1_1_organisation_page_aa1a00ec18c30781f5173eac570a6b3d7}{Save\+Button\+\_\+\+Clicked}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Method responsible for saving organisation into SQLite database, triggered by selection of save button. \end{DoxyCompactList}\item 
+async void \mbox{\hyperlink{class_maui_app1_1_1_views_1_1_organisation_page_a35a4024889c9b1e8e39c1ed4d55bb3d4}{Delete\+Button\+\_\+\+Clicked}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Method responsible for removing organisation from SQLite database, triggered by selection of delete button. Note\+: If no Organisation is selected, no organisation will be removed. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_maui_app1_1_1_views_1_1_organisation_page_ad4a2598d9499436ff854334f41afc452}{Ltv\+\_\+organisations\+\_\+\+Item\+Selected}} (object sender, Selected\+Item\+Changed\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Method responsible for updating currently selected item, integrating UI and Backend functionality. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_maui_app1_1_1_views_1_1_organisation_page_af8b13a1dbb2bf4d632640aa9e56860d7}\label{class_maui_app1_1_1_views_1_1_organisation_page_af8b13a1dbb2bf4d632640aa9e56860d7} 
+\mbox{\hyperlink{class_maui_app1_1_1_models_1_1_organisation}{Organisation}} {\bfseries selected\+Org} = null
+\begin{DoxyCompactList}\small\item\em A reference pointer for storing currently selected Organisation. \end{DoxyCompactList}\item 
+\Hypertarget{class_maui_app1_1_1_views_1_1_organisation_page_a391b4baab436db61924f9ecc92d5c5d0}\label{class_maui_app1_1_1_views_1_1_organisation_page_a391b4baab436db61924f9ecc92d5c5d0} 
+readonly \mbox{\hyperlink{interface_maui_app1_1_1_services_1_1_i_organisation_service}{IOrganisation\+Service}} {\bfseries organisation\+Service}
+\begin{DoxyCompactList}\small\item\em An instance of IOrganisation\+Service. \end{DoxyCompactList}\item 
+\Hypertarget{class_maui_app1_1_1_views_1_1_organisation_page_ab1d681a7e234411eb1a546e3b6aac965}\label{class_maui_app1_1_1_views_1_1_organisation_page_ab1d681a7e234411eb1a546e3b6aac965} 
+Observable\+Collection$<$ \mbox{\hyperlink{class_maui_app1_1_1_models_1_1_organisation}{Organisation}} $>$ {\bfseries orgs} = new()
+\begin{DoxyCompactList}\small\item\em Collection of current Organisations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Organisation\+Page class extending Content\+Page, responsible for functionality on Organisation\+Page view. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_maui_app1_1_1_views_1_1_organisation_page_a35a4024889c9b1e8e39c1ed4d55bb3d4}\label{class_maui_app1_1_1_views_1_1_organisation_page_a35a4024889c9b1e8e39c1ed4d55bb3d4} 
+\index{MauiApp1.Views.OrganisationPage@{MauiApp1.Views.OrganisationPage}!DeleteButton\_Clicked@{DeleteButton\_Clicked}}
+\index{DeleteButton\_Clicked@{DeleteButton\_Clicked}!MauiApp1.Views.OrganisationPage@{MauiApp1.Views.OrganisationPage}}
+\doxysubsubsection{\texorpdfstring{DeleteButton\_Clicked()}{DeleteButton\_Clicked()}}
+{\footnotesize\ttfamily async void Maui\+App1.\+Views.\+Organisation\+Page.\+Delete\+Button\+\_\+\+Clicked (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Method responsible for removing organisation from SQLite database, triggered by selection of delete button. Note\+: If no Organisation is selected, no organisation will be removed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Details about the element that triggered the event.\\
+\hline
+{\em e} & Event details, passed by event\+Handler due to clicking event button.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_maui_app1_1_1_views_1_1_organisation_page_a351b94bb6d03ff9d9c4317250abbc5bc}\label{class_maui_app1_1_1_views_1_1_organisation_page_a351b94bb6d03ff9d9c4317250abbc5bc} 
+\index{MauiApp1.Views.OrganisationPage@{MauiApp1.Views.OrganisationPage}!LoadOrganisations@{LoadOrganisations}}
+\index{LoadOrganisations@{LoadOrganisations}!MauiApp1.Views.OrganisationPage@{MauiApp1.Views.OrganisationPage}}
+\doxysubsubsection{\texorpdfstring{LoadOrganisations()}{LoadOrganisations()}}
+{\footnotesize\ttfamily async Task Maui\+App1.\+Views.\+Organisation\+Page.\+Load\+Organisations (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Private method loading the Organisation list using organisation\+Service getter. 
+
+\begin{DoxyReturn}{Returns}
+Task promise, informing about the status of its\textquotesingle{} completion.
+\end{DoxyReturn}
+\Hypertarget{class_maui_app1_1_1_views_1_1_organisation_page_ad4a2598d9499436ff854334f41afc452}\label{class_maui_app1_1_1_views_1_1_organisation_page_ad4a2598d9499436ff854334f41afc452} 
+\index{MauiApp1.Views.OrganisationPage@{MauiApp1.Views.OrganisationPage}!Ltv\_organisations\_ItemSelected@{Ltv\_organisations\_ItemSelected}}
+\index{Ltv\_organisations\_ItemSelected@{Ltv\_organisations\_ItemSelected}!MauiApp1.Views.OrganisationPage@{MauiApp1.Views.OrganisationPage}}
+\doxysubsubsection{\texorpdfstring{Ltv\_organisations\_ItemSelected()}{Ltv\_organisations\_ItemSelected()}}
+{\footnotesize\ttfamily void Maui\+App1.\+Views.\+Organisation\+Page.\+Ltv\+\_\+organisations\+\_\+\+Item\+Selected (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Selected\+Item\+Changed\+Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Method responsible for updating currently selected item, integrating UI and Backend functionality. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Details about the element that triggered the event.\\
+\hline
+{\em e} & Event details, passed by event\+Handler due to clicking event button.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_maui_app1_1_1_views_1_1_organisation_page_aa1a00ec18c30781f5173eac570a6b3d7}\label{class_maui_app1_1_1_views_1_1_organisation_page_aa1a00ec18c30781f5173eac570a6b3d7} 
+\index{MauiApp1.Views.OrganisationPage@{MauiApp1.Views.OrganisationPage}!SaveButton\_Clicked@{SaveButton\_Clicked}}
+\index{SaveButton\_Clicked@{SaveButton\_Clicked}!MauiApp1.Views.OrganisationPage@{MauiApp1.Views.OrganisationPage}}
+\doxysubsubsection{\texorpdfstring{SaveButton\_Clicked()}{SaveButton\_Clicked()}}
+{\footnotesize\ttfamily void Maui\+App1.\+Views.\+Organisation\+Page.\+Save\+Button\+\_\+\+Clicked (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Method responsible for saving organisation into SQLite database, triggered by selection of save button. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & Details about the element that triggered the event.\\
+\hline
+{\em e} & Event details, passed by event\+Handler due to clicking event button.\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/otfri/\+Documents/\+SEB/\+SEB5\+\_\+\+Napier/\+SET09102\+\_\+\+Software\+\_\+\+Engineering/team\+\_\+repo/\+MAUI-\/\+APP/\+Views/Organisation\+Page.\+xaml.\+cs\end{DoxyCompactItemize}

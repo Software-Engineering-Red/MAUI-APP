@@ -1,0 +1,79 @@
+\doxysection{Maui\+App1.\+Services.\+Continent\+Service Class Reference}
+\hypertarget{class_maui_app1_1_1_services_1_1_continent_service}{}\label{class_maui_app1_1_1_services_1_1_continent_service}\index{MauiApp1.Services.ContinentService@{MauiApp1.Services.ContinentService}}
+Inheritance diagram for Maui\+App1.\+Services.\+Continent\+Service\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_maui_app1_1_1_services_1_1_continent_service}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+async Task$<$ int $>$ \mbox{\hyperlink{class_maui_app1_1_1_services_1_1_continent_service_ab7d95ae8a7232661010e3630370c3a3e}{Add\+Continent}} (\mbox{\hyperlink{class_maui_app1_1_1_models_1_1_continent}{Continent}} continent)
+\item 
+async Task$<$ int $>$ \mbox{\hyperlink{class_maui_app1_1_1_services_1_1_continent_service_a44db15bde05ccacb31f1ca4be5c2ef7d}{Delete\+Continent}} (\mbox{\hyperlink{class_maui_app1_1_1_models_1_1_continent}{Continent}} continent)
+\item 
+async Task$<$ List$<$ \mbox{\hyperlink{class_maui_app1_1_1_models_1_1_continent}{Continent}} $>$ $>$ \mbox{\hyperlink{class_maui_app1_1_1_services_1_1_continent_service_aec9dfa04841732124bcfee16cd3aff2b}{Get\+Continent\+List}} ()
+\item 
+async Task$<$ int $>$ \mbox{\hyperlink{class_maui_app1_1_1_services_1_1_continent_service_aa0d7195d8edb17db4523e07d7d283627}{Update\+Continent}} (\mbox{\hyperlink{class_maui_app1_1_1_models_1_1_continent}{Continent}} continent)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_maui_app1_1_1_services_1_1_continent_service_aa39a29f3d9575090b14483bc04e4d12c}\label{class_maui_app1_1_1_services_1_1_continent_service_aa39a29f3d9575090b14483bc04e4d12c} 
+async Task {\bfseries Set\+Up\+Db} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_maui_app1_1_1_services_1_1_continent_service_a49f0883be9981cd648845a7958700d2a}\label{class_maui_app1_1_1_services_1_1_continent_service_a49f0883be9981cd648845a7958700d2a} 
+SQLite\+Async\+Connection {\bfseries \+\_\+db\+Connection}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_maui_app1_1_1_services_1_1_continent_service_ab7d95ae8a7232661010e3630370c3a3e}\label{class_maui_app1_1_1_services_1_1_continent_service_ab7d95ae8a7232661010e3630370c3a3e} 
+\index{MauiApp1.Services.ContinentService@{MauiApp1.Services.ContinentService}!AddContinent@{AddContinent}}
+\index{AddContinent@{AddContinent}!MauiApp1.Services.ContinentService@{MauiApp1.Services.ContinentService}}
+\doxysubsubsection{\texorpdfstring{AddContinent()}{AddContinent()}}
+{\footnotesize\ttfamily async Task$<$ int $>$ Maui\+App1.\+Services.\+Continent\+Service.\+Add\+Continent (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_maui_app1_1_1_models_1_1_continent}{Continent}}}]{continent }\end{DoxyParamCaption})}
+
+
+
+Implements \mbox{\hyperlink{interface_maui_app1_1_1_services_1_1_i_continent_service}{Maui\+App1.\+Services.\+IContinent\+Service}}.
+
+\Hypertarget{class_maui_app1_1_1_services_1_1_continent_service_a44db15bde05ccacb31f1ca4be5c2ef7d}\label{class_maui_app1_1_1_services_1_1_continent_service_a44db15bde05ccacb31f1ca4be5c2ef7d} 
+\index{MauiApp1.Services.ContinentService@{MauiApp1.Services.ContinentService}!DeleteContinent@{DeleteContinent}}
+\index{DeleteContinent@{DeleteContinent}!MauiApp1.Services.ContinentService@{MauiApp1.Services.ContinentService}}
+\doxysubsubsection{\texorpdfstring{DeleteContinent()}{DeleteContinent()}}
+{\footnotesize\ttfamily async Task$<$ int $>$ Maui\+App1.\+Services.\+Continent\+Service.\+Delete\+Continent (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_maui_app1_1_1_models_1_1_continent}{Continent}}}]{continent }\end{DoxyParamCaption})}
+
+
+
+Implements \mbox{\hyperlink{interface_maui_app1_1_1_services_1_1_i_continent_service}{Maui\+App1.\+Services.\+IContinent\+Service}}.
+
+\Hypertarget{class_maui_app1_1_1_services_1_1_continent_service_aec9dfa04841732124bcfee16cd3aff2b}\label{class_maui_app1_1_1_services_1_1_continent_service_aec9dfa04841732124bcfee16cd3aff2b} 
+\index{MauiApp1.Services.ContinentService@{MauiApp1.Services.ContinentService}!GetContinentList@{GetContinentList}}
+\index{GetContinentList@{GetContinentList}!MauiApp1.Services.ContinentService@{MauiApp1.Services.ContinentService}}
+\doxysubsubsection{\texorpdfstring{GetContinentList()}{GetContinentList()}}
+{\footnotesize\ttfamily async Task$<$ List$<$ \mbox{\hyperlink{class_maui_app1_1_1_models_1_1_continent}{Continent}} $>$ $>$ Maui\+App1.\+Services.\+Continent\+Service.\+Get\+Continent\+List (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Implements \mbox{\hyperlink{interface_maui_app1_1_1_services_1_1_i_continent_service}{Maui\+App1.\+Services.\+IContinent\+Service}}.
+
+\Hypertarget{class_maui_app1_1_1_services_1_1_continent_service_aa0d7195d8edb17db4523e07d7d283627}\label{class_maui_app1_1_1_services_1_1_continent_service_aa0d7195d8edb17db4523e07d7d283627} 
+\index{MauiApp1.Services.ContinentService@{MauiApp1.Services.ContinentService}!UpdateContinent@{UpdateContinent}}
+\index{UpdateContinent@{UpdateContinent}!MauiApp1.Services.ContinentService@{MauiApp1.Services.ContinentService}}
+\doxysubsubsection{\texorpdfstring{UpdateContinent()}{UpdateContinent()}}
+{\footnotesize\ttfamily async Task$<$ int $>$ Maui\+App1.\+Services.\+Continent\+Service.\+Update\+Continent (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_maui_app1_1_1_models_1_1_continent}{Continent}}}]{continent }\end{DoxyParamCaption})}
+
+
+
+Implements \mbox{\hyperlink{interface_maui_app1_1_1_services_1_1_i_continent_service}{Maui\+App1.\+Services.\+IContinent\+Service}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/otfri/\+Documents/\+SEB/\+SEB5\+\_\+\+Napier/\+SET09102\+\_\+\+Software\+\_\+\+Engineering/team\+\_\+repo/\+MAUI-\/\+APP/\+Services/Continent\+Service.\+cs\end{DoxyCompactItemize}

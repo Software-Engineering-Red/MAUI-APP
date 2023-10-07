@@ -1,0 +1,99 @@
+\doxysection{Maui\+App1.\+Views.\+Building\+Type\+Page Class Reference}
+\hypertarget{class_maui_app1_1_1_views_1_1_building_type_page}{}\label{class_maui_app1_1_1_views_1_1_building_type_page}\index{MauiApp1.Views.BuildingTypePage@{MauiApp1.Views.BuildingTypePage}}
+
+
+A page containing logic for handling building types.  
+
+
+Inheritance diagram for Maui\+App1.\+Views.\+Building\+Type\+Page\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_maui_app1_1_1_views_1_1_building_type_page}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_maui_app1_1_1_views_1_1_building_type_page_acbef25e68bad5016231e70d1399252bc}\label{class_maui_app1_1_1_views_1_1_building_type_page_acbef25e68bad5016231e70d1399252bc} 
+async Task {\bfseries Load\+Building\+Types} ()
+\begin{DoxyCompactList}\small\item\em Load building types from the database. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_maui_app1_1_1_views_1_1_building_type_page_a512e1f3a6e491df181c1aea8c7c2e56f}{Save\+Button\+\_\+\+Clicked}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Event handler for the save button. \end{DoxyCompactList}\item 
+async void \mbox{\hyperlink{class_maui_app1_1_1_views_1_1_building_type_page_a831fe2e2df4e48637a20c6075d87a1a2}{Delete\+Button\+\_\+\+Clicked}} (object sender, Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Event handler for the delete button. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_maui_app1_1_1_views_1_1_building_type_page_aadd2e85c6a52e86ab80063d5094090c9}{ltv\+\_\+buildingtypes\+\_\+\+Item\+Selected}} (object sender, Selected\+Item\+Changed\+Event\+Args e)
+\begin{DoxyCompactList}\small\item\em Even handler for the building type list. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_maui_app1_1_1_views_1_1_building_type_page_a6a013b92786d6a5c9574e17f6fc09182}\label{class_maui_app1_1_1_views_1_1_building_type_page_a6a013b92786d6a5c9574e17f6fc09182} 
+\mbox{\hyperlink{class_maui_app1_1_1_models_1_1_building_type}{Building\+Type}} {\bfseries selected\+Building\+Type} = null
+\begin{DoxyCompactList}\small\item\em The currently selected building type. \end{DoxyCompactList}\item 
+\Hypertarget{class_maui_app1_1_1_views_1_1_building_type_page_a9de402e1caf8d3009ef1818332a9a787}\label{class_maui_app1_1_1_views_1_1_building_type_page_a9de402e1caf8d3009ef1818332a9a787} 
+\mbox{\hyperlink{interface_maui_app1_1_1_services_1_1_i_building_type_service}{IBuilding\+Type\+Service}} {\bfseries building\+Type\+Service}
+\begin{DoxyCompactList}\small\item\em An instance of the IBuilding\+Type\+Service. \end{DoxyCompactList}\item 
+\Hypertarget{class_maui_app1_1_1_views_1_1_building_type_page_a500c533985e8afe8325ff7a3e4fa64a6}\label{class_maui_app1_1_1_views_1_1_building_type_page_a500c533985e8afe8325ff7a3e4fa64a6} 
+Observable\+Collection$<$ \mbox{\hyperlink{class_maui_app1_1_1_models_1_1_building_type}{Building\+Type}} $>$ {\bfseries building\+Types} = new Observable\+Collection$<$\mbox{\hyperlink{class_maui_app1_1_1_models_1_1_building_type}{Building\+Type}}$>$()
+\begin{DoxyCompactList}\small\item\em A list of available building types. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A page containing logic for handling building types. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_maui_app1_1_1_views_1_1_building_type_page_a831fe2e2df4e48637a20c6075d87a1a2}\label{class_maui_app1_1_1_views_1_1_building_type_page_a831fe2e2df4e48637a20c6075d87a1a2} 
+\index{MauiApp1.Views.BuildingTypePage@{MauiApp1.Views.BuildingTypePage}!DeleteButton\_Clicked@{DeleteButton\_Clicked}}
+\index{DeleteButton\_Clicked@{DeleteButton\_Clicked}!MauiApp1.Views.BuildingTypePage@{MauiApp1.Views.BuildingTypePage}}
+\doxysubsubsection{\texorpdfstring{DeleteButton\_Clicked()}{DeleteButton\_Clicked()}}
+{\footnotesize\ttfamily async void Maui\+App1.\+Views.\+Building\+Type\+Page.\+Delete\+Button\+\_\+\+Clicked (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Event handler for the delete button. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & The source of the event.\\
+\hline
+{\em e} & The arguments of the event.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_maui_app1_1_1_views_1_1_building_type_page_aadd2e85c6a52e86ab80063d5094090c9}\label{class_maui_app1_1_1_views_1_1_building_type_page_aadd2e85c6a52e86ab80063d5094090c9} 
+\index{MauiApp1.Views.BuildingTypePage@{MauiApp1.Views.BuildingTypePage}!ltv\_buildingtypes\_ItemSelected@{ltv\_buildingtypes\_ItemSelected}}
+\index{ltv\_buildingtypes\_ItemSelected@{ltv\_buildingtypes\_ItemSelected}!MauiApp1.Views.BuildingTypePage@{MauiApp1.Views.BuildingTypePage}}
+\doxysubsubsection{\texorpdfstring{ltv\_buildingtypes\_ItemSelected()}{ltv\_buildingtypes\_ItemSelected()}}
+{\footnotesize\ttfamily void Maui\+App1.\+Views.\+Building\+Type\+Page.\+ltv\+\_\+buildingtypes\+\_\+\+Item\+Selected (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Selected\+Item\+Changed\+Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Even handler for the building type list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & The source of the event.\\
+\hline
+{\em e} & The arguments of the event.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_maui_app1_1_1_views_1_1_building_type_page_a512e1f3a6e491df181c1aea8c7c2e56f}\label{class_maui_app1_1_1_views_1_1_building_type_page_a512e1f3a6e491df181c1aea8c7c2e56f} 
+\index{MauiApp1.Views.BuildingTypePage@{MauiApp1.Views.BuildingTypePage}!SaveButton\_Clicked@{SaveButton\_Clicked}}
+\index{SaveButton\_Clicked@{SaveButton\_Clicked}!MauiApp1.Views.BuildingTypePage@{MauiApp1.Views.BuildingTypePage}}
+\doxysubsubsection{\texorpdfstring{SaveButton\_Clicked()}{SaveButton\_Clicked()}}
+{\footnotesize\ttfamily void Maui\+App1.\+Views.\+Building\+Type\+Page.\+Save\+Button\+\_\+\+Clicked (\begin{DoxyParamCaption}\item[{object}]{sender,  }\item[{Event\+Args}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Event handler for the save button. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sender} & The source of the event.\\
+\hline
+{\em e} & The arguments of the event.\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/otfri/\+Documents/\+SEB/\+SEB5\+\_\+\+Napier/\+SET09102\+\_\+\+Software\+\_\+\+Engineering/team\+\_\+repo/\+MAUI-\/\+APP/\+Views/Building\+Type\+Page.\+xaml.\+cs\end{DoxyCompactItemize}

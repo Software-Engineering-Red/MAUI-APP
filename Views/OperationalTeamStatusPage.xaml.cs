@@ -43,7 +43,7 @@ public partial class OperationalTeamStatusPage : ContentPage
     /// Loads a OperationalTeamStatus Collection from the database
     /// and reference the Collection to the in UI.
     /// </summary>
-    /// <returns> Task promise</returns>
+    /// <returns>Task promise</returns>
     private async Task LoadStatuses()
     {
         statuses = new ObservableCollection<OperationalTeamStatus>(await statusService.GetStatusesListAsync());

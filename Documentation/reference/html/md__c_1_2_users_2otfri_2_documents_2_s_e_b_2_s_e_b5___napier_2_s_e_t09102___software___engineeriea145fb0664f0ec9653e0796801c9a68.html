@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Team Red: doxygen</title>
+<title>Team Red: The Doxygen Documentation Process</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -70,10 +70,28 @@ $(function() {
 
 </div><!-- top -->
 <div><div class="header">
-  <div class="headertitle"><div class="title">doxygen</div></div>
+  <div class="headertitle"><div class="title">The Doxygen Documentation Process</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"></div></div><!-- contents -->
+<div class="textblock"><p><a class="anchor" id="autotoc_md0"></a> </p>
+<h2><a class="anchor" id="autotoc_md1"></a>
+Commenting Code</h2>
+<p>Each Team member has to provide commentary to their own written code according to the <a href="https://learn.microsoft.com/en-gb/dotnet/csharp/language-reference/xmldoc/">.NET guidelines</a>.</p>
+<p>The commentary is supposed to shortly summarize the purpose and functionality of classes, methods, instance variables, interfaces etc..</p>
+<h2><a class="anchor" id="autotoc_md2"></a>
+Generation</h2>
+<p>The generation can be executed by first of all making sure doxygen is <a href="https://www.doxygen.nl/download.html">installed</a>. After that you have to open the Doxywizzard, select the Doxyfile from </p><div class="fragment"><div class="line">\Documentation\doxygen_config\Doxyfile</div>
+</div><!-- fragment --><p> , navigate to the Run Tab in the Wizzard and finally pressing <b>run doxygen</b>. The Documentation will then be generated in the reference-folder and can be commited and pushed according to the workflow.</p>
+<h2><a class="anchor" id="autotoc_md3"></a>
+Specifications</h2>
+<ul>
+<li>Doxygen should not generate any LaTeX (<code>GENERATE_LATEX = NO</code>).</li>
+<li>The selected Programming Language is Java/C#.</li>
+<li>During the Build it should extract private (<code>EXTRACT_PRIVATE = YES</code>), static (<code>EXTRACT_STATIC = YES</code>) members</li>
+<li>It should especially include our written internal documentation in the form of comments (<code>INTERNAL_DOCS = YES</code>)</li>
+<li>The Rest of the Specification in the Configurations are the standar </li>
+</ul>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

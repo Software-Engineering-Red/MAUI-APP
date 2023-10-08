@@ -6,5 +6,6 @@ var searchData=
   ['onsavebuttonclicked_3',['OnSaveButtonClicked',['../class_maui_app1_1_1_views_1_1_rota_page.html#a89293f52dcaf7d68c4020789479cc82c',1,'MauiApp1::Views::RotaPage']]],
   ['operationalteamstatuspage_4',['OperationalTeamStatusPage',['../class_maui_app1_1_1_views_1_1_operational_team_status_page.html#a4fbf9d2af4a7fbe60e9cbed46e14eb26',1,'MauiApp1::Views::OperationalTeamStatusPage']]],
   ['operationalteamstatusservice_5',['OperationalTeamStatusService',['../class_maui_app1_1_1_services_1_1_operational_team_status_service.html#abcc861e52746fbefe79a2699ac160e85',1,'MauiApp1::Services::OperationalTeamStatusService']]],
-  ['organisationpage_6',['OrganisationPage',['../class_maui_app1_1_1_views_1_1_organisation_page.html#a72371e3350cd11d488e98825103f3a74',1,'MauiApp1::Views::OrganisationPage']]]
+  ['orderstatuspage_6',['OrderStatusPage',['../class_maui_app1_1_1_views_1_1_order_status_page.html#a7ff1618482d594c3f42c5cbbc1e9acc8',1,'MauiApp1::Views::OrderStatusPage']]],
+  ['organisationpage_7',['OrganisationPage',['../class_maui_app1_1_1_views_1_1_organisation_page.html#a72371e3350cd11d488e98825103f3a74',1,'MauiApp1::Views::OrganisationPage']]]
 ];

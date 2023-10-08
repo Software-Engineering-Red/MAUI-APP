@@ -70,32 +70,6 @@ namespace MauiApp1.Services
         }
 
         /// <summary>
-        /// Gets instance of OperationalTeamStatus from Database via ID.
-        /// </summary>
-        /// <param name="id">ID of certain Element</param>
-        /// <returns>Task promise to get instance with ID from Database</returns>
-        public async Task<OperationalTeamStatus> GetStatusAsync(int id)
-        {
-            await Init();
-            return await _dbConnection.Table<OperationalTeamStatus>().Where(i => i.ID == id).FirstOrDefaultAsync();
-        }
-
-        /// <summary>
-        /// Saves instance of OperationalTeamStatus to Database.
-        /// </summary>
-        /// <param name="status">Instance of OperationalTeamStatus to be saved</param>
-        /// <returns>Task promise to save instance to Database</returns>
-        public async Task<int> SaveStatusAsync(OperationalTeamStatus status)
-        {
-            await Init();
-            if (status.Name != null)
-                return await _dbConnection.UpdateAsync(status);
-            else
-                return await _dbConnection.InsertAsync(status);
-        }
-
-
-        /// <summary>
         /// Updates an entry of OperationalTeamStatus in Database.
         /// </summary>
         /// <param name="status">entry of OperationalTeamStatus</param>
@@ -105,7 +79,5 @@ namespace MauiApp1.Services
             await Init();
             return await _dbConnection.UpdateAsync(status);
         }
-
-  
     }
 }

@@ -32,19 +32,6 @@ namespace MauiApp1.Services
         /// <returns>Task promise to get a List of OperationalTeamStatus</returns>
         Task<List<OperationalTeamStatus>> GetStatusesListAsync();
 
-        /// <summary>
-        /// Gets instance of OperationalTeamStatus from Database via ID.
-        /// </summary>
-        /// <param name="id">ID of certain Element</param>
-        /// <returns>Task promise to get instance with ID from Database</returns>
-        Task<OperationalTeamStatus> GetStatusAsync(int id);
-
-        /// <summary>
-        /// Saves instance of OperationalTeamStatus to Database.
-        /// </summary>
-        /// <param name="status">Instance of OperationalTeamStatus to be saved</param>
-        /// <returns>Task promise to save instance to Database</returns>
-        Task<int> SaveStatusAsync(OperationalTeamStatus status);
 
         /// <summary>
         /// Updates an entry of OperationalTeamStatus in Database.

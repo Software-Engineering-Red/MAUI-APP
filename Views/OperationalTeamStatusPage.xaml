@@ -4,7 +4,7 @@
              x:Class="MauiApp1.Views.OperationalTeamStatusPage"
              Title="ContinentPage">
     <VerticalStackLayout Spacing="10" Margin="5">
-        <Editor x:Name="txe_status"
+        <Editor x:Name="text_editor_status"
                 Placeholder="Add a Operation Team Status"
                 HeightRequest="100" />
 
@@ -17,7 +17,7 @@
                     Clicked="DeleteButton_Clicked" />
         </Grid>
 
-            <ListView x:Name="ltv_statuses" ItemSelected="ltv_status_ItemSelected" Margin="20"
+            <ListView x:Name="list_view_statuses" ItemSelected="ltv_status_ItemSelected" Margin="20"
                       SelectionMode="Single">
             <ListView.ItemTemplate>
                 <DataTemplate>

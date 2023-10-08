@@ -36,7 +36,7 @@ public partial class OperationalTeamStatusPage : ContentPage
         this.statusService = new OperationalTeamStatusService();
 
         Task.Run(async () => await LoadStatuses());
-        txe_status.Text = "";
+        text_editor_status.Text = "";
     }
 
     /// <summary>
@@ -47,37 +47,39 @@ public partial class OperationalTeamStatusPage : ContentPage
     private async Task LoadStatuses()
     {
         statuses = new ObservableCollection<OperationalTeamStatus>(await statusService.GetStatusesListAsync());
-        ltv_statuses.ItemsSource = statuses;
+        list_view_statuses.ItemsSource = statuses;
     }
 
     /// <summary>
     /// Saves current Element of OperationalTeamStatus to Database
+    /// unless string is empty. Creates new object if selectedStatus
+    /// is currently null and adds it to the database
     /// through a clicking save button in the UI.
     /// </summary>
     /// <param name="sender">Object to be saved</param>
     /// <param name="e">UI Event triggering Method call </param>
     private void SaveButton_Clicked(object sender, EventArgs e)
     {
-        if (String.IsNullOrEmpty(txe_status.Text)) return;
+        if (String.IsNullOrEmpty(text_editor_status.Text)) return;
 
         if (selectedStatus == null)
         {
-            var status = new OperationalTeamStatus() { Name = txe_status.Text };
-            statusService.SaveStatusAsync(status);
+            var status = new OperationalTeamStatus() { Name = text_editor_status.Text };
+            statusService.AddStatus(status);
             statuses.Add(status);
         }
         else
         {
-            selectedStatus.Name = txe_status.Text;
+            selectedStatus.Name = text_editor_status.Text;
             statusService.UpdateStatusAsync(selectedStatus);
             var status = statuses.FirstOrDefault(x => x.ID == selectedStatus.ID);
-            status.Name = txe_status.Text;
+            status.Name = text_editor_status.Text;
         }
 
 
         selectedStatus = null;
-        ltv_statuses.SelectedItem = null;
-        txe_status.Text = "";
+        list_view_statuses.SelectedItem = null;
+        text_editor_status.Text = "";
     }
 
     /// <summary>
@@ -87,7 +89,7 @@ public partial class OperationalTeamStatusPage : ContentPage
     /// <param name="e">UI Event triggering Method call</param>
     private async void DeleteButton_Clicked(object sender, EventArgs e)
     {
-        if (ltv_statuses.SelectedItem == null)
+        if (list_view_statuses.SelectedItem == null)
         {
             await Shell.Current.DisplayAlert("No Status Selected", "Select the status you want to delete from the list", "OK");
             return;
@@ -96,8 +98,8 @@ public partial class OperationalTeamStatusPage : ContentPage
         await statusService.DeleteStatusAsync(selectedStatus);
         statuses.Remove(selectedStatus);
 
-        ltv_statuses.SelectedItem = null;
-        txe_status.Text = "";
+        list_view_statuses.SelectedItem = null;
+        text_editor_status.Text = "";
     }
 
     /// <summary>
@@ -110,7 +112,7 @@ public partial class OperationalTeamStatusPage : ContentPage
         selectedStatus = e.SelectedItem as OperationalTeamStatus;
         if (selectedStatus == null) return;
 
-        txe_status.Text = selectedStatus.Name;
+        text_editor_status.Text = selectedStatus.Name;
     }
     
 }

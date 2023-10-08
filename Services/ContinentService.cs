@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 
 namespace MauiApp1.Services
 {
-    public class ContinentService : IContinentService {
+    public class ContinentService : IContinentService
+    {
 
         private SQLiteAsyncConnection _dbConnection;
 

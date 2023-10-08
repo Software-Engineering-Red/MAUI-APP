@@ -2,79 +2,129 @@
 using MauiApp1.Services;
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Threading.Tasks;
-
+using static System.Net.Mime.MediaTypeNames;
 
 namespace MauiApp1.Views
 {
+    /// <summary>
+    /// Represents the RotaPage class, which is responsible for managing and displaying Rota data.
+    /// </summary>
     public partial class RotaPage : ContentPage
     {
-        Rota selectedRota = null;
-        IRotaService rotaService;
-        ObservableCollection<Rota> rotas = new ObservableCollection<Rota>();
+        private Rota _selectedRota = null;
+        private IRotaService _rotaService;
+        private ObservableCollection<Rota> _rotaCollection = new ObservableCollection<Rota>();
 
+        /// <summary>
+        /// Initializes a new instance of the RotaPage class.
+        /// </summary>
         public RotaPage()
         {
             InitializeComponent();
             this.BindingContext = this;
-            this.rotaService = new RotaService();
+            this._rotaService = new RotaService();
 
             Task.Run(async () => await LoadRotas());
-            txe_rota.Text = "";
+            RotaNameEditor.Text = "";
         }
 
+        /// <summary>
+        /// Loads the list of Rotas asynchronously.
+        /// </summary>
         private async Task LoadRotas()
         {
-            rotas = new ObservableCollection<Rota>(await rotaService.GetRotaList());
-            ltv_rotas.ItemsSource = rotas;
+            _rotaCollection = new ObservableCollection<Rota>(await _rotaService.GetRotaList());
+            RotaListView.ItemsSource = _rotaCollection;
         }
 
-        private void SaveButton_Clicked(object sender, EventArgs e)
+        /// <summary>
+        /// Handles the click event of the Save button.
+        /// </summary>
+        private void OnSaveButtonClicked(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(txe_rota.Text)) return;
+            if (String.IsNullOrEmpty(RotaNameEditor.Text)) return;
 
-            if (selectedRota == null)
+            if (_selectedRota == null)
             {
-                var rota = new Rota() { Name = txe_rota.Text };
-                rotaService.AddRota(rota);
-                rotas.Add(rota);
+                AddNewRota();
             }
             else
             {
-                selectedRota.Name = txe_rota.Text;
-                rotaService.UpdateRota(selectedRota);
-                var rota = rotas.FirstOrDefault(x => x.ID == selectedRota.ID);
-                rota.Name = txe_rota.Text;
+                UpdateExistingRota();
             }
 
-            selectedRota = null;
-            ltv_rotas.SelectedItem = null;
-            txe_rota.Text = "";
-
+            ClearUIComponents();
         }
 
-        private async void DeleteButton_Clicked(object sender, EventArgs e)
+        /// <summary>
+        /// Adds a new Rota to the collection and the data service.
+        /// </summary>
+        private void AddNewRota()
         {
-            if (ltv_rotas.SelectedItem == null)
+            var newRota = CreateRotaFromInput();
+            _rotaService.AddRota(newRota);
+            _rotaCollection.Add(newRota);
+        }
+
+        /// <summary>
+        /// Updates an existing Rota in the collection and the data service.
+        /// </summary>
+        private void UpdateExistingRota()
+        {
+            _selectedRota.Name = RotaNameEditor.Text;
+            _rotaService.UpdateRota(_selectedRota);
+            var existingRota = _rotaCollection.FirstOrDefault(x => x.ID == _selectedRota.ID);
+            existingRota.Name = RotaNameEditor.Text;
+        }
+
+        /// <summary>
+        /// Creates a new Rota object from the input.
+        /// </summary>
+        /// <returns>A new Rota object.</returns>
+        private Rota CreateRotaFromInput()
+        {
+            return new Rota() { Name = RotaNameEditor.Text };
+        }
+
+        /// <summary>
+        /// Clears the UI components and resets the selected Rota.
+        /// </summary>
+        private void ClearUIComponents()
+        {
+            RotaListView.SelectedItem = null;
+            RotaNameEditor.Text = "";
+            _selectedRota = null;
+        }
+
+        /// <summary>
+        /// Handles the click event of the Delete button.
+        /// </summary>
+        private async void OnDeleteButtonClicked(object sender, EventArgs e)
+        {
+            if (RotaListView.SelectedItem == null)
             {
                 await DisplayAlert("No Rota Selected", "Select the rota you want to delete from the list", "OK");
                 return;
             }
 
-            await rotaService.DeleteRota(selectedRota);
-            rotas.Remove(selectedRota);
+            await _rotaService.DeleteRota(_selectedRota);
+            _rotaCollection.Remove(_selectedRota);
 
-            ltv_rotas.SelectedItem = null;
-            txe_rota.Text = "";
+            ClearUIComponents();
         }
 
-        private void ltv_rotas_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        /// <summary>
+        /// Handles the selection of a Rota item in the list.
+        /// </summary>
+        private void OnRotaItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            selectedRota = e.SelectedItem as Rota;
-            if (selectedRota == null) return;
+            _selectedRota = e.SelectedItem as Rota;
+            if (_selectedRota == null) return;
 
-            txe_rota.Text = selectedRota.Name;
+            RotaNameEditor.Text = _selectedRota.Name;
         }
     }
 }

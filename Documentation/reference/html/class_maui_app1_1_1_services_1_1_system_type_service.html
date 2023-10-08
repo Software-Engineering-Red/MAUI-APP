@@ -81,40 +81,51 @@ $(function() {
   <div class="headertitle"><div class="title">MauiApp1.Services.SystemTypeService Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>SystemTypeService inhereting from ISystemTypeService Interface.  
+ <a href="class_maui_app1_1_1_services_1_1_system_type_service.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for MauiApp1.Services.SystemTypeService:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_maui_app1_1_1_services_1_1_system_type_service.png" usemap="#MauiApp1.Services.SystemTypeService_map" alt=""/>
   <map id="MauiApp1.Services.SystemTypeService_map" name="MauiApp1.Services.SystemTypeService_map">
-<area href="interface_maui_app1_1_1_services_1_1_i_system_type_service.html" alt="MauiApp1.Services.ISystemTypeService" shape="rect" coords="0,0,243,24"/>
+<area href="interface_maui_app1_1_1_services_1_1_i_system_type_service.html" title="Interface that exposes methods of SystemTypeService." alt="MauiApp1.Services.ISystemTypeService" shape="rect" coords="0,0,243,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a53dea8471f880565a0923466479aff14" id="r_a53dea8471f880565a0923466479aff14"><td class="memItemLeft" align="right" valign="top">async Task&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_maui_app1_1_1_services_1_1_system_type_service.html#a53dea8471f880565a0923466479aff14">AddSystemType</a> (<a class="el" href="class_maui_app1_1_1_models_1_1_system_type.html">SystemType</a> systemType)</td></tr>
+<tr class="memdesc:a53dea8471f880565a0923466479aff14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method responsible for addition of entry into _dbConnection table.  <br /></td></tr>
 <tr class="separator:a53dea8471f880565a0923466479aff14"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3753b299a07621f0f034a41c53695d7d" id="r_a3753b299a07621f0f034a41c53695d7d"><td class="memItemLeft" align="right" valign="top">async Task&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_maui_app1_1_1_services_1_1_system_type_service.html#a3753b299a07621f0f034a41c53695d7d">DeleteSystemType</a> (<a class="el" href="class_maui_app1_1_1_models_1_1_system_type.html">SystemType</a> systemType)</td></tr>
+<tr class="memdesc:a3753b299a07621f0f034a41c53695d7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method responsible for deletion of an entry from _dbConnection table.  <br /></td></tr>
 <tr class="separator:a3753b299a07621f0f034a41c53695d7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4604ce1d5da72cd0097b8f762e818d49" id="r_a4604ce1d5da72cd0097b8f762e818d49"><td class="memItemLeft" align="right" valign="top">async Task&lt; List&lt; <a class="el" href="class_maui_app1_1_1_models_1_1_system_type.html">SystemType</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_maui_app1_1_1_services_1_1_system_type_service.html#a4604ce1d5da72cd0097b8f762e818d49">GetSystemTypeList</a> ()</td></tr>
+<tr class="memdesc:a4604ce1d5da72cd0097b8f762e818d49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method responsible for quering database, for entries in _dbConnection table.  <br /></td></tr>
 <tr class="separator:a4604ce1d5da72cd0097b8f762e818d49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a27ccba5d14f635e1eeef7c9400f4a772" id="r_a27ccba5d14f635e1eeef7c9400f4a772"><td class="memItemLeft" align="right" valign="top">async Task&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_maui_app1_1_1_services_1_1_system_type_service.html#a27ccba5d14f635e1eeef7c9400f4a772">UpdateSystemType</a> (<a class="el" href="class_maui_app1_1_1_models_1_1_system_type.html">SystemType</a> systemType)</td></tr>
+<tr class="memdesc:a27ccba5d14f635e1eeef7c9400f4a772"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method responsible for updating an entry from _dbConnection table, based on primary key of the element passed.  <br /></td></tr>
 <tr class="separator:a27ccba5d14f635e1eeef7c9400f4a772"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:afb8a69213b10609cde7b1a697dd57d73" id="r_afb8a69213b10609cde7b1a697dd57d73"><td class="memItemLeft" align="right" valign="top"><a id="afb8a69213b10609cde7b1a697dd57d73" name="afb8a69213b10609cde7b1a697dd57d73"></a>
 async Task&#160;</td><td class="memItemRight" valign="bottom"><b>SetUpDb</b> ()</td></tr>
+<tr class="memdesc:afb8a69213b10609cde7b1a697dd57d73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method initiates connection to SQLite database, and creates _dbConnection table, if none is present. <br /></td></tr>
 <tr class="separator:afb8a69213b10609cde7b1a697dd57d73"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:a0b1726fb4eae2f4ebf344636f40b1ec1" id="r_a0b1726fb4eae2f4ebf344636f40b1ec1"><td class="memItemLeft" align="right" valign="top"><a id="a0b1726fb4eae2f4ebf344636f40b1ec1" name="a0b1726fb4eae2f4ebf344636f40b1ec1"></a>
 SQLiteAsyncConnection&#160;</td><td class="memItemRight" valign="bottom"><b>_dbConnection</b></td></tr>
+<tr class="memdesc:a0b1726fb4eae2f4ebf344636f40b1ec1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Variable storing dbConnection to SQLite database. <br /></td></tr>
 <tr class="separator:a0b1726fb4eae2f4ebf344636f40b1ec1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>SystemTypeService inhereting from ISystemTypeService Interface. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a53dea8471f880565a0923466479aff14" name="a53dea8471f880565a0923466479aff14"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a53dea8471f880565a0923466479aff14">&#9670;&#160;</a></span>AddSystemType()</h2>
 
@@ -131,7 +142,15 @@ SQLiteAsyncConnection&#160;</td><td class="memItemRight" valign="bottom"><b>_dbC
       </table>
 </div><div class="memdoc">
 
-<p>Implements <a class="el" href="interface_maui_app1_1_1_services_1_1_i_system_type_service.html">MauiApp1.Services.ISystemTypeService</a>.</p>
+<p>Method responsible for addition of entry into _dbConnection table. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">systemType</td><td>SystemType class instance is attempted to be inserted into _dbConnection table.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="interface_maui_app1_1_1_services_1_1_i_system_type_service.html#adda9992dab0c7ffdea23c04448304910">MauiApp1.Services.ISystemTypeService</a>.</p>
 
 </div>
 </div>
@@ -151,7 +170,15 @@ SQLiteAsyncConnection&#160;</td><td class="memItemRight" valign="bottom"><b>_dbC
       </table>
 </div><div class="memdoc">
 
-<p>Implements <a class="el" href="interface_maui_app1_1_1_services_1_1_i_system_type_service.html">MauiApp1.Services.ISystemTypeService</a>.</p>
+<p>Method responsible for deletion of an entry from _dbConnection table. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">systemType</td><td>SystemType class instance, is attempted to be deleted from _dbConnection table. (Based on its' primary key)</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="interface_maui_app1_1_1_services_1_1_i_system_type_service.html#a2ada6bd49d62c52ee3617ee28a1e56fa">MauiApp1.Services.ISystemTypeService</a>.</p>
 
 </div>
 </div>
@@ -170,7 +197,9 @@ SQLiteAsyncConnection&#160;</td><td class="memItemRight" valign="bottom"><b>_dbC
       </table>
 </div><div class="memdoc">
 
-<p>Implements <a class="el" href="interface_maui_app1_1_1_services_1_1_i_system_type_service.html">MauiApp1.Services.ISystemTypeService</a>.</p>
+<p>Method responsible for quering database, for entries in _dbConnection table. </p>
+
+<p>Implements <a class="el" href="interface_maui_app1_1_1_services_1_1_i_system_type_service.html#acf9c90659f648b90406363f2718a6e4a">MauiApp1.Services.ISystemTypeService</a>.</p>
 
 </div>
 </div>
@@ -190,7 +219,15 @@ SQLiteAsyncConnection&#160;</td><td class="memItemRight" valign="bottom"><b>_dbC
       </table>
 </div><div class="memdoc">
 
-<p>Implements <a class="el" href="interface_maui_app1_1_1_services_1_1_i_system_type_service.html">MauiApp1.Services.ISystemTypeService</a>.</p>
+<p>Method responsible for updating an entry from _dbConnection table, based on primary key of the element passed. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">systemType</td><td>SystemType class instance which will attempt to be updated, based on its' primary key value</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="interface_maui_app1_1_1_services_1_1_i_system_type_service.html#a14ae089fbe9702697d4a328d2a871363">MauiApp1.Services.ISystemTypeService</a>.</p>
 
 </div>
 </div>

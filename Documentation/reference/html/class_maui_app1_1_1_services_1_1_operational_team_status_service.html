@@ -102,12 +102,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4a094acc8615030681f1d7de5b993404" id="r_a4a094acc8615030681f1d7de5b993404"><td class="memItemLeft" align="right" valign="top">async Task&lt; List&lt; <a class="el" href="class_maui_app1_1_1_models_1_1_operational_team_status.html">OperationalTeamStatus</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_maui_app1_1_1_services_1_1_operational_team_status_service.html#a4a094acc8615030681f1d7de5b993404">GetStatusesListAsync</a> ()</td></tr>
 <tr class="memdesc:a4a094acc8615030681f1d7de5b993404"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a List of OperationalTeamStatus from Database.  <br /></td></tr>
 <tr class="separator:a4a094acc8615030681f1d7de5b993404"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af8c5ef3094b4a74f9ea87553a6b68794" id="r_af8c5ef3094b4a74f9ea87553a6b68794"><td class="memItemLeft" align="right" valign="top">async Task&lt; <a class="el" href="class_maui_app1_1_1_models_1_1_operational_team_status.html">OperationalTeamStatus</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_maui_app1_1_1_services_1_1_operational_team_status_service.html#af8c5ef3094b4a74f9ea87553a6b68794">GetStatusAsync</a> (int id)</td></tr>
-<tr class="memdesc:af8c5ef3094b4a74f9ea87553a6b68794"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets instance of OperationalTeamStatus from Database via ID.  <br /></td></tr>
-<tr class="separator:af8c5ef3094b4a74f9ea87553a6b68794"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7fdf84ef3d701737f318ba9ae58f03be" id="r_a7fdf84ef3d701737f318ba9ae58f03be"><td class="memItemLeft" align="right" valign="top">async Task&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_maui_app1_1_1_services_1_1_operational_team_status_service.html#a7fdf84ef3d701737f318ba9ae58f03be">SaveStatusAsync</a> (<a class="el" href="class_maui_app1_1_1_models_1_1_operational_team_status.html">OperationalTeamStatus</a> status)</td></tr>
-<tr class="memdesc:a7fdf84ef3d701737f318ba9ae58f03be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves instance of OperationalTeamStatus to Database.  <br /></td></tr>
-<tr class="separator:a7fdf84ef3d701737f318ba9ae58f03be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a94c1cb58df9b707f7cecca93febf5c74" id="r_a94c1cb58df9b707f7cecca93febf5c74"><td class="memItemLeft" align="right" valign="top">async Task&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_maui_app1_1_1_services_1_1_operational_team_status_service.html#a94c1cb58df9b707f7cecca93febf5c74">UpdateStatusAsync</a> (<a class="el" href="class_maui_app1_1_1_models_1_1_operational_team_status.html">OperationalTeamStatus</a> status)</td></tr>
 <tr class="memdesc:a94c1cb58df9b707f7cecca93febf5c74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates an entry of OperationalTeamStatus in Database.  <br /></td></tr>
 <tr class="separator:a94c1cb58df9b707f7cecca93febf5c74"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -182,33 +176,6 @@ SQLiteAsyncConnection&#160;</td><td class="memItemRight" valign="bottom"><b>_dbC
 
 </div>
 </div>
-<a id="af8c5ef3094b4a74f9ea87553a6b68794" name="af8c5ef3094b4a74f9ea87553a6b68794"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af8c5ef3094b4a74f9ea87553a6b68794">&#9670;&#160;</a></span>GetStatusAsync()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">async Task&lt; <a class="el" href="class_maui_app1_1_1_models_1_1_operational_team_status.html">OperationalTeamStatus</a> &gt; MauiApp1.Services.OperationalTeamStatusService.GetStatusAsync </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>id</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Gets instance of OperationalTeamStatus from Database via ID. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">id</td><td>ID of certain Element</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Task promise to get instance with ID from Database</dd></dl>
-
-</div>
-</div>
 <a id="a4a094acc8615030681f1d7de5b993404" name="a4a094acc8615030681f1d7de5b993404"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4a094acc8615030681f1d7de5b993404">&#9670;&#160;</a></span>GetStatusesListAsync()</h2>
 
@@ -254,33 +221,6 @@ SQLiteAsyncConnection&#160;</td><td class="memItemRight" valign="bottom"><b>_dbC
 
 <p>Initiates Database Connection and creates Table. </p>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
-
-</div>
-</div>
-<a id="a7fdf84ef3d701737f318ba9ae58f03be" name="a7fdf84ef3d701737f318ba9ae58f03be"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7fdf84ef3d701737f318ba9ae58f03be">&#9670;&#160;</a></span>SaveStatusAsync()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">async Task&lt; int &gt; MauiApp1.Services.OperationalTeamStatusService.SaveStatusAsync </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_maui_app1_1_1_models_1_1_operational_team_status.html">OperationalTeamStatus</a>&#160;</td>
-          <td class="paramname"><em>status</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Saves instance of OperationalTeamStatus to Database. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">status</td><td>Instance of OperationalTeamStatus to be saved</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Task promise to save instance to Database</dd></dl>
 
 </div>
 </div>

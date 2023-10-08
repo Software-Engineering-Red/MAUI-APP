@@ -104,7 +104,7 @@ Private Member Functions</h2></td></tr>
 <tr class="memdesc:abf36df43afac054488636adb2eaa0e96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads a OperationalTeamStatus Collection from the database and reference the Collection to the in UI.  <br /></td></tr>
 <tr class="separator:abf36df43afac054488636adb2eaa0e96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac2cf3ec9feceb0814f02899fd48fdfea" id="r_ac2cf3ec9feceb0814f02899fd48fdfea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_maui_app1_1_1_views_1_1_operational_team_status_page.html#ac2cf3ec9feceb0814f02899fd48fdfea">SaveButton_Clicked</a> (object sender, EventArgs e)</td></tr>
-<tr class="memdesc:ac2cf3ec9feceb0814f02899fd48fdfea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves current Element of OperationalTeamStatus to Database through a clicking save button in the UI.  <br /></td></tr>
+<tr class="memdesc:ac2cf3ec9feceb0814f02899fd48fdfea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves current Element of OperationalTeamStatus to Database unless string is empty. Creates new object if selectedStatus is currently null and adds it to the database through a clicking save button in the UI.  <br /></td></tr>
 <tr class="separator:ac2cf3ec9feceb0814f02899fd48fdfea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8efacfa7d4632162c5326681b9287384" id="r_a8efacfa7d4632162c5326681b9287384"><td class="memItemLeft" align="right" valign="top">async void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_maui_app1_1_1_views_1_1_operational_team_status_page.html#a8efacfa7d4632162c5326681b9287384">DeleteButton_Clicked</a> (object sender, EventArgs e)</td></tr>
 <tr class="memdesc:a8efacfa7d4632162c5326681b9287384"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes current Element from the Database.  <br /></td></tr>
@@ -283,7 +283,7 @@ ObservableCollection&lt; <a class="el" href="class_maui_app1_1_1_models_1_1_oper
 </table>
 </div><div class="memdoc">
 
-<p>Saves current Element of OperationalTeamStatus to Database through a clicking save button in the UI. </p>
+<p>Saves current Element of OperationalTeamStatus to Database unless string is empty. Creates new object if selectedStatus is currently null and adds it to the database through a clicking save button in the UI. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">sender</td><td>Object to be saved</td></tr>

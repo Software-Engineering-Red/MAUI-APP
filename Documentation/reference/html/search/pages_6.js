@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['workflow_0',['workflow',['../md__c_1_2_users_2otfri_2_documents_2_s_e_b_2_s_e_b5___napier_2_s_e_t09102___software___engineerie6697a998047e049fa376654630ad87e.html',1,'']]]
+  ['up_20personal_20environment_0',['Setting up personal environment',['../md__c_1_2_users_2otfri_2_documents_2_s_e_b_2_s_e_b5___napier_2_s_e_t09102___software___engineeri3e4ee570bca0831cceeaf73b49ddd2b4.html',1,'']]]
 ];

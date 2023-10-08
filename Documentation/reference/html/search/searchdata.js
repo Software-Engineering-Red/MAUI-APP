@@ -7,7 +7,7 @@ var indexSectionsWithContent =
   4: "_benos",
   5: "int",
   6: "p",
-  7: "eprstuw"
+  7: "deprstuw"
 };
 
 var indexSectionNames =

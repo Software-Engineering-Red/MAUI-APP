@@ -8,6 +8,6 @@ var searchData=
   ['roleservice_5',['RoleService',['../class_maui_app1_1_1_services_1_1_role_service.html',1,'MauiApp1::Services']]],
   ['rolespage_6',['rolespage',['../class_maui_app1_1_1_views_1_1_roles_page.html',1,'MauiApp1.Views.RolesPage'],['../class_maui_app1_1_1_views_1_1_roles_page.html#a4ebf6d0c2c6ce1ffedf3d236cae71b7f',1,'MauiApp1.Views.RolesPage.RolesPage()']]],
   ['rota_7',['Rota',['../class_maui_app1_1_1_models_1_1_rota.html',1,'MauiApp1::Models']]],
-  ['rotapage_8',['RotaPage',['../class_maui_app1_1_1_views_1_1_rota_page.html',1,'MauiApp1::Views']]],
+  ['rotapage_8',['rotapage',['../class_maui_app1_1_1_views_1_1_rota_page.html',1,'MauiApp1.Views.RotaPage'],['../class_maui_app1_1_1_views_1_1_rota_page.html#ade7bfc54b101eb08b02e5cd9942d6c0d',1,'MauiApp1.Views.RotaPage.RotaPage()']]],
   ['rotaservice_9',['RotaService',['../class_maui_app1_1_1_services_1_1_rota_service.html',1,'MauiApp1::Services']]]
 ];

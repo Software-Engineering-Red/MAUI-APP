@@ -60,6 +60,9 @@
             Title="PositionStatusPage"
             ContentTemplate="{DataTemplate views:position_status}" />
 
+        <ShellContent
+           Title="OrderStatusPage"
+           ContentTemplate="{DataTemplate views:OrderStatusPage}" />
     </TabBar>
 
 </Shell>

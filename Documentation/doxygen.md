@@ -5,8 +5,15 @@
 Each Team member has to provide commentary to their own written code
 according to the [.NET guidelines](https://learn.microsoft.com/en-gb/dotnet/csharp/language-reference/xmldoc/).
 
-The commentary is supposed to shortly summarize the purpose and functionality of 
-classes, methods, instance variables, interfaces etc..
+The commentary for the Documentation is supposed to shortly summarize the purpose and functionality of every 
+* class
+* method
+* instance variable
+* interface
+* enum
+* (In principle all somewhat comprehensive modules in C#)
+
+The Documentation should not include any internal Comments inside these Modules.
 
 ### Generation
 

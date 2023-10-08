@@ -31,12 +31,7 @@ public partial class SystemPage : ContentPage
     public SystemPage()
     {
         InitializeComponent();
-        this.BindingContext = this;
-
-        /*! <summary>
-         * Initialize the systemTypeService with an instance of SystemTypeService.
-         * </summary>
-         */
+        this.BindingContext = this;       
         this.systemTypeService = new SystemTypeService();
 
         /*! <summary>
@@ -73,32 +68,31 @@ public partial class SystemPage : ContentPage
          */
         if (String.IsNullOrEmpty(txe_systemType.Text)) return;
 
+        /*! <summary>
+         * Create a new SystemType with the entered name and add it to the service and ObservableCollection.
+         * </summary>
+         */
         if (selectedSystem == null)
-        {
-            /*! <summary>
-            * Create a new SystemType with the entered name and add it to the service and ObservableCollection.
-            * </summary>
-            */
+        {            
             var systemType = new SystemType() { Name = txe_systemType.Text };
             systemTypeService.AddSystemType(systemType);
             systemTypes.Add(systemType);
         }
+        /*! <summary>
+         * Update the name of the selected SystemType and update it in the service and ObservableCollection.
+         * </summary>
+         */
         else
         {
-            /*! <summary>
-            * Update the name of the selected SystemType and update it in the service and ObservableCollection.
-            * </summary>
-            */
             selectedSystem.Name = txe_systemType.Text;
             systemTypeService.UpdateSystemType(selectedSystem);
             var systemType = systemTypes.FirstOrDefault(x => x.type == selectedSystem.type);
             systemType.Name = txe_systemType.Text;
         }
-
-            /*! <summary>
-            * Reset the selectedSystem, selected item, and clear the txe_systemType Text property.
-            * </summary>
-            */
+        /*! <summary>
+         * Reset the selectedSystem, selected item, and clear the txe_systemType Text property.
+         * </summary>
+         */
         selectedSystem = null;
         ltv_systemType.SelectedItem = null;
         txe_systemType.Text = "";
@@ -143,12 +137,7 @@ public partial class SystemPage : ContentPage
     private void ltv_systemType_ItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
         selectedSystem = e.SelectedItem as SystemType;
-        if (selectedSystem == null) return;
-
-        /*! <summary>
-         * Display the name of the selected SystemType in the txe_systemType Text property.
-         * </summary>
-         */
+        if (selectedSystem == null) return;        
         txe_systemType.Text = selectedSystem.Name;
     }
 }

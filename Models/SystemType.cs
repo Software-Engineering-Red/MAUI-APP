@@ -30,14 +30,13 @@ namespace MauiApp1.Models
         private string name;
         /*! <summary>
          * Determine a public property 'Name' that gets and sets the 'name' field.
+         * SetField method is a helper method to set the field and invoke PropertyChanged event.                                              
          * </summary> 
          */
         public string Name
         {
             get => name;
-            set => SetField(ref name, value);/*! 
-                                              * A helper method to set the field and invoke PropertyChanged event. 
-                                              */
+            set => SetField(ref name, value);
         }
         /*! <summary>
          * Determine an event that notifies when a property has changed.

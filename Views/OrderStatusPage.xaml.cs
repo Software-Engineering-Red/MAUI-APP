@@ -40,36 +40,53 @@ namespace MauiApp1.Views
             txe_order_status.Text = "";
         }
 
+         /*! <summary>
+            Methods loads order status from db into the orderStatuses class variable 
+        </summary> */
         private async Task LoadOrderStatus()
         {
             orderStatuses = new ObservableCollection<OrderStatus>(await orderStatusService.GetOrderStatusList());
             ltv_order_statuses.ItemsSource = orderStatuses;
         }
 
+        /* <summary>
+         Event handler for the Save Button Clicked event.
+         Saves or updates an order status based on user input.
+         </summary> */
         private void SaveButton_Clicked(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(txe_order_status.Text)) return;
+            string newStatusName = txe_order_status.Text.Trim();
+
+            if (string.IsNullOrEmpty(newStatusName))
+                return;
 
             if (selectedOrderStatus == null)
             {
-                var orderStatus = new OrderStatus() { Name = txe_order_status.Text };
+                var orderStatus = new OrderStatus()
+                {
+                    Name = newStatusName
+                };
                 orderStatusService.AddStatus(orderStatus);
                 orderStatuses.Add(orderStatus);
             }
             else
             {
-                selectedOrderStatus.Name = txe_order_status.Text;
+                selectedOrderStatus.Name = newStatusName;
                 orderStatusService.UpdateStatus(selectedOrderStatus);
-                var orderStatus = orderStatuses.FirstOrDefault(x => x.ID == selectedOrderStatus.ID);
-                orderStatus.Name = txe_order_status.Text;
+                var updatedOrderStatus = orderStatuses.FirstOrDefault(x => x.ID == selectedOrderStatus.ID);
+                if (updatedOrderStatus != null)
+                    updatedOrderStatus.Name = newStatusName;
             }
 
             selectedOrderStatus = null;
             ltv_order_statuses.SelectedItem = null;
             txe_order_status.Text = "";
-
         }
 
+        /* <summary>
+        Event handler for the Delete Button Clicked event.
+        Deletes the selected order status.
+        </summary> */
         private async void DeleteButton_Clicked(object sender, EventArgs e)
         {
             if (ltv_order_statuses.SelectedItem == null)
@@ -85,6 +102,10 @@ namespace MauiApp1.Views
             txe_order_status.Text = "";
         }
 
+        /* <summary>
+        Event handler for the ItemSelected event of the order status list view.
+        Updates the selectedOrderStatus when an item is selected.
+        </summary> */
         private void ltv_orderStatus_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             selectedOrderStatus = e.SelectedItem as OrderStatus;

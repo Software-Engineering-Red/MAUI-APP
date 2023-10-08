@@ -20,7 +20,7 @@ The Documentation should not include any internal Comments inside these Modules.
 The generation can be executed by first of all making sure doxygen is [installed](https://www.doxygen.nl/download.html).
 After that you have to open the Doxywizzard, select the Doxyfile from
 ```\Documentation\doxygen_config\Doxyfile```, navigate to the Run Tab in the Wizzard and finally pressing **run doxygen**.
-The Documentation will then be generated in the reference-folder and can be commited and pushed according to the workflow.
+The Documentation will then be generated in the ```\Documentation\reference```-folder and can be commited and pushed according to the workflow.
 
 ### Specifications
 

@@ -63,7 +63,7 @@ namespace MauiApp1.Services
         /// Gets a List of OperationalTeamStatus from Database.
         /// </summary>
         /// <returns>Task promise to get a List of OperationalTeamStatus</returns>
-        public async Task<List<OperationalTeamStatus>> GetStatusesListAsync()
+        public async Task<List<OperationalTeamStatus>> GetStatesListAsync()
         {
             await Init();
             return await _dbConnection.Table<OperationalTeamStatus>().ToListAsync();

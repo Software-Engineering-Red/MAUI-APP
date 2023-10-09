@@ -23,7 +23,7 @@ public partial class OperationalTeamStatusPage : ContentPage
     /// <summary>
     /// Collection of of all current instances of OperationalTeamStatus.
     /// </summary>
-    ObservableCollection<OperationalTeamStatus> statuses = new ObservableCollection<OperationalTeamStatus>();
+    ObservableCollection<OperationalTeamStatus> states = new ObservableCollection<OperationalTeamStatus>();
 
     /// <summary>
     /// The Constructor, initializes the Component, sets instance variables
@@ -35,7 +35,7 @@ public partial class OperationalTeamStatusPage : ContentPage
         this.BindingContext = this;
         this.statusService = new OperationalTeamStatusService();
 
-        Task.Run(async () => await LoadStatuses());
+        Task.Run(async () => await LoadStates());
         text_editor_status.Text = "";
     }
 
@@ -44,10 +44,10 @@ public partial class OperationalTeamStatusPage : ContentPage
     /// and reference the Collection to the in UI.
     /// </summary>
     /// <returns>Task promise</returns>
-    private async Task LoadStatuses()
+    private async Task LoadStates()
     {
-        statuses = new ObservableCollection<OperationalTeamStatus>(await statusService.GetStatusesListAsync());
-        list_view_statuses.ItemsSource = statuses;
+        states = new ObservableCollection<OperationalTeamStatus>(await statusService.GetStatesListAsync());
+        list_view_states.ItemsSource = states;
     }
 
     /// <summary>
@@ -66,19 +66,19 @@ public partial class OperationalTeamStatusPage : ContentPage
         {
             var status = new OperationalTeamStatus() { Name = text_editor_status.Text };
             statusService.AddStatus(status);
-            statuses.Add(status);
+            states.Add(status);
         }
         else
         {
             selectedStatus.Name = text_editor_status.Text;
             statusService.UpdateStatusAsync(selectedStatus);
-            var status = statuses.FirstOrDefault(x => x.ID == selectedStatus.ID);
+            var status = states.FirstOrDefault(x => x.ID == selectedStatus.ID);
             status.Name = text_editor_status.Text;
         }
 
 
         selectedStatus = null;
-        list_view_statuses.SelectedItem = null;
+        list_view_states.SelectedItem = null;
         text_editor_status.Text = "";
     }
 
@@ -89,16 +89,16 @@ public partial class OperationalTeamStatusPage : ContentPage
     /// <param name="e">UI Event triggering Method call</param>
     private async void DeleteButton_Clicked(object sender, EventArgs e)
     {
-        if (list_view_statuses.SelectedItem == null)
+        if (list_view_states.SelectedItem == null)
         {
             await Shell.Current.DisplayAlert("No Status Selected", "Select the status you want to delete from the list", "OK");
             return;
         }
 
         await statusService.DeleteStatusAsync(selectedStatus);
-        statuses.Remove(selectedStatus);
+        states.Remove(selectedStatus);
 
-        list_view_statuses.SelectedItem = null;
+        list_view_states.SelectedItem = null;
         text_editor_status.Text = "";
     }
 

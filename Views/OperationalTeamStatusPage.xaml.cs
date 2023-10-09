@@ -62,24 +62,16 @@ public partial class OperationalTeamStatusPage : ContentPage
     {
         if (String.IsNullOrEmpty(text_editor_status.Text)) return;
 
-        if (selectedStatus == null)
+        if (selectedStatus == null) 
         {
-            var status = new OperationalTeamStatus() { Name = text_editor_status.Text };
-            statusService.AddStatus(status);
-            states.Add(status);
+            createNewStatus();
         }
         else
         {
-            selectedStatus.Name = text_editor_status.Text;
-            statusService.UpdateStatusAsync(selectedStatus);
-            var status = states.FirstOrDefault(x => x.ID == selectedStatus.ID);
-            status.Name = text_editor_status.Text;
+            updateStatus();
         }
 
-
-        selectedStatus = null;
-        list_view_states.SelectedItem = null;
-        text_editor_status.Text = "";
+        reset_SelectedStatus_and_Text();
     }
 
     /// <summary>
@@ -98,8 +90,7 @@ public partial class OperationalTeamStatusPage : ContentPage
         await statusService.DeleteStatusAsync(selectedStatus);
         states.Remove(selectedStatus);
 
-        list_view_states.SelectedItem = null;
-        text_editor_status.Text = "";
+        reset_SelectedStatus_and_Text();
     }
 
     /// <summary>
@@ -107,12 +98,44 @@ public partial class OperationalTeamStatusPage : ContentPage
     /// </summary>
     /// <param name="sender">Object to be updated</param>
     /// <param name="e">UI Event triggering Method call</param>
-    private void ltv_status_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+    private void select_Item_from_ListView(object sender, SelectedItemChangedEventArgs e)
     {
         selectedStatus = e.SelectedItem as OperationalTeamStatus;
         if (selectedStatus == null) return;
 
         text_editor_status.Text = selectedStatus.Name;
     }
-    
+
+    /// <summary>
+    /// Updates the currently saved OperationalTeamStatus
+    /// to its new value
+    /// </summary>
+    private void updateStatus()
+    {
+        selectedStatus.Name = text_editor_status.Text;
+        statusService.UpdateStatusAsync(selectedStatus);
+        var status = states.FirstOrDefault(x => x.ID == selectedStatus.ID);
+        status.Name = text_editor_status.Text;
+    }
+
+    /// <summary>
+    /// Creates new OperationalTeamStatus and adds it to teh database
+    /// </summary>
+    private void createNewStatus()
+    {
+        var status = new OperationalTeamStatus() { Name = text_editor_status.Text };
+        statusService.AddStatus(status);
+        states.Add(status);
+    }
+
+    /// <summary>
+    /// Resets selectedStatus to null, clears the Text editor Field
+    /// and sets list_view_states.SelectedItem to null
+    /// </summary>
+    private void reset_SelectedStatus_and_Text()
+    {
+        selectedStatus = null;
+        list_view_states.SelectedItem = null;
+        text_editor_status.Text = "";
+    }
 }

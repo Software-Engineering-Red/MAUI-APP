@@ -77,11 +77,19 @@ $(function() {
 <h2><a class="anchor" id="autotoc_md1"></a>
 Commenting Code</h2>
 <p>Each Team member has to provide commentary to their own written code according to the <a href="https://learn.microsoft.com/en-gb/dotnet/csharp/language-reference/xmldoc/">.NET guidelines</a>.</p>
-<p>The commentary is supposed to shortly summarize the purpose and functionality of classes, methods, instance variables, interfaces etc..</p>
+<p>The commentary for the Documentation is supposed to shortly summarize the purpose and functionality of every</p><ul>
+<li>class</li>
+<li>method</li>
+<li>instance variable</li>
+<li>interface</li>
+<li>enum</li>
+<li>(In principle all somewhat comprehensive modules in C#)</li>
+</ul>
+<p>The Documentation should not include any internal Comments inside these Modules.</p>
 <h2><a class="anchor" id="autotoc_md2"></a>
 Generation</h2>
 <p>The generation can be executed by first of all making sure doxygen is <a href="https://www.doxygen.nl/download.html">installed</a>. After that you have to open the Doxywizzard, select the Doxyfile from </p><div class="fragment"><div class="line">\Documentation\doxygen_config\Doxyfile</div>
-</div><!-- fragment --><p> , navigate to the Run Tab in the Wizzard and finally pressing <b>run doxygen</b>. The Documentation will then be generated in the reference-folder and can be commited and pushed according to the workflow.</p>
+</div><!-- fragment --><p> , navigate to the Run Tab in the Wizzard and finally pressing <b>run doxygen</b>. The Documentation will then be generated in the <code>\Documentation\reference</code>-folder and can be commited and pushed according to the workflow.</p>
 <h2><a class="anchor" id="autotoc_md3"></a>
 Specifications</h2>
 <ul>

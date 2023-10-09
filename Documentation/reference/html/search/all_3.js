@@ -8,5 +8,6 @@ var searchData=
   ['continent_5',['Continent',['../class_maui_app1_1_1_models_1_1_continent.html',1,'MauiApp1::Models']]],
   ['continentpage_6',['ContinentPage',['../class_maui_app1_1_1_views_1_1_continent_page.html',1,'MauiApp1::Views']]],
   ['continentservice_7',['ContinentService',['../class_maui_app1_1_1_services_1_1_continent_service.html',1,'MauiApp1::Services']]],
-  ['createrotafrominput_8',['CreateRotaFromInput',['../class_maui_app1_1_1_views_1_1_rota_page.html#a928c51b104318bda61f531daa8905db0',1,'MauiApp1::Views::RotaPage']]]
+  ['createnewstatus_8',['createNewStatus',['../class_maui_app1_1_1_views_1_1_operational_team_status_page.html#a1f22a2bb057b02832de3765537f00a7c',1,'MauiApp1::Views::OperationalTeamStatusPage']]],
+  ['createrotafrominput_9',['CreateRotaFromInput',['../class_maui_app1_1_1_views_1_1_rota_page.html#a928c51b104318bda61f531daa8905db0',1,'MauiApp1::Views::RotaPage']]]
 ];

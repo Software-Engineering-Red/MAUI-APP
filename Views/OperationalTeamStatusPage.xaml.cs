@@ -56,7 +56,7 @@ public partial class OperationalTeamStatusPage : ContentPage
     /// is currently null and adds it to the database
     /// through a clicking save button in the UI.
     /// </summary>
-    /// <param name="sender">Object to be saved</param>
+    /// <param name="sender">UI Element that send Event.</param>
     /// <param name="e">UI Event triggering Method call </param>
     private void SaveButton_Clicked(object sender, EventArgs e)
     {
@@ -77,7 +77,7 @@ public partial class OperationalTeamStatusPage : ContentPage
     /// <summary>
     /// Deletes current Element from the Database
     /// </summary>
-    /// <param name="sender">Object to be deleted</param>
+    /// <param name="sender">UI Element that send Event.</param>
     /// <param name="e">UI Event triggering Method call</param>
     private async void DeleteButton_Clicked(object sender, EventArgs e)
     {
@@ -96,7 +96,7 @@ public partial class OperationalTeamStatusPage : ContentPage
     /// <summary>
     /// Method to update currently selected OperationalTeamStatus
     /// </summary>
-    /// <param name="sender">Object to be updated</param>
+    /// <param name="sender">UI Element that send Event.</param>
     /// <param name="e">UI Event triggering Method call</param>
     private void select_Item_from_ListView(object sender, SelectedItemChangedEventArgs e)
     {

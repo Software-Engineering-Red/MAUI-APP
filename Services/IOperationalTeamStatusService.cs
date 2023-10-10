@@ -30,7 +30,7 @@ namespace MauiApp1.Services
         /// Gets a List of OperationalTeamStatus from Database.
         /// </summary>
         /// <returns>Task promise to get a List of OperationalTeamStatus</returns>
-        Task<List<OperationalTeamStatus>> GetStatusesListAsync();
+        Task<List<OperationalTeamStatus>> GetStatesListAsync();
 
 
         /// <summary>

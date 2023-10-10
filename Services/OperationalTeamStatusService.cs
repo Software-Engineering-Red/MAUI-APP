@@ -28,7 +28,7 @@ namespace MauiApp1.Services
         /// Initiates Database Connection and creates Table.
         /// </summary>
         /// <returns></returns>
-        async Task Init()
+        async Task InitiateDatabase()
         {
             if (_dbConnection is not null)
                 return;
@@ -44,7 +44,7 @@ namespace MauiApp1.Services
         /// <returns>Task promise to insert instance to Database</returns>
         public async Task<int> AddStatus(OperationalTeamStatus status)
         {
-            await Init();
+            await InitiateDatabase();
             return await _dbConnection.InsertAsync(status);
         }
 
@@ -55,7 +55,7 @@ namespace MauiApp1.Services
         /// <returns>Task promise to delete Instance from Database</returns>
         public async Task<int> DeleteStatusAsync(OperationalTeamStatus status)
         {
-            await Init();
+            await InitiateDatabase();
             return await _dbConnection.DeleteAsync(status);
         }
 
@@ -63,9 +63,9 @@ namespace MauiApp1.Services
         /// Gets a List of OperationalTeamStatus from Database.
         /// </summary>
         /// <returns>Task promise to get a List of OperationalTeamStatus</returns>
-        public async Task<List<OperationalTeamStatus>> GetStatusesListAsync()
+        public async Task<List<OperationalTeamStatus>> GetStatesListAsync()
         {
-            await Init();
+            await InitiateDatabase();
             return await _dbConnection.Table<OperationalTeamStatus>().ToListAsync();
         }
 
@@ -76,7 +76,7 @@ namespace MauiApp1.Services
         /// <returns>Task promise to update certain Status</returns>
         public async Task<int> UpdateStatusAsync(OperationalTeamStatus status)
         {
-            await Init();
+            await InitiateDatabase();
             return await _dbConnection.UpdateAsync(status);
         }
     }

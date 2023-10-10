@@ -23,7 +23,7 @@ public partial class OperationalTeamStatusPage : ContentPage
     /// <summary>
     /// Collection of of all current instances of OperationalTeamStatus.
     /// </summary>
-    ObservableCollection<OperationalTeamStatus> statuses = new ObservableCollection<OperationalTeamStatus>();
+    ObservableCollection<OperationalTeamStatus> states = new ObservableCollection<OperationalTeamStatus>();
 
     /// <summary>
     /// The Constructor, initializes the Component, sets instance variables
@@ -35,7 +35,7 @@ public partial class OperationalTeamStatusPage : ContentPage
         this.BindingContext = this;
         this.statusService = new OperationalTeamStatusService();
 
-        Task.Run(async () => await LoadStatuses());
+        Task.Run(async () => await LoadStates());
         text_editor_status.Text = "";
     }
 
@@ -44,10 +44,10 @@ public partial class OperationalTeamStatusPage : ContentPage
     /// and reference the Collection to the in UI.
     /// </summary>
     /// <returns>Task promise</returns>
-    private async Task LoadStatuses()
+    private async Task LoadStates()
     {
-        statuses = new ObservableCollection<OperationalTeamStatus>(await statusService.GetStatusesListAsync());
-        list_view_statuses.ItemsSource = statuses;
+        states = new ObservableCollection<OperationalTeamStatus>(await statusService.GetStatesListAsync());
+        list_view_states.ItemsSource = states;
     }
 
     /// <summary>
@@ -56,63 +56,86 @@ public partial class OperationalTeamStatusPage : ContentPage
     /// is currently null and adds it to the database
     /// through a clicking save button in the UI.
     /// </summary>
-    /// <param name="sender">Object to be saved</param>
+    /// <param name="sender">UI Element that send Event.</param>
     /// <param name="e">UI Event triggering Method call </param>
     private void SaveButton_Clicked(object sender, EventArgs e)
     {
         if (String.IsNullOrEmpty(text_editor_status.Text)) return;
 
-        if (selectedStatus == null)
+        if (selectedStatus == null) 
         {
-            var status = new OperationalTeamStatus() { Name = text_editor_status.Text };
-            statusService.AddStatus(status);
-            statuses.Add(status);
+            createNewStatus();
         }
         else
         {
-            selectedStatus.Name = text_editor_status.Text;
-            statusService.UpdateStatusAsync(selectedStatus);
-            var status = statuses.FirstOrDefault(x => x.ID == selectedStatus.ID);
-            status.Name = text_editor_status.Text;
+            updateStatus();
         }
 
-
-        selectedStatus = null;
-        list_view_statuses.SelectedItem = null;
-        text_editor_status.Text = "";
+        reset_SelectedStatus_and_Text();
     }
 
     /// <summary>
     /// Deletes current Element from the Database
     /// </summary>
-    /// <param name="sender">Object to be deleted</param>
+    /// <param name="sender">UI Element that send Event.</param>
     /// <param name="e">UI Event triggering Method call</param>
     private async void DeleteButton_Clicked(object sender, EventArgs e)
     {
-        if (list_view_statuses.SelectedItem == null)
+        if (list_view_states.SelectedItem == null)
         {
             await Shell.Current.DisplayAlert("No Status Selected", "Select the status you want to delete from the list", "OK");
             return;
         }
 
         await statusService.DeleteStatusAsync(selectedStatus);
-        statuses.Remove(selectedStatus);
+        states.Remove(selectedStatus);
 
-        list_view_statuses.SelectedItem = null;
-        text_editor_status.Text = "";
+        reset_SelectedStatus_and_Text();
     }
 
     /// <summary>
     /// Method to update currently selected OperationalTeamStatus
     /// </summary>
-    /// <param name="sender">Object to be updated</param>
+    /// <param name="sender">UI Element that send Event.</param>
     /// <param name="e">UI Event triggering Method call</param>
-    private void ltv_status_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+    private void select_Item_from_ListView(object sender, SelectedItemChangedEventArgs e)
     {
         selectedStatus = e.SelectedItem as OperationalTeamStatus;
         if (selectedStatus == null) return;
 
         text_editor_status.Text = selectedStatus.Name;
     }
-    
+
+    /// <summary>
+    /// Updates the currently saved OperationalTeamStatus
+    /// to its new value
+    /// </summary>
+    private void updateStatus()
+    {
+        selectedStatus.Name = text_editor_status.Text;
+        statusService.UpdateStatusAsync(selectedStatus);
+        var status = states.FirstOrDefault(x => x.ID == selectedStatus.ID);
+        status.Name = text_editor_status.Text;
+    }
+
+    /// <summary>
+    /// Creates new OperationalTeamStatus and adds it to teh database
+    /// </summary>
+    private void createNewStatus()
+    {
+        var status = new OperationalTeamStatus() { Name = text_editor_status.Text };
+        statusService.AddStatus(status);
+        states.Add(status);
+    }
+
+    /// <summary>
+    /// Resets selectedStatus to null, clears the Text editor Field
+    /// and sets list_view_states.SelectedItem to null
+    /// </summary>
+    private void reset_SelectedStatus_and_Text()
+    {
+        selectedStatus = null;
+        list_view_states.SelectedItem = null;
+        text_editor_status.Text = "";
+    }
 }

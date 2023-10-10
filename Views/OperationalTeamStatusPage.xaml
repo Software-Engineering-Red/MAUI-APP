@@ -17,7 +17,7 @@
                     Clicked="DeleteButton_Clicked" />
         </Grid>
 
-            <ListView x:Name="list_view_statuses" ItemSelected="ltv_status_ItemSelected" Margin="20"
+        <ListView x:Name="list_view_states" ItemSelected="select_Item_from_ListView" Margin="20"
                       SelectionMode="Single">
             <ListView.ItemTemplate>
                 <DataTemplate>

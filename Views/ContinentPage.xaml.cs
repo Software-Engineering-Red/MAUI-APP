@@ -12,7 +12,7 @@ public partial class ContinentPage : ContentPage {
     /*! <summary>
         A reference pointer for storing currently selected Continent.
      </summary> */
-    Continent selectedContinent = null;
+    private Continent selectedContinent = null;
 
     /*! <summary>
         An instance of IContinentService

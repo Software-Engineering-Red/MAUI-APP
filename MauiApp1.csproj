@@ -60,6 +60,9 @@
       <MauiXaml Update="Views\AlertTypesPage.xaml">
 	  </MauiXaml>
 	  <MauiXaml Update="Views\BuildingTypePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\PositionStatusPage.xaml">
 	  </MauiXaml>
         <MauiXaml Update="Views\ContinentPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
@@ -72,14 +75,14 @@
 		</MauiXaml>
 		<MauiXaml Update="Views\SkillPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Views\SystemPage.xaml">
-			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>		
 	  <MauiXaml Update="Views\OperationalTeamStatusPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\WelcomePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\OrderStatusPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
@@ -106,6 +109,18 @@
 		<Compile Update="Views\SystemPage.xaml.cs">
 			<DependentUpon>SystemPage.xaml</DependentUpon>
 		</Compile>
+	  <Compile Update="Views\BuildingTypePage.xaml.cs">
+	    <DependentUpon>BuildingTypePage.xaml</DependentUpon>
+    </Compile>
+	  <Compile Update="Views\PositionStatusPage.xaml.cs">
+	    <DependentUpon>PositionStatusPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\RotaPage.xaml.cs">
+	    <DependentUpon>RotaPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\EquipmentPage.xaml.cs">
+	    <DependentUpon>EquipmentPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\WelcomePage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
@@ -114,14 +129,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Folder Include="Documentation\reference\" />
 		<Folder Include="Images\" />
 		<Folder Include="Views\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <MauiXaml Update="MauiPage1.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Roles.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

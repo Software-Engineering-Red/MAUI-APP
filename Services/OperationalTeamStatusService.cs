@@ -9,16 +9,26 @@ using System.Threading.Tasks;
 
 namespace MauiApp1.Services
 {
+    /// <summary>
+    /// This class extending IOperationalTeamStatusService 
+    /// </summary>
     public class OperationalTeamStatusService : IOperationalTeamStatusService
     {
+        /// <summary>
+        /// Stores SQLite Database Connection
+        /// </summary>
         SQLiteAsyncConnection _dbConnection;
 
-        public OperationalTeamStatusService()
-        {
+        /// <summary>
+        /// Constructor without implementation
+        /// </summary>
+        public OperationalTeamStatusService(){}
 
-        }
-
-        async Task Init()
+        /// <summary>
+        /// Initiates Database Connection and creates Table.
+        /// </summary>
+        /// <returns></returns>
+        async Task InitiateDatabase()
         {
             if (_dbConnection is not null)
                 return;
@@ -27,44 +37,47 @@ namespace MauiApp1.Services
             await _dbConnection.CreateTableAsync<OperationalTeamStatus>();
         }
 
+        /// <summary>
+        /// Adds a instance of OperationalTeamStatus to the Database.
+        /// </summary>
+        /// <param name="status">Instance of OperationalTeamStatus to be added</param>
+        /// <returns>Task promise to insert instance to Database</returns>
         public async Task<int> AddStatus(OperationalTeamStatus status)
         {
-            await Init();
+            await InitiateDatabase();
             return await _dbConnection.InsertAsync(status);
         }
 
+        /// <summary>
+        /// Deletes a certain instance of OperationalTeamStatus from the Database.
+        /// </summary>
+        /// <param name="status">Instance of OperationalTeamStatus to be deleted</param>
+        /// <returns>Task promise to delete Instance from Database</returns>
         public async Task<int> DeleteStatusAsync(OperationalTeamStatus status)
         {
-            await Init();
+            await InitiateDatabase();
             return await _dbConnection.DeleteAsync(status);
         }
-        public async Task<List<OperationalTeamStatus>> GetStatusesListAsync()
+
+        /// <summary>
+        /// Gets a List of OperationalTeamStatus from Database.
+        /// </summary>
+        /// <returns>Task promise to get a List of OperationalTeamStatus</returns>
+        public async Task<List<OperationalTeamStatus>> GetStatesListAsync()
         {
-            await Init();
+            await InitiateDatabase();
             return await _dbConnection.Table<OperationalTeamStatus>().ToListAsync();
         }
 
-        public async Task<OperationalTeamStatus> GetStatusAsync(int id)
-        {
-            await Init();
-            return await _dbConnection.Table<OperationalTeamStatus>().Where(i => i.ID == id).FirstOrDefaultAsync();
-        }
-
-        public async Task<int> SaveStatusAsync(OperationalTeamStatus status)
-        {
-            await Init();
-            if (status.Name != null)
-                return await _dbConnection.UpdateAsync(status);
-            else
-                return await _dbConnection.InsertAsync(status);
-        }
-
+        /// <summary>
+        /// Updates an entry of OperationalTeamStatus in Database.
+        /// </summary>
+        /// <param name="status">entry of OperationalTeamStatus</param>
+        /// <returns>Task promise to update certain Status</returns>
         public async Task<int> UpdateStatusAsync(OperationalTeamStatus status)
         {
-            await Init();
+            await InitiateDatabase();
             return await _dbConnection.UpdateAsync(status);
         }
-
-  
     }
 }

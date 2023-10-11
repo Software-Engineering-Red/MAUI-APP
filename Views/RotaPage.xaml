@@ -1,26 +1,26 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiApp1.Views.RotaPage"
              Title="RotaPage">
     <VerticalStackLayout Spacing="10" Margin="5">
-        <Editor x:Name="txe_rota"
+        <Editor x:Name="RotaNameEditor"
                 Placeholder="Add a Rota"
                 HeightRequest="100" />
 
         <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
             <Button Text="Save"
-                    Clicked="SaveButton_Clicked" />
+                    Clicked="OnSaveButtonClicked" />
 
             <Button Grid.Column="1"
                     Text="Delete"
-                    Clicked="DeleteButton_Clicked" />
+                    Clicked="OnDeleteButtonClicked" />
         </Grid>
 
-        <ListView x:Name="ltv_rotas" Background="white" ItemSelected="ltv_rotas_ItemSelected">
+        <ListView x:Name="RotaListView" Background="White" ItemSelected="OnRotaItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell TextColor="Black" Text="{Binding Name}"/>
+                    <TextCell TextColor="Black" Text="{Binding Name}" />
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

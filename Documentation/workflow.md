@@ -21,7 +21,6 @@
 <h2>Kanban Definition of Done:</h2>
 <ol>
     <li>Take into account all the acceptance criteria mentioned in the issue.</li>
-    <li>Ensure that all integration tests/Unit tests have been successfully run or written if necessary.</li>
     <li>Resolve and address all review comments as needed.</li>
     <li>Any additional details should be posted in the comments section of the issue page itself to provide the assigned programmer with adequate information.</li>
 </ol>
@@ -56,5 +55,5 @@
 
 <h2>Resolving Issues</h2>
 <p>
-  Issues connected to the code review will be resolved by Justin or any team member after a span of 24 hours, assuring a streamlined and efficient workflow.
+  Issues connected to the code review will be resolved by any team member after a span of 24 hours, assuring a streamlined and efficient workflow.
 </p>

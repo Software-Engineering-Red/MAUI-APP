@@ -129,6 +129,23 @@ public class DatabaseOperations
         return tables;
     }
 
+    public List<string> GetAllRowNames(String tableName)
+    {
+        var rows = new List<string>();
+        string commandText = $"PRAGMA table_info({tableName})";
+
+        using var command = _connection.CreateCommand();
+        command.CommandText = commandText;
+
+        using var reader = command.ExecuteReader();
+        while (reader.Read())
+        {
+            rows.Add(reader.GetValue(1).ToString());
+        }
+
+        return rows;
+    }
+
     /// <summary>
     /// Fetches all records, including their IDs, from the specified table.
     /// </summary>
@@ -138,6 +155,23 @@ public class DatabaseOperations
     {
         var records = new Dictionary<int, string>();
         var commandText = $"SELECT Id, Name FROM {tableName}";
+
+        using var command = _connection.CreateCommand();
+        command.CommandText = commandText;
+
+        using var reader = command.ExecuteReader();
+        while (reader.Read())
+        {
+            records.Add(reader.GetInt32(0), reader.GetString(1));
+        }
+
+        return records;
+    }
+
+    public Dictionary<int, string> GetAllRecordsWithIdsAndFilter(string tableName, string columnName, string filterValue)
+    {
+        var records = new Dictionary<int, string>();
+        string commandText = $"SELECT Id, Name FROM {tableName} WHERE {columnName} LIKE '%{filterValue}%'";
 
         using var command = _connection.CreateCommand();
         command.CommandText = commandText;

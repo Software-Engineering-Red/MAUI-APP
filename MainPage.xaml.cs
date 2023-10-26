@@ -7,6 +7,7 @@ namespace MauiApp1
     {
         private readonly DatabaseOperations _dbOps;
         private Dictionary<int, string> _currentRecords;
+        private Dictionary<int, string> _currentFilteredRecords;
 
         public MainPage()
         {
@@ -97,6 +98,26 @@ namespace MauiApp1
             }
         }
 
+        private void PopulateRowPicker(String table)
+        {
+            try
+            {
+                var rows = _dbOps.GetAllRowNames(table);
+                foreach (var row in rows)
+                {
+                    Console.WriteLine(row);
+                }
+                RowPicker.ItemsSource = rows;
+            }
+            catch (Exception ex)
+            {
+                // Log error
+                Console.WriteLine(ex.Message);
+                // Display error message or handle the exception
+                DisplayAlert("Error", "Failed to load rows.", "OK");
+            }
+        }
+
         private void OnTableSelected(object sender, EventArgs e)
         {
             var selectedTable = GetSelectedTable();
@@ -107,6 +128,7 @@ namespace MauiApp1
             {
                 _currentRecords = _dbOps.GetAllRecordsWithIds(selectedTable);
                 RecordsListView.ItemsSource = _currentRecords;
+                PopulateRowPicker(selectedTable);
             }
             catch (Exception ex)
             {
@@ -116,6 +138,30 @@ namespace MauiApp1
                 DisplayAlert("Error", $"Failed to load records for table {selectedTable}.", "OK");
             }
         }
+
+        private void OnFilterRecord(object sender, EventArgs e)
+        {
+            var selectedTable = GetSelectedTable();
+            var filterValue = AddRecordFilter.Text;
+            var columnToFilter = GetSelectedColumn();
+            if (string.IsNullOrWhiteSpace(selectedTable) || string.IsNullOrWhiteSpace(filterValue) || string.IsNullOrWhiteSpace(columnToFilter))
+                return;
+
+            try
+            {
+                _currentFilteredRecords = _dbOps.GetAllRecordsWithIdsAndFilter(selectedTable, columnToFilter, filterValue);
+                RecordsListView.ItemsSource = _currentFilteredRecords;
+            }
+            catch (Exception ex)
+            {
+                // Log error
+                Console.WriteLine(ex.Message);
+                // Handle the exception
+                DisplayAlert("Error", $"Failed to filter and load records for table {selectedTable}.", "OK");
+            }
+        }
+
+        private string GetSelectedColumn() => RowPicker.SelectedItem?.ToString();
 
         private void OnRecordSelected(object sender, SelectedItemChangedEventArgs e)
         {

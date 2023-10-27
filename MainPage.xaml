@@ -40,6 +40,24 @@
             <!-- Display records -->
             <Frame CornerRadius="10" Padding="20" BackgroundColor="#373737">
                 <VerticalStackLayout Spacing="15">
+                    <Label Text="{Binding Source={x:Reference TablePicker}, Path=SelectedItem, StringFormat='Filter values in {0}:'}" 
+                       FontSize="20" 
+                       FontAttributes="Bold" 
+                       TextColor="White" />
+                    <Picker x:Name="RowPicker" TextColor="White" BackgroundColor="#454545"/>
+                    <Entry x:Name="AddRecordFilter" 
+                       Placeholder="Enter filter value" 
+                       TextColor="White" 
+                       PlaceholderColor="#aaa" 
+                       BackgroundColor="#454545" />
+                    <StackLayout Orientation="Horizontal" Spacing="15">
+                        <Button Text="{Binding Source={x:Reference TablePicker}, Path=SelectedItem, StringFormat='Filter records'}" 
+                            Clicked="OnFilterRecord"
+                            BackgroundColor="#4CAF50" 
+                            TextColor="White" 
+                            CornerRadius="8" />
+                        <Button Text="Remove Filter" Clicked="OnTableSelected" BackgroundColor="#F44336" TextColor="White" CornerRadius="8" />
+                    </StackLayout>
                     <Label Text="{Binding Source={x:Reference TablePicker}, Path=SelectedItem, StringFormat='Records in {0}:'}" 
                            FontSize="20" 
                            FontAttributes="Bold" 

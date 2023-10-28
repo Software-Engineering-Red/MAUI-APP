@@ -257,5 +257,11 @@ namespace MauiApp1
         }
 
         private void RefreshRecordsList() => OnTableSelected(null, EventArgs.Empty);
+
+        private async void NavigateToMapPage(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new OperationMapPage());
+        }
+
     }
 }

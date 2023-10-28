@@ -91,7 +91,13 @@
                 </VerticalStackLayout>
             </Frame>
 
-                        <!-- Test CRUD Operations -->
+            <Button Text="map" 
+        VerticalOptions="Center" 
+        HorizontalOptions="Center"
+        Clicked="NavigateToMapPage"/>
+
+
+            <!-- Test CRUD Operations -->
             <Frame CornerRadius="10" Padding="20" BackgroundColor="#373737">
                 <Button Text="Test CRUD Operations" Clicked="OnTestCrudOperations" BackgroundColor="#607D8B" TextColor="White" CornerRadius="8" />
             </Frame>

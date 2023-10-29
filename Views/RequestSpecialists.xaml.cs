@@ -1,34 +1,44 @@
 using MauiApp1.Models;
+using MauiApp1.Services;
 
 namespace MauiApp1.Views;
 
 public partial class RequestSpecialists : ContentPage
 {
 	private readonly DatabaseOperations _dbOps;
-
+	private ISpecialistRequestService specialistRequestService;
 
 	public RequestSpecialists()
 	{
 		InitializeComponent();
 
-		// Initialize database operations
 		_dbOps = new DatabaseOperations($"Data Source={Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "reference_values.sqlite")}");
+		specialistRequestService = new SpecialistRequestService($"Data Source={Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "reference_values.sqlite")}");
+
+		PopulateSkillPicker();
 	}
 
-	private void OnAddRecordClicked(object sender, EventArgs e)
+	private async void OnAddRecordClicked(object sender, EventArgs e)
 	{
-		if (_dbOps != null)
-		{
-
-		}
-		// Retrieve values from the Entry and DatePicker controls
 		var skillName = SkillNamePicker.Title;
-		var organisationId = Convert.ToInt32(OrganisationIdEntry.Text);
-		var requestDate = DateTime.Today;
-		var requestedBy = 0;
 		var numberRequired = Convert.ToInt32(NumberRequiredEntry.Text);
 		var startDate = StartDatePicker.Date;
 		var endDate = EndDatePicker.Date;
+
+		if (_dbOps != null && skillName != null)
+		{
+			try
+			{
+				specialistRequestService.AddSkillRequest(skillName, numberRequired,
+					startDate, endDate);
+				await DisplayAlert("Success", $"Successfully inserted record into skills.", "OK");
+			}
+			catch (Exception ex)
+			{
+				await DisplayAlert("Error", $"Failed to insert record into skills. Error: {ex.Message}", "OK");
+				return;
+			}
+		}
 	}
 
 	private void OnCheckBoxCheckedChanged()
@@ -44,7 +54,7 @@ public partial class RequestSpecialists : ContentPage
 	{
 		try
 		{
-			var skills = _dbOps.GetAllRowNames("skill");
+			var skills = _dbOps.GetAllRecords("skill");
 			foreach (var skill in skills)
 			{
 				Console.WriteLine(skill);
@@ -56,5 +66,10 @@ public partial class RequestSpecialists : ContentPage
 			Console.WriteLine(ex.Message);
 			DisplayAlert("Error", "Failed to load skills.", "OK");
 		}
+	}
+
+	private void StartDatePicker_DateSelected(object sender, DateChangedEventArgs e)
+	{
+		EndDatePicker.MinimumDate = e.NewDate;
 	}
 }

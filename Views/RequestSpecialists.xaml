@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:sys="clr-namespace:System;assembly=netstandard"
              x:Class="MauiApp1.Views.RequestSpecialists"
+             BackgroundColor="#252525"
              Title="RequestSpecialists">
 
     <ScrollView>
@@ -16,18 +17,15 @@
                     <Label Text="Select required skill:" FontSize="20" FontAttributes="Bold" TextColor="White" />
                     <Picker x:Name="SkillNamePicker" TextColor="White" BackgroundColor="#454545" />
 
-                    <Entry Placeholder="Organisation ID" x:Name="OrganisationIdEntry" Keyboard="Numeric" 
-                           TextColor="White" 
-                           PlaceholderColor="#aaa" 
-                           BackgroundColor="#454545" />
                     <Entry Placeholder="Number Required" x:Name="NumberRequiredEntry" Keyboard="Numeric" 
                            TextColor="White" 
                            PlaceholderColor="#aaa" 
                            BackgroundColor="#454545" />
                     <DatePicker x:Name="StartDatePicker" MinimumDate="{x:Static sys:DateTime.Today}"
+                                DateSelected="StartDatePicker_DateSelected"
                                 TextColor="White" 
                                 BackgroundColor="#454545" />
-                    <DatePicker x:Name="EndDatePicker" MinimumDate="{x:Static sys:DateTime.Today}"
+                    <DatePicker x:Name="EndDatePicker" MinimumDate="{Binding SelectedDate, Source={x:Reference StartDatePicker}}"
                                 TextColor="White" 
                                 BackgroundColor="#454545" />
                     

@@ -31,7 +31,7 @@ namespace MauiApp1.Services
 		}
 
 		void ISpecialistRequestService.AddSkillRequest(string skillName, int numberRequired,
-			DateTime startDate, DateTime endDate, string status)
+			DateTime startDate, DateTime endDate)
 		{
 			var commandText = @"INSERT INTO skills_request (skill_name, organisation_id, request_date, requested_by, number_required, start_date, end_date, status, confirmed_date) 
                                VALUES (@skill_name, @organisation_id, @request_date, @requested_by, @number_required, @start_date, @end_date, @status, @confirmed_date)";
@@ -52,10 +52,6 @@ namespace MauiApp1.Services
 			}
 		}
 
-		void ISpecialistRequestService.DeleteSkillRequest(int id)
-		{
-			throw new NotImplementedException();
-		}
 
 		List<SkillRequest> ISpecialistRequestService.GetAllSkillRequests()
 		{
@@ -74,7 +70,7 @@ namespace MauiApp1.Services
 
 		void approveSkillRequest(int id, int organisationId) 
 		{ 
-			throw new NotImplementedException();
+			
 		}
 	}
 }

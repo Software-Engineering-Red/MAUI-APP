@@ -53,7 +53,7 @@ namespace MauiApp1
             // Update the inserted record
             try
             {
-                _dbOps.UpdateNameRecord(tableName, insertedRecordId, updatedTestRecordName);
+                _dbOps.UpdateRecord(tableName, insertedRecordId, updatedTestRecordName);
                 await DisplayAlert("Success", $"Successfully updated record in {tableName} to '{updatedTestRecordName}'.", "OK");
             }
             catch (Exception ex)

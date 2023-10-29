@@ -90,7 +90,7 @@ public class DatabaseOperations
     /// <param name="tableName">Target table name.</param>
     /// <param name="id">ID of the record to update.</param>
     /// <param name="newName">New name to set for the record.</param>
-    public void UpdateNameRecord(string tableName, int id, string newName)
+    public void UpdateRecord(string tableName, int id, string newName)
     {
         UpdateRecord(tableName, "Name", id, newName);
     }

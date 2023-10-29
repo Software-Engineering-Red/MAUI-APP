@@ -21,7 +21,6 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 7.0.x
-          include-prerelease: true
 
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v1.1
@@ -42,4 +41,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: windows-ci-build
-          path: /bin/Release/net7.0-windows*/**/DB-Manager*.exe
+          path: /bin/Release/net7.0-windows*/**/DB-Manager*.msix

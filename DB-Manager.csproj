@@ -63,7 +63,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Views\RequestSpecialities.xaml">
+	  <Compile Update="Views\RequestSpecialists.xaml.cs">
+	    <DependentUpon>RequestSpecialists.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Views\RequestSpecialists.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

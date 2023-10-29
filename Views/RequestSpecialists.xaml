@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sys="clr-namespace:System;assembly=netstandard"
+             x:Class="MauiApp1.Views.RequestSpecialists"
+             Title="RequestSpecialists">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="30" Padding="30,20" VerticalOptions="Center">
+
+            <!-- Title -->
+            <Label Text="Request Specialists" FontSize="26" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" TextColor="White" />
+
+            <Entry Placeholder="Skill Name" x:Name="SkillNameEntry" />
+            <Entry Placeholder="Organisation ID" x:Name="OrganisationIdEntry" Keyboard="Numeric" />
+            <Entry Placeholder="Requested By" x:Name="RequestedByEntry" Keyboard="Numeric" />
+            <Entry Placeholder="Number Required" x:Name="NumberRequiredEntry" Keyboard="Numeric" />
+            <DatePicker x:Name="StartDatePicker" MinimumDate="{x:Static sys:DateTime.Today}"/>
+            <DatePicker x:Name="EndDatePicker" MinimumDate="{x:Static sys:DateTime.Today}"/>
+            <Button Text="Add Record" Clicked="OnAddRecordClicked" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

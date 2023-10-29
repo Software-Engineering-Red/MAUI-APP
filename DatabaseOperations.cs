@@ -115,14 +115,7 @@ public class DatabaseOperations
     public void DeleteRecord(string tableName, int id)
     {
         var commandText = $"DELETE FROM {tableName} WHERE Id = {id}";
-        try
-        {
-            ExecuteNonQuery(commandText);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.ToString());
-        }
+        ExecuteNonQuery(commandText);
     }
 
     /// <summary>

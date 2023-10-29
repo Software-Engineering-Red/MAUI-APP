@@ -1,4 +1,6 @@
 ﻿using Microsoft.Data.Sqlite;
+using System;
+using System.Collections.Generic;
 
 /// <summary>
 /// Initializes a SQLite database by creating the necessary tables.

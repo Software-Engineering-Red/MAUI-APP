@@ -243,6 +243,37 @@ namespace MauiApp1
                 }
             }
         }
+        /// <summary>
+        /// Method to copy all stored data to the clipboard for a given table
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnCopyAllData(object sender, EventArgs e)
+        {
+            var selectedTable = GetSelectedTable();
+            if (string.IsNullOrWhiteSpace(selectedTable))
+                return;
+
+            try
+            {
+                var allRecords = _dbOps.GetAllRecords(selectedTable);
+
+                // Create a string containing all the records
+                var recordsText = string.Join(Environment.NewLine, allRecords);
+
+                // Copy the records to the clipboard
+                Clipboard.SetTextAsync(recordsText);
+
+                DisplayAlert("Success", "All data copied to clipboard.", "OK");
+            }
+            catch (Exception ex)
+            {
+                // Log error
+                Console.WriteLine(ex.Message);
+                // Handle the exception
+                DisplayAlert("Error", $"Failed to copy data to clipboard for table {selectedTable}.", "OK");
+            }
+        }
 
         private string GetSelectedTable() => TablePicker.SelectedItem?.ToString();
 

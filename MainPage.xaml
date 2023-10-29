@@ -87,6 +87,7 @@
                     <StackLayout Orientation="Horizontal" Spacing="15">
                         <Button Text="Update Record" Clicked="OnUpdateRecord" BackgroundColor="#2196F3" TextColor="White" CornerRadius="8" />
                         <Button Text="Delete Record" Clicked="OnDeleteRecord" BackgroundColor="#F44336" TextColor="White" CornerRadius="8" />
+                        <Button Text="Copy All Data" Clicked="OnCopyAllData" BackgroundColor="#607D8B" TextColor="White" CornerRadius="8" />
                     </StackLayout>
                 </VerticalStackLayout>
             </Frame>

@@ -15,7 +15,7 @@
 
         <ShellContent
             Title="Request Specialists"
-            ContentTemplate="{DataTemplate views:RequestSpecialists}" />
+            ContentTemplate="{DataTemplate views:RequestSpecialities}" />
     </TabBar>
     
 </Shell>

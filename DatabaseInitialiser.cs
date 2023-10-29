@@ -1,6 +1,4 @@
 ﻿using Microsoft.Data.Sqlite;
-using System;
-using System.Collections.Generic;
 
 /// <summary>
 /// Initializes a SQLite database by creating the necessary tables.
@@ -81,12 +79,13 @@ public class DatabaseInitialiser
     {
         return new List<string>
         {
+            "PRAGMA foreign_keys = ON",
             "CREATE TABLE IF NOT EXISTS continent (Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL)",
             "CREATE TABLE IF NOT EXISTS rota_type (Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL)",
             "CREATE TABLE IF NOT EXISTS equipment_type (Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL)",
             "CREATE TABLE IF NOT EXISTS organisation_type (Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL)",
             "CREATE TABLE IF NOT EXISTS order_status (Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL)",
-            "CREATE TABLE IF NOT EXISTS resource_types (Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL)",
+            "CREATE TABLE IF NOT EXISTS resource_types (Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL UNIQUE)",
             "CREATE TABLE IF NOT EXISTS room_type (Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL)",
             "CREATE TABLE IF NOT EXISTS room_use_type (Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL)",
             "CREATE TABLE IF NOT EXISTS building_type (Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL)",
@@ -100,7 +99,11 @@ public class DatabaseInitialiser
             "CREATE TABLE IF NOT EXISTS role (Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL)",
             "CREATE TABLE IF NOT EXISTS skill (Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL)",
             "CREATE TABLE IF NOT EXISTS team_member (Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL)",
-            "CREATE TABLE IF NOT EXISTS partner_agencies (Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL)"
+            "CREATE TABLE IF NOT EXISTS partner_agencies (Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL)",
+            "CREATE TABLE IF NOT EXISTS resource (Id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "Name TEXT NOT NULL," +
+                "Type TEXT DEFAULT \"Food\" REFERENCES resource_types(Name) ON DELETE CASCADE ON UPDATE CASCADE," +
+                "Quantity INTEGER DEFAULT 0)"
         };
     }
 }

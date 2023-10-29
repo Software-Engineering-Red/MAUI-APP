@@ -79,8 +79,9 @@
                            FontSize="20" 
                            FontAttributes="Bold" 
                            TextColor="White" />
+                    <Picker x:Name="UpdateFilter" SelectedIndexChanged="OnUpdateFilterSelected"  TextColor="White" BackgroundColor="#454545" />
                     <Entry x:Name="UpdateRecordEntry" 
-                           Placeholder="{Binding Source={x:Reference TablePicker}, Path=SelectedItem, StringFormat='Update {0} record'}" 
+                           Placeholder="{Binding Source={x:Reference UpdateFilter}, StringFormat='Update record'}" 
                            TextColor="White" 
                            PlaceholderColor="#aaa" 
                            BackgroundColor="#454545" />

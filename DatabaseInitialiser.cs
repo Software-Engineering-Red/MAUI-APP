@@ -106,6 +106,7 @@ public class DatabaseInitialiser
                 "Name TEXT NOT NULL," +
                 "Type TEXT DEFAULT \"food\" REFERENCES resource_type(Name) ON DELETE CASCADE ON UPDATE CASCADE," +
                 "Quantity INTEGER DEFAULT 0)"
+            "CREATE TABLE IF NOT EXISTS operation_resource_request (Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL)"
         };
     }
 }

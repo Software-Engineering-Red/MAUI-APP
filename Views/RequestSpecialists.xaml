@@ -10,15 +10,47 @@
 
             <!-- Title -->
             <Label Text="Request Specialists" FontSize="26" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" TextColor="White" />
+            <Frame CornerRadius="10" Padding="20" BackgroundColor="#373737">
+                <VerticalStackLayout Spacing="15">
+                    
+                    <Label Text="Select required skill:" FontSize="20" FontAttributes="Bold" TextColor="White" />
+                    <Picker x:Name="SkillNamePicker" TextColor="White" BackgroundColor="#454545" />
 
-            <Entry Placeholder="Skill Name" x:Name="SkillNameEntry" />
-            <Entry Placeholder="Organisation ID" x:Name="OrganisationIdEntry" Keyboard="Numeric" />
-            <Entry Placeholder="Requested By" x:Name="RequestedByEntry" Keyboard="Numeric" />
-            <Entry Placeholder="Number Required" x:Name="NumberRequiredEntry" Keyboard="Numeric" />
-            <DatePicker x:Name="StartDatePicker" MinimumDate="{x:Static sys:DateTime.Today}"/>
-            <DatePicker x:Name="EndDatePicker" MinimumDate="{x:Static sys:DateTime.Today}"/>
-            <Button Text="Add Record" Clicked="OnAddRecordClicked" />
+                    <Entry Placeholder="Organisation ID" x:Name="OrganisationIdEntry" Keyboard="Numeric" 
+                           TextColor="White" 
+                           PlaceholderColor="#aaa" 
+                           BackgroundColor="#454545" />
+                    <Entry Placeholder="Number Required" x:Name="NumberRequiredEntry" Keyboard="Numeric" 
+                           TextColor="White" 
+                           PlaceholderColor="#aaa" 
+                           BackgroundColor="#454545" />
+                    <DatePicker x:Name="StartDatePicker" MinimumDate="{x:Static sys:DateTime.Today}"
+                                TextColor="White" 
+                                BackgroundColor="#454545" />
+                    <DatePicker x:Name="EndDatePicker" MinimumDate="{x:Static sys:DateTime.Today}"
+                                TextColor="White" 
+                                BackgroundColor="#454545" />
+                    
+                    <Button Text="Add Record" Clicked="OnAddRecordClicked" 
+                            BackgroundColor="#4CAF50" 
+                            TextColor="White" 
+                            CornerRadius="8" />
+                </VerticalStackLayout>
+            </Frame>
 
+            <ListView x:Name="RequestSpecialistsListView">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" Padding="10">
+                                <CheckBox IsEnabled="False" IsChecked="{Binding IsApproved}" />
+                                <Label Text="{Binding Name}" VerticalOptions="CenterAndExpand" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </VerticalStackLayout>
+        
     </ScrollView>
 </ContentPage>

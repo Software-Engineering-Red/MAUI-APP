@@ -17,10 +17,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Setup .NET 6
+      - name: Setup .NET 7
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 6.0.x
+          dotnet-version: 7.0.x
           include-prerelease: true
 
       - name: Setup MSBuild
@@ -36,7 +36,7 @@ jobs:
         run: dotnet restore DB-Manager.csproj
 
       - name: Build MAUI Windows
-        run: msbuild DB-Manager.csproj -r -p:Configuration=Release -p:RestorePackages=false -p:TargetFramework=net6.0-windows10.0.19041 /p:GenerateAppxPackageOnBuild=true
+        run: msbuild DB-Manager.csproj -r -p:Configuration=Release -p:RestorePackages=false -p:TargetFramework=net7.0-windows10.0.19041 /p:GenerateAppxPackageOnBuild=true
 
       - name: Upload Windows Artifact
         uses: actions/upload-artifact@v2.3.1

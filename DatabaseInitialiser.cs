@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
+using System.Xml.Linq;
 
 /// <summary>
 /// Initializes a SQLite database by creating the necessary tables.
@@ -100,14 +101,20 @@ public class DatabaseInitialiser
             "CREATE TABLE IF NOT EXISTS assignment_status (Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL)",
             "CREATE TABLE IF NOT EXISTS position_status (Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL)",
             "CREATE TABLE IF NOT EXISTS role (Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL)",
-            "CREATE TABLE IF NOT EXISTS skill (Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL)",
+			"CREATE TABLE IF NOT EXISTS skill (Name TEXT NOT NULL PRIMARY KEY)",
             "CREATE TABLE IF NOT EXISTS team_member (Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL)",
             "CREATE TABLE IF NOT EXISTS partner_agencies (Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL)",
-			"CREATE TABLE IF NOT EXISTS skills_request (Id INTEGER PRIMARY KEY AUTOINCREMENT, skill_name TEXT NOT NULL, " +
-			"organisation_id INTEGER, request_date DATE NOT NULL, requested_by INTEGER, number_required INTEGER NOT NULL, " +
-			"start_date DATE NOT NULL, end_date DATE NOT NULL, status TEXT CHECK (status IN ('Pending', 'Approved'))," +
+			"CREATE TABLE IF NOT EXISTS skills_request (Id INTEGER PRIMARY KEY AUTOINCREMENT, skill_name TEXT, " +
+			"organisation_id INTEGER, request_date DATE, requested_by INTEGER, number_required INTEGER, " +
+			"start_date DATE, end_date DATE, status TEXT CHECK (status IN ('Pending', 'Approved'))," +
             " confirmed_date DATE, FOREIGN KEY (skill_name) REFERENCES skill(Name), " +
-            "FOREIGN KEY (organisation_id) REFERENCES organisation(id),FOREIGN KEY (requested_by) REFERENCES person(id));"
-		};
+            "FOREIGN KEY (organisation_id) REFERENCES organisation(Id),FOREIGN KEY (requested_by) REFERENCES person(Id));"
+
+            //TEST Values
+			,"INSERT OR IGNORE INTO person (Id, Name, FieldName) VALUES (0,'John Doe', 'Healthcare');"
+			,"INSERT OR IGNORE INTO organisation (Id, Name) VALUES (0, 'No Organisation');"
+			,"INSERT OR IGNORE INTO skill (Name) VALUES ('rescue'),('rebuild Infrastructure'),('mental & emotional support'),('first aid');"
+            //,"DROP TABLE IF EXISTS skill;"
+	};
     }
 }

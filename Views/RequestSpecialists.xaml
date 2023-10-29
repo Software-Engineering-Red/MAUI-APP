@@ -15,9 +15,10 @@
                 <VerticalStackLayout Spacing="15">
                     
                     <Label Text="Select required skill:" FontSize="20" FontAttributes="Bold" TextColor="White" />
-                    <Picker x:Name="SkillNamePicker" TextColor="White" BackgroundColor="#454545" />
+                    <Picker x:Name="SkillNamePicker" TextColor="White" BackgroundColor="#454545" 
+                            />
 
-                    <Entry Placeholder="Number Required" x:Name="NumberRequiredEntry" Keyboard="Numeric" 
+                    <Entry Placeholder="Number Required" x:Name="NumberRequiredEntry" Keyboard="Numeric"
                            TextColor="White" 
                            PlaceholderColor="#aaa" 
                            BackgroundColor="#454545" />
@@ -25,7 +26,7 @@
                                 DateSelected="StartDatePicker_DateSelected"
                                 TextColor="White" 
                                 BackgroundColor="#454545" />
-                    <DatePicker x:Name="EndDatePicker" MinimumDate="{Binding SelectedDate, Source={x:Reference StartDatePicker}}"
+                    <DatePicker x:Name="EndDatePicker" MinimumDate="{Binding Source={x:Reference StartDatePicker}}"
                                 TextColor="White" 
                                 BackgroundColor="#454545" />
                     
@@ -41,7 +42,6 @@
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Orientation="Horizontal" Padding="10">
-                                <CheckBox IsEnabled="False" IsChecked="{Binding IsApproved}" />
                                 <Label Text="{Binding Name}" VerticalOptions="CenterAndExpand" />
                             </StackLayout>
                         </ViewCell>

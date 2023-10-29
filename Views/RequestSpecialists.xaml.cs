@@ -7,6 +7,7 @@ public partial class RequestSpecialists : ContentPage
 {
 	private readonly DatabaseOperations _dbOps;
 	private ISpecialistRequestService specialistRequestService;
+	private DateTime selectedDate;
 
 	public RequestSpecialists()
 	{
@@ -20,12 +21,11 @@ public partial class RequestSpecialists : ContentPage
 
 	private async void OnAddRecordClicked(object sender, EventArgs e)
 	{
-		var skillName = SkillNamePicker.Title;
+		var skillName = (string)SkillNamePicker.SelectedItem;
 		var numberRequired = Convert.ToInt32(NumberRequiredEntry.Text);
 		var startDate = StartDatePicker.Date;
 		var endDate = EndDatePicker.Date;
-
-		if (_dbOps != null && skillName != null)
+		if (CheckAddable(skillName, numberRequired))
 		{
 			try
 			{
@@ -41,13 +41,25 @@ public partial class RequestSpecialists : ContentPage
 		}
 	}
 
-	private void OnCheckBoxCheckedChanged()
+	private  bool CheckAddable(string skillName, int numberRequired)
 	{
-		// Handle checkbox checked changed event here
-		// You can access the checked state using e.Value
+		if (_dbOps == null)
+		{
+			DisplayAlert("Error", $"No Database-Connection", "OK");
+			return false;
+		}
+		if (skillName == null || skillName == "")
+		{
+			DisplayAlert("Error", $"No Skill entered", "OK");
+			return false;
+		}
+		if (numberRequired <= 0)
+		{
+			DisplayAlert("Error", $"Number of requested Helpers requires to be bigger than Zero", "OK");
+			return false;
+		}
+		return true;
 	}
-
-	private string GetSelectedSkill() => SkillNamePicker.SelectedItem?.ToString();
 
 
 	private void PopulateSkillPicker()
@@ -72,4 +84,5 @@ public partial class RequestSpecialists : ContentPage
 	{
 		EndDatePicker.MinimumDate = e.NewDate;
 	}
+
 }

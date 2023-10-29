@@ -102,11 +102,11 @@ public class DatabaseInitialiser
             "CREATE TABLE IF NOT EXISTS skill (Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL)",
             "CREATE TABLE IF NOT EXISTS team_member (Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL)",
             "CREATE TABLE IF NOT EXISTS partner_agencies (Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL)",
+            "CREATE TABLE IF NOT EXISTS operation_resource_request (Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL)"
             "CREATE TABLE IF NOT EXISTS resource (Id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "Name TEXT NOT NULL," +
                 "Type TEXT DEFAULT \"food\" REFERENCES resource_type(Name) ON DELETE CASCADE ON UPDATE CASCADE," +
                 "Quantity INTEGER DEFAULT 0)"
-            "CREATE TABLE IF NOT EXISTS operation_resource_request (Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL)"
         };
     }
 }

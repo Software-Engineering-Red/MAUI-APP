@@ -34,7 +34,7 @@ public class DatabaseOperations
     /// <param name="name">The name of the record to insert.</param>
     public void AddRecord(string tableName, string name)
     {
-        var commandText = $"INSERT INTO {tableName} (Name) VALUES (@name)";
+        var commandText = $"INSERT INTO {tableName}(Name) VALUES (@name)";
         ExecuteNonQuery(commandText, ("@name", name));
     }
 
@@ -84,7 +84,6 @@ public class DatabaseOperations
         throw new Exception($"No record with the name '{name}' found in table '{tableName}'.");
     }
 
-
     /// <summary>
     /// Updates a record's name in the specified table based on the provided ID.
     /// </summary>
@@ -93,8 +92,19 @@ public class DatabaseOperations
     /// <param name="newName">New name to set for the record.</param>
     public void UpdateRecord(string tableName, int id, string newName)
     {
-        var commandText = $"UPDATE {tableName} SET Name = @name WHERE Id = @id";
-        ExecuteNonQuery(commandText, ("@name", newName), ("@id", id));
+        UpdateRecord(tableName, "Name", id, newName);
+    }
+
+    /// <summary>
+    /// Updates a record's row in the specified table based on the provided ID.
+    /// </summary>
+    /// <param name="tableName">Target table name.</param>
+    /// <param name="id">ID of the record to update.</param>
+    /// <param name="newValue">New value to set for the record.</param>
+    public void UpdateRecord(string tableName, string rowName, int id, string newValue)
+    {
+        var commandText = $"UPDATE {tableName} SET {rowName} = @value WHERE Id = @id";
+        ExecuteNonQuery(commandText, ("@value", newValue), ("@id", id));
     }
 
     /// <summary>
@@ -104,8 +114,8 @@ public class DatabaseOperations
     /// <param name="id">ID of the record to delete.</param>
     public void DeleteRecord(string tableName, int id)
     {
-        var commandText = $"DELETE FROM {tableName} WHERE Id = @id";
-        ExecuteNonQuery(commandText, ("@id", id));
+        var commandText = $"DELETE FROM {tableName} WHERE Id = {id}";
+        ExecuteNonQuery(commandText);
     }
 
     /// <summary>

@@ -17,7 +17,7 @@ namespace MauiApp1
 
             // Initialize database operations
             // Ideally, this connection string should come from a config or environment setting.
-            _dbOps = new DatabaseOperations($"Data Source={Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "reference_values.sqlite")}");
+            _dbOps = new DatabaseOperations($"Data Source={Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "reference_valuesv2.sqlite")}");
 
             // Populate table picker
             PopulateTablePicker();
@@ -108,6 +108,8 @@ namespace MauiApp1
                     Console.WriteLine(row);
                 }
                 RowPicker.ItemsSource = rows;
+                UpdateFilter.ItemsSource = rows;
+                UpdateFilter.SelectedIndex = 1; 
             }
             catch (Exception ex)
             {
@@ -128,6 +130,7 @@ namespace MauiApp1
             {
                 _currentRecords = _dbOps.GetAllRecordsWithIds(selectedTable);
                 RecordsListView.ItemsSource = _currentRecords;
+                RecordsListView.SelectedItem = null;
                 PopulateRowPicker(selectedTable);
             }
             catch (Exception ex)
@@ -167,10 +170,40 @@ namespace MauiApp1
         {
             if (e.SelectedItem is KeyValuePair<int, string> selectedRecord)
             {
-                UpdateRecordEntry.Text = selectedRecord.Value;
+                UpdateRecordText();
             }
         }
 
+        void OnUpdateFilterSelected(object sender, EventArgs e)
+        {
+            var picker = (Picker)sender;
+            int selectedIndex = picker.SelectedIndex;
+
+            if (selectedIndex != -1)
+            {
+                 UpdateRecordText();
+            }
+        }
+
+        private void UpdateRecordText()
+        {
+            if (RecordsListView.SelectedItem is KeyValuePair<int, string> selectedItem)
+            {
+                if (string.IsNullOrWhiteSpace(UpdateFilter.SelectedItem.ToString()) || !UpdateFilter.SelectedItem.ToString().Equals("Id"))
+                {
+                    UpdateRecordEntry.Text = selectedItem.Value.ToString();
+                }
+                else
+                {
+                    UpdateRecordEntry.Text = selectedItem.Key.ToString();
+                }
+            }
+            else
+            {
+                UpdateRecordEntry.Text = "";
+            }
+
+        }
 
         private void OnAddRecord(object sender, EventArgs e)
         {
@@ -199,13 +232,14 @@ namespace MauiApp1
             if (RecordsListView.SelectedItem is KeyValuePair<int, string> selectedRecord)
             {
                 var tableName = GetSelectedTable();
-                var newName = UpdateRecordEntry.Text;
+                var newValue = UpdateRecordEntry.Text;
+                string selectedRow = UpdateFilter.SelectedItem?.ToString();
 
-                if (IsValidInput(tableName, newName))
+                if (IsValidInput(tableName, newValue))
                 {
                     try
                     {
-                        _dbOps.UpdateRecord(tableName, selectedRecord.Key, newName);
+                        _dbOps.UpdateRecord(tableName, selectedRow.Length > 0 ? selectedRow : "Name", selectedRecord.Key, newValue);
                         RefreshRecordsList();
                     }
                     catch (Exception ex)
@@ -217,6 +251,10 @@ namespace MauiApp1
                         DisplayAlert("Error", $"Failed to update record in table {tableName}.", "OK");
                     }
                 }
+            }
+            else
+            {
+                DisplayAlert("Error", $"No valid record selected", "OK");
             }
         }
 
@@ -256,6 +294,10 @@ namespace MauiApp1
             return true;
         }
 
-        private void RefreshRecordsList() => OnTableSelected(null, EventArgs.Empty);
+        private void RefreshRecordsList()
+        {
+            OnTableSelected(null, EventArgs.Empty);
+            UpdateRecordText();
+        }
     }
 }

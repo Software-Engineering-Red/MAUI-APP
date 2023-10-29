@@ -104,8 +104,9 @@ public class DatabaseInitialiser
             "CREATE TABLE IF NOT EXISTS team_member (Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL)",
             "CREATE TABLE IF NOT EXISTS partner_agencies (Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL)",
 			"CREATE TABLE IF NOT EXISTS skills_request (Id INTEGER PRIMARY KEY AUTOINCREMENT, skill_name TEXT NOT NULL, " +
-            "organisation_id INTEGER, request_date DATE, requested_by INTEGER, number_required INTEGER, start_date DATE, end_date DATE, " +
-            "status TEXT, confirmed_date DATE, FOREIGN KEY (skill_name) REFERENCES skill(Name), " +
+			"organisation_id INTEGER, request_date DATE NOT NULL, requested_by INTEGER, number_required INTEGER NOT NULL, " +
+			"start_date DATE NOT NULL, end_date DATE NOT NULL, status TEXT CHECK (status IN ('Pending', 'Approved'))," +
+            " confirmed_date DATE, FOREIGN KEY (skill_name) REFERENCES skill(Name), " +
             "FOREIGN KEY (organisation_id) REFERENCES organisation(id),FOREIGN KEY (requested_by) REFERENCES person(id));"
 		};
     }

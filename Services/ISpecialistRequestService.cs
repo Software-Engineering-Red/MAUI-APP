@@ -9,10 +9,11 @@ namespace MauiApp1.Services
 {
 	internal interface ISpecialistRequestService
 	{
-		void AddSkillsRequest(SkillRequest request);
-		List<SkillRequest> GetAllSkillsRequests();
-		SkillRequest GetSkillsRequestById(int id);
-		void UpdateSkillsRequest(int id, SkillRequest updatedRequest);
-		void DeleteSkillsRequest(int id);
+		void AddSkillRequest(string skillName, int numberRequired, 
+			DateTime startDate,DateTime endDate, string status);
+		List<SkillRequest> GetAllSkillRequests();
+		SkillRequest GetSkillRequestById(int id);
+		void UpdateSkillRequest(int id, SkillRequest updatedRequest);
+		void DeleteSkillRequest(int id);
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.Sqlite;
+using MauiApp1.Models;
 using System;
 using System.Collections.Generic;
 
@@ -201,5 +202,56 @@ public class DatabaseOperations
         }
 
         command.ExecuteNonQuery();
+    }
+    // ... [rest of the class]
+
+    // Adjusted methods to use _connection instead of database
+    public void InsertPin(OperationPin pin)
+    {
+        var commandText = "INSERT INTO OperationPin (Name, OtherColumns) VALUES (@Name, @OtherValues)";  // Replace with actual columns and values
+        ExecuteNonQuery(commandText, ("@Name", pin.Name));  // Add other parameters as needed
+    }
+
+    public void UpdatePin(OperationPin pin)
+    {
+        var commandText = "UPDATE OperationPin SET Name = @Name WHERE Id = @id";  // Adjust to set other columns as needed
+        ExecuteNonQuery(commandText, ("@Name", pin.Name), ("@id", pin.Id));
+    }
+
+    public void DeletePin(int id)
+    {
+        var commandText = "DELETE FROM OperationPin WHERE Id = @id";
+        ExecuteNonQuery(commandText, ("@id", id));
+    }
+
+    public void DeletePin(OperationPin pin)
+    {
+        DeletePin(pin.Id);
+    }
+    public List<OperationPin> GetAllPins()
+    {
+        var pins = new List<OperationPin>();
+        var commandText = "SELECT * FROM operation_pin";
+
+        using var command = _connection.CreateCommand();
+        command.CommandText = commandText;
+
+        using var reader = command.ExecuteReader();
+        while (reader.Read())
+        {
+            var pin = new OperationPin
+            {
+                Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                Name = reader.GetString(reader.GetOrdinal("Name")),
+                Address = reader.GetString(reader.GetOrdinal("Address")),
+                Latitude = reader.GetDouble(reader.GetOrdinal("Latitude")),
+                Longitude = reader.GetDouble(reader.GetOrdinal("Longitude")),
+                PinType = reader.GetString(reader.GetOrdinal("PinType")),
+                StatusOrPurpose = reader.GetString(reader.GetOrdinal("StatusOrPurpose"))
+            };
+            pins.Add(pin);
+        }
+
+        return pins;
     }
 }

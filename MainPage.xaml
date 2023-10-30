@@ -3,6 +3,7 @@
              BackgroundColor="#252525"
              x:Class="MauiApp1.MainPage">
 
+  
     <ScrollView>
         <VerticalStackLayout Spacing="30" Padding="30,20" VerticalOptions="Center">
 

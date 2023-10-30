@@ -13,7 +13,7 @@
             <Label Text="Request Specialists" FontSize="26" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" TextColor="White" />
             <Frame CornerRadius="10" Padding="20" BackgroundColor="#373737">
                 <VerticalStackLayout Spacing="15">
-                    
+
                     <Label Text="Select required skill:" FontSize="20" FontAttributes="Bold" TextColor="White" />
                     <Picker x:Name="SkillNamePicker" TextColor="White" BackgroundColor="#454545" 
                             />
@@ -29,26 +29,13 @@
                     <DatePicker x:Name="EndDatePicker" MinimumDate="{Binding Source={x:Reference StartDatePicker}}"
                                 TextColor="White" 
                                 BackgroundColor="#454545" />
-                    
+
                     <Button Text="Add Record" Clicked="OnAddRecordClicked" 
                             BackgroundColor="#4CAF50" 
                             TextColor="White" 
                             CornerRadius="8" />
                 </VerticalStackLayout>
             </Frame>
-
-            <ListView x:Name="RequestSpecialistsListView">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <StackLayout Orientation="Horizontal" Padding="10">
-                                <Label Text="{Binding Name}" VerticalOptions="CenterAndExpand" />
-                            </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
         </VerticalStackLayout>
-        
     </ScrollView>
 </ContentPage>

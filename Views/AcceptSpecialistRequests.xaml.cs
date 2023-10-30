@@ -3,12 +3,28 @@ using MauiApp1.Services;
 
 namespace MauiApp1.Views;
 
+/// <summary>
+/// Logic to Approving Specialist Requests.
+/// </summary>
 public partial class AcceptSpecialistRequests : ContentPage
 {
+	/// <summary>
+	/// database OperationService
+	/// </summary>
 	private readonly DatabaseOperations _dbOps;
-	private ISpecialistRequestService specialistRequestService;
-	private List<SkillRequest> _currentRecords;
 
+	/// <summary>
+	/// database Service for Specialist Requests 
+	/// </summary>
+	private ISpecialistRequestService specialistRequestService;
+
+	/// <summary>
+	/// List of SkillRequests
+	/// </summary>
+	private List<SkillRequest> _currentRecords;
+	/// <summary>
+	/// Constructor initialising Database Services and filling UI with values.
+	/// </summary>
 	public AcceptSpecialistRequests()
 	{
 		InitializeComponent();
@@ -19,6 +35,9 @@ public partial class AcceptSpecialistRequests : ContentPage
 		PopulateOrganisationPicker();
 	}
 
+	/// <summary>
+	/// Adds All Requests to list and to ListView.
+	/// </summary>
 	private async void populateRequestList()
 	{
 		try
@@ -33,16 +52,24 @@ public partial class AcceptSpecialistRequests : ContentPage
 		}
 	}
 
-
-	private async void OnButtonClick(object sender, EventArgs e)
+	/// <summary>
+	/// Approves Request when button is pushed.
+	/// </summary>
+	/// <param name="sender">Sender</param>
+	/// <param name="e">Event</param>
+	private async void OnButtonClickApprove(object sender, EventArgs e)
 	{
 		if (sender is Button button && button.BindingContext is SkillRequest item)
 		{
 			try
 			{
-				var OrganisationName = (string)OrganisationPicker.SelectedItem;
-				specialistRequestService.approveSkillRequest(item.Id, GetOrganisationId(OrganisationName));
-				await DisplayAlert("Success", $"Successfully inserted record into skills.", "OK");
+				var organisationName = (string)OrganisationPicker.SelectedItem;
+				var organisationId = GetOrganisationId(organisationName);
+				if (CheckUpdateable(item.Status, item.OrganisationId, organisationId))
+				{
+					specialistRequestService.approveSkillRequest(item.Id, organisationId);
+					await DisplayAlert("Success", $"Successfully inserted record into skills.", "OK");
+				}
 			}
 			catch (Exception ex)
 			{
@@ -50,16 +77,45 @@ public partial class AcceptSpecialistRequests : ContentPage
 				return;
 			}
 		}
-		RefreshRecordsList();
+		RefreshRequests();
 	}
 
+	/// <summary>
+	/// Checks whether it is possible to update value.
+	/// </summary>
+	/// <param name="status">Current Status</param>
+	/// <param name="currentOrganisationId">Current OrganisationID</param>
+	/// <param name="newOrganisationId">OrganisationID that should be entered</param>
+	/// <returns>bool whether Updateable</returns>
+	private bool CheckUpdateable(string status, int currentOrganisationId, int newOrganisationId)
+	{
+		if (status == "Approved")
+		{
+			DisplayAlert("Not Possible", "The Request already has been approved.", "OK");
+			return false;
+		}
+		if (newOrganisationId == currentOrganisationId)
+		{
+			DisplayAlert("Not Possible", "The Request already was approved by this Organisation.", "OK");
+			return false;
+		}
+		return true;
+	}
 
+	/// <summary>
+	/// Gets (first) Organisation ID by its name.
+	/// </summary>
+	/// <param name="name">Organisation Name</param>
+	/// <returns></returns>
 	private int GetOrganisationId(string name)
 	{
 		var result = _dbOps.GetRecordIdByName("organisation", name);
 		return result;
 	}
 
+	/// <summary>
+	/// Adds Values to OrganisationPicker.
+	/// </summary>
 	private void PopulateOrganisationPicker()
 	{
 		try
@@ -79,8 +135,10 @@ public partial class AcceptSpecialistRequests : ContentPage
 	}
 
 
-
-	private void OnRequestSelected(object sender, EventArgs e)
+	/// <summary>
+	/// Refreshes the ListView of all Requests.
+	/// </summary>
+	private void RefreshRequests()
 	{
 		try
 		{
@@ -94,5 +152,4 @@ public partial class AcceptSpecialistRequests : ContentPage
 			DisplayAlert("Error", $"Failed to load records for Requests.", "OK");
 		}
 	}
-	private void RefreshRecordsList() => OnRequestSelected(null, EventArgs.Empty);
 }

@@ -22,18 +22,18 @@ namespace MauiApp1.Services
 			DateTime startDate,DateTime endDate);
 
 		/// <summary>
-		/// Approve Request by assingning the date of approval,
-		/// changing the Status to Approved, and Assignig the Corresponding Organisation
-		/// </summary>
-		/// <param name="id"></param>
-		/// <param name="organisationId"></param>
-		List<SkillRequest> GetAllSkillRequests();
-
-		/// <summary>
 		/// Returns a list of SkillRequest objects by Calling a 
 		/// SELECT statement for skills_request
 		/// </summary>
 		/// <returns>A list of SkillRequest objects, created from the database</returns>
+		List<SkillRequest> GetAllSkillRequests();
+
+		/// <summary>
+		/// Approve Request by assingning the date of approval,
+		/// changing the Status to Approved, and Assignig the Corresponding Organisation
+		/// </summary>
+		/// <param name="id">Id of Request</param>
+		/// <param name="organisationId">Id of Organisation</param>
 		void approveSkillRequest(int id, int organisationId);
 	}
 }

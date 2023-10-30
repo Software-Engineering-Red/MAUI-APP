@@ -85,7 +85,7 @@
                                     </Label.FormattedText>
                                 </Label>
 
-                                <Button Text="Approve with my company" Clicked="OnButtonClick" BackgroundColor="#4CAF50" TextColor="White" CornerRadius="8"  />
+                                <Button Text="Approve with my company" Clicked="OnButtonClickApprove" BackgroundColor="#4CAF50" TextColor="White" CornerRadius="8"  />
                                 
                             </StackLayout>
                         </ViewCell>

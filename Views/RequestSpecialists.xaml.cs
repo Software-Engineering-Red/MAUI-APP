@@ -3,12 +3,24 @@ using MauiApp1.Services;
 
 namespace MauiApp1.Views;
 
+/// <summary>
+/// Logic to creating new Specialist Requests.
+/// </summary>
 public partial class RequestSpecialists : ContentPage
 {
+	/// <summary>
+	/// database OperationService.
+	/// </summary>
 	private readonly DatabaseOperations _dbOps;
-	private ISpecialistRequestService specialistRequestService;
-	private DateTime selectedDate;
 
+	/// <summary>
+	/// database Service for Specialist Requests .
+	/// </summary>
+	private ISpecialistRequestService specialistRequestService;
+
+	/// <summary>
+	/// Constructor initialising Database Services and filling UI with values.
+	/// </summary>
 	public RequestSpecialists()
 	{
 		InitializeComponent();
@@ -19,6 +31,12 @@ public partial class RequestSpecialists : ContentPage
 		PopulateSkillPicker();
 	}
 
+
+	/// <summary>
+	/// Creates new Request when button is pushed.
+	/// </summary>
+	/// <param name="sender">Button</param>
+	/// <param name="e">Event</param>
 	private async void OnAddRecordClicked(object sender, EventArgs e)
 	{
 		var skillName = (string)SkillNamePicker.SelectedItem;
@@ -51,6 +69,12 @@ public partial class RequestSpecialists : ContentPage
 		}
 	}
 
+	/// <summary>
+	/// Checks whether something can be added or if there are missing vaues.
+	/// </summary>
+	/// <param name="skillName">SkillName</param>
+	/// <param name="numberRequired">Number of requird Persons</param>
+	/// <returns></returns>
 	private  bool CheckAddable(string skillName, int numberRequired)
 	{
 		if (_dbOps == null)
@@ -71,7 +95,9 @@ public partial class RequestSpecialists : ContentPage
 		return true;
 	}
 
-
+	/// <summary>
+	/// Adds the skills to chose from to SkillPicker.
+	/// </summary>
 	private void PopulateSkillPicker()
 	{
 		try
@@ -90,6 +116,11 @@ public partial class RequestSpecialists : ContentPage
 		}
 	}
 
+	/// <summary>
+	/// Always sets the Minimum of endDate to the current startDate.
+	/// </summary>
+	/// <param name="sender">Datepicker</param>
+	/// <param name="e">Event</param>
 	private void StartDatePicker_DateSelected(object sender, DateChangedEventArgs e)
 	{
 		EndDatePicker.MinimumDate = e.NewDate;

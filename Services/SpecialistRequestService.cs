@@ -72,8 +72,8 @@ namespace MauiApp1.Services
 		/// Approve Request by assingning the date of approval,
 		/// changing the Status to Approved, and Assignig the Corresponding Organisation
 		/// </summary>
-		/// <param name="id"></param>
-		/// <param name="organisationId"></param>
+		/// <param name="id">Id of Request</param>
+		/// <param name="organisationId">Id of Organisation</param>
 		void ISpecialistRequestService.approveSkillRequest(int id, int organisationId)
 		{
 			var currentDate = DateTime.Today;

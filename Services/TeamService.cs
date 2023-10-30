@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MauiApp1.Services
 {
-    public class TeamMemberService : ITeamMemberService
+    public class TeamService : ITeamService
     {
         private SQLiteAsyncConnection _dbConn;
         /*! <summary>
@@ -25,28 +25,28 @@ namespace MauiApp1.Services
             await _dbConn.CreateTableAsync<OrderStatus>();
         }
 
-        public async Task<int> AddTeamMember(TeamMember teamMember)
+        public async Task<int> AddTeam(Team team)
         {
             await SetUpDb();
-            return await _dbConn.InsertAsync(teamMember);
+            return await _dbConn.InsertAsync(team);
         }
 
-        public async Task<int> DeleteTeamMember(TeamMember teamMember)
+        public async Task<int> DeleteTeam(Team team)
         {
             await SetUpDb();
-            return await _dbConn.DeleteAsync(teamMember);
+            return await _dbConn.DeleteAsync(team);
         }
 
-        public async Task<List<TeamMember>> GetTeamMemberList()
+        public async Task<List<Team>> GetTeamList()
         {
             await SetUpDb();
-            return await _dbConn.Table<TeamMember>().ToListAsync();
+            return await _dbConn.Table<Team>().ToListAsync();
         }
 
-        public async Task<TeamMember> UpdateTeamMember(TeamMember teamMember)
+        public async Task<int> UpdateTeam(Team team)
         {
             await SetUpDb();
-            return await _dbConn.UpdateAsync(systemType);
+            return await _dbConn.UpdateAsync(team);
         }
     }
 }

@@ -57,6 +57,9 @@
 	  <MauiXaml Update="MauiPage1.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\TeamPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
       <MauiXaml Update="Views\AlertTypesPage.xaml">
 	  </MauiXaml>
 	  <MauiXaml Update="Views\BuildingTypePage.xaml">
@@ -91,6 +94,9 @@
 	  <Compile Update="Views\AlertTypePage.xaml.cs">
 	    <DependentUpon>AlertTypePage.xaml</DependentUpon>
     </Compile>
+	  <Compile Update="Views\TeamPage.xaml.cs">
+	    <DependentUpon>TeamPage.xaml</DependentUpon>
+	  </Compile>
 		<Compile Update="Views\BuildingTypePage.xaml.cs">
 			<DependentUpon>BuildingTypePage.xaml</DependentUpon>
 		</Compile>
@@ -131,7 +137,6 @@
 	<ItemGroup>
 		<Folder Include="Documentation\reference\" />
 		<Folder Include="Images\" />
-		<Folder Include="Views\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <MauiXaml Update="MauiPage1.xaml">

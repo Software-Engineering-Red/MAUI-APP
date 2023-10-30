@@ -9,10 +9,31 @@ namespace MauiApp1.Services
 {
 	internal interface ISpecialistRequestService
 	{
-		void AddSkillRequest(string skillName, int numberRequired, 
+		/// <summary>
+		/// Inserts a new unapporved Specialist Request in the skills_request table
+		/// (confirmed_date can not be null so it is set to MinValue aswell as organisation.
+		/// requested_by is a dummy Value)
+		/// </summary>
+		/// <param name="skillName">Required Skill</param>
+		/// <param name="numberRequired">Number of Persons Required</param>
+		/// <param name="startDate">Start Date</param>
+		/// <param name="endDate">End Date</param>
+		void AddUnapprovedSkillRequest(string skillName, int numberRequired, 
 			DateTime startDate,DateTime endDate);
+
+		/// <summary>
+		/// Approve Request by assingning the date of approval,
+		/// changing the Status to Approved, and Assignig the Corresponding Organisation
+		/// </summary>
+		/// <param name="id"></param>
+		/// <param name="organisationId"></param>
 		List<SkillRequest> GetAllSkillRequests();
-		SkillRequest GetSkillRequestById(int id);
-		void UpdateSkillRequest(int id, SkillRequest updatedRequest);
+
+		/// <summary>
+		/// Returns a list of SkillRequest objects by Calling a 
+		/// SELECT statement for skills_request
+		/// </summary>
+		/// <returns>A list of SkillRequest objects, created from the database</returns>
+		void approveSkillRequest(int id, int organisationId);
 	}
 }

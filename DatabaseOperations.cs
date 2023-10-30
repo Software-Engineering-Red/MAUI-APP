@@ -74,24 +74,48 @@ public class DatabaseOperations
         command.CommandText = commandText;
         command.Parameters.AddWithValue("@name", name);
 
-        var result = command.ExecuteScalar();
+        var result = Convert.ToInt32(command.ExecuteScalar());
 
-        if (result != null && result is int id)
+		if (result is int id)
         {
             return id;
         }
 
-        throw new Exception($"No record with the name '{name}' found in table '{tableName}'.");
+        throw new Exception($"No record with the name '{name}' found in table '{tableName}'." );
     }
 
 
-    /// <summary>
-    /// Updates a record's name in the specified table based on the provided ID.
-    /// </summary>
-    /// <param name="tableName">Target table name.</param>
-    /// <param name="id">ID of the record to update.</param>
-    /// <param name="newName">New name to set for the record.</param>
-    public void UpdateRecord(string tableName, int id, string newName)
+	/// <summary>
+	/// Retrieves the name of a record from a specified table based on its ID.
+	/// </summary>
+	/// <param name="tableName">The table to search in.</param>
+	/// <param name="id">The id of the record to search for.</param>
+	/// <returns>The ID of the record if found; otherwise, throws an exception.</returns>
+	public string GetRecordNameById(string tableName, int id)
+	{
+		var commandText = $"SELECT Id FROM {tableName} WHERE Id = @Id LIMIT 1";
+
+		using var command = _connection.CreateCommand();
+		command.CommandText = commandText;
+		command.Parameters.AddWithValue("@Id", id);
+
+		var result = command.ExecuteScalar();
+
+		if (result != null && result is string name)
+		{
+			return name;
+		}
+
+		throw new Exception($"No record with the name '{id}' found in table '{tableName}'.");
+	}
+
+	/// <summary>
+	/// Updates a record's name in the specified table based on the provided ID.
+	/// </summary>
+	/// <param name="tableName">Target table name.</param>
+	/// <param name="id">ID of the record to update.</param>
+	/// <param name="newName">New name to set for the record.</param>
+	public void UpdateRecord(string tableName, int id, string newName)
     {
         var commandText = $"UPDATE {tableName} SET Name = @name WHERE Id = @id";
         ExecuteNonQuery(commandText, ("@name", newName), ("@id", id));

@@ -22,14 +22,24 @@ public partial class RequestSpecialists : ContentPage
 	private async void OnAddRecordClicked(object sender, EventArgs e)
 	{
 		var skillName = (string)SkillNamePicker.SelectedItem;
-		var numberRequired = Convert.ToInt32(NumberRequiredEntry.Text);
+		var numberRequired = 0;
+		try
+		{
+			numberRequired = Convert.ToInt32(NumberRequiredEntry.Text);
+		}
+		catch 
+		{
+			await DisplayAlert("Error", $"Failed to insert record into skills. Error: NumberRequired not a number", "OK");
+			NumberRequiredEntry.Text = "";
+			return;
+		}
 		var startDate = StartDatePicker.Date;
 		var endDate = EndDatePicker.Date;
 		if (CheckAddable(skillName, numberRequired))
 		{
 			try
 			{
-				specialistRequestService.AddSkillRequest(skillName, numberRequired,
+				specialistRequestService.AddUnapprovedSkillRequest(skillName, numberRequired,
 					startDate, endDate);
 				await DisplayAlert("Success", $"Successfully inserted record into skills.", "OK");
 			}

@@ -110,11 +110,11 @@ public class DatabaseInitialiser
             " confirmed_date DATE, FOREIGN KEY (skill_name) REFERENCES skill(Name), " +
             "FOREIGN KEY (organisation_id) REFERENCES organisation(Id),FOREIGN KEY (requested_by) REFERENCES person(Id));"
 
-            //TEST Values
+            //TEST Values for Specialist Requests
 			,"INSERT OR IGNORE INTO person (Id, Name, FieldName) VALUES (0,'John Doe', 'Healthcare');"
-			,"INSERT OR IGNORE INTO organisation (Id, Name) VALUES (0, 'No Organisation');"
+			,"INSERT OR IGNORE INTO organisation (Id, Name) VALUES (0, 'No Organisation'),(2, 'Doctors Without Borders'),(2, 'Care'),(3, 'International Medical Corps');"
 			,"INSERT OR IGNORE INTO skill (Name) VALUES ('rescue'),('rebuild Infrastructure'),('mental & emotional support'),('first aid');"
-            //,"DROP TABLE IF EXISTS skill;"
+            //,"DROP TABLE IF EXISTS skills_request;"
 	};
     }
 }

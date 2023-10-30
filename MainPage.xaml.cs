@@ -21,6 +21,7 @@ namespace MauiApp1
 
             // Populate table picker
             PopulateTablePicker();
+
         }
 
         private async void OnTestCrudOperations(object sender, EventArgs e)
@@ -40,6 +41,7 @@ namespace MauiApp1
             {
                 _dbOps.AddRecord(tableName, testRecordName);
                 await DisplayAlert("Success", $"Successfully inserted record '{testRecordName}' into {tableName}.", "OK");
+                
             }
             catch (Exception ex)
             {
@@ -76,7 +78,7 @@ namespace MauiApp1
             RefreshRecordsList();
         }
 
-
+       
 
         private void PopulateTablePicker()
         {
@@ -103,7 +105,6 @@ namespace MauiApp1
             try
             {
                 var rows = _dbOps.GetAllRowNames(table);
-                rows.Insert(0, "All");
                 foreach (var row in rows)
                 {
                     Console.WriteLine(row);
@@ -118,16 +119,23 @@ namespace MauiApp1
                 DisplayAlert("Error", "Failed to load rows.", "OK");
             }
         }
+       
 
         private void OnTableSelected(object sender, EventArgs e)
         {
             var selectedTable = GetSelectedTable();
-            if (string.IsNullOrWhiteSpace(selectedTable))
-                return;
+            if (string.IsNullOrWhiteSpace(selectedTable)) { return; }
+
+            bool isPickerVisible = selectedTable == "media_agencies";
+
+            // Set the IsVisible property of the Picker
+            MediaTypePicker.IsVisible = isPickerVisible;
+
 
             try
             {
                 _currentRecords = _dbOps.GetAllRecordsWithIds(selectedTable);
+              
                 RecordsListView.ItemsSource = _currentRecords;
                 PopulateRowPicker(selectedTable);
             }
@@ -145,13 +153,14 @@ namespace MauiApp1
             var selectedTable = GetSelectedTable();
             var filterValue = AddRecordFilter.Text;
             var columnToFilter = GetSelectedColumn();
-            string mediaTypeFilter = (string)MediaTypePicker.SelectedItem;
-            if (string.IsNullOrWhiteSpace(selectedTable) || string.IsNullOrWhiteSpace(filterValue) || string.IsNullOrWhiteSpace(columnToFilter) || string.IsNullOrWhiteSpace(mediaTypeFilter))
+           
+            
+            if (string.IsNullOrWhiteSpace(selectedTable) || string.IsNullOrWhiteSpace(filterValue) || string.IsNullOrWhiteSpace(columnToFilter))
                 return;
 
             try
             {
-                _currentFilteredRecords = _dbOps.GetAllRecordsWithIdsAndFilter(selectedTable, columnToFilter, filterValue, mediaTypeFilter);
+                _currentFilteredRecords = _dbOps.GetAllRecordsWithIdsAndFilter(selectedTable, columnToFilter, filterValue);
                 RecordsListView.ItemsSource = _currentFilteredRecords;
             }
             catch (Exception ex)
@@ -162,6 +171,102 @@ namespace MauiApp1
                 DisplayAlert("Error", $"Failed to filter and load records for table {selectedTable}.", "OK");
             }
         }
+
+        private void FilterMediaAgencies(string columnToFilter, string filterValue)
+        {
+            var selectedTable = "media_agencies"; // Set the table name to "media_agencies"
+
+            if (string.IsNullOrWhiteSpace(selectedTable) || string.IsNullOrWhiteSpace(columnToFilter) || string.IsNullOrWhiteSpace(filterValue))
+                return;
+
+            try
+            {
+                _currentFilteredRecords = _dbOps.GetAllRecordsWithIdsAndFilter(selectedTable, columnToFilter, filterValue);
+                RecordsListView.ItemsSource = _currentFilteredRecords;
+
+            }
+            catch (Exception ex)
+            {
+                // Log error
+                Console.WriteLine(ex.Message);
+                // Handle the exception
+                DisplayAlert("Error", $"Failed to filter and load records for table {selectedTable}.", "OK");
+            }
+        }
+        private void OnRadioFilterButtonClicked(object sender, EventArgs e)
+        {
+            // Call the FilterMediaAgencies method for "Radio" with a specific filter value
+            FilterMediaAgencies("Radio", "RadioValue");
+        }
+
+        private void OnTVFilterButtonClicked(object sender, EventArgs e)
+        {
+            // Call the FilterMediaAgencies method for "TV" with a specific filter value
+            FilterMediaAgencies("TV", "TVValue");
+        }
+
+        private void OnPressFilterButtonClicked(object sender, EventArgs e)
+        {
+            // Call the FilterMediaAgencies method for "Press" with a specific filter value
+            FilterMediaAgencies("Press", "PressValue");
+        }
+
+        private void OnAddMediaRecord(object sender, EventArgs e)
+        {
+            var agencyName = AddRecordEntry.Text;
+            var selectedMediaType = MediaTypePicker.SelectedItem as string;
+
+            if (IsValidInput(selectedMediaType, agencyName))
+            {
+                try
+                {
+                    if (selectedMediaType == "Radio")
+                    {
+                        _dbOps.AddMediaAgencyRecord(agencyName, radio: agencyName, tv: null, press: null);
+                    }
+                    else if (selectedMediaType == "Tv")
+                    {
+                        _dbOps.AddMediaAgencyRecord(agencyName, radio: null, tv: agencyName, press: null);
+                    }
+                    else if (selectedMediaType == "Press")
+                    {
+                        _dbOps.AddMediaAgencyRecord(agencyName, radio: null, tv: null, press: agencyName);
+                    }
+
+                    RefreshRecordsList();
+                }
+                catch (Exception ex)
+                {
+                    // Log error
+                    Console.WriteLine(ex.Message);
+                    // Handle the exception
+                    DisplayAlert("Error", "Failed to add record.", "OK");
+                }
+            }
+        }
+
+        private async void OnAddMediaAgencyRecord(object sender, EventArgs e)
+        {
+            var agencyName = "AgencyName"; // Fixed agency name
+            var radio = "RadioData"; // Replace with the actual radio data
+            var tv = "TVData"; // Replace with the actual TV data
+            var press = "PressData"; // Replace with the actual press data
+
+            try
+            {
+                _dbOps.AddMediaAgencyRecord(agencyName, radio, tv, press);
+
+                await DisplayAlert("Success", "Media agency data added.", "OK");
+            }
+            catch (Exception ex)
+            {
+                // Log error
+                Console.WriteLine(ex.Message);
+                // Handle the exception
+                DisplayAlert("Error", "Failed to add media agency data.", "OK");
+            }
+        }
+
 
         private string GetSelectedColumn() => RowPicker.SelectedItem?.ToString();
 
@@ -184,6 +289,7 @@ namespace MauiApp1
                 try
                 {
                     _dbOps.AddRecord(tableName, recordName);
+
                     RefreshRecordsList();
                 }
                 catch (Exception ex)
@@ -195,6 +301,8 @@ namespace MauiApp1
                 }
             }
         }
+        
+
 
         private void OnUpdateRecord(object sender, EventArgs e)
         {
@@ -276,7 +384,9 @@ namespace MauiApp1
                 DisplayAlert("Error", $"Failed to copy data to clipboard for table {selectedTable}.", "OK");
             }
         }
-       
+      
+
+
         private string GetSelectedTable() => TablePicker.SelectedItem?.ToString();
 
         private bool IsValidInput(params string[] inputs)

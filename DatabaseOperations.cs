@@ -27,6 +27,10 @@ public class DatabaseOperations
         }
     }
 
+
+
+   
+
     /// <summary>
     /// Inserts a new record into the specified table.
     /// </summary>
@@ -37,6 +41,28 @@ public class DatabaseOperations
         var commandText = $"INSERT INTO {tableName} (Name) VALUES (@name)";
         ExecuteNonQuery(commandText, ("@name", name));
     }
+    /// <summary>
+    /// Inserts data into the "media_agencies" table for Radio, TV, and Press.
+    /// </summary>
+    /// <param name="name">The name of the media agency.</param>
+    /// <param name="radio">Radio data for the media agency.</param>
+    /// <param name="tv">TV data for the media agency.</param>
+    /// <param name="press">Press data for the media agency.</param>
+    public void AddMediaAgencyRecord(string agencyName, string radio, string tv, string press)
+    {
+        
+        var commandText = $"INSERT INTO media_request (Name, Radio, TV, Press) VALUES (@name, @radio, @tv, @press)";
+
+        using var command = _connection.CreateCommand();
+        command.CommandText = commandText;
+        command.Parameters.AddWithValue("@name", agencyName);
+        command.Parameters.AddWithValue("@radio", radio);
+        command.Parameters.AddWithValue("@tv", tv);
+        command.Parameters.AddWithValue("@press", press);
+
+        command.ExecuteNonQuery();
+    }
+
 
     /// <summary>
     /// Retrieves all records from the specified table's 'Name' column.
@@ -83,6 +109,24 @@ public class DatabaseOperations
 
         throw new Exception($"No record with the name '{name}' found in table '{tableName}'.");
     }
+    public List<string> GetRecordsByMediaType(string tableName, string mediaType)
+    {
+        var records = new List<string>();
+        string commandText = $"SELECT Name FROM media_agencies WHERE Radio = @mediaType OR Press = @mediaType OR Tv = @mediaType";
+
+        using var command = _connection.CreateCommand();
+        command.CommandText = commandText;
+        command.Parameters.AddWithValue("@mediaType", mediaType);
+
+        using var reader = command.ExecuteReader();
+        while (reader.Read())
+        {
+            records.Add(reader.GetString(0));
+        }
+
+        return records;
+    }
+
 
 
     /// <summary>
@@ -129,6 +173,8 @@ public class DatabaseOperations
         return tables;
     }
 
+    
+
     public List<string> GetAllRowNames(String tableName)
     {
         var rows = new List<string>();
@@ -167,39 +213,12 @@ public class DatabaseOperations
 
         return records;
     }
+    
 
-    public Dictionary<int, string> GetAllRecordsWithIdsAndFilter(string tableName, string columnName, string filterValue, string mediaTypeFilter)
+    public Dictionary<int, string> GetAllRecordsWithIdsAndFilter(string tableName, string columnName, string filterValue)
     {
         var records = new Dictionary<int, string>();
         string commandText = $"SELECT Id, Name FROM {tableName} WHERE {columnName} LIKE '%{filterValue}%'";
-
-        if (!string.IsNullOrEmpty(mediaTypeFilter))
-        {
-            string mediaTypeCondition = "";
-
-            // Check for each media type condition and append to the query
-            if (mediaTypeFilter.Contains("Radio", StringComparison.OrdinalIgnoreCase))
-            {
-                mediaTypeCondition += "MediaType = 'Radio' OR ";
-            }
-
-            if (mediaTypeFilter.Contains("Tv", StringComparison.OrdinalIgnoreCase))
-            {
-                mediaTypeCondition += "MediaType = 'Tv' OR ";
-            }
-
-            if (mediaTypeFilter.Contains("Press", StringComparison.OrdinalIgnoreCase))
-            {
-                mediaTypeCondition += "MediaType = 'Press' OR ";
-            }
-
-            if (!string.IsNullOrEmpty(mediaTypeCondition))
-            {
-                // Remove the trailing " OR " and add the media type condition to the query
-                mediaTypeCondition = mediaTypeCondition.Substring(0, mediaTypeCondition.Length - 4);
-                commandText += $" AND ({mediaTypeCondition})";
-            }
-        }
 
         using var command = _connection.CreateCommand();
         command.CommandText = commandText;
@@ -212,7 +231,6 @@ public class DatabaseOperations
 
         return records;
     }
-
 
     /// <summary>
     /// Executes a non-query command on the database (e.g., INSERT, UPDATE, DELETE).

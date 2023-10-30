@@ -27,6 +27,13 @@ namespace MauiApp1.Models
             set => SetField(ref lastname, value);
         }
 
+        private string email;
+        public string Email
+        {
+            get => email;
+            set => SetField(ref email, value);
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

@@ -5,35 +5,35 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 
-/*! The RolesPage class allows for the basic functions 
- *  implemented in the RoleService class to be used within
+/*! The TeamMembersPage class allows for the basic functions 
+ *  implemented in the TeamMemberService class to be used within
  *  the UI
  */
 
 namespace MauiApp1.Views;
 
-public partial class RolesPage : ContentPage
+public partial class TeamMembersPage : ContentPage
 {
-    Role selectedRole = null;
-    IRoleService roleService;
-    ObservableCollection<Role> roles = new ObservableCollection<Role>();
+    TeamMember selectedTeamMember = null;
+    ITeamMemberService teamMemberService;
+    ObservableCollection<TeamMember> teamMembers = new ObservableCollection<TeamMember>();
 
     //! public initialisation of components
-    public RolesPage()
-	{
+    public TeamMembersPage()
+    {
         InitializeComponent();
         this.BindingContext = this;
-        this.roleService = new RoleService();
+        this.teamMemberService = new TeamMemberService();
 
-        Task.Run(async () => await LoadRoles());
-        txe_role.Text = "";
+        Task.Run(async () => await LoadTeamMembers());
     }
 
-    //! Task to load roles into a variable
-    private async Task LoadRoles()
+
+    //! Task to load teamMembers into a variable
+    private async Task LoadTeamMembers()
     {
-        roles = new ObservableCollection<Role>(await roleService.GetRoleList());
-        ltv_roles.ItemsSource = roles;
+        teamMembers = new ObservableCollection<TeamMember>(await teamMemberService.GetTeamMemberList());
+        ltv_teamMembers.ItemsSource = teamMembers;
     }
 
     /*!
@@ -43,27 +43,28 @@ public partial class RolesPage : ContentPage
     */
     private void SaveButton_Clicked(object sender, EventArgs e)
     {
-        if (String.IsNullOrEmpty(txe_role.Text)) return;
+        string firstName = txe_teamMemberFirstName.Text;
+        string lastName = txe_teamMemberLastName.Text;
+        string email = txe_teamMemberEmail.Text;
 
-        if (selectedRole == null)
+        if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(email)) return;
+
+        var teamMember = new TeamMember()
         {
-            var role = new Role() { Name = txe_role.Text };
-            roleService.AddRole(role);
-            roles.Add(role);
-        }
-        else
-        {
-            selectedRole.Name = txe_role.Text;
-            roleService.UpdateRole(selectedRole);
-            var role = roles.FirstOrDefault(x => x.ID == selectedRole.ID);
-            role.Name = txe_role.Text;
-        }
+            Firstname = firstName,
+            Lastname = lastName,
+            Email = email
+        };
 
-        selectedRole = null;
-        ltv_roles.SelectedItem = null;
-        txe_role.Text = "";
+        teamMemberService.AddTeamMember(teamMember);
+        teamMembers.Add(teamMember);
 
+        // Clear input fields
+        txe_teamMemberFirstName.Text = "";
+        txe_teamMemberLastName.Text = "";
+        txe_teamMemberEmail.Text = "";
     }
+
 
     /*!
     * Detect delete button being clicked
@@ -72,29 +73,39 @@ public partial class RolesPage : ContentPage
     */
     private async void DeleteButton_Clicked(object sender, EventArgs e)
     {
-        if (ltv_roles.SelectedItem == null)
+        if (ltv_teamMembers.SelectedItem == null)
         {
-            await DisplayAlert("No Role Selected", "Select the role you want to delete from the list", "OK");
+            await DisplayAlert("No TeamMember Selected", "Select the teamMember you want to delete from the list", "OK");
             return;
         }
 
-        await roleService.DeleteRole(selectedRole);
-        roles.Remove(selectedRole);
+        TeamMember selectedTeamMember = (TeamMember)ltv_teamMembers.SelectedItem;
 
-        ltv_roles.SelectedItem = null;
-        txe_role.Text = "";
+        await teamMemberService.DeleteTeamMember(selectedTeamMember);
+        teamMembers.Remove(selectedTeamMember);
+
+        // Clear input fields
+        txe_teamMemberFirstName.Text = "";
+        txe_teamMemberLastName.Text = "";
+        txe_teamMemberEmail.Text = "";
+
+        ltv_teamMembers.SelectedItem = null;
     }
+
 
     /*!
     * Detect all items selected in list view
     * @param sender (Object) the sender object created by the event
     * @param e (SelectedItemChangedEventArgs) the arguments passed into the event
     */
-    private void ltv_roles_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+    private void ltv_teamMembers_ItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
-        selectedRole = e.SelectedItem as Role;
-        if (selectedRole == null) return;
+        TeamMember selectedTeamMember = e.SelectedItem as TeamMember;
+        if (selectedTeamMember == null) return;
 
-        txe_role.Text = selectedRole.Name;
+        txe_teamMemberFirstName.Text = selectedTeamMember.Firstname;
+        txe_teamMemberLastName.Text = selectedTeamMember.Lastname;
+        txe_teamMemberEmail.Text = selectedTeamMember.Email;
     }
+
 }

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MauiApp1.Views.RolesPage"
-             Title="Role Page">
+             x:Class="MauiApp1.Views.TeamMembersPage"
+             Title="TeamMember Page">
     <VerticalStackLayout Spacing="10" Margin="5">
-        <Editor x:Name="txe_role"
-                Placeholder="Add a Role"
-                HeightRequest="100" />
+        <Editor x:Name="txe_teamMemberFirstName" Placeholder="First Name" />
+        <Editor x:Name="txe_teamMemberLastName" Placeholder="Last Name" />
+        <Editor x:Name="txe_teamMemberEmail" Placeholder="Email" />
+
 
         <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
             <Button Text="Save"
@@ -17,10 +18,11 @@
                     Clicked="DeleteButton_Clicked" />
         </Grid>
 
-        <ListView x:Name="ltv_roles" Background="white" ItemSelected="ltv_roles_ItemSelected">
+        <ListView x:Name="ltv_teamMembers" Background="white" ItemSelected="ltv_teamMembers_ItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell TextColor="Black" Text="{Binding Name}"/>
+                    <Label Text="{Binding FirstName}" TextColor="Black" FontAttributes="Bold" />
+                    <Label Text="{Binding LastName + ' - ' + Email}" TextColor="Gray" />
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

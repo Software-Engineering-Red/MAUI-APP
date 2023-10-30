@@ -9,7 +9,7 @@ namespace MauiApp1.Services
 {
     public interface ITeamMemberService
     {
-        Task<List<Equipment>> GetTeamMemberList();
+        Task<List<TeamMember>> GetTeamMemberList();
         Task<int> AddTeamMember(TeamMember teamMember);
         Task<int> DeleteTeamMember(TeamMember teamMember);
         Task<int> UpdateTeamMember(TeamMember teamMember);

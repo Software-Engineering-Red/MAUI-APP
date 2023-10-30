@@ -101,7 +101,7 @@ public class DatabaseInitialiser
             "CREATE TABLE IF NOT EXISTS skill (Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL)",
             "CREATE TABLE IF NOT EXISTS team_member (Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL)",
             "CREATE TABLE IF NOT EXISTS media_agencies (Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL, Radio TEXT, Tv TEXT, Press TEXT)",
-            "CREATE TABLE IF NOT EXISTS partner_agencies (Id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL)",
+            
         };
     }
 }

@@ -22,7 +22,7 @@ public class DatabaseConnection : IDisposable
         {
             // Determine the path where the SQLite database is located.
             // It uses the local application data folder to store the SQLite file.
-            string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "reference_values2.sqlite");
+            string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "reference_valuesv2.sqlite");
 
             // Create a new connection using the determined path.
             _connection = new SqliteConnection($"Data Source={dbPath}");

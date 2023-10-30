@@ -17,7 +17,7 @@ namespace MauiApp1
 
             // Initialize database operations
             // Ideally, this connection string should come from a config or environment setting.
-            _dbOps = new DatabaseOperations($"Data Source={Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "reference_values2.sqlite")}");
+            _dbOps = new DatabaseOperations($"Data Source={Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "reference_valuesv2.sqlite")}");
 
             // Populate table picker
             PopulateTablePicker();

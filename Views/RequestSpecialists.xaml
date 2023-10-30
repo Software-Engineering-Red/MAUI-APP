@@ -15,17 +15,21 @@
                 <VerticalStackLayout Spacing="15">
 
                     <Label Text="Select required skill:" FontSize="20" FontAttributes="Bold" TextColor="White" />
-                    <Picker x:Name="SkillNamePicker" TextColor="White" BackgroundColor="#454545" 
-                            />
+                    <Picker x:Name="SkillNamePicker" TextColor="White" BackgroundColor="#454545" />
 
-                    <Entry Placeholder="Number Required" x:Name="NumberRequiredEntry" Keyboard="Numeric"
+                    <Label Text="Number of Personell Required:" FontSize="20" FontAttributes="Bold" TextColor="White" />
+                    <Entry Placeholder="Number of Personell Required" x:Name="NumberRequiredEntry" Keyboard="Numeric"
                            TextColor="White" 
                            PlaceholderColor="#aaa" 
                            BackgroundColor="#454545" />
+
+                    <Label Text="Start Date:" FontSize="20" FontAttributes="Bold" TextColor="White" />
                     <DatePicker x:Name="StartDatePicker" MinimumDate="{x:Static sys:DateTime.Today}"
                                 DateSelected="StartDatePicker_DateSelected"
                                 TextColor="White" 
                                 BackgroundColor="#454545" />
+
+                    <Label Text="End Date:" FontSize="20" FontAttributes="Bold" TextColor="White" />
                     <DatePicker x:Name="EndDatePicker" MinimumDate="{Binding Source={x:Reference StartDatePicker}}"
                                 TextColor="White" 
                                 BackgroundColor="#454545" />

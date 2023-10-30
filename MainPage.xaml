@@ -44,7 +44,7 @@
                            FontSize="20" 
                            FontAttributes="Bold" 
                            TextColor="White" />
-                    <ListView x:Name="RecordsListView" ItemSelected="OnRecordSelected">
+                    <ListView x:Name="RecordsListView" ItemSelected="OnRecordSelected" >
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <TextCell Text="{Binding Value}" Detail="{Binding Key}" TextColor="White" DetailColor="#aaa" />

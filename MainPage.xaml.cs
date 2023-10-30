@@ -7,6 +7,7 @@ namespace MauiApp1
     {
         private readonly DatabaseOperations _dbOps;
         private Dictionary<int, string> _currentRecords;
+        
 
         public MainPage()
         {
@@ -39,6 +40,7 @@ namespace MauiApp1
             {
                 _dbOps.AddRecord(tableName, testRecordName);
                 await DisplayAlert("Success", $"Successfully inserted record '{testRecordName}' into {tableName}.", "OK");
+                
             }
             catch (Exception ex)
             {
@@ -70,9 +72,11 @@ namespace MauiApp1
             catch (Exception ex)
             {
                 await DisplayAlert("Error", $"Failed to delete record from {tableName}. Error: {ex.Message}", "OK");
+                return;
             }
 
             RefreshRecordsList();
+            
         }
 
 
@@ -86,6 +90,7 @@ namespace MauiApp1
                 {
                     Console.WriteLine(table);
                 }
+                tables.Remove("sqlite_sequence");
                 TablePicker.ItemsSource = tables;
             }
             catch (Exception ex)
@@ -137,6 +142,7 @@ namespace MauiApp1
                 {
                     _dbOps.AddRecord(tableName, recordName);
                     RefreshRecordsList();
+                    
                 }
                 catch (Exception ex)
                 {
@@ -145,6 +151,7 @@ namespace MauiApp1
                     // Handle the exception
                     DisplayAlert("Error", $"Failed to add record to table {tableName}.", "OK");
                 }
+
             }
         }
 
@@ -161,6 +168,7 @@ namespace MauiApp1
                     {
                         _dbOps.UpdateRecord(tableName, selectedRecord.Key, newName);
                         RefreshRecordsList();
+                        
                     }
                     catch (Exception ex)
                     {
@@ -186,6 +194,7 @@ namespace MauiApp1
                     {
                         _dbOps.DeleteRecord(tableName, selectedRecord.Key);
                         RefreshRecordsList();
+                        
                     }
                     catch (Exception ex)
                     {
@@ -211,5 +220,6 @@ namespace MauiApp1
         }
 
         private void RefreshRecordsList() => OnTableSelected(null, EventArgs.Empty);
+
     }
 }

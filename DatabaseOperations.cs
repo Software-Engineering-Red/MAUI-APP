@@ -82,6 +82,8 @@ public class DatabaseOperations
         }
 
         throw new Exception($"No record with the name '{name}' found in table '{tableName}'.");
+        
+        
     }
 
 

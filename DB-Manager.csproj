@@ -61,4 +61,10 @@
 		</PackageReference>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <MauiXaml Update="View\CalenderPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
 </Project>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.View.CalenderPage"
+             Title="CalenderPage">
+    <VerticalStackLayout>
+        <Label 
+            Text="Calender and events"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" 
+            FontSize="48"/>
+        
+        <HorizontalStackLayout>
+            <DatePicker x:Name ="DP_EventDate" FontSize="30" DateSelected="DP_EventDate_DateSelected" Date="{Binding DateSelect}"></DatePicker>
+            <Label WidthRequest="90"></Label>
+            <Label WidthRequest="250" Text="Enter Event Details" FontSize="25"></Label>
+            <Label x:Name="Ignore1" WidthRequest="230"></Label>
+            <Label Text="Event Details" FontSize="25"></Label>
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout>
+            
+            <VerticalStackLayout>
+                                        <!-- ex -->
+                <HorizontalStackLayout>
+                    <Label x:Name="Ignore" WidthRequest="300"></Label>
+                    <Entry x:Name="TBX_EventName" WidthRequest="250" BackgroundColor="DarkGrey" Placeholder="Enter Event Name" TextChanged="TBX_EventName_TextChanged" ></Entry>
+                    <Label WidthRequest="125"></Label>
+                    <Entry x:Name="TB_EventNameDisplay" IsReadOnly="True" BackgroundColor="DarkSeaGreen" Placeholder="event name displayed here" HeightRequest="50"></Entry>
+                    <Entry x:Name="TB_EventContinent" IsReadOnly="True" BackgroundColor="DarkSeaGreen" Placeholder="Contentent for event Location"></Entry>
+                </HorizontalStackLayout>
+                
+                <HorizontalStackLayout>
+                    <Label WidthRequest="300"></Label>
+                    <Entry x:Name="TBX_EventLocation" WidthRequest="250" BackgroundColor="DarkGrey" Placeholder="enter your event lacations" TextChanged="TBX_EventLocation_TextChanged"></Entry>
+                    <Label WidthRequest="125"></Label>
+                    <Entry x:Name="TB_EventLoacation" IsReadOnly="True" BackgroundColor="DarkSeaGreen" Placeholder="Event Location displayed here" HeightRequest="50"></Entry>
+                </HorizontalStackLayout>
+                
+                <HorizontalStackLayout>
+                    <Label WidthRequest="150"></Label>
+                    <Label WidthRequest="150" Text="Select Particapents"></Label>
+                    <Picker x:Name="P_ParticapentsSelect" WidthRequest="250" BackgroundColor="DarkGrey" HeightRequest="30" SelectedIndexChanged="P_ParticapentsSelect_SelectedIndexChanged"></Picker>
+                    <Label WidthRequest="125"></Label>
+                    <Label Text="list of Particapents below" FontSize="26"></Label>
+                </HorizontalStackLayout>
+                
+                <HorizontalStackLayout>
+                    <Label WidthRequest="120"></Label>
+                    <Label WidthRequest="180" Text="Pick Organisations type"></Label>
+                    <Picker x:Name="P_PickOrganisation" WidthRequest="250" BackgroundColor="DarkGrey" HeightRequest="30" SelectedIndexChanged="P_PickOrganisation_SelectedIndexChanged"></Picker>
+                    <Label WidthRequest="125"></Label>
+                    <ListView x:Name="LS_ParticapentsDisplay" BackgroundColor="DarkSeaGreen" HeightRequest="35" ></ListView>
+                </HorizontalStackLayout>
+                
+                <HorizontalStackLayout>
+                    <Label WidthRequest="150"></Label>
+                    <Label WidthRequest="150" Text="Select the Continent"></Label>
+                    <Picker x:Name="P_PickContinent" WidthRequest="250" BackgroundColor="DarkGrey" HeightRequest="30" SelectedIndexChanged="P_PickContinent_SelectedIndexChanged"></Picker>
+                    <Label WidthRequest="125"></Label>
+                    <Entry x:Name="TB_EventOrganisation" IsReadOnly="True" BackgroundColor="DarkSeaGreen" Placeholder="Event Organisation will be displayed here"></Entry>
+                </HorizontalStackLayout>
+                
+                <HorizontalStackLayout>
+                    <Label WidthRequest="210"></Label>
+                    <Label WidthRequest="90" Text="Start Time"></Label>
+                    <TimePicker x:Name="TP_PickStart" BackgroundColor="DarkGrey" PropertyChanged="TP_PickStart_PropertyChanged"  Time="12:00:00" ></TimePicker>
+                    <Label WidthRequest="134"></Label>
+                    <Entry x:Name="TB_StartTimeDisplay" IsReadOnly="True" BackgroundColor="DarkSeaGreen" Placeholder="Start Time will be displayed here"></Entry>
+                </HorizontalStackLayout>
+                
+                <HorizontalStackLayout>
+                    <Label WidthRequest="210"></Label>
+                    <Label WidthRequest="90" Text="Finish Time"></Label>
+                    <TimePicker x:Name="TP_PickFinish" BackgroundColor="DarkGrey" PropertyChanged="TP_PickFinish_PropertyChanged" Time="12:00:00"></TimePicker>
+                    <Label WidthRequest="134"></Label>
+                    <Entry x:Name="TB_FinishTimeDisplay" IsReadOnly="True" BackgroundColor="DarkSeaGreen" Placeholder="Finish Time will be displayed here"></Entry>
+                </HorizontalStackLayout>
+                
+                <HorizontalStackLayout>
+                    <Label WidthRequest="300"></Label>
+                    <Entry x:Name="TBX_EventDuration" Placeholder="Please Enter the Duration" BackgroundColor="DarkGrey" TextChanged="TBX_EventDuration_TextChanged" WidthRequest="190"></Entry>
+                    <Label WidthRequest="189"></Label>
+                    <Entry x:Name="TB_EventDuration" IsReadOnly="True" BackgroundColor="DarkSeaGreen" Placeholder="Duration of event displayed here"></Entry>
+                    <Entry x:Name="TB_EventDate" IsReadOnly="True" BackgroundColor="DarkSeaGreen" Placeholder="Date of event displayed here" Text="{Binding DateSelect, StringFormat='dd/MM/yyyy'}"></Entry>
+                    
+                </HorizontalStackLayout>
+                
+            </VerticalStackLayout>
+            
+        </HorizontalStackLayout>
+        
+    </VerticalStackLayout>
+    
+</ContentPage>

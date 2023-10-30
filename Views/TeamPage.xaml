@@ -4,7 +4,7 @@
              x:Class="MauiApp1.Views.TeamPage"
              Title="TeamPage">
     <VerticalStackLayout Spacing="10" Margin="5">
-        <Editor x:Name="txe_alert"
+        <Editor x:Name="txe_team"
                 Placeholder="Add an alert type"
                 HeightRequest="100" />
 
@@ -17,7 +17,7 @@
                     Clicked="DeleteButton_Clicked" />
         </Grid>
 
-        <ListView x:Name="ltv_alerttypes" Background="white" ItemSelected="ltv_alerttypes_ItemSelected">
+        <ListView x:Name="ltv_teams" Background="white" ItemSelected="ltv_alerttypes_ItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextCell TextColor="Black" Text="{Binding Name}"/>

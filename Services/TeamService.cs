@@ -12,9 +12,6 @@ namespace MauiApp1.Services
     public class TeamService : ITeamService
     {
         private SQLiteAsyncConnection _dbConn;
-        /*! <summary>
-        Method that initiates connection to database. Will create the OrderStatus table if connected.
-        </summary> */
         private async Task SetUpDb()
         {
             if (_dbConn != null)

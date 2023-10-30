@@ -1,11 +1,14 @@
 
 using System.ComponentModel;
+using System.Data;
 
 namespace MauiApp1.View
 {
     public partial class CalenderPage : ContentPage
     {
         public DateTime EventDate { get; set; } = new DateTime();
+        private readonly DatabaseOperations DBO = new DatabaseOperations($"Data Source={Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "reference_values.sqlite")}");
+        private Dictionary<int, string> _concurentDataRcords;
         
         public TimeOnly EventTimeStartO { get; set; } = new TimeOnly();
         public TimeSpan EventTimeFinsihS { get; set; } = new TimeSpan();
@@ -35,7 +38,7 @@ namespace MauiApp1.View
 
         private void P_PickOrganisation_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string Organisation;
+            
             //TB_EventOrganisation.Text = Organisation;
         }
 
@@ -111,7 +114,17 @@ namespace MauiApp1.View
             char[] charInt = { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
             foreach (char i in charInt)
                if (TBX_EventDuration.Text.Contains(i))
-                { 
+                {
+                    char[] charAlphabet = { 'A', 'a', 'B', 'b', 'C', 'c', 'D', 'd', 'E', 'e', 'F', 'f', 'G', 'g', 
+                        'H', 'h', 'I', 'i', 'J', 'j', 'K', 'k', 'L', 'l', 'N', 'n', 'O', 'o', 'P', 'p', 'Q', 'q',
+                        'R', 'r', 'S', 's', 'T', 't', 'U', 'u', 'V', 'v', 'W', 'w', 'X', 'x', 'Y', 'y', 'Z', 'z' };
+                    foreach(char c in charAlphabet)
+                    {
+                        if(TBX_EventDuration.Text.Contains(c))
+                        {
+                            return false;
+                        }
+                    }
                     return true;
                 }
                 return false;

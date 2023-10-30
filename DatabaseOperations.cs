@@ -168,10 +168,38 @@ public class DatabaseOperations
         return records;
     }
 
-    public Dictionary<int, string> GetAllRecordsWithIdsAndFilter(string tableName, string columnName, string filterValue)
+    public Dictionary<int, string> GetAllRecordsWithIdsAndFilter(string tableName, string columnName, string filterValue, string mediaTypeFilter)
     {
         var records = new Dictionary<int, string>();
         string commandText = $"SELECT Id, Name FROM {tableName} WHERE {columnName} LIKE '%{filterValue}%'";
+
+        if (!string.IsNullOrEmpty(mediaTypeFilter))
+        {
+            string mediaTypeCondition = "";
+
+            // Check for each media type condition and append to the query
+            if (mediaTypeFilter.Contains("Radio", StringComparison.OrdinalIgnoreCase))
+            {
+                mediaTypeCondition += "MediaType = 'Radio' OR ";
+            }
+
+            if (mediaTypeFilter.Contains("Tv", StringComparison.OrdinalIgnoreCase))
+            {
+                mediaTypeCondition += "MediaType = 'Tv' OR ";
+            }
+
+            if (mediaTypeFilter.Contains("Press", StringComparison.OrdinalIgnoreCase))
+            {
+                mediaTypeCondition += "MediaType = 'Press' OR ";
+            }
+
+            if (!string.IsNullOrEmpty(mediaTypeCondition))
+            {
+                // Remove the trailing " OR " and add the media type condition to the query
+                mediaTypeCondition = mediaTypeCondition.Substring(0, mediaTypeCondition.Length - 4);
+                commandText += $" AND ({mediaTypeCondition})";
+            }
+        }
 
         using var command = _connection.CreateCommand();
         command.CommandText = commandText;
@@ -184,6 +212,7 @@ public class DatabaseOperations
 
         return records;
     }
+
 
     /// <summary>
     /// Executes a non-query command on the database (e.g., INSERT, UPDATE, DELETE).

@@ -20,6 +20,15 @@
             <!-- Add record -->
             <Frame CornerRadius="10" Padding="20" BackgroundColor="#373737">
                 <VerticalStackLayout Spacing="15">
+                    <Picker x:Name="MediaTypePicker">
+                        <Picker.Items>
+                            <x:String>Radio</x:String>
+                            <x:String>Tv</x:String>
+                            <x:String>Press</x:String>
+                            <x:String>All</x:String>
+                            <!-- An option to clear the filter -->
+                        </Picker.Items>
+                    </Picker>
                     <Label Text="{Binding Source={x:Reference TablePicker}, Path=SelectedItem, StringFormat='Add a new record to {0}'}" 
                            FontSize="20" 
                            FontAttributes="Bold" 

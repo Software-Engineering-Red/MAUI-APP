@@ -17,7 +17,7 @@ namespace MauiApp1
 
             // Initialize database operations
             // Ideally, this connection string should come from a config or environment setting.
-            _dbOps = new DatabaseOperations($"Data Source={Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "reference_values.sqlite")}");
+            _dbOps = new DatabaseOperations($"Data Source={Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "reference_values5.sqlite")}");
 
             // Populate table picker
             PopulateTablePicker();
@@ -103,6 +103,7 @@ namespace MauiApp1
             try
             {
                 var rows = _dbOps.GetAllRowNames(table);
+                rows.Insert(0, "All");
                 foreach (var row in rows)
                 {
                     Console.WriteLine(row);
@@ -144,12 +145,13 @@ namespace MauiApp1
             var selectedTable = GetSelectedTable();
             var filterValue = AddRecordFilter.Text;
             var columnToFilter = GetSelectedColumn();
-            if (string.IsNullOrWhiteSpace(selectedTable) || string.IsNullOrWhiteSpace(filterValue) || string.IsNullOrWhiteSpace(columnToFilter))
+            string mediaTypeFilter = (string)MediaTypePicker.SelectedItem;
+            if (string.IsNullOrWhiteSpace(selectedTable) || string.IsNullOrWhiteSpace(filterValue) || string.IsNullOrWhiteSpace(columnToFilter) || string.IsNullOrWhiteSpace(mediaTypeFilter))
                 return;
 
             try
             {
-                _currentFilteredRecords = _dbOps.GetAllRecordsWithIdsAndFilter(selectedTable, columnToFilter, filterValue);
+                _currentFilteredRecords = _dbOps.GetAllRecordsWithIdsAndFilter(selectedTable, columnToFilter, filterValue, mediaTypeFilter);
                 RecordsListView.ItemsSource = _currentFilteredRecords;
             }
             catch (Exception ex)
@@ -274,7 +276,7 @@ namespace MauiApp1
                 DisplayAlert("Error", $"Failed to copy data to clipboard for table {selectedTable}.", "OK");
             }
         }
-
+       
         private string GetSelectedTable() => TablePicker.SelectedItem?.ToString();
 
         private bool IsValidInput(params string[] inputs)

@@ -35,5 +35,7 @@ namespace MauiApp1.Services
 		/// <param name="id">Id of Request</param>
 		/// <param name="organisationId">Id of Organisation</param>
 		void approveSkillRequest(int id, int organisationId);
+
+		void deleteSkillRequestById(int id);
 	}
 }

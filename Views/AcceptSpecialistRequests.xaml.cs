@@ -33,6 +33,7 @@ public partial class AcceptSpecialistRequests : ContentPage
 		specialistRequestService = new SpecialistRequestService($"Data Source={Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "reference_values.sqlite")}");
 		populateRequestList();
 		PopulateOrganisationPicker();
+		RefreshRequests();
 	}
 
 	/// <summary>
@@ -57,7 +58,7 @@ public partial class AcceptSpecialistRequests : ContentPage
 	/// </summary>
 	/// <param name="sender">Sender</param>
 	/// <param name="e">Event</param>
-	private async void OnButtonClickApprove(object sender, EventArgs e)
+	private async void OnButtonClickedApprove(object sender, EventArgs e)
 	{
 		if (sender is Button button && button.BindingContext is SkillRequest item)
 		{
@@ -74,6 +75,29 @@ public partial class AcceptSpecialistRequests : ContentPage
 			catch (Exception ex)
 			{
 				await DisplayAlert("Error", $"Failed to approve Request. Error: {ex.Message}", "OK");
+				return;
+			}
+		}
+		RefreshRequests();
+	}
+
+
+	/// <summary>
+	/// Removes Request when button is pushed.
+	/// </summary>
+	/// <param name="sender">Sender</param>
+	/// <param name="e">Event</param>
+	private async void OnButtonClickedDelete(object sender, EventArgs e)
+	{
+		if (sender is Button button && button.BindingContext is SkillRequest item)
+		{
+			try
+			{
+				specialistRequestService.deleteSkillRequestById(item.Id);
+			}
+			catch (Exception ex)
+			{
+				await DisplayAlert("Error", $"Failed to remove Request. Error: {ex.Message}", "OK");
 				return;
 			}
 		}
@@ -134,6 +158,11 @@ public partial class AcceptSpecialistRequests : ContentPage
 		}
 	}
 
+
+	private async void UpdatePage(object sender, EventArgs e)
+	{
+		RefreshRequests();
+	}
 
 	/// <summary>
 	/// Refreshes the ListView of all Requests.

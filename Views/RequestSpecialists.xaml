@@ -30,9 +30,11 @@
                                 BackgroundColor="#454545" />
 
                     <Label Text="End Date:" FontSize="20" FontAttributes="Bold" TextColor="White" />
-                    <DatePicker x:Name="EndDatePicker" MinimumDate="{Binding Source={x:Reference StartDatePicker}}"
-                                TextColor="White" 
-                                BackgroundColor="#454545" />
+					<DatePicker x:Name="EndDatePicker"
+								MinimumDate="{Binding Source={x:Reference StartDatePicker}, 
+                                Converter={StaticResource DateTimeConverter}}"
+								TextColor="White"
+								BackgroundColor="#454545" />
 
                     <Button Text="Add Record" Clicked="OnAddRecordClicked" 
                             BackgroundColor="#4CAF50" 

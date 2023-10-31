@@ -111,10 +111,19 @@ namespace MauiApp1.Services
 					skillRequests.Add(skillRequest);
 				}
 			}
-
 			return skillRequests;
 		}
 
+		void ISpecialistRequestService.deleteSkillRequestById(int id)
+		{
+			var commandText = $"DELETE FROM skills_request WHERE Id = @id";
+			using (var command = new SqliteCommand(commandText, _connection))
+			{
+				command.Parameters.AddWithValue("@id", id);
+
+				command.ExecuteNonQuery();
+			}
+		}
 		/// <summary>
 		/// Creates one SkillRequest object by transfering 
 		/// data from the reader.

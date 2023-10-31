@@ -32,6 +32,7 @@ public partial class TeamMemberPage : ContentPage
 
         Task.Run(async () => await LoadTeamMembers());
         txe_teamMember.Text = "";
+        txe_privledgeLevel.Text = "";
     }
 
     /*! <summary>
@@ -55,22 +56,32 @@ public partial class TeamMemberPage : ContentPage
 
         if (selectedTeamMember == null)
         {
-            var teamMember = new TeamMember() { Name = txe_teamMember.Text };
+            var teamMember = new TeamMember() { Name = txe_teamMember.Text, AccessPrivledgeLevel = txe_privledgeLevel.Text };
             teamMemberService.AddTeamMember(teamMember);
             teamMembers.Add(teamMember);
         }
         else
         {
-            selectedTeamMember.Name = txe_teamMember.Text;
-            teamMemberService.UpdateTeamMember(selectedTeamMember);
-            var teamMember = teamMembers.FirstOrDefault(x => x.ID == selectedTeamMember.ID);
-            teamMember.Name = txe_teamMember.Text;
+            if (int.Parse(txe_privledgeLevel.Text) <= int.Parse(selectedTeamMember.AccessPrivledgeLevel))
+            {
+                selectedTeamMember.Name = txe_teamMember.Text;
+                selectedTeamMember.AccessPrivledgeLevel = txe_privledgeLevel.Text;
+                teamMemberService.UpdateTeamMember(selectedTeamMember);
+                var teamMember = teamMembers.FirstOrDefault(x => x.ID == selectedTeamMember.ID);
+                teamMember.Name = txe_teamMember.Text;
+                teamMember.AccessPrivledgeLevel = txe_privledgeLevel.Text;
+            } 
+            else
+            {
+                DisplayAlert("Failure", "Unable to increase privledges without Deputy Team Leader approval - Sending for approval", "OK");
+            }
         }
 
 
         selectedTeamMember = null;
         ltv_teamMembers.SelectedItem = null;
         txe_teamMember.Text = "";
+        txe_privledgeLevel.Text = "";
     }
 
     /*! <summary>
@@ -92,6 +103,7 @@ public partial class TeamMemberPage : ContentPage
 
         ltv_teamMembers.SelectedItem = null;
         txe_teamMember.Text = "";
+        txe_privledgeLevel.Text = "";
     }
 
     /*! <summary>
@@ -105,5 +117,6 @@ public partial class TeamMemberPage : ContentPage
         if (selectedTeamMember == null) return;
 
         txe_teamMember.Text = selectedTeamMember.Name;
+        txe_privledgeLevel.Text = selectedTeamMember.AccessPrivledgeLevel;
     }
 }

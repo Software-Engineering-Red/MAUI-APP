@@ -14,12 +14,18 @@ namespace MauiApp1.Models
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
         private string name;
-        private int accessPrivledgeLevel;
+        private string accessPrivledgeLevel;
 
         public string Name
         {
             get => name;
             set => SetField(ref name, value);
+        }
+
+        public string AccessPrivledgeLevel
+        {
+            get => accessPrivledgeLevel;
+            set => SetField(ref accessPrivledgeLevel, value);
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

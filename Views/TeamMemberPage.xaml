@@ -7,6 +7,10 @@
         <Editor x:Name="txe_teamMember"
             Placeholder="Add a Team member"
             HeightRequest="100" />
+        
+        <Editor x:Name="txe_privledgeLevel"
+            Placeholder="Add a team member privledge level"
+            HeightRequest="100" />
 
         <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
             <Button Text="Save"
@@ -17,12 +21,18 @@
                 Clicked="DeleteButton_Clicked" />
         </Grid>
 
-        <ListView x:Name="ltv_teamMembers" Background="white" ItemSelected="ltv_teamMembers_ItemSelected">
+        <ListView x:Name="ltv_teamMembers" Background="White" ItemSelected="ltv_teamMembers_ItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell TextColor="Black" Text="{Binding Name}"/>
+                    <ViewCell>
+                        <StackLayout Orientation="Vertical">
+                            <Label Text="{Binding Name}" TextColor="Black" />
+                            <Label Text="{Binding AccessPrivledgeLevel}" TextColor="Black" />
+                        </StackLayout>
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
     </VerticalStackLayout>
 </ContentPage>

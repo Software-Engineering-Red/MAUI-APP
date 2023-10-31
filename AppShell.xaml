@@ -27,6 +27,10 @@
             ContentTemplate="{DataTemplate views:TeamMemberPage}"/>
 
         <ShellContent
+            Title="Privledge Requests"
+            ContentTemplate="{DataTemplate views:PrivledgeRequestsPage}"/>
+
+        <ShellContent
             Title="Skill"
             ContentTemplate="{DataTemplate views:SkillPage}"/>
 

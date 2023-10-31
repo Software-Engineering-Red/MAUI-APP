@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.Views.PrivledgeRequestsPage"
+             Title="PrivledgeRequestsPage">
+    <VerticalStackLayout Spacing="10" Margin="5">
+        <ListView x:Name="ltv_privledgeRequests" Background="White">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Vertical">
+                            <Label Text="{Binding RequestType}" TextColor="Black" />
+                            <Label Text="{Binding PrivledgeLevel}" TextColor="Black" />
+                            <Label Text="{Binding MemberID}" TextColor="Black" />
+                            <Label Text="{Binding Approved}" TextColor="Black" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
+            <Button Text="Approved"
+                Clicked="ApprovedButton_Clicked" />
+            <Button Grid.Column="1"
+                Text="Denied"
+                Clicked="DeniedButton_Clicked" />
+        </Grid>
+
+    </VerticalStackLayout>
+</ContentPage>

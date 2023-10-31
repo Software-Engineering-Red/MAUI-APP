@@ -15,6 +15,7 @@ public partial class TeamMemberPage : ContentPage
         An instance of ITeamMemberService
      </summary> */
     ITeamMemberService teamMemberService;
+    IPrivledgeRequestService privledgeRequestService;
 
     /*! <summary>
         Collection of current TeamMembers.
@@ -29,6 +30,7 @@ public partial class TeamMemberPage : ContentPage
         InitializeComponent();
         this.BindingContext = this;
         this.teamMemberService = new TeamMemberService();
+        this.privledgeRequestService = new PrivledgeRequestService();
 
         Task.Run(async () => await LoadTeamMembers());
         txe_teamMember.Text = "";
@@ -73,6 +75,9 @@ public partial class TeamMemberPage : ContentPage
             } 
             else
             {
+                
+                PrivledgeRequest request = new PrivledgeRequest() { RequestType = "Privledge Escalation", MemberID = selectedTeamMember.ID, PrivledgeLevel = txe_privledgeLevel.Text, Approved = false };
+                privledgeRequestService.AddRequest(request);
                 DisplayAlert("Failure", "Unable to increase privledges without Deputy Team Leader approval - Sending for approval", "OK");
             }
         }

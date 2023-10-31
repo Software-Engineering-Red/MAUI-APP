@@ -67,6 +67,9 @@
         <MauiXaml Update="Views\ContinentPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+        <MauiXaml Update="Views\PrivledgeRequestsPage.xaml">
+          <Generator>MSBuild:Compile</Generator>
+        </MauiXaml>
 		<MauiXaml Update="Views\RolesPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>

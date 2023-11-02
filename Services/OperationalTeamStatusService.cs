@@ -1,11 +1,7 @@
 ﻿using MauiApp1.Data;
 using MauiApp1.Models;
-using System;
-using System.Collections.Generic;
 using SQLite;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace MauiApp1.Services
 {

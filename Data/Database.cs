@@ -1,9 +1,5 @@
 ﻿using SQLite;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MauiApp1.Models;
 
 namespace MauiApp1.Data
 {
@@ -11,13 +7,38 @@ namespace MauiApp1.Data
     {
         public SQLiteAsyncConnection _database;
 
-        async Task Init()
+		public Database()
+		{
+			Init().Wait(); 
+		}
+
+		async Task Init()
         {
             if (_database is not null)
                 return;
 
             _database = new SQLiteAsyncConnection(DatabaseSettings.DBPath, DatabaseSettings.Flags);
-            // TODO: Create tables that we will use for project
-        }
+            intitialiseTables();
+
+		}
+
+
+        private void intitialiseTables()
+        {
+            _database.CreateTableAsync<Skill>();
+			_database.CreateTableAsync<AlertType>();
+			_database.CreateTableAsync<BuildingType>();
+			_database.CreateTableAsync<Continent>();
+			_database.CreateTableAsync<Equipment>();
+			_database.CreateTableAsync<OperationalTeamStatus>();
+			_database.CreateTableAsync<OrderStatus>();
+			_database.CreateTableAsync<Organisation>();
+			_database.CreateTableAsync<position_statuses>();
+			_database.CreateTableAsync<Role>();
+			_database.CreateTableAsync<RoomType>();
+			_database.CreateTableAsync<Rota>();
+			_database.CreateTableAsync<SystemType>();
+			_database.CreateTableAsync<SkillRequest>();
+		}
     }
 }

@@ -109,6 +109,21 @@ public class DatabaseInitialiser
                 "Name TEXT NOT NULL," +
                 "Type TEXT DEFAULT \"food\" REFERENCES resource_type(Name) ON DELETE CASCADE ON UPDATE CASCADE," +
                 "Quantity INTEGER DEFAULT 0)"
+            "CREATE TABLE IF NOT EXISTS completed_operations ("
+        + "Id INTEGER PRIMARY KEY AUTOINCREMENT, "
+        + "OperationName TEXT NOT NULL, "
+        + "OperationStatus TEXT NOT NULL, "
+        + "OperationDate DATETIME NOT NULL, "
+        + "ResourceTypeId INTEGER, "
+        + "ResourceQuantity INTEGER, "
+        + "ResourceRequestStatus TEXT NOT NULL, "
+        + "ResourceRequestDate DATETIME NOT NULL, "
+        + "DeputyTeamLeaderId INTEGER, "
+        + "AuthorizationDate DATETIME, "
+        + "AuthorizationStatus TEXT NOT NULL, "
+        + "FOREIGN KEY(ResourceTypeId) REFERENCES resource_types(Id), "
+        + "FOREIGN KEY(DeputyTeamLeaderId) REFERENCES personnel(Id)"
+        + ")"
         };
     }
 }

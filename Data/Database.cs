@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MauiApp1.Data
+namespace UndacApp.Data
 {
     public class Database
     {

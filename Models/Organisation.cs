@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MauiApp1.Models
+namespace UndacApp.Models
 {
     /*! <summary>
         A model structure for Organisation data

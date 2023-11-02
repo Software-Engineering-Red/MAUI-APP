@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace MauiApp1.Models
+namespace UndacApp.Models
 {
     /*! <summary>
         A model structure for Equipment data

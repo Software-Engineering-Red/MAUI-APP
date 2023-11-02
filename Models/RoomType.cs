@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 
-namespace MauiApp1.Models
+namespace UndacApp.Models
 {
     /// <summary>
     /// Represents a type of room in the application

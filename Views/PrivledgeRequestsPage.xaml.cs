@@ -9,6 +9,7 @@ public partial class PrivledgeRequestsPage : ContentPage
     private PrivledgeRequest selectedRequest = null;
 
     IPrivledgeRequestService requestService;
+    ITeamMemberService memberService;
 
     ObservableCollection<PrivledgeRequest> requests = new ObservableCollection<PrivledgeRequest>();
 
@@ -17,6 +18,7 @@ public partial class PrivledgeRequestsPage : ContentPage
         InitializeComponent();
         this.BindingContext = new PrivledgeRequest();
         this.requestService = new PrivledgeRequestService();
+        this.memberService = new TeamMemberService();
 
         Task.Run(async () => await LoadRequests());
     }
@@ -34,6 +36,14 @@ public partial class PrivledgeRequestsPage : ContentPage
             Shell.Current.DisplayAlert("No request selected", "Select the request you wish to approve from the list", "OK");
             return;
         }
+        else
+        {
+            var selectedRequest = ltv_privledgeRequests.SelectedItem as PrivledgeRequest;
+            int updatedID = selectedRequest.ID;
+            TeamMember updatedMember = new TeamMember() { ID = updatedID, AccessPrivledgeLevel = selectedRequest.PrivledgeLevel};
+            memberService.UpdateTeamMember(updatedMember);
+            selectedRequest.Approved = true;
+        }
     }
 
     private async void DeniedButton_Clicked(object sender, EventArgs e)
@@ -41,6 +51,11 @@ public partial class PrivledgeRequestsPage : ContentPage
         if (ltv_privledgeRequests.SelectedItem == null)
         {
             await Shell.Current.DisplayAlert("No request selected", "Select the request you want to deny from the list", "OK");
+            return;
+        }
+        else
+        {
+            await Shell.Current.DisplayAlert("Request denied", "Denied request", "OK");
             return;
         }
     }

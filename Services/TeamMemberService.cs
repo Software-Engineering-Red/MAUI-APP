@@ -59,6 +59,13 @@ namespace MauiApp1.Services
             return await _dbConnection.Table<TeamMember>().ToListAsync();
         }
 
+        public async Task<TeamMember> GetTeamMemberById(int memberId)
+        {
+            await SetUpDb();
+            return await _dbConnection.FindAsync<TeamMember>(memberId);
+        }
+
+
         /*! <summary>
          Method responsible for updating an entry from TeamMember table, based on primary key of the element passed.
         </summary> 

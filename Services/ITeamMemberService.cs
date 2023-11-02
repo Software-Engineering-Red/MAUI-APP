@@ -15,6 +15,8 @@ namespace MauiApp1.Services
          <returns>Returns Task containing List of TeamMembers present in the database.</returns>*/
         Task<List<TeamMember>> GetTeamMemberList();
 
+        Task<TeamMember> GetTeamMemberById(int memberId);
+
         /*! <summary>
             Method responsible for addtion of entry into TeamMember table.
         </summary> 

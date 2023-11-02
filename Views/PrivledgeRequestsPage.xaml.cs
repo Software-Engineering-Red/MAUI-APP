@@ -40,7 +40,8 @@ public partial class PrivledgeRequestsPage : ContentPage
         {
             var selectedRequest = ltv_privledgeRequests.SelectedItem as PrivledgeRequest;
             int updatedID = selectedRequest.ID;
-            TeamMember updatedMember = new TeamMember() { ID = updatedID, AccessPrivledgeLevel = selectedRequest.PrivledgeLevel};
+            TeamMember updatedMember = memberService.GetTeamMemberById(updatedID).Result;
+            updatedMember.AccessPrivledgeLevel = selectedRequest.PrivledgeLevel;
             memberService.UpdateTeamMember(updatedMember);
             selectedRequest.Approved = true;
         }

@@ -22,7 +22,7 @@ public partial class RolesPage : ContentPage
     public RolesPage()
 	{
         InitializeComponent();
-        this.BindingContext = this;
+        BindingContext = new Role();
         this.roleService = new RoleService();
 
         Task.Run(async () => await LoadRoles());

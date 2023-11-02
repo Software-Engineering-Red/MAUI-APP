@@ -23,38 +23,27 @@ namespace MauiApp1.Models {
         /*! <summary>
             A private variable, storing continent name
         </summary> */
-        private string name;
-
-        /*! <summary>
-        A public variable, responsible for getting and setting continent name.
-        </summary> */
-        public string Name {
-            get => name;
-            set => SetField(ref name, value);
+        private string _name;
+        public string Name
+        {
+            get => _name;
+            set => SetProperty(ref _name, value);
         }
 
-        /*! <summary>
-            Event responsible for handling propertyChange.
-        </summary> */
         public event PropertyChangedEventHandler? PropertyChanged;
-
-        /*! <summary>
-            Method determining if property was changed, and if so triggers PropertyChangeEvent
-        </summary>
-        <param name="propertyName">String value of the property Name</param> */
-        protected void OnPropertyChanged(string propertyName) =>
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
-        /*! <summary>
-            Field method setter, triggers PropertyChangeEventHandler, when OnPropertyChanged is true
-        </summary>
-        <param name="field">String value of the field</param>
-        <param name="value">String value of the coparator</param>
-        <param name="propertyName">String value of the property changed</param>
-        <returns>Boolean if property was successfuly changed.</returns> */
-        protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = "") {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-            field = value;
+        protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(storage, value))
+            {
+                return false;
+            }
+
+            storage = value;
             OnPropertyChanged(propertyName);
             return true;
         }

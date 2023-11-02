@@ -38,8 +38,18 @@ namespace MauiApp1.Data
                 // Create your database tables here
                 await _database.CreateTableAsync<Models.AlertType>();
                 await _database.CreateTableAsync<Models.OperationalTeamStatus>();
-
-                // Add more CreateTableAsync calls for additional tables as needed.
+                await _database.CreateTableAsync<Models.BuildingType>();
+                await _database.CreateTableAsync<Models.Continent>();
+                await _database.CreateTableAsync<Models.Equipment>();
+                await _database.CreateTableAsync<Models.OrderStatus>();
+                await _database.CreateTableAsync<Models.Organisation>();
+                await _database.CreateTableAsync<Models.position_statuses>();
+                await _database.CreateTableAsync<Models.Role>();
+                await _database.CreateTableAsync<Models.RoomType>();
+                await _database.CreateTableAsync<Models.Rota>();
+                await _database.CreateTableAsync<Models.Skill>();
+                await _database.CreateTableAsync<Models.SystemType>();
+                
             }
             catch (Exception ex)
             {

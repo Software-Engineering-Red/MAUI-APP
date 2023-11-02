@@ -6,9 +6,6 @@ namespace MauiApp1.Views;
 
 public partial class PrivledgeRequestsPage : ContentPage
 {
-    /*! <summary>
-        A reference pointer for storing currently selected TeamMember.
-     </summary> */
     private PrivledgeRequest selectedRequest = null;
 
     IPrivledgeRequestService requestService;

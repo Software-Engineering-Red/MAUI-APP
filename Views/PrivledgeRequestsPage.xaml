@@ -13,7 +13,16 @@
                             <Label Text="{Binding RequestType}" TextColor="Black" />
                             <Label Text="{Binding PrivledgeLevel}" TextColor="Black" />
                             <Label Text="{Binding MemberID}" TextColor="Black" />
-                            <Label Text="{Binding Approved}" TextColor="Black" />
+                            <Label TextColor="Black">
+                              <Label.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding Approved}" Value="true">
+                                  <Setter Property="Text" Value="Yes" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="Label" Binding="{Binding Approved}" Value="false">
+                                  <Setter Property="Text" Value="No" />
+                                </DataTrigger>
+                              </Label.Triggers>
+                            </Label>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

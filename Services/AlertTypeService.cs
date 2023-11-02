@@ -1,5 +1,5 @@
-﻿using MauiApp1.Data;
-using MauiApp1.Models;
+﻿using UndacApp.Data;
+using UndacApp.Models;
 using Microsoft.Maui.Animations;
 using SQLite;
 using System;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MauiApp1.Services
+namespace UndacApp.Services
 {
     public class AlertTypeService : IAlertTypeService
     {

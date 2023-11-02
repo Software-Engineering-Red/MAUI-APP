@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SQLite;
 
-namespace MauiApp1.Data
+namespace UndacApp.Data
 {
     public static class DatabaseSettings
     {

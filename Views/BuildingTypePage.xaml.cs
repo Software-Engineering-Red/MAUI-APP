@@ -28,7 +28,7 @@ public partial class BuildingTypePage : ContentPage {
 
     public BuildingTypePage() {
         InitializeComponent();
-        this.BindingContext = this;
+        BindingContext = new BuildingType();
         this.buildingTypeService = new BuildingTypeService();
 
         Task.Run(async () => await LoadBuildingTypes());

@@ -18,30 +18,28 @@ namespace MauiApp1.Models
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        private string name;
+        private string _name;
         public string Name
         {
-            get => name; 
-            
-            set => SetField(ref name,value);
+            get => _name;
+            set => SetProperty(ref _name, value);
         }
-        
-        
+
         public event PropertyChangedEventHandler? PropertyChanged;
-
-        /*this protected function searches for the correct parent class for use in this case an event handler for proerty changed*/
-        /*and creates a new instance of the class to handle the parameter named propertyname*/
-        protected void OnPropertyChanged(string proertyName) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(proertyName));
-
-        /*this protected function sets a letter as a reference for both value and field and does a check for change in the feild name*/
-        /*if true then it returns a false otherwise it set the field to the value */
-        /*then call OnPropertyChanged(prpertyName) with the parameters proertyName*/
-        protected bool SetField<T>(ref T feild, T value, [CallerMemberName] string propetyName = "")
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (EqualityComparer<T>.Default.Equals(feild, value)) return false;
-            feild = value;
-            OnPropertyChanged(propetyName);
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(storage, value))
+            {
+                return false;
+            }
+
+            storage = value;
+            OnPropertyChanged(propertyName);
             return true;
         }
     }

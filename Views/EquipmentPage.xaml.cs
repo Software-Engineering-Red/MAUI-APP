@@ -27,7 +27,7 @@ public partial class EquipmentPage : ContentPage
     public EquipmentPage()
     {
         InitializeComponent();
-        this.BindingContext = this;
+        BindingContext =new Equipment();
         this.equipmentService = new EquipmentService();
 
         Task.Run(async () => await LoadEquipment());

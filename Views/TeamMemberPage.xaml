@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:MauiApp1.Converters"
              x:Class="MauiApp1.Views.TeamMemberPage"
              Title="TeamMemberPage">
+    <ContentPage.Resources>
+        <converters:BoolToAvailabilityConverter x:Key="boolToAvailability" />
+    </ContentPage.Resources>
     <VerticalStackLayout Spacing="10" Margin="5">
         <Editor x:Name="txe_teammember"
                 Placeholder="Add a Team Member"
@@ -17,10 +21,24 @@
                     Clicked="DeleteButton_Clicked" />
         </Grid>
 
-        <ListView x:Name="ltv_teammember" Background="white" ItemSelected="ltv_teammember_ItemSelected">
+        <ListView x:Name="ltv_teammember" ItemsSource="{Binding Teammembers}" Background="white" ItemSelected="ltv_teammember_ItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell TextColor="Black" Text="{Binding Name}"/>
+                    <ViewCell>
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0"
+                           Text="{Binding Name}"
+                           FontAttributes="Bold" />
+                            <Label Grid.Row="1"
+                           Text="{Binding Available,Converter={StaticResource boolToAvailability}}" 
+                           FontAttributes="Italic"
+                           VerticalOptions="End" />
+                        </Grid>
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

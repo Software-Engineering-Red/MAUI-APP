@@ -11,6 +11,11 @@ namespace MauiApp1.Models
 {
     public class TeamMember : AModel
     {
+        public TeamMember()
+        {
+            Available = true;
+        }
+
         private string _name;
         public string Name
         {

@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace MauiApp1.Converters
 {
-    public class BoolToStringConverter : IValueConverter
+    public class BoolToAvailabilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value is bool ? ((bool)value ? "Yes" : "No") : "No";
+            return value is bool ? ((bool)value ? "Available" : "Not Available") : "Not Available";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value is string ? ((string)value == "Yes" ? true : false) : false;
+            return value is string ? ((string)value == "Available" ? true : false) : false;
         }
     }
 }

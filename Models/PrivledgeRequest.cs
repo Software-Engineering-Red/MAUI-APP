@@ -22,36 +22,42 @@ namespace MauiApp1.Models
         public bool Approved
         {
             get => approved;
-            set => SetField(ref approved, value);
+            set => SetProperty(ref approved, value);
         }
 
         public string RequestType
         {
             get => requestType;
-            set => SetField(ref requestType, value);
+            set => SetProperty(ref requestType, value);
         }
 
         public string PrivledgeLevel
         {
             get => privledgeLevel;
-            set => SetField(ref privledgeLevel, value);
+            set => SetProperty(ref privledgeLevel, value);
         }
 
         public int MemberID
         {
             get => memberID;
-            set => SetField(ref  memberID, value);
+            set => SetProperty(ref  memberID, value);
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected void OnPropertyChanged(string propertyName) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
-        protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-            field = value;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(storage, value))
+            {
+                return false;
+            }
+
+            storage = value;
             OnPropertyChanged(propertyName);
             return true;
         }

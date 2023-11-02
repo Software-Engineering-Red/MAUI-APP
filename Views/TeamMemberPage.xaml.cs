@@ -28,7 +28,7 @@ public partial class TeamMemberPage : ContentPage
     public TeamMemberPage()
     {
         InitializeComponent();
-        this.BindingContext = this;
+        this.BindingContext = new TeamMember();
         this.teamMemberService = new TeamMemberService();
         this.privledgeRequestService = new PrivledgeRequestService();
 

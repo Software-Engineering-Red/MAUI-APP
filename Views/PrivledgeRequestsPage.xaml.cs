@@ -18,7 +18,7 @@ public partial class PrivledgeRequestsPage : ContentPage
     public PrivledgeRequestsPage()
     {
         InitializeComponent();
-        this.BindingContext = this;
+        this.BindingContext = new PrivledgeRequest();
         this.requestService = new PrivledgeRequestService();
 
         Task.Run(async () => await LoadRequests());

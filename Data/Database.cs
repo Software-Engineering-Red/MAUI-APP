@@ -49,7 +49,9 @@ namespace MauiApp1.Data
                 await _database.CreateTableAsync<Models.Rota>();
                 await _database.CreateTableAsync<Models.Skill>();
                 await _database.CreateTableAsync<Models.SystemType>();
-                
+                await _database.CreateTableAsync<Models.TeamMember>();
+                await _database.CreateTableAsync<Models.PrivledgeRequest>();
+
             }
             catch (Exception ex)
             {

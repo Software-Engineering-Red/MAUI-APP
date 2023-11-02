@@ -12,7 +12,7 @@ using System.Xml.Linq;
  *  and allows for the basic values to be updated
  */
 
-namespace MauiApp1.Models
+namespace UndacApp.Models
 {
     public class Role : INotifyPropertyChanged
     {

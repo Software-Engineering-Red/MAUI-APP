@@ -1,5 +1,5 @@
-﻿using MauiApp1.Models;
-using MauiApp1.Services;
+﻿using UndacApp.Models;
+using UndacApp.Services;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics.Metrics;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace MauiApp1.Views
+namespace UndacApp.Views
 {
     /// <summary>
     /// Represents the RotaPage class, which is responsible for managing and displaying Rota data.

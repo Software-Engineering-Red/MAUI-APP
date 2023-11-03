@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace MauiApp1.Models
+namespace UndacApp.Models
 /*! <summary>
 A model structure for Order Status data
 </summary> 

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace MauiApp1.Models
+namespace UndacApp.Models
 {
     /*! <summary>
      * Determine a class named SystemType which implements the INotifyPropertyChanged interface.

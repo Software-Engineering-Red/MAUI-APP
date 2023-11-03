@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MauiApp1.Converters
+namespace UndacApp.Converters
 {
     public class BoolToAvailabilityConverter : IValueConverter
     {

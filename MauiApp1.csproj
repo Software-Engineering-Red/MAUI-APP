@@ -62,6 +62,9 @@
 	  <MauiXaml Update="Views\BuildingTypePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\OperationRecord.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\PositionStatusPage.xaml">
 	  </MauiXaml>
         <MauiXaml Update="Views\ContinentPage.xaml">
@@ -131,7 +134,6 @@
 	<ItemGroup>
 		<Folder Include="Documentation\reference\" />
 		<Folder Include="Images\" />
-		<Folder Include="Views\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <MauiXaml Update="MauiPage1.xaml">

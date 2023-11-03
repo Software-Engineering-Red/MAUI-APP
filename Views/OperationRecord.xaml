@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.Views.OperationRecord"
+             Title="OperationRecord">
+    <VerticalStackLayout  BackgroundColor="#212121">
+        <Label TextColor="#757575" HorizontalOptions="Center" Text="Operation completion records" FontSize="Title"></Label>
+        <HorizontalStackLayout BackgroundColor="Black">
+            <Border HeightRequest="30"></Border>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+
+            <Grid HeightRequest="600" WidthRequest="600">
+                <Grid.RowDefinitions>
+                    <RowDefinition x:Name="x0"></RowDefinition>
+                    <RowDefinition x:Name="x1"></RowDefinition>
+                    <RowDefinition x:Name="x2"></RowDefinition>
+                    <RowDefinition x:Name="x3"></RowDefinition>
+                    <RowDefinition x:Name="x4"></RowDefinition>
+                    <RowDefinition x:Name="x5"></RowDefinition>
+                    <RowDefinition x:Name="x6"></RowDefinition>
+                    
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition x:Name="y0" Width="*"></ColumnDefinition>
+                    <ColumnDefinition x:Name="y1" Width="*"></ColumnDefinition>
+                    <ColumnDefinition x:Name="y2" Width="*"></ColumnDefinition>
+                    <ColumnDefinition x:Name="y3" Width="*"></ColumnDefinition>
+                    <ColumnDefinition x:Name="y4" Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Frame Grid.ColumnSpan="5" Grid.RowSpan="7" BorderColor="Black" BackgroundColor="DimGray"></Frame>
+                
+                <Label Grid.Row="0" Grid.ColumnSpan="5" Text="Operation Record Finalisation" HorizontalOptions="Center" FontSize="32"></Label>
+                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Operation final status" VerticalOptions="End" FontSize="18"></Label>
+                <Label Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="3" Text="Operational resource request" VerticalOptions="End" FontSize="18"></Label>
+                
+                <Entry x:Name="TBX_FinalStatus" Grid.Row="1" Grid.ColumnSpan="2" Placeholder="enter final status here" PlaceholderColor="LightBlue" HeightRequest="30" VerticalOptions="Start"></Entry>
+                <Label Grid.Row="1" Grid.ColumnSpan="2" Text="Enter Date and Time of the Operation Completions" VerticalOptions="End" HorizontalTextAlignment="Center"></Label>
+                
+                <DatePicker Grid.Row="2" Grid.Column="0" VerticalOptions="Start"></DatePicker>
+                <TimePicker Grid.Row="2" Grid.ColumnSpan="2" VerticalOptions="End"></TimePicker>
+                
+                <Frame Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" Grid.RowSpan="5" BackgroundColor="DimGray">
+                    <ListView Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" Grid.RowSpan="5">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextCell Text="{Binding OppIDTOppIDMemberName}"></TextCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Frame>
+                <Label Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="Start" Text="Depupty Team leader signature authorisation"></Label>
+                <Entry x:Name="TBX_DTL_Signature" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="End" Placeholder="Deputiy leader Siganture here" PlaceholderColor="LightBlue" HeightRequest="30"></Entry>
+                <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="Start" HeightRequest="30" Text="Submit Deputy Leader authorisation" FontSize="12"></Button>
+            </Grid>
+            
+            <Grid WidthRequest="600" HeightRequest="600">
+                <Grid.RowDefinitions>
+                    <RowDefinition x:Name="g2x0"></RowDefinition>
+                    <RowDefinition x:Name="g2x1"></RowDefinition>
+                    <RowDefinition x:Name="g2x2"></RowDefinition>
+                    <RowDefinition x:Name="g2x3"></RowDefinition>
+                    <RowDefinition x:Name="g2x4"></RowDefinition>
+                    <RowDefinition x:Name="g2x5"></RowDefinition>
+                    <RowDefinition x:Name="g2x6"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition x:Name="g2y0"></ColumnDefinition>
+                    <ColumnDefinition x:Name="g2y1"></ColumnDefinition>
+                    <ColumnDefinition x:Name="g2y2"></ColumnDefinition>
+                    <ColumnDefinition x:Name="g2y3"></ColumnDefinition>
+                    <ColumnDefinition x:Name="g2y4"></ColumnDefinition>
+                    <ColumnDefinition x:Name="g2y5"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Frame Grid.ColumnSpan="6" Grid.RowSpan="7" BorderColor="Black" BackgroundColor="#2b2b2b"></Frame>
+                <Label Grid.Row="0" Grid.ColumnSpan="5" TextColor="White" Text="Operations Details" HorizontalOptions="Center" FontSize="32"></Label>
+                <Label Grid.Row="0" VerticalTextAlignment="End" Text="Operation ID"></Label>
+                
+                <Entry x:Name="TB_Opp_ID" Grid.Row="1"  HeightRequest="30" IsReadOnly="True" VerticalOptions="Start"></Entry>
+                <Label Grid.Row="1"  Grid.ColumnSpan="2" VerticalOptions="End" Text="Opertational Team ID"></Label>
+
+                <Entry x:Name="TB_OppTeam_ID" Grid.Row="2"  VerticalOptions="Start" IsReadOnly="True"></Entry>
+                <Label Grid.Row="2" VerticalOptions="End" Text="requested by"></Label>
+
+                <Entry x:Name="TB_RequestedByTeamMember " Grid.Row="3" Grid.ColumnSpan="2" HeightRequest="30"></Entry>
+                <Label Grid.Row="3" Grid.ColumnSpan="2" Text="request dated" VerticalOptions="End"></Label>
+
+                <Entry x:Name="TB_Request_Date" IsReadOnly="True" Grid.Row="4" Grid.ColumnSpan="2" HeightRequest="30" VerticalOptions="Start"></Entry>
+                
+                <Label Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="3" Text="request's details" HorizontalOptions="Center" VerticalOptions="End" FontSize="18"></Label>
+                <Frame Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="4" Grid.RowSpan="4" BackgroundColor="#2b2b2b">
+                    <Label x:Name="LTB_Request_s_details" Text=""></Label>
+                </Frame>
+
+                
+                <Label Grid.Row="5" Grid.ColumnSpan="2" VerticalOptions="Start" Text="Current Status" ></Label>
+                <Entry x:Name="TB_CurrentStatus" Grid.Row="5" Grid.ColumnSpan="2" HeightRequest="30" IsReadOnly="True" VerticalOptions="Center"></Entry>
+                
+                <Label Grid.Row="6" VerticalOptions="Start" Text="Confirmed by"></Label>
+                <Entry x:Name="TB_ConfirmedByDTL" Grid.Row="6" Grid.ColumnSpan="2" VerticalOptions="Center" HeightRequest="30" IsReadOnly="True"></Entry>
+                <Label Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" Text="Confirmed date"></Label>
+                <Entry x:Name="TB_Confirmed_Date" Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" VerticalOptions="Center" HeightRequest="30" IsReadOnly="True"></Entry>
+                
+                <Label Grid.Column="2" VerticalOptions="End" Text="resource ID"></Label>
+                <Entry x:Name="TB_Resource_ID" Grid.Row="1" Grid.Column="2" VerticalOptions="Start" IsReadOnly="True"></Entry>
+                
+            </Grid>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>

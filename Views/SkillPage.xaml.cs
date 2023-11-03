@@ -17,7 +17,7 @@ namespace UndacApp.Views
         public SkillPage()
         {
             InitializeComponent();
-            this.BindingContext = this;
+            BindingContext = new Skill();
             this.skillService = new SkillService();
 
             Task.Run(async () => await LoadSkills());

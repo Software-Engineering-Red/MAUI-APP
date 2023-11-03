@@ -33,7 +33,7 @@ namespace UndacApp.Views
         public OrderStatusPage()
         {
             InitializeComponent();
-            this.BindingContext = this;
+            BindingContext = new OrderStatus();
             this.orderStatusService = new OrderStatusService();
 
             Task.Run(async () => await LoadOrderStatus());

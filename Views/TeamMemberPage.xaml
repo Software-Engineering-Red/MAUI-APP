@@ -21,7 +21,7 @@
                     Clicked="DeleteButton_Clicked" />
         </Grid>
 
-        <ListView x:Name="ltv_teammember" ItemsSource="{Binding Teammembers}" Background="white" ItemSelected="ltv_teammember_ItemSelected">
+        <ListView x:Name="ltv_teammember" Background="white" ItemSelected="ltv_teammember_ItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

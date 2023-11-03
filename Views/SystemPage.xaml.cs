@@ -31,7 +31,7 @@ public partial class SystemPage : ContentPage
     public SystemPage()
     {
         InitializeComponent();
-        this.BindingContext = this;       
+        BindingContext = new SystemType();       
         this.systemTypeService = new SystemTypeService();
 
         /*! <summary>

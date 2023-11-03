@@ -21,39 +21,36 @@ namespace UndacApp.Models
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
 
+        // A public property for an integer ID.
+        private string _name;
+        // A private field to store the value of the Name property.
 
-        private string name;
-
-        /// <summary>
-        /// The name of the building type.
-        /// </summary>
-        public string Name {
-            get => name;
-            set => SetField(ref name, value);
+        public string Name
+        {
+            // Getter returns the value of the private _name field.
+            get => _name;
+            // Setter uses SetProperty to update the value and raise PropertyChanged event.
+            set => SetProperty(ref _name, value);
+        }
+        // Event to notify subscribers when a property changes.
+        public event PropertyChangedEventHandler? PropertyChanged;
+        // Method to raise the PropertyChanged event with the property name.
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        /// <summary>
-        /// Event for the building type properties changing.
-        /// </summary>
-        public event PropertyChangedEventHandler? PropertyChanged;
+        protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
+        {
+            // If the new value is the same as the current value, no change is made, and false is returned.
+            if (EqualityComparer<T>.Default.Equals(storage, value))
+            {
+                return false;
+            }
 
-        protected void OnPropertyChanged(string propertyName) => 
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
-        /// <summary>
-        /// Reflection helper for implementing <see cref="INotifyPropertyChanged"/>.
-        /// </summary>
-        /// <typeparam name="T">The type of the field.</typeparam>
-        /// <param name="field">A reference to the field.</param>
-        /// <param name="value">The value of the field.</param>
-        /// <param name="propertyName">The property name changing. This is automatically assigned by <see cref="CallerMemberNameAttribute"/>.</param>
-        /// <returns></returns>
-
-        protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = "") {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-            field = value;
-            OnPropertyChanged(propertyName);
-            return true;
+            storage = value; // Update the field with the new value.
+            OnPropertyChanged(propertyName);// Notify subscribers that the property has changed.
+            return true; // Return true to indicate that the property was changed.
         }
     }
 }

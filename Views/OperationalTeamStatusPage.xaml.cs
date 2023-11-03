@@ -32,7 +32,7 @@ public partial class OperationalTeamStatusPage : ContentPage
     public OperationalTeamStatusPage()
     {
         InitializeComponent();
-        this.BindingContext = this;
+        BindingContext = new OperationalTeamStatus();
         this.statusService = new OperationalTeamStatusService();
 
         Task.Run(async () => await LoadStates());

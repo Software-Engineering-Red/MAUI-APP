@@ -24,7 +24,7 @@ namespace UndacApp.Views
         public RotaPage()
         {
             InitializeComponent();
-            this.BindingContext = this;
+            BindingContext = new Rota();
             this._rotaService = new RotaService();
 
             Task.Run(async () => await LoadRotas());

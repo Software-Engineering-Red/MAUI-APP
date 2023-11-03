@@ -2,7 +2,6 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converters="clr-namespace:UndacApp.Converters"
-             xmlns:local="clr-namespace:UndacApp.Models"
              x:Class="UndacApp.Views.TeamMemberPage"
              Title="TeamMemberPage">
     <ContentPage.Resources>
@@ -22,7 +21,7 @@
                     Clicked="DeleteButton_Clicked" />
         </Grid>
 
-        <ListView x:Name="ltv_teammember" Background="white" ItemSelected="ltv_teammember_ItemSelected">
+        <ListView x:Name="ltv_teammember" ItemsSource="{Binding Teammembers}" Background="white" ItemSelected="ltv_teammember_ItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

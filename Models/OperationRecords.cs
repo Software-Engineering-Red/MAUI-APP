@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 using System.ComponentModel;
 using SQLite;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Security.Cryptography.X509Certificates;
 
 namespace MauiApp1.Models
 {
@@ -17,8 +10,13 @@ namespace MauiApp1.Models
         [PrimaryKey, AutoIncrement] 
         public int Id { get; set; }
 
-        /*[ForeignKey(nameof(Operational_Team_ID))]
-        public int Operational_Team_ID { get; set; }*/
+        private int operationalTeamID;
+        public int OperationalTeamID
+        {  
+            get => operationalTeamID; 
+            
+            set => SetField(ref operationalTeamID, value); 
+        }
 
         private string requested_By;
         public string Requested_By
@@ -28,45 +26,9 @@ namespace MauiApp1.Models
             set => SetField(ref requested_By, value); 
         }
 
+        /*private*/ 
 
-
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
-
-
-
 
         public event PropertyChangedEventHandler PropertyChanged;
 

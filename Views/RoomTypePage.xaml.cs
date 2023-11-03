@@ -15,7 +15,7 @@ public partial class RoomTypePage : ContentPage
         InitializeComponent();
 
         // Set the binding context to the RoomTypePage
-        this.BindingContext = this;
+        BindingContext = new RoomType();
         this.roomTypeService = new RoomTypeService();
 
         // Load room types and initialize the text input 

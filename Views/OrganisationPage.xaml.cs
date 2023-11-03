@@ -30,7 +30,7 @@ public partial class OrganisationPage : ContentPage
     public OrganisationPage()
     {
         InitializeComponent();
-        this.BindingContext = this;
+        BindingContext = new Organisation();
         this.organisationService = new OrganisationService();
 
         Task.Run(async () => await LoadOrganisations());

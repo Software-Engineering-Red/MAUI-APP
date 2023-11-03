@@ -20,29 +20,27 @@ A model structure for Order Status data
         /*! <summary>
             A private variable, storing order status name
         </summary> */
-        private string name;
-
-        /*! <summary>
-        A public variable, responsible for getting and setting order status.
-        </summary> */
+        private string _name;
         public string Name
         {
-            get => name;
-            set => SetField(ref name, value);
+            get => _name;
+            set => SetProperty(ref _name, value);
         }
 
-        /*! <summary>
-            Event responsible for handling propertyChange.
-        </summary> */
         public event PropertyChangedEventHandler? PropertyChanged;
-
-        protected void OnPropertyChanged(string propertyName) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
-        protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-            field = value;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(storage, value))
+            {
+                return false;
+            }
+
+            storage = value;
             OnPropertyChanged(propertyName);
             return true;
         }

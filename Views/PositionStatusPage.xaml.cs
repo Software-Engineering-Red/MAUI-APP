@@ -21,7 +21,7 @@ namespace MauiApp1.Views;
     public position_status()
 	{
 		InitializeComponent();
-		this.BindingContext = this;
+		BindingContext = new position_statuses();
 		this.statusesServices = new PositionStatusesServices();
 
 		Task.Run(async () => await LoadpostionSatus());

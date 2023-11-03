@@ -13,7 +13,7 @@ public partial class AlertTypesPage : ContentPage
     public AlertTypesPage()
     {
         InitializeComponent();
-        this.BindingContext = this;
+        BindingContext = new AlertType();
         _alertTypeService = new AlertTypeService();
 
         Task.Run(async () => await LoadAlertTypes());

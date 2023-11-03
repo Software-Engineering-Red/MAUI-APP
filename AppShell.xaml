@@ -69,6 +69,11 @@
         <ShellContent
            Title="TeamMemberPage"
            ContentTemplate="{DataTemplate views:TeamMemberPage}" />
+        
+        <ShellContent
+            Title="SubTeamsStatusPage"
+            ContentTemplate="{DataTemplate views:SubTeamsStatusPage}" />
+        
     </TabBar>
 
 </Shell>

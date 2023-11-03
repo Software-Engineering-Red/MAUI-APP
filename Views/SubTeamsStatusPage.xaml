@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UndacApp.Views.SubTeamsStatusPage"
+             Title="Sub Teams Status Page">
+    <VerticalStackLayout Spacing="10" Margin="5">
+        <Editor x:Name="text_editor_status"
+        Placeholder="Add a Sub Team Status"
+        HeightRequest="100" />
+        
+        <Entry x:Name="txe_SubTeamName" Placeholder="Sub-Team Name" />
+        <Entry x:Name="txe_SubTeamLocation" Placeholder="Location" />
+        <Entry x:Name="txe_SubTeamPersonnel" Placeholder="Personnel" />
+        <Entry x:Name="txe_SubTeamResources" Placeholder="Resources" />
+        <Entry x:Name="txe_SubTeamLeaderCommunication" Placeholder="Leader Communication" />
+
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
+            <Button Text="Save"
+                    Clicked="SaveButton_Clicked" />
+
+            <Button Grid.Column="1"
+                    Text="Delete"
+                    Clicked="DeleteButton_Clicked" />
+        </Grid>
+
+        <ListView x:Name="ltv_systemStatusItems" BackgroundColor="White">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Name}" Detail="{Binding Location}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </VerticalStackLayout>
+</ContentPage>

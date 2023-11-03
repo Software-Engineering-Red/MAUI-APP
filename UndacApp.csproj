@@ -79,6 +79,9 @@
 	  <MauiXaml Update="Views\OperationalTeamStatusPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>		
+	  <MauiXaml Update="Views\SubTeamsStatusPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>		
 	  <MauiXaml Update="Views\TeamMemberPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

@@ -11,12 +11,18 @@ namespace UndacApp.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value is bool ? ((bool)value ? "Available" : "Not Available") : "Not Available";
+            if (value is not bool) 
+                return "Not Available";
+
+            return (bool)value ? "Available" : "Not Available";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value is string ? ((string)value == "Available" ? true : false) : false;
+            if (value is not string)
+                return false;
+
+            return (string) value == "Available" ? true : false;
         }
     }
 }

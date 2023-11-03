@@ -15,6 +15,7 @@ namespace UndacApp.Models
         public int ID { get; set; }
         private string name;
         private string accessPrivledgeLevel;
+        private bool available = true;
 
         public string Name
     {
@@ -26,6 +27,12 @@ namespace UndacApp.Models
         {
             get => accessPrivledgeLevel;
             set => SetProperty(ref accessPrivledgeLevel, value);
+        }
+
+        public bool Available
+        {
+            get => available;
+            set => SetProperty(ref available, value);
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

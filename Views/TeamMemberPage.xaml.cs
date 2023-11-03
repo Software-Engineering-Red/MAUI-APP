@@ -16,7 +16,7 @@ public partial class TeamMemberPage : ContentPage
 	{
         InitializeComponent();
         Teammembers = new ObservableCollection<TeamMember>();
-        this.BindingContext = this;
+        this.BindingContext = new TeamMember();
         this.teammemberService = new TeamMemberService();
 
         Task.Run(async () => await LoadData());
@@ -25,11 +25,8 @@ public partial class TeamMemberPage : ContentPage
 
     private async Task LoadData()
     {
-        var newTeamMembers = await teammemberService.GetAll();
-        foreach (var tm in newTeamMembers)
-        {
-            Teammembers.Add(tm);
-        }
+        Teammembers = new ObservableCollection<TeamMember>(await teammemberService.GetAll());
+        ltv_teammember.ItemsSource = Teammembers;
     }
 
     private void SaveButton_Clicked(object sender, EventArgs e)

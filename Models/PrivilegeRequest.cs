@@ -10,13 +10,13 @@ using System.Xml.Linq;
 
 namespace UndacApp.Models
 {
-    public class PrivledgeRequest : INotifyPropertyChanged
+    public class PrivilegeRequest : INotifyPropertyChanged
     {
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
         private string requestType;
         private int memberID;
-        private string privledgeLevel;
+        private string privilegeLevel;
         private bool approved;
 
         public bool Approved
@@ -31,10 +31,10 @@ namespace UndacApp.Models
             set => SetProperty(ref requestType, value);
         }
 
-        public string PrivledgeLevel
+        public string PrivilegeLevel
         {
-            get => privledgeLevel;
-            set => SetProperty(ref privledgeLevel, value);
+            get => privilegeLevel;
+            set => SetProperty(ref privilegeLevel, value);
         }
 
         public int MemberID

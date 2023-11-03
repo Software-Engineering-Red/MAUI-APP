@@ -4,20 +4,20 @@ using System.Collections.ObjectModel;
 
 namespace UndacApp.Views;
 
-public partial class PrivledgeRequestsPage : ContentPage
+public partial class PrivilegeRequestsPage : ContentPage
 {
-    private PrivledgeRequest selectedRequest = null;
+    private PrivilegeRequest selectedRequest = null;
 
-    IPrivledgeRequestService requestService;
+    IPrivilegeRequestService requestService;
     ITeamMemberService memberService;
 
-    ObservableCollection<PrivledgeRequest> requests = new ObservableCollection<PrivledgeRequest>();
+    ObservableCollection<PrivilegeRequest> requests = new ObservableCollection<PrivilegeRequest>();
 
-    public PrivledgeRequestsPage()
+    public PrivilegeRequestsPage()
     {
         InitializeComponent();
-        this.BindingContext = new PrivledgeRequest();
-        this.requestService = new PrivledgeRequestService();
+        this.BindingContext = new PrivilegeRequest();
+        this.requestService = new PrivilegeRequestService();
         this.memberService = new TeamMemberService();
 
         Task.Run(async () => await LoadRequests());
@@ -25,23 +25,23 @@ public partial class PrivledgeRequestsPage : ContentPage
 
     private async Task LoadRequests()
     {
-        requests = new ObservableCollection<PrivledgeRequest>(await requestService.GetPrivledgeRequestList());
-        ltv_privledgeRequests.ItemsSource = requests;
+        requests = new ObservableCollection<PrivilegeRequest>(await requestService.GetPrivilegeRequestList());
+        ltv_privilegeRequests.ItemsSource = requests;
     }
 
     private void ApprovedButton_Clicked(object sender, EventArgs e)
     {
-        if (ltv_privledgeRequests.SelectedItem == null)
+        if (ltv_privilegeRequests.SelectedItem == null)
         {
             Shell.Current.DisplayAlert("No request selected", "Select the request you wish to approve from the list", "OK");
             return;
         }
         else
         {
-            var selectedRequest = ltv_privledgeRequests.SelectedItem as PrivledgeRequest;
+            var selectedRequest = ltv_privilegeRequests.SelectedItem as PrivilegeRequest;
             int updatedID = selectedRequest.ID;
             TeamMember updatedMember = memberService.GetTeamMemberById(updatedID).Result;
-            updatedMember.AccessPrivledgeLevel = selectedRequest.PrivledgeLevel;
+            updatedMember.AccessPrivilegeLevel = selectedRequest.PrivilegeLevel;
             memberService.UpdateTeamMember(updatedMember);
             selectedRequest.Approved = true;
         }
@@ -49,7 +49,7 @@ public partial class PrivledgeRequestsPage : ContentPage
 
     private async void DeniedButton_Clicked(object sender, EventArgs e)
     {
-        if (ltv_privledgeRequests.SelectedItem == null)
+        if (ltv_privilegeRequests.SelectedItem == null)
         {
             await Shell.Current.DisplayAlert("No request selected", "Select the request you want to deny from the list", "OK");
             return;

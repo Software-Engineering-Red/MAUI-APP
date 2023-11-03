@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="UndacApp.Views.PrivledgeRequestsPage"
-             Title="PrivledgeRequestsPage"
+             x:Class="UndacApp.Views.PrivilegeRequestsPage"
+             Title="PrivilegeRequestsPage"
              xmlns:local="clr-namespace:UndacApp.Models">
     <VerticalStackLayout Spacing="10" Margin="5">
-        <ListView x:Name="ltv_privledgeRequests" Background="White">
+        <ListView x:Name="ltv_privilegeRequests" Background="White">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Orientation="Vertical">
                             <Label Text="{Binding RequestType}" TextColor="Black" />
-                            <Label Text="{Binding PrivledgeLevel}" TextColor="Black" />
+                            <Label Text="{Binding PrivilegeLevel}" TextColor="Black" />
                             <Label Text="{Binding MemberID}" TextColor="Black" />
                             <Label TextColor="Black">
                               <Label.Triggers>

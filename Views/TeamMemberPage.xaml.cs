@@ -15,7 +15,7 @@ public partial class TeamMemberPage : ContentPage
         An instance of ITeamMemberService
      </summary> */
     ITeamMemberService teamMemberService;
-    IPrivledgeRequestService privledgeRequestService;
+    IPrivilegeRequestService privilegeRequestService;
 
     /*! <summary>
         Collection of current TeamMembers.
@@ -30,11 +30,11 @@ public partial class TeamMemberPage : ContentPage
         InitializeComponent();
         this.BindingContext = new TeamMember();
         this.teamMemberService = new TeamMemberService();
-        this.privledgeRequestService = new PrivledgeRequestService();
+        this.privilegeRequestService = new PrivilegeRequestService();
 
         Task.Run(async () => await LoadTeamMembers());
         txe_teamMember.Text = "";
-        txe_privledgeLevel.Text = "";
+        txe_privilegeLevel.Text = "";
     }
 
     /*! <summary>
@@ -58,27 +58,27 @@ public partial class TeamMemberPage : ContentPage
 
         if (selectedTeamMember == null)
         {
-            var teamMember = new TeamMember() { Name = txe_teamMember.Text, AccessPrivledgeLevel = txe_privledgeLevel.Text };
+            var teamMember = new TeamMember() { Name = txe_teamMember.Text, AccessPrivilegeLevel = txe_privilegeLevel.Text };
             teamMemberService.AddTeamMember(teamMember);
             teamMembers.Add(teamMember);
         }
         else
         {
-            if (int.Parse(txe_privledgeLevel.Text) <= int.Parse(selectedTeamMember.AccessPrivledgeLevel))
+            if (int.Parse(txe_privilegeLevel.Text) <= int.Parse(selectedTeamMember.AccessPrivilegeLevel))
             {
                 selectedTeamMember.Name = txe_teamMember.Text;
-                selectedTeamMember.AccessPrivledgeLevel = txe_privledgeLevel.Text;
+                selectedTeamMember.AccessPrivilegeLevel = txe_privilegeLevel.Text;
                 teamMemberService.UpdateTeamMember(selectedTeamMember);
                 var teamMember = teamMembers.FirstOrDefault(x => x.ID == selectedTeamMember.ID);
                 teamMember.Name = txe_teamMember.Text;
-                teamMember.AccessPrivledgeLevel = txe_privledgeLevel.Text;
+                teamMember.AccessPrivilegeLevel = txe_privilegeLevel.Text;
             } 
             else
         {
                 
-                PrivledgeRequest request = new PrivledgeRequest() { RequestType = "Privledge Escalation", MemberID = selectedTeamMember.ID, PrivledgeLevel = txe_privledgeLevel.Text, Approved = false };
-                privledgeRequestService.AddRequest(request);
-                DisplayAlert("Failure", "Unable to increase privledges without Deputy Team Leader approval - Sending for approval", "OK");
+                PrivilegeRequest request = new PrivilegeRequest() { RequestType = "Privilege Escalation", MemberID = selectedTeamMember.ID, PrivilegeLevel = txe_privilegeLevel.Text, Approved = false };
+                privilegeRequestService.AddRequest(request);
+                DisplayAlert("Failure", "Unable to increase privileges without Deputy Team Leader approval - Sending for approval", "OK");
             }
         }
 
@@ -86,7 +86,7 @@ public partial class TeamMemberPage : ContentPage
         selectedTeamMember = null;
         ltv_teamMembers.SelectedItem = null;
         txe_teamMember.Text = "";
-        txe_privledgeLevel.Text = "";
+        txe_privilegeLevel.Text = "";
     }
 
     /*! <summary>
@@ -108,7 +108,7 @@ public partial class TeamMemberPage : ContentPage
 
         ltv_teamMembers.SelectedItem = null;
         txe_teamMember.Text = "";
-        txe_privledgeLevel.Text = "";
+        txe_privilegeLevel.Text = "";
     }
 
     /*! <summary>
@@ -122,6 +122,6 @@ public partial class TeamMemberPage : ContentPage
         if (selectedTeamMember == null) return;
 
         txe_teamMember.Text = selectedTeamMember.Name;
-        txe_privledgeLevel.Text = selectedTeamMember.AccessPrivledgeLevel;
+        txe_privilegeLevel.Text = selectedTeamMember.AccessPrivilegeLevel;
     }
 }

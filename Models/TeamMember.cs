@@ -14,7 +14,7 @@ namespace UndacApp.Models
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
         private string name;
-        private string accessPrivledgeLevel;
+        private string accessPrivilegeLevel;
         private bool available = true;
 
         public string Name
@@ -23,10 +23,10 @@ namespace UndacApp.Models
             set => SetProperty(ref name, value);
         }
 
-        public string AccessPrivledgeLevel
+        public string AccessPrivilegeLevel
         {
-            get => accessPrivledgeLevel;
-            set => SetProperty(ref accessPrivledgeLevel, value);
+            get => accessPrivilegeLevel;
+            set => SetProperty(ref accessPrivilegeLevel, value);
         }
 
         public bool Available

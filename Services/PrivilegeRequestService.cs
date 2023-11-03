@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace UndacApp.Services
 {
-    public class PrivledgeRequestService : IPrivledgeRequestService
+    public class PrivilegeRequestService : IPrivilegeRequestService
     {
         private SQLiteAsyncConnection _dbConnection;
 
@@ -23,22 +23,22 @@ namespace UndacApp.Services
 
 
             _dbConnection = new SQLiteAsyncConnection(DatabaseSettings.DBPath, DatabaseSettings.Flags);
-            await _dbConnection.CreateTableAsync<PrivledgeRequest>();
+            await _dbConnection.CreateTableAsync<PrivilegeRequest>();
         }
 
-        public async Task<List<PrivledgeRequest>> GetPrivledgeRequestList()
+        public async Task<List<PrivilegeRequest>> GetPrivilegeRequestList()
         {
             await SetUpDb();
-            return await _dbConnection.Table<PrivledgeRequest>().ToListAsync();
+            return await _dbConnection.Table<PrivilegeRequest>().ToListAsync();
         }
 
-        public async Task<int> UpdatePrivledgeRequest(PrivledgeRequest request)
+        public async Task<int> UpdatePrivilegeRequest(PrivilegeRequest request)
         {
             await SetUpDb();
             return await _dbConnection.UpdateAsync(request);
         }
 
-        public async Task<int> AddRequest(PrivledgeRequest request)
+        public async Task<int> AddRequest(PrivilegeRequest request)
         {
             await SetUpDb();
             return await _dbConnection.InsertAsync(request);

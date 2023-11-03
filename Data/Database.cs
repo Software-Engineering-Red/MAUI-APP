@@ -50,7 +50,7 @@ namespace UndacApp.Data
                 await _database.CreateTableAsync<Models.Skill>();
                 await _database.CreateTableAsync<Models.SystemType>();
                 await _database.CreateTableAsync<Models.TeamMember>();
-                await _database.CreateTableAsync<Models.PrivledgeRequest>();
+                await _database.CreateTableAsync<Models.PrivilegeRequest>();
 
             }
             catch (Exception ex)

@@ -17,7 +17,7 @@ namespace UndacApp.Models
         private string accessPrivledgeLevel;
 
         public string Name
-        {
+    {
             get => name;
             set => SetProperty(ref name, value);
         }
@@ -38,7 +38,7 @@ namespace UndacApp.Models
         protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
         {
             if (EqualityComparer<T>.Default.Equals(storage, value))
-            {
+        {
                 return false;
             }
 

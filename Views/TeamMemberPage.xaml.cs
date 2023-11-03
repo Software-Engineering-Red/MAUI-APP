@@ -26,8 +26,9 @@ public partial class TeamMemberPage : ContentPage
         Constructor class, setting the binding context and initiating the TeamMember serrvice, as well as loading the TeamMember list.
     </summary> */
     public TeamMemberPage()
-    {
+	{
         InitializeComponent();
+        Teammembers = new ObservableCollection<TeamMember>();
         this.BindingContext = new TeamMember();
         this.teamMemberService = new TeamMemberService();
         this.privledgeRequestService = new PrivledgeRequestService();
@@ -74,7 +75,7 @@ public partial class TeamMemberPage : ContentPage
                 teamMember.AccessPrivledgeLevel = txe_privledgeLevel.Text;
             } 
             else
-            {
+        {
                 
                 PrivledgeRequest request = new PrivledgeRequest() { RequestType = "Privledge Escalation", MemberID = selectedTeamMember.ID, PrivledgeLevel = txe_privledgeLevel.Text, Approved = false };
                 privledgeRequestService.AddRequest(request);

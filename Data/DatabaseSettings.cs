@@ -1,6 +1,6 @@
 ﻿using SQLite;
 
-namespace MauiApp1.Data
+namespace UndacApp.Data
 {
     public static class DatabaseSettings
     {

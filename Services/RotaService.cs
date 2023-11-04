@@ -1,8 +1,8 @@
-﻿using MauiApp1.Data;
-using MauiApp1.Models;
+﻿using UndacApp.Data;
+using UndacApp.Models;
 using SQLite;
 
-namespace MauiApp1.Services
+namespace UndacApp.Services
 {
     /// <summary>
     /// Represents the RotaService class, which provides CRUD operations for Rota objects.

@@ -1,8 +1,8 @@
-using MauiApp1.Models;
-using MauiApp1.Services;
+using UndacApp.Models;
+using UndacApp.Services;
 using System.Collections.ObjectModel;
 
-namespace MauiApp1.Views;
+namespace UndacApp.Views;
 
 
 public partial class RoomTypePage : ContentPage
@@ -15,7 +15,7 @@ public partial class RoomTypePage : ContentPage
         InitializeComponent();
 
         // Set the binding context to the RoomTypePage
-        this.BindingContext = this;
+        BindingContext = new RoomType();
         this.roomTypeService = new RoomTypeService();
 
         // Load room types and initialize the text input 

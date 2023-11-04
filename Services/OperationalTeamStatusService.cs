@@ -1,9 +1,11 @@
-﻿using MauiApp1.Data;
-using MauiApp1.Models;
+﻿using UndacApp.Data;
+using UndacApp.Models;
+using System;
+using System.Collections.Generic;
 using SQLite;
 
 
-namespace MauiApp1.Services
+namespace UndacApp.Services
 {
     /// <summary>
     /// This class extending IOperationalTeamStatusService 

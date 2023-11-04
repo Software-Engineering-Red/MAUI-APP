@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <Shell
-    x:Class="MauiApp1.AppShell"
+    x:Class="UndacApp.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:views="clr-namespace:MauiApp1.Views"
-    xmlns:local="clr-namespace:MauiApp1"
+    xmlns:views="clr-namespace:UndacApp.Views"
+    xmlns:local="clr-namespace:UndacApp"
     Shell.FlyoutBehavior="Disabled">
 
     <TabBar>
@@ -62,14 +62,9 @@
         <ShellContent
            Title="OrderStatusPage"
            ContentTemplate="{DataTemplate views:OrderStatusPage}" />
-
         <ShellContent
-            Title="Request Specialists"
-            ContentTemplate="{DataTemplate views:RequestSpecialists}" />
-
-        <ShellContent
-            Title="Accept Specialist Requests"
-            ContentTemplate="{DataTemplate views:AcceptSpecialistRequests}" />
+           Title="TeamMemberPage"
+           ContentTemplate="{DataTemplate views:TeamMemberPage}" />
     </TabBar>
 
 </Shell>

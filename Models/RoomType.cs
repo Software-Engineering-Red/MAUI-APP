@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 
-namespace MauiApp1.Models
+namespace UndacApp.Models
 {
     /// <summary>
     /// Represents a type of room in the application
@@ -19,31 +19,27 @@ namespace MauiApp1.Models
         public int ID { get; set; }
 
 
-        private string name;
-        /// <summary>
-        /// Gets or sets the name of the room type
-        /// </summary>
-        
+        private string _name;
         public string Name
         {
-            get => name;
-            set => SetField(ref name, value);
+            get => _name;
+            set => SetProperty(ref _name, value);
         }
 
-        /// <summary>
-        /// Event that is raised when a property of the room type is changed
-        /// </summary>
-        /// <param name="propertyName">The name of the property that changed</param>
-        
         public event PropertyChangedEventHandler? PropertyChanged;
-        
-        protected void OnPropertyChanged(string propertyName) =>
-           PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
-        protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-            field = value;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(storage, value))
+            {
+                return false;
+            }
+
+            storage = value;
             OnPropertyChanged(propertyName);
             return true;
         }

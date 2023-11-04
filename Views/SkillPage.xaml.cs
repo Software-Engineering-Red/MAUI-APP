@@ -1,12 +1,12 @@
-﻿using MauiApp1.Models;
-using MauiApp1.Services;
+﻿using UndacApp.Models;
+using UndacApp.Services;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 
 
-namespace MauiApp1.Views
+namespace UndacApp.Views
 {
     public partial class SkillPage : ContentPage
     {
@@ -17,7 +17,7 @@ namespace MauiApp1.Views
         public SkillPage()
         {
             InitializeComponent();
-            this.BindingContext = this;
+            BindingContext = new Skill();
             this.skillService = new SkillService();
 
             Task.Run(async () => await LoadSkills());

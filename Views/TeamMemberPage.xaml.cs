@@ -10,6 +10,7 @@ public partial class TeamMemberPage : ContentPage
         A reference pointer for storing currently selected TeamMember.
      </summary> */
     private TeamMember selectedTeamMember = null;
+    private int privilegeLevel;
 
     /*! <summary>
         An instance of ITeamMemberService
@@ -33,8 +34,6 @@ public partial class TeamMemberPage : ContentPage
         this.privilegeRequestService = new PrivilegeRequestService();
 
         Task.Run(async () => await LoadTeamMembers());
-        txe_teamMember.Text = "";
-        txe_privilegeLevel.Text = "";
     }
 
     /*! <summary>
@@ -54,9 +53,9 @@ public partial class TeamMemberPage : ContentPage
         <param name="e">Event details, passed by eventHandler due to clicking event button.</param> */
     private void SaveButton_Clicked(object sender, EventArgs e)
     {
-        if (String.IsNullOrEmpty(txe_teamMember.Text)) return;
+        if (String.IsNullOrEmpty(txe_teamMember.Text) || String.IsNullOrEmpty(txe_privilegeLevel.Text)) return;
 
-        if (selectedTeamMember == null)
+        if (selectedTeamMember == null && int.TryParse(txe_privilegeLevel.Text, out privilegeLevel) == true)
         {
             var teamMember = new TeamMember() { Name = txe_teamMember.Text, AccessPrivilegeLevel = txe_privilegeLevel.Text };
             teamMemberService.AddTeamMember(teamMember);
@@ -64,29 +63,36 @@ public partial class TeamMemberPage : ContentPage
         }
         else
         {
-            if (int.Parse(txe_privilegeLevel.Text) <= int.Parse(selectedTeamMember.AccessPrivilegeLevel))
+            if (int.TryParse(txe_privilegeLevel.Text, out privilegeLevel) == true)
             {
-                selectedTeamMember.Name = txe_teamMember.Text;
-                selectedTeamMember.AccessPrivilegeLevel = txe_privilegeLevel.Text;
-                teamMemberService.UpdateTeamMember(selectedTeamMember);
-                var teamMember = teamMembers.FirstOrDefault(x => x.ID == selectedTeamMember.ID);
-                teamMember.Name = txe_teamMember.Text;
-                teamMember.AccessPrivilegeLevel = txe_privilegeLevel.Text;
-            } 
+                if (privilegeLevel <= int.Parse(selectedTeamMember.AccessPrivilegeLevel))
+                {
+                    selectedTeamMember.Name = txe_teamMember.Text;
+                    selectedTeamMember.AccessPrivilegeLevel = txe_privilegeLevel.Text;
+                    teamMemberService.UpdateTeamMember(selectedTeamMember);
+                    var teamMember = teamMembers.FirstOrDefault(x => x.ID == selectedTeamMember.ID);
+                    teamMember.Name = txe_teamMember.Text;
+                    teamMember.AccessPrivilegeLevel = txe_privilegeLevel.Text;
+                }
+                else
+                {
+
+                    PrivilegeRequest request = new PrivilegeRequest() { RequestType = "Privilege Escalation", MemberID = selectedTeamMember.ID, PrivilegeLevel = txe_privilegeLevel.Text, Approved = false };
+                    privilegeRequestService.AddRequest(request);
+                    DisplayAlert("Failure", "Unable to increase privileges without Deputy Team Leader approval - Sending for approval", "OK");
+                }
+            }
             else
-        {
-                
-                PrivilegeRequest request = new PrivilegeRequest() { RequestType = "Privilege Escalation", MemberID = selectedTeamMember.ID, PrivilegeLevel = txe_privilegeLevel.Text, Approved = false };
-                privilegeRequestService.AddRequest(request);
-                DisplayAlert("Failure", "Unable to increase privileges without Deputy Team Leader approval - Sending for approval", "OK");
+            {
+                DisplayAlert("Failure", "Unable to use privilege level that is not an integer", "OK");
             }
         }
 
 
         selectedTeamMember = null;
         ltv_teamMembers.SelectedItem = null;
-        txe_teamMember.Text = "";
-        txe_privilegeLevel.Text = "";
+        txe_teamMember.Text = null;
+        txe_privilegeLevel.Text = null;
     }
 
     /*! <summary>
@@ -107,8 +113,8 @@ public partial class TeamMemberPage : ContentPage
         teamMembers.Remove(selectedTeamMember);
 
         ltv_teamMembers.SelectedItem = null;
-        txe_teamMember.Text = "";
-        txe_privilegeLevel.Text = "";
+        txe_teamMember.Text = null;
+        txe_privilegeLevel.Text = null;
     }
 
     /*! <summary>

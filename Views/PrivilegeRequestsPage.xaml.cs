@@ -6,8 +6,6 @@ namespace UndacApp.Views;
 
 public partial class PrivilegeRequestsPage : ContentPage
 {
-    private PrivilegeRequest selectedRequest = null;
-
     IPrivilegeRequestService requestService;
     ITeamMemberService memberService;
 

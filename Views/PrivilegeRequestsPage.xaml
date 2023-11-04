@@ -14,12 +14,18 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout Orientation="Vertical">
-                            <Label Text="{Binding RequestType}" TextColor="Black" />
-                            <Label Text="{Binding PrivilegeLevel}" TextColor="Black" />
-                            <Label Text="{Binding MemberID,Converter={StaticResource IntToString}}" TextColor="Black" />
-                            <Label Text="{Binding Approved,Converter={StaticResource boolToApproved}}" TextColor="Black" />
-                        </StackLayout>
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Text="{Binding MemberID,Converter={StaticResource IntToString}}" TextColor="Black" />
+                            <Label Grid.Row="1" Text="{Binding RequestType}" TextColor="Black" />
+                            <Label Grid.Row="2" Text="{Binding PrivilegeLevel}" TextColor="Black" />
+                            <Label Grid.Row="3" Text="{Binding Approved,Converter={StaticResource boolToApproved}}" TextColor="Black" />
+                        </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>

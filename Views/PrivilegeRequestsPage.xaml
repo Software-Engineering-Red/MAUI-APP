@@ -7,6 +7,7 @@
              xmlns:local="clr-namespace:UndacApp.Models">
     <ContentPage.Resources>
         <converters:BoolToApprovedConverter x:Key="boolToApproved" />
+        <converters:IntToStringConverter x:Key="IntToString" />
     </ContentPage.Resources>
     <VerticalStackLayout Spacing="10" Margin="5">
         <ListView x:Name="ltv_privilegeRequests" Background="White">
@@ -16,7 +17,7 @@
                         <StackLayout Orientation="Vertical">
                             <Label Text="{Binding RequestType}" TextColor="Black" />
                             <Label Text="{Binding PrivilegeLevel}" TextColor="Black" />
-                            <Label Text="{Binding MemberID}" TextColor="Black" />
+                            <Label Text="{Binding MemberID,Converter={StaticResource IntToString}}" TextColor="Black" />
                             <Label Text="{Binding Approved,Converter={StaticResource boolToApproved}}" TextColor="Black" />
                         </StackLayout>
                     </ViewCell>

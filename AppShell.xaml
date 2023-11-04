@@ -66,6 +66,10 @@
         <ShellContent
            Title="OrderStatusPage"
            ContentTemplate="{DataTemplate views:OrderStatusPage}" />
+
+        <ShellContent
+            Title="Experts"
+            ContentTemplate="{DataTemplate views:ExpertPage}"/>
     </TabBar>
 
 </Shell>

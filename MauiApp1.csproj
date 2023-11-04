@@ -78,6 +78,9 @@
 		</MauiXaml>		
 	  <MauiXaml Update="Views\OperationalTeamStatusPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>		
+	  <MauiXaml Update="Views\ExpertPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\WelcomePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
@@ -106,6 +109,9 @@
 	  <Compile Update="Views\SkillPage.xaml.cs">
 	    <DependentUpon>SkillPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\ExpertPage.xaml.cs">
+	    <DependentUpon>ExpertPage.xaml</DependentUpon>
+	  </Compile>
 		<Compile Update="Views\SystemPage.xaml.cs">
 			<DependentUpon>SystemPage.xaml</DependentUpon>
 		</Compile>
@@ -131,7 +137,6 @@
 	<ItemGroup>
 		<Folder Include="Documentation\reference\" />
 		<Folder Include="Images\" />
-		<Folder Include="Views\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <MauiXaml Update="MauiPage1.xaml">

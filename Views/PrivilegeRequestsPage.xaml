@@ -10,6 +10,15 @@
         <converters:IntToStringConverter x:Key="IntToString" />
     </ContentPage.Resources>
     <VerticalStackLayout Spacing="10" Margin="5">
+        
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
+            <Button Text="Approved"
+        Clicked="ApprovedButton_Clicked" />
+            <Button Grid.Column="1"
+        Text="Denied"
+        Clicked="DeniedButton_Clicked" />
+        </Grid>
+        
         <ListView x:Name="ltv_privilegeRequests" Background="White">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -30,13 +39,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
-            <Button Text="Approved"
-                Clicked="ApprovedButton_Clicked" />
-            <Button Grid.Column="1"
-                Text="Denied"
-                Clicked="DeniedButton_Clicked" />
-        </Grid>
 
     </VerticalStackLayout>
 </ContentPage>

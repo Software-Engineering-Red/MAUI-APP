@@ -13,12 +13,13 @@ public partial class PrivilegeRequestsPage : ContentPage
 
     public PrivilegeRequestsPage()
     {
-        InitializeComponent();
+        Task.Run(async () => await LoadRequests());
+        
         this.BindingContext = new PrivilegeRequest();
         this.requestService = new PrivilegeRequestService();
         this.memberService = new TeamMemberService();
 
-        Task.Run(async () => await LoadRequests());
+        InitializeComponent();
     }
 
     private async Task LoadRequests()

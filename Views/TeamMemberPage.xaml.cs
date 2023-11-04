@@ -65,6 +65,11 @@ public partial class TeamMemberPage : ContentPage
         {
             if (int.TryParse(txe_privilegeLevel.Text, out privilegeLevel) == true)
             {
+                selectedTeamMember.AccessPrivilegeLevel =
+                    selectedTeamMember.AccessPrivilegeLevel == null
+                    ? selectedTeamMember.AccessPrivilegeLevel = "0"
+                    : selectedTeamMember.AccessPrivilegeLevel = selectedTeamMember.AccessPrivilegeLevel;
+
                 if (privilegeLevel <= int.Parse(selectedTeamMember.AccessPrivilegeLevel))
                 {
                     selectedTeamMember.Name = txe_teamMember.Text;

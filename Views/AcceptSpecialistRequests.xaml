@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:views="clr-namespace:MauiApp1.Views"
-             x:Class="MauiApp1.Views.AcceptSpecialistRequests"
+             xmlns:views="clr-namespace:UndacApp.Views"
+             x:Class="UndacApp.Views.AcceptSpecialistRequests"
              BackgroundColor="#252525"
              Title="AcceptSpecialistRequests">
     <ScrollView>

@@ -1,7 +1,7 @@
-using MauiApp1.Models;
-using MauiApp1.Services;
+using UndacApp.Models;
+using UndacApp.Services;
 
-namespace MauiApp1.Views;
+namespace UndacApp.Views;
 
 /// <summary>
 /// Logic to creating new Specialist Requests.

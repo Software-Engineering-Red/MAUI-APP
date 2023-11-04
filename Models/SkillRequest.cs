@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 
 
-namespace MauiApp1.Models
+namespace UndacApp.Models
 {
 	public class SkillRequest : INotifyPropertyChanged
 	{

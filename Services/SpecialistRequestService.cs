@@ -1,10 +1,8 @@
-﻿using MauiApp1.Data;
-using MauiApp1.Models;
-using System.Text;
+﻿using UndacApp.Data;
+using UndacApp.Models;
 using SQLite;
-using Microsoft.Maui.Controls;
 
-namespace MauiApp1.Services
+namespace UndacApp.Services
 {
 	/// <summary>
 	/// Service to Apply the required SQL Statements to Add new 

@@ -23,6 +23,7 @@ public static class MauiProgram
 
     builder.Services.AddSingleton<Database>();
         builder.Services.AddSingleton<IContinentService, ContinentService>();
+        builder.Services.AddSingleton<ISecurityAlertService, SecurityAlertService>();
         builder.Services.AddSingleton<ISkillService, SkillService>();
 	    builder.Services.AddSingleton<IAlertTypeService, AlertTypeService>();
         builder.Services.AddSingleton<IBuildingTypeService, BuildingTypeService>();

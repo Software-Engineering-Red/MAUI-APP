@@ -57,6 +57,8 @@ public partial class PrivilegeRequestsPage : ContentPage
         }
         else
         {
+            var selectedRequest = ltv_privilegeRequests.SelectedItem as PrivilegeRequest;
+            await requestService.DeleteRequest(selectedRequest);
             await Shell.Current.DisplayAlert("Request denied", "Denied request", "OK");
             return;
         }

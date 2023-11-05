@@ -23,5 +23,7 @@ namespace UndacApp.Services
         Task<int> UpdatePrivilegeRequest(PrivilegeRequest request);
 
         Task<int> AddRequest(PrivilegeRequest request);
+
+        Task<int> DeleteRequest(PrivilegeRequest request);
     }
 }

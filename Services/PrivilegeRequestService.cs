@@ -44,5 +44,11 @@ namespace UndacApp.Services
             return await _dbConnection.InsertAsync(request);
 
         }
+
+        public async Task<int> DeleteRequest(PrivilegeRequest request)
+        {
+            await SetUpDb();
+            return await _dbConnection.DeleteAsync(request);
+        }
     }
 }

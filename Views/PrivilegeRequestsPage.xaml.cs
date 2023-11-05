@@ -28,21 +28,23 @@ public partial class PrivilegeRequestsPage : ContentPage
         ltv_privilegeRequests.ItemsSource = requests;
     }
 
-    private void ApprovedButton_Clicked(object sender, EventArgs e)
+    private async void ApprovedButton_Clicked(object sender, EventArgs e)
     {
         if (ltv_privilegeRequests.SelectedItem == null)
         {
-            Shell.Current.DisplayAlert("No request selected", "Select the request you wish to approve from the list", "OK");
+            await Shell.Current.DisplayAlert("No request selected", "Select the request you wish to approve from the list", "OK");
             return;
         }
         else
         {
             var selectedRequest = ltv_privilegeRequests.SelectedItem as PrivilegeRequest;
-            int updatedID = selectedRequest.ID;
-            TeamMember updatedMember = memberService.GetTeamMemberById(updatedID).Result;
-            updatedMember.AccessPrivilegeLevel = selectedRequest.PrivilegeLevel;
-            memberService.UpdateTeamMember(updatedMember);
+            int updatedID = selectedRequest.MemberID;
+            var teamMembers = new ObservableCollection<TeamMember>(await memberService.GetTeamMemberList());
+            var teamMember = teamMembers.FirstOrDefault(x => x.ID == updatedID);
+            teamMember.AccessPrivilegeLevel = selectedRequest.PrivilegeLevel;
+            await memberService.UpdateTeamMember(teamMember);
             selectedRequest.Approved = true;
+            await requestService.UpdatePrivilegeRequest(selectedRequest);
         }
     }
 

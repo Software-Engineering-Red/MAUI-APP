@@ -26,42 +26,39 @@ public partial class RequestSpecialists : ContentPage
 		PopulateSkillPicker();
 	}
 
+	/// <summary>
+	/// Overides On Appearing Method to Update Bindings
+	/// </summary>
+	protected override void OnAppearing()
+	{
+		base.OnAppearing();
+		Task.Run(async () => await PopulateSkillPicker());
+	}
+
 
 	/// <summary>
-	/// Creates new Request when button is pushed.
+	/// Reacts to a button push calls methods to initialize steps
+	/// to Add a new Record, if that is possible.
 	/// </summary>
 	/// <param name="sender">Button</param>
 	/// <param name="e">Event</param>
-	private async void OnAddRecordClicked(object sender, EventArgs e)
+	private void OnAddRecordClicked(object sender, EventArgs e)
 	{
-		Skill skill;
-		var numberRequired = 0;
-		try
-		{
-			numberRequired = Convert.ToInt32(NumberRequiredEntry.Text);
-		}
-		catch 
-		{
-			await DisplayAlert("Error", $"Failed to insert record into skills. Error: NumberRequired not a number", "OK");
-			NumberRequiredEntry.Text = "";
-			return;
-		}
-		try
-		{
-			skill = (Skill)SkillNamePicker.SelectedItem;
-		}
-		catch
-		{
-			await DisplayAlert("Error", $"Failed to insert record into skills. Error: Skill not found", "OK");
-			NumberRequiredEntry.Text = "";
-			return;
-		}
+		var numberRequired = GetNumberRequired();
+		var skillId = GetSkillId();
 		var startDate = StartDatePicker.Date;
 		var endDate = EndDatePicker.Date;
-		this.AddSkillRequest(skill.ID, numberRequired, startDate, endDate);
+		AddNewSkillRequest(skillId, numberRequired, startDate, endDate);
 	}
 
-	private async void AddSkillRequest(int skillId, int numberRequired, DateTime startDate, DateTime endDate)
+	/// <summary>
+	/// Adds a new Skill Request Record if that is possible.
+	/// </summary>
+	/// <param name="skillId"></param>
+	/// <param name="numberRequired"></param>
+	/// <param name="startDate"></param>
+	/// <param name="endDate"></param>
+	private void AddNewSkillRequest(int skillId, int numberRequired, DateTime startDate, DateTime endDate)
 	{
 		if (CheckAddable(skillId, numberRequired))
 		{
@@ -69,18 +66,60 @@ public partial class RequestSpecialists : ContentPage
 			{
 				specialistRequestService.AddUnapprovedSkillRequest(skillId, numberRequired,
 					startDate, endDate);
-				await DisplayAlert("Success", $"Successfully inserted record into skills.", "OK");
+				DisplayAlert("Success", $"Successfully inserted record into skills.", "OK");
 			}
 			catch (Exception ex)
 			{
-				await DisplayAlert("Error", $"Failed to insert record into skills. Error: {ex.Message}", "OK");
+				DisplayAlert("Error", $"Failed to insert record into skills. Error: {ex.Message}", "OK");
 				return;
 			}
 		}
 	}
 
 	/// <summary>
-	/// Checks whether something can be added or if there are missing vaues.
+	/// Returns the Number (of Helpers) Required, if that is possible.
+	/// </summary>
+	/// <returns>Number (of Helpers) Required</returns>
+	private int GetNumberRequired()
+	{
+		try
+		{
+			return Convert.ToInt32(NumberRequiredEntry.Text);
+		}
+		catch 
+		{
+			DisplayAlert("Error", $"Failed to insert record into skills. Error: Number of Helpers required is not a number", "OK");
+			NumberRequiredEntry.Text = "";
+			return 0;
+		}
+	}
+
+	/// <summary>
+	/// Returns the Id of a certain Skill, if that is possible.
+	/// </summary>
+	/// <returns>Skill ID</returns>
+	private int GetSkillId()
+	{
+		try
+		{
+			var skill = (Skill)SkillNamePicker.SelectedItem;
+			if (skill == null)
+			{
+				DisplayAlert("Error", $"Failed to insert record into skills. Error: Skill not found", "OK");
+				return 0;
+			}
+			return skill.ID;
+		}
+		catch
+		{
+			DisplayAlert("Error", $"Failed to insert record into skills. Error: Skill not found", "OK");
+			NumberRequiredEntry.Text = "";
+			return 0;
+		}
+	}
+
+	/// <summary>
+	/// Checks whether a new Skill Request, can be added or whether there are missing vaues.
 	/// </summary>
 	/// <param name="skillId">Skill Id</param>
 	/// <param name="numberRequired">Number of requird Persons</param>
@@ -105,8 +144,16 @@ public partial class RequestSpecialists : ContentPage
 	/// </summary>
 	private async Task PopulateSkillPicker()
 	{
-		Skills = new ObservableCollection<Skill>(await skillService.GetSkillList());
-		SkillNamePicker.ItemsSource = Skills;
+		try
+		{
+			Skills = new ObservableCollection<Skill>(await skillService.GetSkillList());
+			SkillNamePicker.ItemsSource = Skills;
+		}
+		catch (Exception ex)
+		{
+			await DisplayAlert("Error", $"Failed to load Skills. Error: {ex.Message}", "OK");
+			return;
+		}
 	}
 
 	/// <summary>

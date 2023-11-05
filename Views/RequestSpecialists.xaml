@@ -18,7 +18,7 @@
                     <Picker x:Name="SkillNamePicker" TextColor="White" BackgroundColor="#454545" 
                         ItemDisplayBinding="{Binding Name}" />
 
-                    <Entry Placeholder="Number Required" x:Name="NumberRequiredEntry" Keyboard="Numeric"
+                    <Entry Placeholder="Number of Helpers Required" x:Name="NumberRequiredEntry" Keyboard="Numeric"
                            TextColor="White" 
                            PlaceholderColor="#aaa" 
                            BackgroundColor="#454545" />

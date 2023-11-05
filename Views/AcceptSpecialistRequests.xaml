@@ -85,9 +85,8 @@
                                         </FormattedString>
                                     </Label.FormattedText>
                                 </Label>
-
                                 <Button Text="Approve with my company" Clicked="OnButtonClickApprove" BackgroundColor="#4CAF50" TextColor="White" CornerRadius="8"  />
-                                
+                                <Button Text="Delete Request" Clicked="OnButtonClickDelete" BackgroundColor="OrangeRed" TextColor="White" CornerRadius="8"  />
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

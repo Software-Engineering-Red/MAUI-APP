@@ -11,17 +11,23 @@ public partial class AcceptSpecialistRequests : ContentPage
 {
 
 	/// <summary>
-	/// database Service for Specialist Requests 
+	/// Database Service for Specialist Requests 
 	/// </summary>
 	private ISpecialistRequestService specialistRequestService;
 
+	/// <summary>
+	/// Database Service for Organisation Requests 
+	/// </summary>
 	private IOrganisationService organisationService;
 
 	/// <summary>
-	/// List of SkillRequests
+	/// Observable Collection of SkillRequests
 	/// </summary>
 	public ObservableCollection<SkillRequest> Skills { get; set; } = new ObservableCollection<SkillRequest>();
 
+	/// <summary>
+	/// Observable Collection of Organisations
+	/// </summary>
 	public ObservableCollection<Organisation> Organisations { get; set; } = new ObservableCollection<Organisation>();
 	/// <summary>
 	/// Constructor initialising Database Services and filling UI with values.
@@ -32,19 +38,28 @@ public partial class AcceptSpecialistRequests : ContentPage
 		this.BindingContext = this;
 		this.specialistRequestService = new SpecialistRequestService();
 		this.organisationService = new OrganisationService();
-
-		populateRequestList();
 		PopulateOrganisationPicker();
+		Task.Run(async () => await LoadRequests());
+	}
+
+	/// <summary>
+	/// Overides On Appearing Method to Update Bindings
+	/// </summary>
+	protected override void OnAppearing()
+	{
+		base.OnAppearing();
+		PopulateOrganisationPicker();
+		LoadRequests();
 	}
 
 	/// <summary>
 	/// Adds All Requests to list and to ListView.
 	/// </summary>
-	private async Task populateRequestList()
+	private async Task LoadRequests()
 	{
 		try
 		{
-			Skills = new ObservableCollection<SkillRequest>(await specialistRequestService.GetSkillRequestListAsync());
+			Skills = new ObservableCollection<SkillRequest>(await specialistRequestService.GetAll());
 			SkillsRequestsListView.ItemsSource = Skills;
 		}
 		catch (Exception ex) 
@@ -66,9 +81,15 @@ public partial class AcceptSpecialistRequests : ContentPage
 			try
 			{
 				var organisation = OrganisationPicker.SelectedItem as Organisation;
-				if (CheckUpdateable(item.Status, item.OrganisationId, organisation.id))
+				if (organisation == null)
 				{
-					specialistRequestService.approveSkillRequest(item.Id, organisation);
+					await DisplayAlert("Error", $"Organisation not selected.", "OK");
+					return;
+				}
+				if (CheckUpdateable(item))
+				{
+					specialistRequestService.approveSkillRequest(item.ID, organisation);
+					await Task.Run(LoadRequests);
 					await DisplayAlert("Success", $"Successfully inserted record into skills.", "OK");
 				}
 			}
@@ -78,26 +99,60 @@ public partial class AcceptSpecialistRequests : ContentPage
 				return;
 			}
 		}
-		RefreshRequests();
 	}
+
+
+
+	/// <summary>
+	/// Deletes Skill Request when button is pushed.
+	/// </summary>
+	/// <param name="sender">Sender</param>
+	/// <param name="e">Event</param>
+	private async void OnButtonClickDelete(object sender, EventArgs e)
+	{
+		if (sender is Button button && button.BindingContext is SkillRequest item)
+		{
+			try
+			{
+				DeleteRecord(item.ID);
+			}
+			catch (Exception ex)
+			{
+				await DisplayAlert("Error", $"Failed to delete Request. Error: {ex.Message}", "OK");
+				return;
+			}
+		}
+	}
+
+	/// <summary>
+	/// Deletes Skill Request.
+	/// </summary>
+	/// <param name="item">Skill Request to be deleted</param>
+	private async void DeleteRecord(int id)
+	{
+		var deleteBool = true;
+		deleteBool = await DisplayAlert("Confirmation", "Are you sure you want to delete this request?", "Yes", "No");
+		if (deleteBool)
+		{
+			await specialistRequestService.RemoveByID(id);
+		}
+		PopulateOrganisationPicker();
+		LoadRequests();
+	}
+
 
 	/// <summary>
 	/// Checks whether it is possible to update value.
 	/// </summary>
-	/// <param name="status">Current Status</param>
-	/// <param name="currentOrganisationId">Current OrganisationID</param>
-	/// <param name="newOrganisationId">OrganisationID that should be entered</param>
-	/// <returns>bool whether Updateable</returns>
-	private bool CheckUpdateable(string status, int currentOrganisationId, int newOrganisationId)
+	/// <param name="skillRequest">Skill Request</param>
+	/// <returns></returns>
+	private bool CheckUpdateable(SkillRequest skillRequest)
 	{
-		if (status == "Approved")
+		if (skillRequest == null)
+			return false;
+		if (skillRequest.Status == "Approved")
 		{
 			DisplayAlert("Not Possible", "The Request already has been approved.", "OK");
-			return false;
-		}
-		if (newOrganisationId == currentOrganisationId)
-		{
-			DisplayAlert("Not Possible", "The Request already was approved by this Organisation.", "OK");
 			return false;
 		}
 		return true;
@@ -111,34 +166,12 @@ public partial class AcceptSpecialistRequests : ContentPage
 	{
 		try
 		{
-			var organisations = await organisationService.GetOrganisationList();
-			foreach (var organisation in organisations)
-			{
-				Console.WriteLine(organisation);
-			}
-			OrganisationPicker.ItemsSource = organisations;
+			Organisations = new ObservableCollection<Organisation>(await organisationService.GetOrganisationList());
+			OrganisationPicker.ItemsSource = Organisations;
 		}
 		catch (Exception ex)
 		{
-			Console.WriteLine(ex.Message);
 			DisplayAlert("Error", "Failed to load Organisations.", "OK");
-		}
-	}
-
-
-	/// <summary>
-	/// Refreshes the ListView of all Requests.
-	/// </summary>
-	private async void RefreshRequests()
-	{
-		try
-		{
-			populateRequestList();
-		}
-		catch (Exception ex)
-		{
-
-			DisplayAlert("Error", $"Failed to load records for Requests.", "OK");
 		}
 	}
 }

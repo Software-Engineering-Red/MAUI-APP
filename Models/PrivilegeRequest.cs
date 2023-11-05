@@ -10,29 +10,37 @@ using System.Xml.Linq;
 
 namespace UndacApp.Models
 {
-    public class TeamMember : INotifyPropertyChanged {
+    public class PrivilegeRequest : INotifyPropertyChanged
+    {
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
-        private string name;
-        private string accessPrivilegeLevel;
-        private bool available = true;
+        private string requestType;
+        private int memberID;
+        private string privilegeLevel;
+        private bool approved;
 
-        public string Name
-    {
-            get => name;
-            set => SetProperty(ref name, value);
+        public bool Approved
+        {
+            get => approved;
+            set => SetProperty(ref approved, value);
         }
 
-        public string AccessPrivilegeLevel
+        public string RequestType
         {
-            get => accessPrivilegeLevel;
-            set => SetProperty(ref accessPrivilegeLevel, value);
+            get => requestType;
+            set => SetProperty(ref requestType, value);
         }
 
-        public bool Available
+        public string PrivilegeLevel
         {
-            get => available;
-            set => SetProperty(ref available, value);
+            get => privilegeLevel;
+            set => SetProperty(ref privilegeLevel, value);
+        }
+
+        public int MemberID
+        {
+            get => memberID;
+            set => SetProperty(ref  memberID, value);
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -45,7 +53,7 @@ namespace UndacApp.Models
         protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
         {
             if (EqualityComparer<T>.Default.Equals(storage, value))
-        {
+            {
                 return false;
             }
 

@@ -6,72 +6,133 @@ namespace UndacApp.Views;
 
 public partial class TeamMemberPage : ContentPage
 {
+    /*! <summary>
+        A reference pointer for storing currently selected TeamMember.
+     </summary> */
     private TeamMember selectedTeamMember = null;
+    private int privilegeLevel;
 
-    ITeamMemberService teammemberService;
+    /*! <summary>
+        An instance of ITeamMemberService
+     </summary> */
+    ITeamMemberService teamMemberService;
+    IPrivilegeRequestService privilegeRequestService;
 
-    public ObservableCollection<TeamMember> Teammembers { get; set; }
+    /*! <summary>
+        Collection of current TeamMembers.
+    </summary> */
+    ObservableCollection<TeamMember> teamMembers = new ObservableCollection<TeamMember>();
 
+    /*! <summary>
+        Constructor class, setting the binding context and initiating the TeamMember serrvice, as well as loading the TeamMember list.
+    </summary> */
     public TeamMemberPage()
 	{
         InitializeComponent();
-        Teammembers = new ObservableCollection<TeamMember>();
         this.BindingContext = new TeamMember();
-        this.teammemberService = new TeamMemberService();
+        this.teamMemberService = new TeamMemberService();
+        this.privilegeRequestService = new PrivilegeRequestService();
 
-        Task.Run(async () => await LoadData());
-        txe_teammember.Text = "";
+        Task.Run(async () => await LoadTeamMembers());
     }
 
-    private async Task LoadData()
+    /*! <summary>
+            Private method loading the TeamMember list using TeamMemberService getter.
+        </summary> 
+        <returns>Task promise, informing about the status of its' completion.</returns> */
+    private async Task LoadTeamMembers()
     {
-        Teammembers = new ObservableCollection<TeamMember>(await teammemberService.GetAll());
-        ltv_teammember.ItemsSource = Teammembers;
+        teamMembers = new ObservableCollection<TeamMember>(await teamMemberService.GetTeamMemberList());
+        ltv_teamMembers.ItemsSource = teamMembers;
     }
 
+    /*! <summary>
+            Method responsible for saving TeamMember into SQLite database, triggered by selection of save button.
+        </summary> 
+        <param name="sender">Details about the element that triggered the event.</param>
+        <param name="e">Event details, passed by eventHandler due to clicking event button.</param> */
     private void SaveButton_Clicked(object sender, EventArgs e)
     {
-        if (String.IsNullOrEmpty(txe_teammember.Text)) return;
+        if (String.IsNullOrEmpty(txe_teamMember.Text) || String.IsNullOrEmpty(txe_privilegeLevel.Text)) return;
 
-        if (selectedTeamMember == null)
+        if (selectedTeamMember == null && int.TryParse(txe_privilegeLevel.Text, out privilegeLevel) == true)
         {
-            var teammember = new TeamMember() { Name = txe_teammember.Text };
-            teammemberService.Add(teammember);
-            Teammembers.Add(teammember);
-        } else
+            var teamMember = new TeamMember() { Name = txe_teamMember.Text, AccessPrivilegeLevel = txe_privilegeLevel.Text };
+            teamMemberService.AddTeamMember(teamMember);
+            teamMembers.Add(teamMember);
+        }
+        else
         {
-            selectedTeamMember.Name = txe_teammember.Text;
-            teammemberService.Update(selectedTeamMember);
-            var teammember = Teammembers.FirstOrDefault(x => x.ID == selectedTeamMember.ID);
-            teammember.Name = txe_teammember.Text;
+            if (int.TryParse(txe_privilegeLevel.Text, out privilegeLevel) == true)
+            {
+                selectedTeamMember.AccessPrivilegeLevel =
+                    selectedTeamMember.AccessPrivilegeLevel == null
+                    ? selectedTeamMember.AccessPrivilegeLevel = "0"
+                    : selectedTeamMember.AccessPrivilegeLevel = selectedTeamMember.AccessPrivilegeLevel;
+
+                if (privilegeLevel <= int.Parse(selectedTeamMember.AccessPrivilegeLevel))
+                {
+                    selectedTeamMember.Name = txe_teamMember.Text;
+                    selectedTeamMember.AccessPrivilegeLevel = txe_privilegeLevel.Text;
+                    teamMemberService.UpdateTeamMember(selectedTeamMember);
+                    var teamMember = teamMembers.FirstOrDefault(x => x.ID == selectedTeamMember.ID);
+                    teamMember.Name = txe_teamMember.Text;
+                    teamMember.AccessPrivilegeLevel = txe_privilegeLevel.Text;
+                }
+                else
+                {
+
+                    PrivilegeRequest request = new PrivilegeRequest() { RequestType = "Privilege Escalation", MemberID = selectedTeamMember.ID, PrivilegeLevel = txe_privilegeLevel.Text, Approved = false };
+                    privilegeRequestService.AddRequest(request);
+                    DisplayAlert("Failure", "Unable to increase privileges without Deputy Team Leader approval - Sending for approval", "OK");
+                }
+            }
+            else
+            {
+                DisplayAlert("Failure", "Unable to use privilege level that is not an integer", "OK");
+            }
         }
 
 
         selectedTeamMember = null;
-        ltv_teammember.SelectedItem = null;
-        txe_teammember.Text = "";
+        ltv_teamMembers.SelectedItem = null;
+        txe_teamMember.Text = null;
+        txe_privilegeLevel.Text = null;
     }
 
+    /*! <summary>
+             Method responsible for removing TeamMember from SQLite database, triggered by selection of delete button.
+             Note: If no TeamMember is selected, no TeamMember will be removed.
+        </summary> 
+        <param name="sender">Details about the element that triggered the event.</param>
+        <param name="e">Event details, passed by eventHandler due to clicking event button.</param> */
     private async void DeleteButton_Clicked(object sender, EventArgs e)
     {
-        if (ltv_teammember.SelectedItem == null)
+        if (ltv_teamMembers.SelectedItem == null)
         {
-            await Shell.Current.DisplayAlert("No Team Member Selected", "Select the Team Member you want to delete from the list", "OK");
+            await Shell.Current.DisplayAlert("No TeamMember Selected", "Select the teamMember you want to delete from the list", "OK");
             return;
         }
 
-        await teammemberService.Remove(selectedTeamMember);
-        Teammembers.Remove(selectedTeamMember);
+        await teamMemberService.DeleteTeamMember(selectedTeamMember);
+        teamMembers.Remove(selectedTeamMember);
 
-        ltv_teammember.SelectedItem = null;
-        txe_teammember.Text = "";
+        ltv_teamMembers.SelectedItem = null;
+        txe_teamMember.Text = null;
+        txe_privilegeLevel.Text = null;
     }
 
-    private void ltv_teammember_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+    /*! <summary>
+            Method responsible for updating currently selected item, integrating UI and Backend functionality.
+        </summary> 
+        <param name="sender">Details about the element that triggered the event.</param>
+        <param name="e">Event details, passed by eventHandler due to clicking event button.</param> */
+    private void ltv_teamMembers_ItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
         selectedTeamMember = e.SelectedItem as TeamMember;
         if (selectedTeamMember == null) return;
 
-        txe_teammember.Text = selectedTeamMember.Name;
+        txe_teamMember.Text = selectedTeamMember.Name;
+        txe_privilegeLevel.Text = selectedTeamMember.AccessPrivilegeLevel;
     }
 }

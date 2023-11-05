@@ -67,6 +67,9 @@
         <MauiXaml Update="Views\ContinentPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+        <MauiXaml Update="Views\PrivilegeRequestsPage.xaml">
+          <Generator>MSBuild:Compile</Generator>
+        </MauiXaml>
 		<MauiXaml Update="Views\RolesPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
@@ -99,6 +102,9 @@
 		</Compile>
 		<Compile Update="Views\ContinentPage.xaml.cs">
 			<DependentUpon>ContinentPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\PrivilegeRequestsPage.xaml.cs">
+		  <DependentUpon>PrivilegeRequestsPage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Views\RolesPage.xaml.cs">
 			<DependentUpon>RolesPage.xaml</DependentUpon>

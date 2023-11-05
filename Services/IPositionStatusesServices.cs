@@ -1,11 +1,11 @@
-﻿using MauiApp1.Models;
+﻿using UndacApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MauiApp1.Services
+namespace UndacApp.Services
 {
     /// <summary>
     /// this interface is to be used for defining that the classes implemented with this interface have these task function

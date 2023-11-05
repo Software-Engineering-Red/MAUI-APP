@@ -1,10 +1,10 @@
-﻿using MauiApp1.Data;
-using MauiApp1.Models;
+﻿using UndacApp.Data;
+using UndacApp.Models;
 using SQLite;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace MauiApp1.Services
+namespace UndacApp.Services
 {
     /// <summary>
     /// Service for managing skills using SQLite database.

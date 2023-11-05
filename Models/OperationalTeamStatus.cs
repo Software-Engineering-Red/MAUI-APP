@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MauiApp1.Models
+namespace UndacApp.Models
 {
     /// <summary>
     /// Class representing the Status of OperationalTeam extending INotifyPropertyChanged.

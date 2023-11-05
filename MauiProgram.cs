@@ -1,8 +1,8 @@
-﻿using MauiApp1.Data;
-using MauiApp1.Services;
+﻿using UndacApp.Data;
+using UndacApp.Services;
 using Microsoft.Extensions.Logging;
 
-namespace MauiApp1;
+namespace UndacApp;
 
 public static class MauiProgram
 {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MauiApp1.Data
+namespace UndacApp.Data
 {
     public class Database
     {
@@ -49,7 +49,8 @@ namespace MauiApp1.Data
                 await _database.CreateTableAsync<Models.Rota>();
                 await _database.CreateTableAsync<Models.Skill>();
                 await _database.CreateTableAsync<Models.SystemType>();
-                await _database.CreateTableAsync<Models.Expert>();
+                await _database.CreateTableAsync<Models.TeamMember>();
+                await _database.CreateTableAsync<Models.PrivilegeRequest>();
 
             }
             catch (Exception ex)

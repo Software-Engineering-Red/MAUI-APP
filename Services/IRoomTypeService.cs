@@ -1,6 +1,6 @@
-﻿using MauiApp1.Models;
+﻿using UndacApp.Models;
 
-namespace MauiApp1.Services
+namespace UndacApp.Services
 {
     /// <summary>
     /// Interface used for managing rooms 

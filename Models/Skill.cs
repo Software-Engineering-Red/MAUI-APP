@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace MauiApp1.Models
+namespace UndacApp.Models
 {
     public class Skill : INotifyPropertyChanged
     {
@@ -16,22 +16,27 @@ namespace MauiApp1.Models
         public int ID { get; set; }
 
 
-        private string name;
+        private string _name;
         public string Name
         {
-            get => name;
-            set => SetField(ref name, value);
+            get => _name;
+            set => SetProperty(ref _name, value);
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
-
-        protected void OnPropertyChanged(string propertyName) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
-        protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-            field = value;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(storage, value))
+            {
+                return false;
+            }
+
+            storage = value;
             OnPropertyChanged(propertyName);
             return true;
         }

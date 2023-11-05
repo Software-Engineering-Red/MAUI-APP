@@ -1,12 +1,12 @@
-using MauiApp1.Models;
-using MauiApp1.Services;
+using UndacApp.Models;
+using UndacApp.Services;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 
 
-namespace MauiApp1.Views
+namespace UndacApp.Views
 {
 /*! <summary>
         OrderStatusPage class extending ContentPage - responsible for OrderStatusPage view
@@ -33,7 +33,7 @@ namespace MauiApp1.Views
         public OrderStatusPage()
         {
             InitializeComponent();
-            this.BindingContext = this;
+            BindingContext = new OrderStatus();
             this.orderStatusService = new OrderStatusService();
 
             Task.Run(async () => await LoadOrderStatus());

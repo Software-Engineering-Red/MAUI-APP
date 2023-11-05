@@ -1,8 +1,8 @@
-using MauiApp1.Models;
-using MauiApp1.Services;
+using UndacApp.Models;
+using UndacApp.Services;
 using System.Collections.ObjectModel;
 
-namespace MauiApp1.Views;
+namespace UndacApp.Views;
 
 /// <summary>
 /// This class extending ContentPage provides the functional logic to
@@ -32,7 +32,7 @@ public partial class OperationalTeamStatusPage : ContentPage
     public OperationalTeamStatusPage()
     {
         InitializeComponent();
-        this.BindingContext = this;
+        BindingContext = new OperationalTeamStatus();
         this.statusService = new OperationalTeamStatusService();
 
         Task.Run(async () => await LoadStates());

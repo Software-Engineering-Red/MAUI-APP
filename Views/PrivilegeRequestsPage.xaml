@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:UndacApp.Converters"
+             x:Class="UndacApp.Views.PrivilegeRequestsPage"
+             Title="PrivilegeRequestsPage"
+             xmlns:local="clr-namespace:UndacApp.Models">
+    <ContentPage.Resources>
+        <converters:BoolToApprovedConverter x:Key="boolToApproved" />
+        <converters:IntToStringConverter x:Key="IntToString" />
+    </ContentPage.Resources>
+    <VerticalStackLayout Spacing="10" Margin="5">
+        
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
+            <Button Text="Approved"
+        Clicked="ApprovedButton_Clicked" />
+            <Button Grid.Column="1"
+        Text="Denied"
+        Clicked="DeniedButton_Clicked" />
+        </Grid>
+        
+        <ListView x:Name="ltv_privilegeRequests" Background="White">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Text="{Binding MemberID,Converter={StaticResource IntToString}}" TextColor="Black" />
+                            <Label Grid.Row="1" Text="{Binding RequestType}" TextColor="Black" />
+                            <Label Grid.Row="2" Text="{Binding PrivilegeLevel}" TextColor="Black" />
+                            <Label Grid.Row="3" Text="{Binding Approved,Converter={StaticResource boolToApproved}}" TextColor="Black" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </VerticalStackLayout>
+</ContentPage>

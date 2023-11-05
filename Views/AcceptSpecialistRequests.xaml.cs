@@ -23,7 +23,7 @@ public partial class AcceptSpecialistRequests : ContentPage
 	/// <summary>
 	/// Observable Collection of SkillRequests
 	/// </summary>
-	public ObservableCollection<SkillRequest> Skills { get; set; } = new ObservableCollection<SkillRequest>();
+	public ObservableCollection<SkillRequest> SkillRequests { get; set; } = new ObservableCollection<SkillRequest>();
 
 	/// <summary>
 	/// Observable Collection of Organisations
@@ -35,7 +35,7 @@ public partial class AcceptSpecialistRequests : ContentPage
 	public AcceptSpecialistRequests()
 	{
 		InitializeComponent();
-		this.BindingContext = this;
+		this.BindingContext = new SkillRequest();
 		this.specialistRequestService = new SpecialistRequestService();
 		this.organisationService = new OrganisationService();
 		PopulateOrganisationPicker();
@@ -59,8 +59,8 @@ public partial class AcceptSpecialistRequests : ContentPage
 	{
 		try
 		{
-			Skills = new ObservableCollection<SkillRequest>(await specialistRequestService.GetAll());
-			SkillsRequestsListView.ItemsSource = Skills;
+			SkillRequests = new ObservableCollection<SkillRequest>(await specialistRequestService.GetAll());
+			SkillsRequestsListView.ItemsSource = SkillRequests;
 		}
 		catch (Exception ex) 
 		{

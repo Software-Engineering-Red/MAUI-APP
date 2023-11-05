@@ -151,7 +151,7 @@ public partial class RequestSpecialists : ContentPage
 		}
 		catch (Exception ex)
 		{
-			await DisplayAlert("Error", $"Failed to load Skills. Error: {ex.Message}", "OK");
+			await DisplayAlert("Error", $"Failed to load SkillRequests. Error: {ex.Message}", "OK");
 			return;
 		}
 	}

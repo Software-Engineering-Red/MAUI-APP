@@ -19,7 +19,14 @@
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Orientation="Vertical" Padding="20" BackgroundColor="#373737">
-                                <Label Text="{Binding Id, StringFormat='Request: {0:F0}'}" FontSize="20" FontAttributes="Bold" TextColor="White"/>
+                                <Label FontSize="20" FontAttributes="Bold" TextColor="White">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Request#" />
+                                            <Span Text="{Binding ID}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
                                 <Label Text="" />
                                 <Label FontSize="16" TextColor="White">
                                     <Label.FormattedText>

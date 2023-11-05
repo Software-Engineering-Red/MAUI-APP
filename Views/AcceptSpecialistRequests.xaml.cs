@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using UndacApp.Models;
 using UndacApp.Services;
 
@@ -19,7 +20,9 @@ public partial class AcceptSpecialistRequests : ContentPage
 	/// <summary>
 	/// List of SkillRequests
 	/// </summary>
-	private List<SkillRequest> _currentRecords;
+	public ObservableCollection<SkillRequest> Skills { get; set; } = new ObservableCollection<SkillRequest>();
+
+	public ObservableCollection<Organisation> Organisations { get; set; } = new ObservableCollection<Organisation>();
 	/// <summary>
 	/// Constructor initialising Database Services and filling UI with values.
 	/// </summary>
@@ -37,12 +40,12 @@ public partial class AcceptSpecialistRequests : ContentPage
 	/// <summary>
 	/// Adds All Requests to list and to ListView.
 	/// </summary>
-	private async void populateRequestList()
+	private async Task populateRequestList()
 	{
 		try
 		{
-			_currentRecords = await this.specialistRequestService.GetSkillRequestListAsync();
-			SkillsRequestsListView.ItemsSource = _currentRecords;
+			Skills = new ObservableCollection<SkillRequest>(await specialistRequestService.GetSkillRequestListAsync());
+			SkillsRequestsListView.ItemsSource = Skills;
 		}
 		catch (Exception ex) 
 		{
@@ -62,11 +65,10 @@ public partial class AcceptSpecialistRequests : ContentPage
 		{
 			try
 			{
-				var organisationName = (string)OrganisationPicker.SelectedItem;
-				var organisationId = GetOrganisationId(organisationName);
-				if (CheckUpdateable(item.Status, item.OrganisationId, organisationId))
+				var organisation = OrganisationPicker.SelectedItem as Organisation;
+				if (CheckUpdateable(item.Status, item.OrganisationId, organisation.id))
 				{
-					specialistRequestService.approveSkillRequest(item.Id, organisationId);
+					specialistRequestService.approveSkillRequest(item.Id, organisation);
 					await DisplayAlert("Success", $"Successfully inserted record into skills.", "OK");
 				}
 			}
@@ -101,16 +103,6 @@ public partial class AcceptSpecialistRequests : ContentPage
 		return true;
 	}
 
-	/// <summary>
-	/// Gets (first) Organisation ID by its name.
-	/// </summary>
-	/// <param name="name">Organisation Name</param>
-	/// <returns></returns>
-	private int GetOrganisationId(string name)
-	{
-		var result = 1; //HAs to be fixed later 
-		return result;
-	}
 
 	/// <summary>
 	/// Adds Values to OrganisationPicker.
@@ -141,8 +133,6 @@ public partial class AcceptSpecialistRequests : ContentPage
 	{
 		try
 		{
-			_currentRecords = await specialistRequestService.GetSkillRequestListAsync();
-			SkillsRequestsListView.ItemsSource = _currentRecords;
 			populateRequestList();
 		}
 		catch (Exception ex)

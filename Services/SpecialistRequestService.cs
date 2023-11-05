@@ -21,7 +21,7 @@ namespace UndacApp.Services
 				return;
 
 			_dbConnection = new SQLiteAsyncConnection(DatabaseSettings.DBPath, DatabaseSettings.Flags);
-			await _dbConnection.CreateTableAsync<Skill>();
+			await _dbConnection.CreateTableAsync<SkillRequest>();
 		}
 
 		/// <summary>
@@ -33,13 +33,13 @@ namespace UndacApp.Services
 		/// <param name="numberRequired">Number of Persons Required</param>
 		/// <param name="startDate">Start Date</param>
 		/// <param name="endDate">End Date</param>
-		async void ISpecialistRequestService.AddUnapprovedSkillRequest(string skillName, int numberRequired,
+		async void ISpecialistRequestService.AddUnapprovedSkillRequest(int skillId, int numberRequired,
 			DateTime startDate, DateTime endDate)
 		{
 			SkillRequest skillRequest = new SkillRequest()
 			{
 				Id = 1,
-				SkillName = skillName,
+				SkillId = skillId,
 				OrganisationId = 0,
 				RequestDate = DateTime.Now,
 				RequestedBy = 0,
@@ -58,12 +58,13 @@ namespace UndacApp.Services
 		/// </summary>
 		/// <param name="id">Id of Request</param>
 		/// <param name="organisationId">Id of Organisation</param>
-		async void ISpecialistRequestService.approveSkillRequest(int id, int organisationId)
+		async void ISpecialistRequestService.approveSkillRequest(int id, Organisation organisation)
 		{
 			SkillRequest skillRequest = await ((ISpecialistRequestService)this).GetSkillRequestByIdAsync(id);
-			skillRequest.OrganisationId = organisationId;
+			skillRequest.OrganisationId = organisation.id;
 			skillRequest.ConfirmedDate = DateTime.Today;
 			skillRequest.Status = "Approved";
+			await ((ISpecialistRequestService)this).UpdateSkillRequestAsync(skillRequest);
 		}
 
 

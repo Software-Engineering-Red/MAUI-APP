@@ -1,5 +1,4 @@
 ﻿using SQLite;
-using MauiApp1.Models;
 
 namespace UndacApp.Data
 {

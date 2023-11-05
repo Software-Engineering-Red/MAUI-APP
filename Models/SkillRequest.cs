@@ -10,7 +10,7 @@ namespace UndacApp.Models
 	{
 		[PrimaryKey, AutoIncrement]
 		public int Id { get; set; }
-		public string SkillName { get; set; }
+		public int SkillId { get; set; }
 		public int OrganisationId { get; set; }
 		public DateTime RequestDate { get; set; }
 		public int RequestedBy { get; set; }

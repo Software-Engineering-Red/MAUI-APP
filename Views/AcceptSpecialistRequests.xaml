@@ -10,7 +10,8 @@
             <Frame CornerRadius="10" Padding="20" BackgroundColor="#373737">
                 <VerticalStackLayout Spacing="15">
                     <Label Text="Select your Organisation:" FontSize="20" FontAttributes="Bold" TextColor="White" />
-                    <Picker x:Name="OrganisationPicker" TextColor="White" BackgroundColor="#454545" />
+                    <Picker x:Name="OrganisationPicker" TextColor="White" BackgroundColor="#454545" 
+                            ItemDisplayBinding="{Binding Name}"/>
                 </VerticalStackLayout>
             </Frame>
             <ListView x:Name="SkillsRequestsListView" BackgroundColor="#373737" SeparatorColor="Gray">
@@ -24,7 +25,7 @@
                                     <Label.FormattedText>
                                         <FormattedString>
                                             <Span Text="Skill required: " FontAttributes="Bold"/>
-                                            <Span Text="{Binding SkillName}" />
+                                            <Span Text="{Binding SkillId}" />
                                         </FormattedString>
                                     </Label.FormattedText>
                                 </Label>

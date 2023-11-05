@@ -65,6 +65,12 @@
         <ShellContent
            Title="TeamMemberPage"
            ContentTemplate="{DataTemplate views:TeamMemberPage}" />
+        <ShellContent
+           Title="Request Specialists"
+           ContentTemplate="{DataTemplate views:RequestSpecialists}" />
+        <ShellContent
+           Title="Accept Specialist Requests"
+           ContentTemplate="{DataTemplate views:AcceptSpecialistRequests}" />
     </TabBar>
 
 </Shell>

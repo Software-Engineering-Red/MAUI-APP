@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using UndacApp.Models;
 using UndacApp.Services;
 
@@ -8,12 +9,9 @@ namespace UndacApp.Views;
 /// </summary>
 public partial class RequestSpecialists : ContentPage
 {
-
-	/// <summary>
-	/// database Service for Specialist Requests .
-	/// </summary>
 	private ISpecialistRequestService specialistRequestService;
 	private ISkillService skillService;
+	private ObservableCollection<Skill> Skills { get; set; } = new ObservableCollection<Skill>();
 
 	/// <summary>
 	/// Constructor initialising Database Services and filling UI with values.
@@ -21,9 +19,10 @@ public partial class RequestSpecialists : ContentPage
 	public RequestSpecialists()
 	{
 		InitializeComponent();
+		BindingContext = this;
 
 		specialistRequestService = new SpecialistRequestService();
-		skillService = new SkillService();	
+		this.skillService = new SkillService();
 		PopulateSkillPicker();
 	}
 
@@ -35,7 +34,7 @@ public partial class RequestSpecialists : ContentPage
 	/// <param name="e">Event</param>
 	private async void OnAddRecordClicked(object sender, EventArgs e)
 	{
-		var skillName = (string)SkillNamePicker.SelectedItem;
+		Skill skill;
 		var numberRequired = 0;
 		try
 		{
@@ -47,13 +46,28 @@ public partial class RequestSpecialists : ContentPage
 			NumberRequiredEntry.Text = "";
 			return;
 		}
+		try
+		{
+			skill = (Skill)SkillNamePicker.SelectedItem;
+		}
+		catch
+		{
+			await DisplayAlert("Error", $"Failed to insert record into skills. Error: Skill not found", "OK");
+			NumberRequiredEntry.Text = "";
+			return;
+		}
 		var startDate = StartDatePicker.Date;
 		var endDate = EndDatePicker.Date;
-		if (CheckAddable(skillName, numberRequired))
+		this.AddSkillRequest(skill.ID, numberRequired, startDate, endDate);
+	}
+
+	private async void AddSkillRequest(int skillId, int numberRequired, DateTime startDate, DateTime endDate)
+	{
+		if (CheckAddable(skillId, numberRequired))
 		{
 			try
 			{
-				specialistRequestService.AddUnapprovedSkillRequest(skillName, numberRequired,
+				specialistRequestService.AddUnapprovedSkillRequest(skillId, numberRequired,
 					startDate, endDate);
 				await DisplayAlert("Success", $"Successfully inserted record into skills.", "OK");
 			}
@@ -68,12 +82,12 @@ public partial class RequestSpecialists : ContentPage
 	/// <summary>
 	/// Checks whether something can be added or if there are missing vaues.
 	/// </summary>
-	/// <param name="skillName">SkillName</param>
+	/// <param name="skillId">Skill Id</param>
 	/// <param name="numberRequired">Number of requird Persons</param>
 	/// <returns></returns>
-	private  bool CheckAddable(string skillName, int numberRequired)
+	private  bool CheckAddable(int skillId, int numberRequired)
 	{
-		if (skillName == null || skillName == "")
+		if (skillId == 0)
 		{
 			DisplayAlert("Error", $"No Skill entered", "OK");
 			return false;
@@ -89,22 +103,10 @@ public partial class RequestSpecialists : ContentPage
 	/// <summary>
 	/// Adds the skills to chose from to SkillPicker.
 	/// </summary>
-	private async void PopulateSkillPicker()
+	private async Task PopulateSkillPicker()
 	{
-		try
-		{
-			var skills = (await skillService.GetSkillList()).Select(skill => skill.Name).ToList();
-			foreach (var skill in skills)
-			{
-				Console.WriteLine(skill);
-			}
-			SkillNamePicker.ItemsSource = skills;
-		}
-		catch (Exception ex)
-		{
-			Console.WriteLine(ex.Message);
-			DisplayAlert("Error", "Failed to load skills.", "OK");
-		}
+		Skills = new ObservableCollection<Skill>(await skillService.GetSkillList());
+		SkillNamePicker.ItemsSource = Skills;
 	}
 
 	/// <summary>

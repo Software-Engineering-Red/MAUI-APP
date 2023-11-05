@@ -13,7 +13,7 @@ namespace UndacApp.Services
 		/// <param name="numberRequired">Number of Persons Required</param>
 		/// <param name="startDate">Start Date</param>
 		/// <param name="endDate">End Date</param>
-		void AddUnapprovedSkillRequest(string skillName, int numberRequired, 
+		void AddUnapprovedSkillRequest(int skillId, int numberRequired, 
 			DateTime startDate,DateTime endDate);
 
 		/// <summary>
@@ -22,7 +22,7 @@ namespace UndacApp.Services
 		/// </summary>
 		/// <param name="id">Id of Request</param>
 		/// <param name="organisationId">Id of Organisation</param>
-		void approveSkillRequest(int id, int organisationId);
+		void approveSkillRequest(int id, Organisation organisation);
 		/// <summary>
 		/// Adds a instance of OperationalTeamStatus to the Database.
 		/// </summary>

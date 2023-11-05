@@ -35,7 +35,7 @@ namespace UndacApp.Services
 		/// <param name="numberRequired">Number of Persons Required</param>
 		/// <param name="startDate">Start Date</param>
 		/// <param name="endDate">End Date</param>
-		async void ISpecialistRequestService.AddUnapprovedSkillRequest(int skillId, int numberRequired,
+		async Task<int> ISpecialistRequestService.AddUnapprovedSkillRequest(int skillId, int numberRequired, 
 			DateTime startDate, DateTime endDate)
 		{
 			SkillRequest skillRequest = new SkillRequest()
@@ -50,7 +50,7 @@ namespace UndacApp.Services
 				Status = "Pending",
 				ConfirmedDate = DateTime.MaxValue
 			};
-			await Add(skillRequest);
+			return await Add(skillRequest);
 		}
 
 		/// <summary>
@@ -58,14 +58,14 @@ namespace UndacApp.Services
 		/// changing the Status to Approved, and Assignig the Corresponding Organisation
 		/// </summary>
 		/// <param name="id">Id of Request</param>
-		/// <param name="organisation">Organisation</param>
-		async void ISpecialistRequestService.approveSkillRequest(int id, Organisation organisation)
+		/// <param name="organisation">Approving Organisation</param>
+		async Task<int> ISpecialistRequestService.approveSkillRequest(int id, Organisation organisation)
 		{
 			SkillRequest skillRequest = await ((SkillRequestService)this).GetOne(id);
 			skillRequest.OrganisationId = organisation.id;
 			skillRequest.ConfirmedDate = DateTime.Today;
 			skillRequest.Status = "Approved";
-			await Update(skillRequest);
+			return await Update(skillRequest);
 		}
 
 	}

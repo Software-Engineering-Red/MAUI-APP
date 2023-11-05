@@ -88,8 +88,9 @@ public partial class AcceptSpecialistRequests : ContentPage
 				}
 				if (CheckUpdateable(item))
 				{
-					specialistRequestService.approveSkillRequest(item.ID, organisation);
-					await Task.Run(LoadRequests);
+					await specialistRequestService.approveSkillRequest(item.ID, organisation);
+					LoadRequests();
+
 					await DisplayAlert("Success", $"Successfully inserted record into skills.", "OK");
 				}
 			}
@@ -169,9 +170,9 @@ public partial class AcceptSpecialistRequests : ContentPage
 			Organisations = new ObservableCollection<Organisation>(await organisationService.GetOrganisationList());
 			OrganisationPicker.ItemsSource = Organisations;
 		}
-		catch (Exception ex)
+		catch 
 		{
-			DisplayAlert("Error", "Failed to load Organisations.", "OK");
+			await DisplayAlert("Error", "Failed to load Organisations.", "OK");
 		}
 	}
 }

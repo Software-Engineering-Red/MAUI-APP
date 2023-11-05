@@ -25,31 +25,45 @@ namespace UndacApp.Views
             btnResolve.IsVisible = false;
         }
 
+
         private async void CreateAlertButton_Clicked(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txe_securityAlert.Text))
                 return;
 
-            var securityAlert = new SecurityAlert
-            {
-                Message = txe_securityAlert.Text,
-                CreatedTime = DateTime.Now,
-                Resolved = false
-            };
+            var securityAlert = CreateSecurityAlert(txe_securityAlert.Text);
 
             _currentAlerts.Insert(0, securityAlert);
             txe_securityAlert.Text = "";
 
+            await DisplaySecurityAlerts(securityAlert);
+        }
+
+        private SecurityAlert CreateSecurityAlert(string message)
+        {
+            return new SecurityAlert
+            {
+                Message = message,
+                CreatedTime = DateTime.Now,
+                Resolved = false
+            };
+        }
+
+        private async Task DisplaySecurityAlerts(SecurityAlert securityAlert)
+        {
             await DisplayAlert("Alert", securityAlert.Message, "OK");
 
+            PlayAlertSound();
+        }
+
+        private void PlayAlertSound()
+        {
             using (var soundPlayer = new SoundPlayer("Resources/Sounds/alert.mp3"))
             {
                 soundPlayer.Play();
             }
-
-            NotifySeniorManagement(securityAlert);
         }
-
+        
         private void ltv_currentAlerts_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem is SecurityAlert selectedAlert)
@@ -150,8 +164,9 @@ namespace UndacApp.Views
             }
             catch (Exception ex)
             {
-                DisplayAlert("Email Error", $"Error sending email: {ex.Message}", "OK");
+                await DisplayAlert("Email Error", $"Error sending email: {ex.Message}", "OK");
             }
         }
+       
     }
 }

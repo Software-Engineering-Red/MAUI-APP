@@ -59,6 +59,9 @@
 	  <MauiXaml Update="MauiPage1.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\AcceptSpecialistRequests.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
       <MauiXaml Update="Views\AlertTypesPage.xaml">
 	  </MauiXaml>
 	  <MauiXaml Update="Views\BuildingTypePage.xaml">
@@ -70,6 +73,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
         <MauiXaml Update="Views\PrivilegeRequestsPage.xaml">
+          <Generator>MSBuild:Compile</Generator>
+        </MauiXaml>
+        <MauiXaml Update="Views\RequestSpecialists.xaml">
           <Generator>MSBuild:Compile</Generator>
         </MauiXaml>
 		<MauiXaml Update="Views\RolesPage.xaml">

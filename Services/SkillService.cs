@@ -1,8 +1,6 @@
 ﻿using UndacApp.Data;
 using UndacApp.Models;
 using SQLite;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace UndacApp.Services
 {

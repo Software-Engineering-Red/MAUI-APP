@@ -1,33 +1,33 @@
 ﻿using SQLite;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace UndacApp.Models
 {
-    public class TeamMember : AModel
-    {
-        public TeamMember()
-        {
-            Available = true;
-        }
+    public class TeamMember : INotifyPropertyChanged {
+        [PrimaryKey, AutoIncrement]
+        public int ID { get; set; }
+        private string name;
+        private string accessPrivilegeLevel;
+        private bool available = true;
 
-        private string _name;
         public string Name
-        {
-            get => _name;
-            set => SetField(ref _name, value);
+    {
+            get => name;
+            set => Utils.SetProperty(ref name, value, this);
         }
 
-        private bool _available;
+        public string AccessPrivilegeLevel
+        {
+            get => accessPrivilegeLevel;
+            set => Utils.SetProperty(ref accessPrivilegeLevel, value, this);
+        }
+
         public bool Available
         {
-            get => _available;
-            set => SetField(ref _available, value);
+            get => available;
+            set => Utils.SetProperty(ref available, value, this);
         }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
     }
 }

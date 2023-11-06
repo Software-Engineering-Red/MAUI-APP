@@ -1,12 +1,11 @@
 ﻿using SQLite;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
 namespace UndacApp.Models
 {
     /// <summary>
     /// this class is for setting up the table for the database and implemetns INotifyPropertyChanged functions
-    /// by retreiving the name of the table and the index for the database
+    /// by retrieving the name of the table and the index for the database
     /// </summary>
     internal class position_statuses : INotifyPropertyChanged
     {
@@ -17,25 +16,9 @@ namespace UndacApp.Models
         public string Name
         {
             get => _name;
-            set => SetProperty(ref _name, value);
+            set => Utils.SetProperty(ref _name, value, this);
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
-        {
-            if (EqualityComparer<T>.Default.Equals(storage, value))
-            {
-                return false;
-            }
-
-            storage = value;
-            OnPropertyChanged(propertyName);
-            return true;
-        }
     }
 }

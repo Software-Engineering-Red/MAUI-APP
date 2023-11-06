@@ -22,6 +22,14 @@
             ContentTemplate="{DataTemplate views:RotaPage}"/>
 
         <ShellContent
+            Title="Team Members"
+            ContentTemplate="{DataTemplate views:TeamMemberPage}"/>
+
+        <ShellContent
+            Title="Privilege Requests"
+            ContentTemplate="{DataTemplate views:PrivilegeRequestsPage}"/>
+
+        <ShellContent
             Title="Skill"
             ContentTemplate="{DataTemplate views:SkillPage}"/>
 

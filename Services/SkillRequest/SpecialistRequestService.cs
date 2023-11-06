@@ -61,7 +61,7 @@ namespace UndacApp.Services
 		/// <param name="organisation">Approving Organisation</param>
 		async Task<int> ISpecialistRequestService.approveSkillRequest(int id, Organisation organisation)
 		{
-			SkillRequest skillRequest = await ((SkillRequestService)this).GetOne(id);
+			SkillRequest skillRequest = await GetOne(id);
 			skillRequest.OrganisationId = organisation.id;
 			skillRequest.ConfirmedDate = DateTime.Today;
 			skillRequest.Status = "Approved";

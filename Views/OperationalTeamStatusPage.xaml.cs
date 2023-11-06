@@ -32,8 +32,8 @@ public partial class OperationalTeamStatusPage : ContentPage
     public OperationalTeamStatusPage()
     {
         InitializeComponent();
-        this.BindingContext = this;
-        this.statusService = new OperationalTeamStatusService();
+        BindingContext = new OperationalTeamStatus();
+        statusService = new OperationalTeamStatusService();
 
         Task.Run(async () => await LoadStates());
         text_editor_status.Text = "";

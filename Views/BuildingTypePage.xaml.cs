@@ -28,8 +28,8 @@ public partial class BuildingTypePage : ContentPage {
 
     public BuildingTypePage() {
         InitializeComponent();
-        this.BindingContext = this;
-        this.buildingTypeService = new BuildingTypeService();
+        BindingContext = new BuildingType();
+        buildingTypeService = new BuildingTypeService();
 
         Task.Run(async () => await LoadBuildingTypes());
         txe_buildingtype.Text = "";

@@ -24,8 +24,8 @@ namespace MauiApp1.Views
         public RotaPage()
         {
             InitializeComponent();
-            this.BindingContext = this;
-            this._rotaService = new RotaService();
+            BindingContext = new Rota();
+            _rotaService = new RotaService();
 
             Task.Run(async () => await LoadRotas());
             RotaNameEditor.Text = "";

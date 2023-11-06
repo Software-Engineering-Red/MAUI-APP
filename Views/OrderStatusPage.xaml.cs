@@ -33,8 +33,8 @@ namespace MauiApp1.Views
         public OrderStatusPage()
         {
             InitializeComponent();
-            this.BindingContext = this;
-            this.orderStatusService = new OrderStatusService();
+            BindingContext = new OrderStatus();
+            orderStatusService = new OrderStatusService();
 
             Task.Run(async () => await LoadOrderStatus());
             txe_order_status.Text = "";

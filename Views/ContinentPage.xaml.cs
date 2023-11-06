@@ -29,8 +29,8 @@ public partial class ContinentPage : ContentPage {
     </summary> */
     public ContinentPage() {
         InitializeComponent();
-        this.BindingContext = this;
-        this.continentService = new ContinentService();
+        BindingContext = new Continent();
+        continentService = new ContinentService();
 
         Task.Run(async () => await LoadContinents());
         txe_continent.Text = "";

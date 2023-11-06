@@ -15,8 +15,8 @@ public partial class RoomTypePage : ContentPage
         InitializeComponent();
 
         // Set the binding context to the RoomTypePage
-        this.BindingContext = this;
-        this.roomTypeService = new RoomTypeService();
+        BindingContext = new RoomType();
+        roomTypeService = new RoomTypeService();
 
         // Load room types and initialize the text input 
         Task.Run(async () => await LoadRoomTypes());

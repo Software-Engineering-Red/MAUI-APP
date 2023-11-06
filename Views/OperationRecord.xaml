@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiApp1.Views.OperationRecord"
-             Title="OperationRecord">
+             Title="OperationRecord"
+             xmlns:local="clr-namespace:MauiApp1.Models">
     <VerticalStackLayout  BackgroundColor="#212121">
         <Label TextColor="#757575" HorizontalOptions="Center" Text="Operation completion records" FontSize="Title"></Label>
         <HorizontalStackLayout BackgroundColor="Black">
@@ -42,10 +43,10 @@
                 <TimePicker Grid.Row="2" Grid.ColumnSpan="2" VerticalOptions="End"></TimePicker>
                 
                 <Frame Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" Grid.RowSpan="5" BackgroundColor="DimGray">
-                    <ListView Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" Grid.RowSpan="5">
+                    <ListView x:Name="LW_OperationsRequests" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" Grid.RowSpan="5">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <TextCell Text="{Binding OppIDTOppIDMemberName}"></TextCell>
+                                <TextCell></TextCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>

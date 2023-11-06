@@ -4,7 +4,7 @@ using SQLite;
 
 namespace MauiApp1.Models
 {
-    [Table("Operation_Authorisation")]
+    [Table("OperationRecords")]
     class OperationRecords : INotifyPropertyChanged
     {
         [PrimaryKey, AutoIncrement] 
@@ -26,9 +26,52 @@ namespace MauiApp1.Models
             set => SetField(ref requested_By, value); 
         }
 
-        /*private*/ 
+        private string request_Detail;
+        public string Requested_Detail
+        { 
+            get => request_Detail; 
+            
+            set => SetField(ref request_Detail, value); 
+        }
 
-        
+        private DateTime request_Date;
+        public DateTime Requested_Date
+        {
+            get => request_Date;
+
+            set => SetField(ref request_Date, value);
+        }
+
+        private string status;
+        public string Status
+        {
+            get => status;
+
+            set => SetField(ref status, value);
+        }
+
+        private string confirmed_by;
+        public string Confirmed_By
+        {
+            get => confirmed_by;
+
+            set => SetField(ref confirmed_by, value);
+        }
+
+        private DateTime confirmed_Date;
+        public DateTime Confirmed_Date
+        {
+            get => confirmed_Date;
+
+            set => SetField(ref confirmed_Date, value);
+        }
+
+        private string fk_OpperationRecordsID_OperationalTeamID;
+        public string FK_OpperationRecordsID_OperationalTeamID
+        {
+            get => fk_OpperationRecordsID_OperationalTeamID;
+            set => SetField(ref fk_OpperationRecordsID_OperationalTeamID, value);
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

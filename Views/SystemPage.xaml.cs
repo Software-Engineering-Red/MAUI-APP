@@ -31,8 +31,8 @@ public partial class SystemPage : ContentPage
     public SystemPage()
     {
         InitializeComponent();
-        this.BindingContext = this;       
-        this.systemTypeService = new SystemTypeService();
+        BindingContext = new SystemType();       
+        systemTypeService = new SystemTypeService();
 
         /*! <summary>
          * Asynchronously load the list of SystemTypes.

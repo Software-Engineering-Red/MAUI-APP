@@ -22,8 +22,8 @@ public partial class RolesPage : ContentPage
     public RolesPage()
 	{
         InitializeComponent();
-        this.BindingContext = this;
-        this.roleService = new RoleService();
+        BindingContext = new Role();
+        roleService = new RoleService();
 
         Task.Run(async () => await LoadRoles());
         txe_role.Text = "";

@@ -17,8 +17,8 @@ namespace MauiApp1.Views
         public SkillPage()
         {
             InitializeComponent();
-            this.BindingContext = this;
-            this.skillService = new SkillService();
+            BindingContext = new Skill();
+            skillService = new SkillService();
 
             Task.Run(async () => await LoadSkills());
             txe_skill.Text = "";

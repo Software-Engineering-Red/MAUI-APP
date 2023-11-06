@@ -63,7 +63,30 @@ namespace UndacApp.Views
                 soundPlayer.Play();
             }
         }
-        
+
+        private async void NotifySeniorManagement(SecurityAlert securityAlert)
+        {
+            string emailRecipient = "crisismanager@UNSAC.com";
+            string emailSubject = "Security Alert";
+            string emailBody = securityAlert.Message;
+
+            try
+            {
+                var message = new EmailMessage
+                {
+                    Subject = emailSubject,
+                    Body = emailBody,
+                    To = { emailRecipient }
+                };
+
+                await Email.ComposeAsync(message);
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Email Error", $"Error sending email: {ex.Message}", "OK");
+            }
+        }
+
         private void ltv_currentAlerts_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem is SecurityAlert selectedAlert)
@@ -145,28 +168,7 @@ namespace UndacApp.Views
             ltv_currentAlerts.ItemsSource = _currentAlerts;
         }
 
-        private async void NotifySeniorManagement(SecurityAlert securityAlert)
-        {
-            string emailRecipient = "crisismanager@UNSAC.com";
-            string emailSubject = "Security Alert";
-            string emailBody = securityAlert.Message;
-
-            try
-            {
-                var message = new EmailMessage
-                {
-                    Subject = emailSubject,
-                    Body = emailBody,
-                    To = { emailRecipient }
-                };
-
-                await Email.ComposeAsync(message);
-            }
-            catch (Exception ex)
-            {
-                await DisplayAlert("Email Error", $"Error sending email: {ex.Message}", "OK");
-            }
-        }
+       
        
     }
 }

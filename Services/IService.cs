@@ -14,6 +14,7 @@ namespace UndacApp.Services
         Task<int> Add(T entity);
         Task<int> Update(T entity);
         Task<int> Remove(T entity);
-        Task<bool> Exists(int id);
+        Task<int> RemoveByID(int id);
+		Task<bool> Exists(int id);
     }
 }

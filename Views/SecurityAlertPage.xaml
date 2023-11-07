@@ -1,0 +1,70 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UndacApp.Views.SecurityAlertsPage"
+             Title="Security Alerts Page">
+   
+
+    <StackLayout Spacing="10" Margin="5">
+        <Editor x:Name="txe_securityAlert"
+                Placeholder="Add a security alert"
+                HeightRequest="100" />
+
+        <Grid ColumnDefinitions="*,*,*">
+            <Button Text="Create Alert"
+                    Clicked="CreateAlertButton_Clicked" />
+
+            <Button Grid.Column="1"
+                    x:Name="btnSnooze"
+                    Text="Snooze"
+                    Clicked="SnoozeButton_Clicked" />
+
+            <Button Grid.Column="2"
+                    x:Name="btnResolve"
+                    Text="Resolve"
+                    Clicked="ResolveButton_Clicked" />
+        </Grid>
+
+        <StackLayout Orientation="Horizontal" Spacing="10">
+            <Entry x:Name="FilterAlerts"
+                   Placeholder="Search Alerts"
+                   WidthRequest="200"
+                   TextChanged="FilterAlerts_TextChanged" />
+
+            <Button Text="Clear Filter"
+                    WidthRequest="100"
+                    Clicked="ClearFilterButton_Clicked" />
+        </StackLayout>
+
+        <Label Text="Current Alerts" FontSize="18" HorizontalOptions="Center" />
+        <ListView x:Name="ltv_currentAlerts" Background="White"  ItemSelected="ltv_currentAlerts_ItemSelected">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell TextColor="Black" Text="{Binding Message}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+
+        <Button Text="Snooze"
+                IsVisible="False"
+                Clicked="SnoozeButton_Clicked" />
+
+        <Button Text="Resolve"
+                IsVisible="False"
+                Clicked="ResolveButton_Clicked" />
+
+        <Label Text="Resolved Alerts" FontSize="18" HorizontalOptions="Center" />
+        <ListView x:Name="ltv_resolvedAlerts" Background="White">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell TextColor="Black" Text="{Binding Message}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Button Text="Clear Resolved Alerts"
+          Clicked="ClearAlertsButton_Clicked" />
+    </StackLayout>
+</ContentPage>
+
+

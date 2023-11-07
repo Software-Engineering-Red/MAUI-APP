@@ -14,9 +14,14 @@
             ContentTemplate="{DataTemplate views:WelcomePage}"/>
 
         <ShellContent
+             Title="Security Alerts"
+             ContentTemplate="{DataTemplate views:SecurityAlertsPage}"
+             Icon="{OnPlatform 'icon_about.png', iOS='icon_about_ios.png', MacCatalyst='icon_about_ios.png'}" />
+
+
+        <ShellContent
             Title="Equipment"
-            ContentTemplate="{DataTemplate views:EquipmentPage}"
-            Icon="{OnPlatform 'icon_about.png', iOS='icon_about_ios.png', MacCatalyst='icon_about_ios.png'}" />
+            ContentTemplate="{DataTemplate views:EquipmentPage}" />
 
         <ShellContent
             Title="Rotas"
@@ -40,8 +45,7 @@
 
         <ShellContent
             Title="Continents"
-            ContentTemplate="{DataTemplate views:ContinentPage}"
-            Icon="{OnPlatform 'icon_continent.png', iOS='icon_continent_ios.png', MacCatalyst='icon_continent_ios.png'}" />
+            ContentTemplate="{DataTemplate views:ContinentPage}" />
         
         <ShellContent
             Title="Building Types"
@@ -61,16 +65,14 @@
 
         <ShellContent
             Title="Operational Team Status"
-            ContentTemplate="{DataTemplate views:OperationalTeamStatusPage}"
-            Icon="{OnPlatform 'icon_continent.png', iOS='icon_continent_ios.png', MacCatalyst='icon_continent_ios.png'}" />
+            ContentTemplate="{DataTemplate views:OperationalTeamStatusPage}" />
         
         <ShellContent
             Title="PositionStatusPage"
             ContentTemplate="{DataTemplate views:position_status}" />
         <ShellContent
             Title="Rooms Types"
-            ContentTemplate="{DataTemplate views:RoomTypePage}"
-            Icon="{OnPlatform 'icon_building.png', iOS='icon_building_ios.png', MacCatalyst='icon_continent_ios.png'}" />
+            ContentTemplate="{DataTemplate views:RoomTypePage}" />
         <ShellContent
            Title="OrderStatusPage"
            ContentTemplate="{DataTemplate views:OrderStatusPage}" />
@@ -78,6 +80,15 @@
         <ShellContent
             Title="ITSystemStatusPage"
             ContentTemplate="{DataTemplate views:ITSystemStatusPage}" />
+        <ShellContent
+           Title="TeamMemberPage"
+           ContentTemplate="{DataTemplate views:TeamMemberPage}" />
+        <ShellContent
+           Title="Request Specialists"
+           ContentTemplate="{DataTemplate views:RequestSpecialists}" />
+        <ShellContent
+           Title="Accept Specialist Requests"
+           ContentTemplate="{DataTemplate views:AcceptSpecialistRequests}" />
     </TabBar>
 
 </Shell>

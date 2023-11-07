@@ -13,5 +13,10 @@ namespace UndacApp.Services
         Task<int> AddAlertType(AlertType continent);
         Task<int> DeleteAlertType(AlertType continent);
         Task<int> UpdateAlertType(AlertType continent);
+
+        Task<List<AlertType>> GetAlertTypesByStatus(string status);
+
+
+
     }
 }

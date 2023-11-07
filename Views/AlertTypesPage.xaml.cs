@@ -6,10 +6,11 @@ namespace UndacApp.Views;
 
 public partial class AlertTypesPage : ContentPage
 {
-    AlertType _selectedAlertType = null;
+    AlertType _selectedAlertType = null; 
     IAlertTypeService _alertTypeService;
     ObservableCollection<AlertType> _alertTypes = new ObservableCollection<AlertType>();
     private string selectedStatus = "";
+
 
 
     public AlertTypesPage()
@@ -21,12 +22,19 @@ public partial class AlertTypesPage : ContentPage
         Task.Run(async () => await LoadAlertTypes());
         txe_alert.Text = "";
 
+       
+
     }
+
+  
 
     private async Task LoadAlertTypes()
     {
         _alertTypes = new ObservableCollection<AlertType>(await _alertTypeService.GetAlertTypes());
         ltv_alerttypes.ItemsSource = _alertTypes;
+
+
+
     }
 
     private void SaveButton_Clicked(object sender, EventArgs e)
@@ -37,6 +45,7 @@ public partial class AlertTypesPage : ContentPage
 
         if (_selectedAlertType == null)
         {
+            
             var alert = new AlertType() { Name = txe_alert.Text, Status = selectedStatus };
             _alertTypeService.AddAlertType(alert);
             _alertTypes.Add(alert);
@@ -46,6 +55,7 @@ public partial class AlertTypesPage : ContentPage
             _selectedAlertType.Name = txe_alert.Text;
             _selectedAlertType.Status = selectedStatus;
             _alertTypeService.UpdateAlertType(_selectedAlertType);
+            
             var alert = _alertTypes.FirstOrDefault(x => x.ID == _selectedAlertType.ID);
             alert.Name = txe_alert.Text;
             alert.Status = selectedStatus; 
@@ -81,6 +91,31 @@ public partial class AlertTypesPage : ContentPage
 
 
     }
+
+    private void UpdateAlertTypes()
+    {
+        string selectedFilter = filterPicker.SelectedItem.ToString();
+        if (_alertTypes == null)
+        {
+            return;
+        }
+
+        if (selectedFilter == "All")
+        {
+            ltv_alerttypes.ItemsSource = _alertTypes; 
+        }
+        else
+        {
+            ltv_alerttypes.ItemsSource = _alertTypes.Where(item => item.Status == selectedFilter);
+        }
+    }
+
+
+    private void FilterPicker_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        UpdateAlertTypes();
+    }
+
 
 
 

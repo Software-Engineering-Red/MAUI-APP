@@ -58,10 +58,11 @@ namespace UndacApp.Views
 
         private void PlayAlertSound()
         {
-            using (var soundPlayer = new SoundPlayer("Resources/Sounds/alert.mp3"))
+           /* using (var soundPlayer = new SoundPlayer("Resources/Sounds/alert.mp3"))
             {
                 soundPlayer.Play();
             }
+           */
         }
 
         private async void NotifySeniorManagement(SecurityAlert securityAlert)

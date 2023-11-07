@@ -9,6 +9,8 @@ public partial class AlertTypesPage : ContentPage
     AlertType _selectedAlertType = null;
     IAlertTypeService _alertTypeService;
     ObservableCollection<AlertType> _alertTypes = new ObservableCollection<AlertType>();
+    private string selectedStatus = "";
+
 
     public AlertTypesPage()
     {
@@ -18,6 +20,7 @@ public partial class AlertTypesPage : ContentPage
 
         Task.Run(async () => await LoadAlertTypes());
         txe_alert.Text = "";
+
     }
 
     private async Task LoadAlertTypes()
@@ -30,18 +33,22 @@ public partial class AlertTypesPage : ContentPage
     {
         if (String.IsNullOrEmpty(txe_alert.Text)) return;
 
+        string selectedStatus = alertStatusPicker.SelectedItem.ToString();
+
         if (_selectedAlertType == null)
         {
-            var alert = new AlertType() { Name = txe_alert.Text };
+            var alert = new AlertType() { Name = txe_alert.Text, Status = selectedStatus };
             _alertTypeService.AddAlertType(alert);
             _alertTypes.Add(alert);
         }
         else
         {
             _selectedAlertType.Name = txe_alert.Text;
+            _selectedAlertType.Status = selectedStatus;
             _alertTypeService.UpdateAlertType(_selectedAlertType);
             var alert = _alertTypes.FirstOrDefault(x => x.ID == _selectedAlertType.ID);
             alert.Name = txe_alert.Text;
+            alert.Status = selectedStatus; 
         }
 
 
@@ -69,7 +76,15 @@ public partial class AlertTypesPage : ContentPage
     {
         _selectedAlertType = e.SelectedItem as AlertType;
         if (_selectedAlertType == null) return;
-
+        _selectedAlertType.Status = alertStatusPicker.SelectedItem.ToString();
         txe_alert.Text = _selectedAlertType.Name;
+
+
     }
+
+
+
+
+
+
 }

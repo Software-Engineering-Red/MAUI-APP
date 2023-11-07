@@ -1,8 +1,8 @@
-using MauiApp1.Models;
-using MauiApp1.Services;
+using UndacApp.Models;
+using UndacApp.Services;
 using System.Collections.ObjectModel;
 
-namespace MauiApp1.Views;
+namespace UndacApp.Views;
 
 /*! <summary>
         OrganisationPage class extending ContentPage, responsible for functionality on OrganisationPage view.
@@ -31,7 +31,7 @@ public partial class OrganisationPage : ContentPage
     {
         InitializeComponent();
         BindingContext = new Organisation();
-        organisationService = new OrganisationService();
+        this.organisationService = new OrganisationService();
 
         Task.Run(async () => await LoadOrganisations());
         txe_organisation.Text = "";

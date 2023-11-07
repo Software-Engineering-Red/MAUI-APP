@@ -1,14 +1,7 @@
 ﻿using SQLite;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
-namespace MauiApp1.Models
+namespace UndacApp.Models
 {
     /// <summary>
     /// A class representing a building type.
@@ -21,39 +14,18 @@ namespace MauiApp1.Models
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
 
+        // A public property for an integer ID.
+        private string _name;
+        // A private field to store the value of the Name property.
 
-        private string name;
-
-        /// <summary>
-        /// The name of the building type.
-        /// </summary>
-        public string Name {
-            get => name;
-            set => SetField(ref name, value);
+        public string Name
+        {
+            // Getter returns the value of the private _name field.
+            get => _name;
+            // Setter uses SetProperty to update the value and raise PropertyChanged event.
+            set => Utils.SetProperty(ref _name, value, this);
         }
-
-        /// <summary>
-        /// Event for the building type properties changing.
-        /// </summary>
+        // Event to notify subscribers when a property changes.
         public event PropertyChangedEventHandler? PropertyChanged;
-
-        protected void OnPropertyChanged(string propertyName) => 
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
-        /// <summary>
-        /// Reflection helper for implementing <see cref="INotifyPropertyChanged"/>.
-        /// </summary>
-        /// <typeparam name="T">The type of the field.</typeparam>
-        /// <param name="field">A reference to the field.</param>
-        /// <param name="value">The value of the field.</param>
-        /// <param name="propertyName">The property name changing. This is automatically assigned by <see cref="CallerMemberNameAttribute"/>.</param>
-        /// <returns></returns>
-
-        protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = "") {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-            field = value;
-            OnPropertyChanged(propertyName);
-            return true;
-        }
     }
 }

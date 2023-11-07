@@ -1,5 +1,5 @@
-using MauiApp1.Models;
-using MauiApp1.Services;
+using UndacApp.Models;
+using UndacApp.Services;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
  *  the UI
  */
 
-namespace MauiApp1.Views;
+namespace UndacApp.Views;
 
 public partial class RolesPage : ContentPage
 {
@@ -23,7 +23,7 @@ public partial class RolesPage : ContentPage
 	{
         InitializeComponent();
         BindingContext = new Role();
-        roleService = new RoleService();
+        this.roleService = new RoleService();
 
         Task.Run(async () => await LoadRoles());
         txe_role.Text = "";

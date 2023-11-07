@@ -1,11 +1,11 @@
-using MauiApp1.Models;
-using MauiApp1.Services;
+using UndacApp.Models;
+using UndacApp.Services;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MauiApp1.Views;
+namespace UndacApp.Views;
 
 /// <summary>
 /// this page displays, saves and deletes the data from the database via user interaction and inherits ContentPage
@@ -22,7 +22,7 @@ namespace MauiApp1.Views;
 	{
 		InitializeComponent();
 		BindingContext = new position_statuses();
-		statusesServices = new PositionStatusesServices();
+		this.statusesServices = new PositionStatusesServices();
 
 		Task.Run(async () => await LoadpostionSatus());
 		TBX_PositionStatus.Text = "";

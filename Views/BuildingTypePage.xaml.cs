@@ -1,9 +1,9 @@
 
-using MauiApp1.Models;
-using MauiApp1.Services;
+using UndacApp.Models;
+using UndacApp.Services;
 using System.Collections.ObjectModel;
 
-namespace MauiApp1.Views;
+namespace UndacApp.Views;
 
 
 /// <summary>
@@ -29,7 +29,7 @@ public partial class BuildingTypePage : ContentPage {
     public BuildingTypePage() {
         InitializeComponent();
         BindingContext = new BuildingType();
-        buildingTypeService = new BuildingTypeService();
+        this.buildingTypeService = new BuildingTypeService();
 
         Task.Run(async () => await LoadBuildingTypes());
         txe_buildingtype.Text = "";

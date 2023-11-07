@@ -1,8 +1,8 @@
-﻿using MauiApp1.Models;
+﻿using UndacApp.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace MauiApp1.Services
+namespace UndacApp.Services
 {
     /// <summary>
     /// Interface for managing skills.

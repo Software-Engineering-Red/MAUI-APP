@@ -1,11 +1,6 @@
-﻿using MauiApp1.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using UndacApp.Models;
 
-namespace MauiApp1.Services
+namespace UndacApp.Services
 {
     /// <summary>
     /// Interface exposing the methods for CRUD-Interface of OperationalTeamStatusService.

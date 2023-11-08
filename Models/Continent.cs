@@ -2,15 +2,13 @@
 
 
 namespace UndacApp.Models {
-    public class Continent : AModel, INotifyPropertyChanged
+    public class Continent : AModel
     {
     
         private string name;
         public string Name {
             get => name;
-            set => Utils.SetProperty(ref name, value, this);
+            set => SetField(ref name, value);
         }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
     }
 }

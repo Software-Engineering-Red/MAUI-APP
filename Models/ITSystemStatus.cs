@@ -2,7 +2,7 @@ using SQLite;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace MauiApp1.Models {
+namespace UndacApp.Models {
     [Table("it_system_status")]
     public class ITSystemStatus : INotifyPropertyChanged
     {

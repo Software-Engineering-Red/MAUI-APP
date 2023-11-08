@@ -1,11 +1,11 @@
-using MauiApp1.Models;
-using MauiApp1.Services;
+using UndacApp.Models;
+using UndacApp.Services;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MauiApp1.Views;
+namespace UndacApp.Views;
 
 public partial class ITSystemStatusPage : ContentPage
 {

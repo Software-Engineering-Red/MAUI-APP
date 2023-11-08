@@ -39,10 +39,10 @@ public partial class PrivilegeRequestsPage : ContentPage
         {
             var selectedRequest = ltv_privilegeRequests.SelectedItem as PrivilegeRequest;
             int updatedID = selectedRequest.MemberID;
-            var teamMembers = new ObservableCollection<TeamMember>(await memberService.GetTeamMemberList());
+            var teamMembers = new ObservableCollection<TeamMember>(await memberService.GetAll());
             var teamMember = teamMembers.FirstOrDefault(x => x.ID == updatedID);
             teamMember.AccessPrivilegeLevel = selectedRequest.PrivilegeLevel;
-            await memberService.UpdateTeamMember(teamMember);
+            await memberService.Update(teamMember);
             selectedRequest.Approved = true;
             await requestService.UpdatePrivilegeRequest(selectedRequest);
         }

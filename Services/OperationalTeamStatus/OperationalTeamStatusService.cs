@@ -1,11 +1,6 @@
 ﻿using UndacApp.Data;
 using UndacApp.Models;
-using System;
-using System.Collections.Generic;
 using SQLite;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace UndacApp.Services
 {

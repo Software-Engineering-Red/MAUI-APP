@@ -28,6 +28,8 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -51,10 +53,14 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
+		<PackageReference Include="System.Windows.Extensions" Version="7.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <MauiXaml Update="MauiPage1.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\AcceptSpecialistRequests.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
       <MauiXaml Update="Views\AlertTypesPage.xaml">
@@ -67,6 +73,12 @@
         <MauiXaml Update="Views\ContinentPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+        <MauiXaml Update="Views\PrivilegeRequestsPage.xaml">
+          <Generator>MSBuild:Compile</Generator>
+        </MauiXaml>
+        <MauiXaml Update="Views\RequestSpecialists.xaml">
+          <Generator>MSBuild:Compile</Generator>
+        </MauiXaml>
 		<MauiXaml Update="Views\RolesPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
@@ -99,6 +111,9 @@
 		</Compile>
 		<Compile Update="Views\ContinentPage.xaml.cs">
 			<DependentUpon>ContinentPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\PrivilegeRequestsPage.xaml.cs">
+		  <DependentUpon>PrivilegeRequestsPage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Views\RolesPage.xaml.cs">
 			<DependentUpon>RolesPage.xaml</DependentUpon>

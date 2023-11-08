@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sys="clr-namespace:System;assembly=netstandard"
+             x:Class="UndacApp.Views.RequestSpecialists"
+             BackgroundColor="#252525"
+             Title="RequestSpecialists">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="30" Padding="30,20" VerticalOptions="Center">
+
+            <!-- Title -->
+            <Label Text="Request Specialists" FontSize="26" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" TextColor="White" />
+            <Frame CornerRadius="10" Padding="20" BackgroundColor="#373737">
+                <VerticalStackLayout Spacing="15">
+
+                    <Label Text="Select required skill:" FontSize="20" FontAttributes="Bold" TextColor="White" />
+                    <Picker x:Name="SkillNamePicker" TextColor="White" BackgroundColor="#454545" 
+                        ItemDisplayBinding="{Binding Name}" />
+
+                    <Entry Placeholder="Number of Helpers Required" x:Name="NumberRequiredEntry" Keyboard="Numeric"
+                           TextColor="White" 
+                           PlaceholderColor="#aaa" 
+                           BackgroundColor="#454545" />
+                    <DatePicker x:Name="StartDatePicker" MinimumDate="{x:Static sys:DateTime.Today}"
+                        DateSelected="StartDatePicker_DateSelected"
+                        TextColor="White" 
+                        BackgroundColor="#454545" />
+                    <DatePicker x:Name="EndDatePicker" 
+                        MinimumDate="{Binding Source={x:Reference StartDatePicker}, Path=Date}"
+                        TextColor="White" 
+                        BackgroundColor="#454545" />
+
+                    <Button Text="Add Record" Clicked="OnAddRecordClicked" 
+                            BackgroundColor="#4CAF50" 
+                            TextColor="White" 
+                            CornerRadius="8" />
+                </VerticalStackLayout>
+            </Frame>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

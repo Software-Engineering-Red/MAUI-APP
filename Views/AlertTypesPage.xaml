@@ -2,12 +2,23 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UndacApp.Views.AlertTypesPage"
-             Title="AlertTypesPage">
-    <VerticalStackLayout Spacing="10" Margin="5">
+             Title="AlertTypesPage"
+             xmlns:local="clr-namespace:UndacApp.Models">
+    <ScrollView>
+        <VerticalStackLayout Spacing="10" Margin="5">
         <Editor x:Name="txe_alert"
                 Placeholder="Add an alert type"
                 HeightRequest="100" />
-
+        <Picker x:Name="alertStatusPicker" TextColor="White">
+            <Picker.Title>Select Alert Status</Picker.Title>
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>New</x:String>
+                    <x:String>Resolved</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+            <Picker.SelectedItem>New</Picker.SelectedItem>
+        </Picker>
         <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
             <Button Text="Save"
                     Clicked="SaveButton_Clicked" />
@@ -16,13 +27,43 @@
                     Text="Delete"
                     Clicked="DeleteButton_Clicked" />
         </Grid>
-
+        <Label Text="Current Alerts" FontSize="24" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+        <StackLayout Orientation="Horizontal">
+            <Entry x:Name="searchEntry" Placeholder="Search" Text="{Binding SearchText}" HorizontalOptions="FillAndExpand"/>
+   
+                <Picker x:Name="filterPicker" TextColor="White">
+                    <Picker.Title>Filter Alert Status</Picker.Title>
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>All</x:String>
+                        <x:String>New</x:String>
+                        <x:String>Resolved</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+                    <Picker.SelectedItem>All</Picker.SelectedItem>
+            </Picker>
+                
+            
+        </StackLayout>
+            <Button Text="Filter" Clicked="FilterPicker_SelectedIndexChanged"></Button>
         <ListView x:Name="ltv_alerttypes" Background="white" ItemSelected="ltv_alerttypes_ItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell TextColor="Black" Text="{Binding Name}"/>
+                    <ViewCell>
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Text="{Binding Name}" TextColor="Black" FontAttributes="Bold"/>
+                            <Label Grid.Row="1" Text="{Binding Status}" TextColor="Black"/>
+                        </Grid>
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        
+
     </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

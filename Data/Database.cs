@@ -1,9 +1,4 @@
 ﻿using SQLite;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace UndacApp.Data
 {
@@ -49,7 +44,9 @@ namespace UndacApp.Data
                 await _database.CreateTableAsync<Models.Rota>();
                 await _database.CreateTableAsync<Models.Skill>();
                 await _database.CreateTableAsync<Models.SystemType>();
-                
+                await _database.CreateTableAsync<Models.TeamMember>();
+                await _database.CreateTableAsync<Models.PrivilegeRequest>();
+
             }
             catch (Exception ex)
             {

@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UndacApp.Views.position_status"
-             Title="PositionStatusPage">
+             Title="PositionStatusPage"
+             xmlns:local="clr-namespace:Undac.Models">
     <VerticalStackLayout Spacing="10" Margin="5">
         <Editor x:Name="TBX_PositionStatus"
                 Placeholder="Add a position status"

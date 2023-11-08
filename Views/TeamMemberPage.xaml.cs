@@ -70,9 +70,7 @@ public partial class TeamMemberPage : ContentPage
                     ? selectedTeamMember.AccessPrivilegeLevel = "0"
                     : selectedTeamMember.AccessPrivilegeLevel = selectedTeamMember.AccessPrivilegeLevel;
 
-                string testing = "disabled";
-
-                if (selectedTeamMember.AccessPrivilegeLevel.Equals(testing) || privilegeLevel <= int.Parse(selectedTeamMember.AccessPrivilegeLevel))
+                if (selectedTeamMember.AccessPrivilegeLevel.Equals("disabled") || privilegeLevel <= int.Parse(selectedTeamMember.AccessPrivilegeLevel))
                 {
                     selectedTeamMember.Name = txe_teamMember.Text;
                     selectedTeamMember.AccessPrivilegeLevel = txe_privilegeLevel.Text;

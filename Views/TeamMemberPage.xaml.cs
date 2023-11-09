@@ -125,7 +125,7 @@ public partial class TeamMemberPage : ContentPage
     private async void RemoveAccessButton_Clicked(object sender, EventArgs e)
     {
         selectedTeamMember.AccessPrivilegeLevel = "disabled";
-        await teamMemberService.UpdateTeamMember(selectedTeamMember);
+        await teamMemberService.Update(selectedTeamMember);
         await Shell.Current.DisplayAlert("Team member access removed", "Team member access has been removed", "OK");
         return;
     }

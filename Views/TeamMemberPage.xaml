@@ -17,13 +17,23 @@
             Placeholder="Add a team member privilege level"
             HeightRequest="100" />
 
-        <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
-            <Button Text="Save"
-                    Clicked="SaveButton_Clicked" />
+        <Grid ColumnSpacing="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0"
+                Text="Save"
+                Clicked="SaveButton_Clicked" />
 
             <Button Grid.Column="1"
-                    Text="Delete"
-                    Clicked="DeleteButton_Clicked" />
+                Text="Remove Access"
+                Clicked="RemoveAccessButton_Clicked" />
+
+            <Button Grid.Column="2"
+                Text="Delete"
+                Clicked="DeleteButton_Clicked" />
         </Grid>
 
         <ListView x:Name="ltv_teamMembers" Background="White" ItemSelected="ltv_teamMembers_ItemSelected">

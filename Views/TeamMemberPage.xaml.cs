@@ -70,7 +70,7 @@ public partial class TeamMemberPage : ContentPage
                     ? selectedTeamMember.AccessPrivilegeLevel = "0"
                     : selectedTeamMember.AccessPrivilegeLevel = selectedTeamMember.AccessPrivilegeLevel;
 
-                if (privilegeLevel <= int.Parse(selectedTeamMember.AccessPrivilegeLevel))
+                if (selectedTeamMember.AccessPrivilegeLevel.Equals("disabled") || privilegeLevel <= int.Parse(selectedTeamMember.AccessPrivilegeLevel))
                 {
                     selectedTeamMember.Name = txe_teamMember.Text;
                     selectedTeamMember.AccessPrivilegeLevel = txe_privilegeLevel.Text;
@@ -120,6 +120,14 @@ public partial class TeamMemberPage : ContentPage
         ltv_teamMembers.SelectedItem = null;
         txe_teamMember.Text = null;
         txe_privilegeLevel.Text = null;
+    }
+
+    private async void RemoveAccessButton_Clicked(object sender, EventArgs e)
+    {
+        selectedTeamMember.AccessPrivilegeLevel = "disabled";
+        await teamMemberService.UpdateTeamMember(selectedTeamMember);
+        await Shell.Current.DisplayAlert("Team member access removed", "Team member access has been removed", "OK");
+        return;
     }
 
     /*! <summary>

@@ -54,37 +54,14 @@
         <ShellContent
             Title="Role"
             ContentTemplate="{DataTemplate views:RolesPage}" />
-    
+        
+        <ShellContent
+            Title="OperationRecord"
+            ContentTemplate="{DataTemplate views:OperationRecord}"/>
+
         <ShellContent
                 Title="Organisations"
                 ContentTemplate="{DataTemplate views:OrganisationPage}" />
-
-        <ShellContent
-            Title="System Type"
-            ContentTemplate="{DataTemplate views:SystemPage}"/>
-
-        <ShellContent
-            Title="Operational Team Status"
-            ContentTemplate="{DataTemplate views:OperationalTeamStatusPage}" />
-        
-        <ShellContent
-            Title="PositionStatusPage"
-            ContentTemplate="{DataTemplate views:position_status}" />
-        <ShellContent
-            Title="Rooms Types"
-            ContentTemplate="{DataTemplate views:RoomTypePage}" />
-        <ShellContent
-           Title="OrderStatusPage"
-           ContentTemplate="{DataTemplate views:OrderStatusPage}" />
-        <ShellContent
-           Title="TeamMemberPage"
-           ContentTemplate="{DataTemplate views:TeamMemberPage}" />
-        <ShellContent
-           Title="Request Specialists"
-           ContentTemplate="{DataTemplate views:RequestSpecialists}" />
-        <ShellContent
-           Title="Accept Specialist Requests"
-           ContentTemplate="{DataTemplate views:AcceptSpecialistRequests}" />
     </TabBar>
 
 </Shell>

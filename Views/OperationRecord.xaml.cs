@@ -1,8 +1,8 @@
-using MauiApp1.Models;
-using MauiApp1.Services;
+using UndacApp.Models;
+using UndacApp.Services;
 using System.Collections.ObjectModel;
 
-namespace MauiApp1.Views
+namespace UndacApp.Views
 {
 	public partial class OperationRecord : ContentPage
 	{
@@ -18,15 +18,15 @@ namespace MauiApp1.Views
 			BindingContext = new OperationRecords();
 			operationRecords_Service = new OperationRecords_Service();
 
-			Task.Run(async () => await LoadState());
+			//Task.Run(async () => await LoadState());
 		}
 
-        private async Task LoadState()
-		{
+        //private async Task LoadState()
+		/*{
 			OperationRequests = new ObservableCollection<List<string>> (await operationRecords_Service.OperationRecordsRquest());
 			
 			LW_OperationsRequests.ItemsSource = OperationRequests; 
-		}
+		}*/
 
 
 	}

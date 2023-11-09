@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using SQLite;
 
-namespace MauiApp1.Models
+namespace UndacApp.Models
 {
     [Table("OperationRecords")]
     class OperationRecords : INotifyPropertyChanged

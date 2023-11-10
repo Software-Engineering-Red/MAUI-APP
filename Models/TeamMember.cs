@@ -10,12 +10,6 @@ namespace UndacApp.Models
             Available = true;
         }
 
-        private string _name;
-        public string Name
-    {
-            get => _name;
-            set => SetField(ref _name, value);
-        }
         private string _accessPrivilegeLevel;
         public string AccessPrivilegeLevel
         {

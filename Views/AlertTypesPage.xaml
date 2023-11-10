@@ -29,21 +29,19 @@
         </Grid>
         <Label Text="Current Alerts" FontSize="24" FontAttributes="Bold" HorizontalTextAlignment="Center" />
         <StackLayout Orientation="Horizontal">
-            <Entry x:Name="searchEntry" Placeholder="Search" Text="{Binding SearchText}" HorizontalOptions="FillAndExpand"/>
-   
+                <Entry x:Name="searchEntry" Placeholder="Search" Text="{Binding SearchText}" MinimumWidthRequest="200" HorizontalOptions="CenterAndExpand"/>
+
                 <Picker x:Name="filterPicker" TextColor="White">
                     <Picker.Title>Filter Alert Status</Picker.Title>
-                <Picker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>All</x:String>
-                        <x:String>New</x:String>
-                        <x:String>Resolved</x:String>
-                    </x:Array>
-                </Picker.ItemsSource>
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>All</x:String>
+                            <x:String>New</x:String>
+                            <x:String>Resolved</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
                     <Picker.SelectedItem>All</Picker.SelectedItem>
-            </Picker>
-                
-            
+                </Picker>
         </StackLayout>
             <Button Text="Filter" Clicked="FilterPicker_SelectedIndexChanged"></Button>
         <ListView x:Name="ltv_alerttypes" Background="white" ItemSelected="ltv_alerttypes_ItemSelected">

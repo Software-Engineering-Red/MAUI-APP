@@ -86,6 +86,13 @@
         <ShellContent
            Title="Accept Specialist Requests"
            ContentTemplate="{DataTemplate views:AcceptSpecialistRequests}" />
+        <ShellContent
+           Title="Resource Type"
+           ContentTemplate="{DataTemplate views:ResourceTypePage}" />
+        <ShellContent
+           Title="Add Resource"
+           ContentTemplate="{DataTemplate views:AddResourcePage}" />
+
     </TabBar>
 
 </Shell>

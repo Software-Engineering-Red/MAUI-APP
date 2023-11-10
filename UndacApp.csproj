@@ -68,6 +68,12 @@
 	  <MauiXaml Update="Views\BuildingTypePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\ResorceType.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+		<MauiXaml Update="Views\AddResourcePage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 	  <MauiXaml Update="Views\PositionStatusPage.xaml">
 	  </MauiXaml>
         <MauiXaml Update="Views\ContinentPage.xaml">
@@ -111,6 +117,12 @@
 		</Compile>
 		<Compile Update="Views\ContinentPage.xaml.cs">
 			<DependentUpon>ContinentPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\AddResourcePage.xaml.cs">
+		  <DependentUpon>AddResourcePage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\ResorceType.xaml.cs">
+		  <DependentUpon>ResorceType.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Views\PrivilegeRequestsPage.xaml.cs">
 		  <DependentUpon>PrivilegeRequestsPage.xaml</DependentUpon>

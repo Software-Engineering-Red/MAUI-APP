@@ -20,6 +20,11 @@ namespace MauiApp1.Views
             BindingContext = this;
         }
 
+        private object expertService()
+        {
+            throw new NotImplementedException();
+        }
+
         protected override async void OnAppearing()
         {
             base.OnAppearing();

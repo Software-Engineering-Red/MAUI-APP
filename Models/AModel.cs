@@ -9,6 +9,13 @@ namespace UndacApp.Models
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
 
+        private string? name = String.Empty;
+        public string Name
+        {
+            get => name;
+            set => SetField(ref name, value);
+        }
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         protected void OnPropertyChanged(string propertyName) =>

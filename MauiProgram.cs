@@ -29,9 +29,11 @@ public static class MauiProgram
 		builder.Services.AddSingleton<IOrderStatusService, OrderStatusService>();
         builder.Services.AddSingleton<IPersonService, PersonService>();
         builder.Services.AddSingleton<ISpecialistRequestService, SpecialistRequestService>();
+        builder.Services.AddSingleton<IResourceTypeService, ResourceTypeService>();
+        builder.Services.AddSingleton<IResourceService, ResourceService>();
 
 #if DEBUG
-		builder.Logging.AddDebug();
+        builder.Logging.AddDebug();
 #endif
 
 

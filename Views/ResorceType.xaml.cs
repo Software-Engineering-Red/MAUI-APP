@@ -4,30 +4,13 @@ using UndacApp.Services;
 
 namespace UndacApp.Views;
 
-/*! <summary>
-        ResourceTypePage class extending ContentPage, responsible for functionality on ResourceTypePage view.
-    </summary> */
 public partial class ResourceTypePage : ContentPage
 {
-/*! <summary>
-        A reference pointer for storing currently selected ResourceType.
-     </summary> */
-    ResourceType? selectedOrg = null;
 
-/*! <summary>
-        An instance of IResourceTypeService
-     </summary> */
+    ResourceType? selectedType = null;
     readonly IResourceTypeService resource_typeService;
+    ObservableCollection<ResourceType> resourceTypes = new();
 
-/*! <summary>
-        Collection of current ResourceTypes.
-    </summary> */
-    ObservableCollection<ResourceType> orgs = new();
-
-
-/*! <summary>
-        Constructor class, setting the binding context and initiating the resource_type serrvice, as well as loading the resource_type list.
-    </summary> */
     public ResourceTypePage()
     {
         InitializeComponent();
@@ -38,78 +21,58 @@ public partial class ResourceTypePage : ContentPage
         txe_resource_type.Text = "";
     }
 
-    /*! <summary>
-            Private method loading the ResourceType list using resource_typeService getter.
-        </summary> 
-        <returns>Task promise, informing about the status of its' completion.</returns> */
     private async Task LoadResourceTypes()
     {
-        orgs = new ObservableCollection<ResourceType>(await resource_typeService.GetAll());
-        ltv_resource_types.ItemsSource = orgs;
+        resourceTypes = new ObservableCollection<ResourceType>(await resource_typeService.GetAll());
+        ltv_resource_types.ItemsSource = resourceTypes;
     }
 
-    /*! <summary>
-            Method responsible for saving resource_type into SQLite database, triggered by selection of save button.
-        </summary> 
-        <param name="sender">Details about the element that triggered the event.</param>
-        <param name="e">Event details, passed by eventHandler due to clicking event button.</param> */
     private void SaveButton_Clicked(object sender, EventArgs e)
     {
         if (String.IsNullOrEmpty(txe_resource_type.Text)) return;
 
-        if (selectedOrg == null)
+        if (selectedType == null)
         {
-            var org = new ResourceType() { Name = txe_resource_type.Text };
-            resource_typeService.Add(org);
-            orgs.Add(org);
+            var resourceType = new ResourceType() { Name = txe_resource_type.Text };
+            resource_typeService.Add(resourceType);
+            resourceTypes.Add(resourceType);
         }
         else
         {
-            selectedOrg.Name = txe_resource_type.Text;
-            resource_typeService.Update(selectedOrg);
+            selectedType.Name = txe_resource_type.Text;
+            resource_typeService.Update(selectedType);
 
-            var org = orgs.FirstOrDefault(x => x.ID == selectedOrg.ID);
-            org.Name = txe_resource_type.Text;
+            var resourceType = resourceTypes.FirstOrDefault(x => x.ID == selectedType.ID);
+            resourceType.Name = txe_resource_type.Text;
 
         }
-        selectedOrg = null;
+        selectedType = null;
         ltv_resource_types.SelectedItem = null;
         txe_resource_type.Text = "";
         txe_resource_type.Focus();
     }
 
-    /*! <summary>
-             Method responsible for removing resource_type from SQLite database, triggered by selection of delete button.
-             Note: If no ResourceType is selected, no resource_type will be removed.
-        </summary> 
-        <param name="sender">Details about the element that triggered the event.</param>
-        <param name="e">Event details, passed by eventHandler due to clicking event button.</param> */
     private async void DeleteButton_Clicked(object sender, EventArgs e)
     {
         if (ltv_resource_types.SelectedItem == null)
         {
-            await DisplayAlert("No Org Selected", "Select resource_type you want to delete from the list", "OK");
+            await DisplayAlert("No Type Selected", "Select resource_type you want to delete from the list", "OK");
             return;
         }
 
-        await resource_typeService.Remove(selectedOrg);
-        orgs.Remove(selectedOrg);
+        await resource_typeService.Remove(selectedType);
+        resourceTypes.Remove(selectedType);
 
         ltv_resource_types.SelectedItem = null;
         txe_resource_type.Text = "";
         txe_resource_type.Focus();
     }
 
-    /*! <summary>
-            Method responsible for updating currently selected item, integrating UI and Backend functionality.
-        </summary> 
-        <param name="sender">Details about the element that triggered the event.</param>
-        <param name="e">Event details, passed by eventHandler due to clicking event button.</param> */
     private void Ltv_resource_types_ItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
-        selectedOrg = e.SelectedItem as ResourceType;
-        if (selectedOrg == null) return;
-        txe_resource_type.Text = selectedOrg.Name;
+        selectedType = e.SelectedItem as ResourceType;
+        if (selectedType == null) return;
+        txe_resource_type.Text = selectedType.Name;
         txe_resource_type.Focus();
     }
 }

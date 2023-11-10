@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.Views.TeamRequestPage"
+             Title="Request Team Members">
+
+    <StackLayout>
+        <ListView x:Name="ExpertsListView"
+                  ItemsSource="{Binding AvailableExperts}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding Name}" VerticalOptions="Center" />
+                            <Label Text="{Binding Skill}" VerticalOptions="Center" />
+                            <Button Text="Reserve" Command="{Binding Path=BindingContext.ReserveCommand, Source={x:Reference Name=ExpertsListView}}" CommandParameter="{Binding .}" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Label x:Name="ReservationStatus" Text="" />
+    </StackLayout>
+</ContentPage>

@@ -31,6 +31,8 @@ public static class MauiProgram
         builder.Services.AddSingleton<OperationalTeamStatusService>();
         builder.Services.AddSingleton<IRotaService, RotaService>();
         builder.Services.AddSingleton<IOrderStatusService, OrderStatusService>();
+        builder.Services.AddSingleton<BasicExpertService>();
+
 
         return builder.Build();
     }

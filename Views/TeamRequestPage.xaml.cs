@@ -2,6 +2,7 @@ using MauiApp1.Models;
 using MauiApp1.Services;
 using System.Collections.ObjectModel;
 
+namespace MauiApp1.Views{ 
 public partial class TeamRequestPage : ContentPage
 {
     private BasicExpertService _expertService;
@@ -25,4 +26,5 @@ public partial class TeamRequestPage : ContentPage
             AvailableExperts.Add(expert);
         }
     }
+}
 }

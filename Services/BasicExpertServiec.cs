@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using MauiApp1.Models; // Adjust the namespace based on your project structure
+using MauiApp1.Models; // Ensure this is using the correct namespace for your Expert model
 
 public class BasicExpertService
 {
@@ -8,22 +8,17 @@ public class BasicExpertService
 
     public BasicExpertService()
     {
-        _experts = new List<Expert>
+        _experts = new List<BasicExpert>
         {
-            new Expert { ID = 1, Name = "John Doe", Skill = "Logistics", IsAvailable = true },
-            new Expert { ID = 2, Name = "Jane Smith", Skill = "First Aid", IsAvailable = false },
-            // Add more experts as needed
+            new BasicExpert { ID = 1, Name = "John Doe", Skill = "Logistics", IsAvailable = true },
+            new BasicExpert { ID = 2, Name = "Jane Smith", Skill = "First Aid", IsAvailable = false },
         };
-    }
-
-    public Task<List<Expert>> GetAllExpertsAsync()
-    {
-        return Task.FromResult(_experts);
     }
 
     public Task<List<Expert>> GetAvailableExpertsAsync()
     {
-        var availableExperts = _experts.FindAll(expert => expert.IsAvailable);
-        return Task.FromResult(availableExperts);
+        var availableExperts = _experts.FindAll(expert => expert.Status == "Available"); // Adjust the condition based on your logic
+        return availableExperts;
     }
 }
+

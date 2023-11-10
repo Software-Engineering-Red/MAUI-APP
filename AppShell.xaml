@@ -70,6 +70,12 @@
         <ShellContent
             Title="Experts"
             ContentTemplate="{DataTemplate views:ExpertPage}"/>
+        
+        
+        <ShellContent 
+            Title="Request Team Members" 
+            ContentTemplate="{DataTemplate local:TeamRequestPage}" />
+
     </TabBar>
 
 </Shell>

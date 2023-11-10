@@ -9,9 +9,16 @@
                   ItemsSource="{Binding AvailableExperts}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding Name}" Detail="{Binding Skill}" />
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding Name}" VerticalOptions="Center" />
+                            <Label Text="{Binding Skill}" VerticalOptions="Center" />
+                            <Button Text="Reserve" Command="{Binding Path=BindingContext.ReserveCommand, Source={x:Reference Name=ExpertsListView}}" CommandParameter="{Binding .}" />
+                        </StackLayout>
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <Label x:Name="ReservationStatus" Text="" />
     </StackLayout>
 </ContentPage>

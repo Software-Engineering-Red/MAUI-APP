@@ -1,0 +1,71 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UndacApp.Views.VolunteerRequestPage"
+             Title="Volunteer Request Page">
+
+    <StackLayout Spacing="10" Margin="5">
+        <VerticalStackLayout>
+            <Label Text="Add Volunteer"></Label>
+        <Entry Placeholder="Name" x:Name="NameEntry" />
+        <Entry Placeholder="Email" x:Name="EmailEntry" />
+        <Entry Placeholder="Skill" x:Name="SkillEntry" />
+        <Entry Placeholder="Geographical Location" x:Name="LocationEntry" />
+
+
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
+            <Button Text="Save"
+               Clicked="SaveButton_Clicked" />
+
+            <Button Grid.Column="1"
+               Text="Delete"
+               Clicked="DeleteButton_Clicked" />
+        </Grid>
+        </VerticalStackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Entry Placeholder="Search by Name" x:Name="NameFilter" TextChanged="FilterVolunteers_TextChanged" />
+            <Entry Placeholder="Search by Email" x:Name="EmailFilter" TextChanged="FilterVolunteers_TextChanged" />
+            <Entry Placeholder="Search by Skill" x:Name="SkillFilter" TextChanged="FilterVolunteers_TextChanged" />
+            <Entry Placeholder="Search by Location" x:Name="LocationFilter" TextChanged="FilterVolunteers_TextChanged" />
+            <Button Text="Clear Filter" Clicked="ClearFilterButton_Clicked" />
+        </StackLayout>
+
+        <Label Text="Volunteer List"></Label>
+        <ListView x:Name="ltv_volunteers" Background="White" ItemSelected="ltv_volunteers_ItemSelected">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Column="0" Text="{Binding Name}" />
+                            <Label Grid.Column="1" Text="{Binding Skill}" />
+                            <Label Grid.Column="2" Text="{Binding GeographicalLocation}" />
+                            <Label Grid.Column="3" Text="{Binding Status}" />
+                            <Label Grid.Column="4" Text="{Binding DateOfArrival}" />
+                            <Label Grid.Column="5" Text="{Binding DateOfDeparture}" />
+
+
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button x:Name="FlagButton" Grid.Column="4" Text="Flag" Clicked="FlagButton_Clicked" />
+        <DatePicker x:Name="ArrivalDatePicker" IsVisible="False" />
+        <DatePicker x:Name="DepartureDatePicker" IsVisible="False" />
+
+        <Button x:Name="RequestDatesButton" Text="Request Arrival / Departure Dates" IsVisible="False" Clicked="RequestDatesButton_Clicked" />
+
+        <Button x:Name="SetNeutralButton" Text="Volunteer Declined" IsVisible="False" Clicked="SetNeutralButton_Clicked" />
+
+        <Button x:Name="SetConfirmedButton" Text="Volunteer Accepted" IsVisible="False" Clicked="SetConfirmButton_Clicked" />
+
+    </StackLayout>
+</ContentPage>

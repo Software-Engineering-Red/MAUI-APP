@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace UndacApp.Services
 {
-    public interface ITeamMemberService : IService<TeamMember> {
-        public Task<List<TeamMember>> GetAvailable();
+    public interface ITeamService : IService<Team> {
     }
 }

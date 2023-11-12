@@ -18,7 +18,7 @@
 
             <Button Grid.Column="1"
                Text="Delete"
-               Clicked="DeleteButton_Clicked" />
+               Clicked="DeleteButton_ClickedWrapper" />
         </Grid>
         </VerticalStackLayout>
         <StackLayout Orientation="Horizontal">

@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Linq;
 using UndacApp.Models;
 using UndacApp.Services;
 
@@ -22,6 +23,38 @@ public partial class VolunteerRequestPage : ContentPage
         Task.Run(async () => await LoadVolunteers());
        
     }
+
+    private void DeleteButton_ClickedWrapper(object sender, EventArgs e)
+    {
+        _ = DeleteButton_Clicked();
+    }
+
+    private async Task DeleteButton_Clicked()
+    {
+        try
+        {
+            if (ltv_volunteers.SelectedItem == null)
+            {
+                await DisplayAlert("No Volunteer Selected", "Select the volunteer you want to delete from the list", "OK");
+                return;
+            }
+
+            await volunteerService.DeleteVolunteer(selectedVolunteer);
+            volunteers.Remove(selectedVolunteer);
+
+            ltv_volunteers.SelectedItem = null;
+            NameEntry.Text = null;
+            EmailEntry.Text = null;
+
+            SkillEntry.Text = null;
+            LocationEntry.Text = null;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error deleting volunteer: {ex.Message}");
+        }
+    }
+
     private async Task LoadVolunteers()
     {
         volunteers = new ObservableCollection<Volunteer>(await volunteerService.GetVolunteerList());
@@ -47,9 +80,6 @@ public partial class VolunteerRequestPage : ContentPage
     private void SaveButton_Clicked(object sender, EventArgs e)
 
     {
-
-     
-
         if (selectedVolunteer == null)
         {
             var newVolunteer = new Volunteer
@@ -75,38 +105,6 @@ public partial class VolunteerRequestPage : ContentPage
 
     }
 
-    /*!
-    * Detect delete button being clicked
-    * @param sender (Object) the sender object created by the event
-    * @param e (EventArgs) the arguments passed into the event
-    */
-    private async void DeleteButton_Clicked(object sender, EventArgs e)
-    {
-        if (ltv_volunteers.SelectedItem == null)
-        {
-            await DisplayAlert("No Volunteer Selected", "Select the volunteer you want to delete from the list", "OK");
-            return;
-        }
-
-        await volunteerService.DeleteVolunteer(selectedVolunteer);
-        volunteers.Remove(selectedVolunteer);
-
-        ltv_volunteers.SelectedItem = null;
-        NameEntry.Text = null;
-        EmailEntry.Text = null;
-
-        SkillEntry.Text = null;
-        LocationEntry.Text = null;
-    }
-
-    /*!
-    * Detect all items selected in list view
-    * @param sender (Object) the sender object created by the event
-    * @param e (SelectedItemChangedEventArgs) the arguments passed into the event
-    */
-
-
-
     private void FilterVolunteers_TextChanged(object sender, TextChangedEventArgs e)
     {
         string nameFilter = NameFilter.Text;
@@ -114,15 +112,37 @@ public partial class VolunteerRequestPage : ContentPage
         string skillFilter = SkillFilter.Text;
         string locationFilter = LocationFilter.Text;
 
-        var filteredVolunteers = _volunteers.Where(volunteer =>
-            (string.IsNullOrEmpty(nameFilter) || volunteer.Name.Contains(nameFilter)) &&
-            (string.IsNullOrEmpty(emailFilter) || volunteer.Email.Contains(emailFilter)) &&
-            (string.IsNullOrEmpty(skillFilter) || volunteer.Skill.Contains(skillFilter)) &&
-            (string.IsNullOrEmpty(locationFilter) || volunteer.GeographicalLocation.Contains(locationFilter))
-        ).ToList();
+        var filteredVolunteers = volunteers
+            .Where(volunteer => PassesNameFilter(volunteer, nameFilter))
+            .Where(volunteer => PassesEmailFilter(volunteer, emailFilter))
+            .Where(volunteer => PassesSkillFilter(volunteer, skillFilter))
+            .Where(volunteer => PassesLocationFilter(volunteer, locationFilter))
+            .ToList();
 
         ltv_volunteers.ItemsSource = new ObservableCollection<Volunteer>(filteredVolunteers);
     }
+
+
+    private bool PassesNameFilter(Volunteer volunteer, string nameFilter)
+    {
+        return string.IsNullOrEmpty(nameFilter) || volunteer.Name.Contains(nameFilter);
+    }
+
+    private bool PassesEmailFilter(Volunteer volunteer, string emailFilter)
+    {
+        return string.IsNullOrEmpty(emailFilter) || volunteer.Email.Contains(emailFilter);
+    }
+
+    private bool PassesSkillFilter(Volunteer volunteer, string skillFilter)
+    {
+        return string.IsNullOrEmpty(skillFilter) || volunteer.Skill.Contains(skillFilter);
+    }
+
+    private bool PassesLocationFilter(Volunteer volunteer, string locationFilter)
+    {
+        return string.IsNullOrEmpty(locationFilter) || volunteer.GeographicalLocation.Contains(locationFilter);
+    }
+
 
 
     private void ClearFilterButton_Clicked(object sender, EventArgs e)
@@ -136,6 +156,11 @@ public partial class VolunteerRequestPage : ContentPage
         // Reset the list to show all volunteers
         ltv_volunteers.ItemsSource = _volunteers;
     }
+
+    private const string NeutralStatus = "Neutral";
+    private const string ConfirmedStatus = "Confirmed";
+
+   
 
     private void FlagButton_Clicked(object sender, EventArgs e)
     {

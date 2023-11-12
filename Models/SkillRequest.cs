@@ -67,7 +67,5 @@ namespace UndacApp.Models
 			get => confirmedDate;
 			set => SetField(ref confirmedDate, value);
 		}
-
-		public event PropertyChangedEventHandler PropertyChanged;
 	}
 }

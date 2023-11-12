@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UndacApp.Views.OperationalTeamPage"
+             xmlns:viewmodel="clr-namespace:UndacApp.ViewModels"
+             Title="OperationalTeamPage"
+             x:DataType="viewmodel:OperationalTeamViewModel"
+             >
+    <VerticalStackLayout>
+        <Label Text="For Test Purposes only"></Label>
+        
+        <Entry Placeholder="Name" Text="{Binding Name}"/>
+        <Entry Placeholder="Created By" Text="{Binding CreatedBy}" Keyboard="Numeric"/>
+        <Entry Placeholder="Team ID" Text="{Binding TeamId}" Keyboard="Numeric"/>
+        <Entry Placeholder="Status" Text="{Binding Status}" Keyboard="Numeric"/>
+
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
+            <Button Text="Save"
+                    Clicked="SaveButton_Clicked" />
+
+            <Button Grid.Column="1"
+                    Text="Delete"
+                    Clicked="DeleteButton_Clicked" />
+        </Grid>
+
+        <ListView x:Name="operationalTeamListView"
+                  ItemsSource="{Binding OperationalTeams}"
+                  ItemSelected="select_Item_from_ListView" Margin="20"
+                      SelectionMode="Single" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="10">
+                            <Label Text="{Binding Name}" FontAttributes="Bold"/>
+                            <Label Text="{Binding CreatedBy, StringFormat='Created By: {0}'}"/>
+                            <Label Text="{Binding TeamId, StringFormat='Team ID: {0}'}"/>
+                            <Label Text="{Binding Status, StringFormat='Status: {0}'}"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </VerticalStackLayout>
+</ContentPage>

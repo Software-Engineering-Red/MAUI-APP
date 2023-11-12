@@ -192,21 +192,21 @@ public partial class VolunteerRequestPage : ContentPage
         }
 
 
+    private const string NeutralStatus = "Neutral";
+    private const string ConfirmedStatus = "Confirmed";
 
     private void SetNeutralButton_Clicked(object sender, EventArgs e)
     {
         if (_selectedVolunteer != null)
         {
             // Reset the status and clear the dates in the database
-            _selectedVolunteer.Status = "Neutral";
+            _selectedVolunteer.Status = NeutralStatus;
             _selectedVolunteer.DateOfArrival = null;
             _selectedVolunteer.DateOfDeparture = null;
-            // Clear the dates in the database
 
             SetNeutralButton.IsVisible = false;
             RequestDatesButton.IsVisible = false;
             SetConfirmedButton.IsVisible = false;
-
         }
     }
     private void SetConfirmButton_Clicked(object sender, EventArgs e)

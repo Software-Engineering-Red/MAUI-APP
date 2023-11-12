@@ -13,30 +13,34 @@ namespace UndacApp.Services
         #region get data
         /*tasks that get the list of  data from the databas for each column in the table*/
         /*task that  return list of ID of the record, operational teamID and name of the the reqest*/
+
         Task<List<OperationRecords>> GetOperationRecordsID(int id);
-        
+        Task<List<int>> GetOperationRecordsIDL();
+
 
         Task<List<OperationRecords>> GetOperationRecordsOperationalTeamID(int id);
-        
+        Task<List<int>> GetOperationRecordsOperationalTeamIDL();
+
 
         Task<List<OperationRecords>> GetOperationRecordsRequested_By(string RequestBy);
+        Task<List<string>> GetOperationRecordsRequested_ByL();
 
         /*tasks that return the list of details of the request, date it was requested and status of the request*/
-        Task<List<OperationRecords>> GetOperationRecordsRequest_Details(string Details);
-        
+        Task<List<OperationRecords>> GetOperationRecordsRequest_Details(int id);
+        Task<List<string>> GetOperationRecordsRequest_DetailsL();
 
         Task<List<OperationRecords>> GetOperationRecordsRequest_Date(DateTime DateAndTimeRequest);
-        
+        Task<List<DateTime>> GetOperationRecordsRequest_Date();
 
         Task<List<OperationRecords>> GetOperationRecordsStatus(string status);
-       
-
+        Task<List<string>> GetOperationRecordsStatusL();
         /*tasks returns lists of data from other table to be used for UI only*/
         /*Task<List<ResourceTable>> GetResourceID()*//*place holder for when Resource table created*/
 
         /*tasks return lists with data that will later be used to add to the Operationrecords table from other tables*/
+
         Task<List<OperationalTeamStatus>> GetOperationalTeamStatusesID(int id);
-        
+        Task<List<int>> GetOperationalTeamStatusesIDL();
         /*Task<List<RequestTable>> GetRequestTableRequest_By();*/ /*placeholder for when Request table added*/
         /*Task<List<RequestTable>> GetRequestTable_Details();*/
         /*Task<List<RequestTable>> GetRequestTables_Date();*/
@@ -45,9 +49,10 @@ namespace UndacApp.Services
         /*tasks that reutrn the list  of names confiriming the status and the date the confirmations was on as well as the time */
         //Task<List<OperationRecords>> GetOperationRecordsConfirmed_ByTable();
         Task<List<OperationRecords>> GetOperationRecordsConfirmed_By(string Confirmed_By);
+        Task<List<string>> GetOperationRecordsConfirmed_ByL();
 
         Task<List<OperationRecords>> GetOperationRecordsConfirmed_Date(DateTime dateAndTimeCondirmed);
-        
+        Task<List<DateTime>> GetOperationRecordsConfirmed_DateL();
         #endregion
         #region add data
         /*task that add data from seperate tables to the OperationRecords table*//* these are place holders untill the tables are added*/
@@ -66,7 +71,8 @@ namespace UndacApp.Services
         /*task for combined lists of ID of the table, Opperational Team ID, and requested By. name */
         //Task<int> addOperationRecordrquest(OperationRecords operationRecords);
 
-        //Task<List<string>> OperationRecordsRquest();
+        Task<List<string>> OperationRecordsRquest();
+        Task<List<OperationRecords>> GetOperationRecordsTable();
         #endregion
     }
 }

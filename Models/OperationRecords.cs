@@ -66,13 +66,6 @@ namespace UndacApp.Models
             set => SetField(ref confirmed_Date, value);
         }
 
-        private string fk_OpperationRecordsID_OperationalTeamID;
-        public string FK_OpperationRecordsID_OperationalTeamID
-        {
-            get => fk_OpperationRecordsID_OperationalTeamID;
-            set => SetField(ref fk_OpperationRecordsID_OperationalTeamID, value);
-        }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string propertyName) =>

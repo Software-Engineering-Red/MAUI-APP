@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UndacApp.Models
 {
-	internal class OperationResourceRequest : AModel
+	public class OperationResourceRequest : AModel
 	{
 		private int operational_team_Id;
 		public int OperationalTeamId

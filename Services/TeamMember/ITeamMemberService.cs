@@ -1,12 +1,11 @@
-﻿using SQLite;
+﻿using UndacApp.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UndacApp.Models
+namespace UndacApp.Services
 {
-    public class ResourceType : AModel { }
+    public interface ITeamMemberService : IService<TeamMember> { }
 }

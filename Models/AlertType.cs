@@ -2,6 +2,7 @@
 using System.ComponentModel;
 namespace UndacApp.Models
 {
+
     public class AlertType : INotifyPropertyChanged
     {
         [PrimaryKey, AutoIncrement]
@@ -13,6 +14,15 @@ namespace UndacApp.Models
             get => _name;
             set => Utils.SetProperty(ref _name, value, this);
         }
+        private string _status;
+        public string Status
+        {
+            get => _status;
+            set => Utils.SetProperty(ref _status, value, this);
+        }
+
+   
+
 
         public event PropertyChangedEventHandler? PropertyChanged;
 

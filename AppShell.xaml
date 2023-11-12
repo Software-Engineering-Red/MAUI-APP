@@ -33,7 +33,7 @@
 
         <ShellContent
             Title="Teams"
-            ContentTemplate="}"/>
+            ContentTemplate="{DataTemplate views:TeamPage}"/>
 
         <ShellContent
             Title="Privilege Requests"

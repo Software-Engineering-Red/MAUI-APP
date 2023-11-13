@@ -108,6 +108,9 @@
         <ShellContent
             Title="Operation-Resource-Request-Status"
             ContentTemplate="{DataTemplate views:OperationResourceRequestStatusPage}" />
+        <ShellContent
+            Title="Operation-Resource-Request"
+            ContentTemplate="{DataTemplate views:OperationRessourceRequestPage}" />
     </TabBar>
 
 </Shell>

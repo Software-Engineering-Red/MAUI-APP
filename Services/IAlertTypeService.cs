@@ -10,9 +10,10 @@ namespace UndacApp.Services
     public interface IAlertTypeService
     {
         Task<List<AlertType>> GetAlertTypes();
-        Task<int> AddAlertType(AlertType continent);
-        Task<int> DeleteAlertType(AlertType continent);
-        Task<int> UpdateAlertType(AlertType continent);
+        Task<int> AddAlertType(AlertType alertType);
+        Task<int> DeleteAlertType(AlertType alertType);
+        Task<int> DeleteAllAlertType();
+        Task<int> UpdateAlertType(AlertType alertType);
         Task<List<AlertType>> GetAlertTypesByStatus(string status);
     }
 }

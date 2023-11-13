@@ -15,8 +15,8 @@ public partial class TeamMemberPage : ContentPage
     /*! <summary>
         An instance of ITeamMemberService
      </summary> */
-    ITeamMemberService teamMemberService;
-    IPrivilegeRequestService privilegeRequestService;
+    ITeamMemberService teamMemberService = new TeamMemberService();
+    IPrivilegeRequestService privilegeRequestService = new PrivilegeRequestService();
 
     /*! <summary>
         Collection of current TeamMembers.
@@ -29,11 +29,8 @@ public partial class TeamMemberPage : ContentPage
     public TeamMemberPage()
 	{
         InitializeComponent();
-        this.BindingContext = new TeamMember();
-        this.teamMemberService = new TeamMemberService();
-        this.privilegeRequestService = new PrivilegeRequestService();
-
-        Task.Run(async () => await LoadTeamMembers());
+        BindingContext = new TeamMember();
+        Task.Run(LoadTeamMembers);
     }
 
     /*! <summary>

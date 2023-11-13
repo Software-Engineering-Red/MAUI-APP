@@ -14,6 +14,12 @@
             ContentTemplate="{DataTemplate views:WelcomePage}"/>
 
         <ShellContent
+        Title="Volunteer Requests"
+        ContentTemplate="{DataTemplate views:VolunteerRequestPage}"
+        Icon="{OnPlatform 'icon_about.png', iOS='icon_about_ios.png', MacCatalyst='icon_about_ios.png'}" />
+
+
+        <ShellContent
              Title="Security Alerts"
              ContentTemplate="{DataTemplate views:SecurityAlertsPage}"
              Icon="{OnPlatform 'icon_about.png', iOS='icon_about_ios.png', MacCatalyst='icon_about_ios.png'}" />
@@ -30,6 +36,10 @@
         <ShellContent
             Title="Team Members"
             ContentTemplate="{DataTemplate views:TeamMemberPage}"/>
+
+        <ShellContent
+            Title="Teams"
+            ContentTemplate="{DataTemplate views:TeamPage}"/>
 
         <ShellContent
             Title="Privilege Requests"

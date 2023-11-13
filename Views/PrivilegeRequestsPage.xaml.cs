@@ -13,13 +13,13 @@ public partial class PrivilegeRequestsPage : ContentPage
 
     public PrivilegeRequestsPage()
     {
-        Task.Run(async () => await LoadRequests());
-        
-        this.BindingContext = new PrivilegeRequest();
-        this.requestService = new PrivilegeRequestService();
-        this.memberService = new TeamMemberService();
-
         InitializeComponent();
+        this.requestService = new PrivilegeRequestService();              
+        this.memberService = new TeamMemberService();
+        Task.Run(async () => await LoadRequests());
+        this.BindingContext = new PrivilegeRequest();
+
+        
     }
 
     private async Task LoadRequests()
@@ -41,14 +41,16 @@ public partial class PrivilegeRequestsPage : ContentPage
             int updatedID = selectedRequest.MemberID;
             var teamMembers = new ObservableCollection<TeamMember>(await memberService.GetAll());
             var teamMember = teamMembers.FirstOrDefault(x => x.ID == updatedID);
+
+
             teamMember.AccessPrivilegeLevel = selectedRequest.PrivilegeLevel;
             await memberService.Update(teamMember);
             selectedRequest.Approved = true;
             await requestService.UpdatePrivilegeRequest(selectedRequest);
 
-            /*
-            requests.Remove(selectedRequest);
-            ltv_privilegeRequests.ItemsSource = requests;*/
+            
+            requests.Clear();
+            ltv_privilegeRequests.ItemsSource = requests;
         }
     }
 

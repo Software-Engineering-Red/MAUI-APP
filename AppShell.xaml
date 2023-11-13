@@ -102,6 +102,9 @@
         <ShellContent
            Title="Add Resource"
            ContentTemplate="{DataTemplate views:AddResourcePage}" />
+        <ShellContent
+            Title="Local Media's"
+             ContentTemplate="{DataTemplate views:LocalMediaPage}" />
 
     </TabBar>
 

@@ -54,18 +54,62 @@ public partial class TeamMemberPage : ContentPage
 
         if (selectedTeamMember == null && int.TryParse(txe_privilegeLevel.Text, out privilegeLevel) == true)
         {
-            var teamMember = new TeamMember() { Name = txe_teamMember.Text, AccessPrivilegeLevel = txe_privilegeLevel.Text };
+            
+            var teamMember = new TeamMember()
+            {
+                Name = txe_teamMember.Text,
+                AccessPrivilegeLevel = txe_privilegeLevel.Text,
+                SystemType = (string)pickerSystemType.SelectedItem,
+                IsSystemTypeUpdatePending = true
+            };
+            
             teamMemberService.Add(teamMember);
             teamMembers.Add(teamMember);
+            if (pickerSystemType.SelectedItem == null)
+            {
+                DisplayAlert("System Type Error", "Please select a system type", "OK");
+                return;
+            }
+            else if (teamMember.IsSystemTypeUpdatePending)
+            {
+                // Create a privilege request for system type update
+                PrivilegeRequest request = new PrivilegeRequest()
+                {
+                    RequestType = "System Type Update",
+                    MemberID = teamMember.ID,
+                    SystemType = teamMember.SystemType, // Include the current system type in the request
+                    Approved = false // Set to true if the request is approved immediately
+                };
+
+                privilegeRequestService.AddRequest(request);
+                DisplayAlert("System Type Update", "System type update requested - Pending approval", "OK");
+            }
         }
+
         else
         {
             if (int.TryParse(txe_privilegeLevel.Text, out privilegeLevel) == true)
             {
-                selectedTeamMember.AccessPrivilegeLevel =
+                if (selectedTeamMember.IsSystemTypeUpdatePending)
+                {
+                    // Create a privilege request for system type update
+                    PrivilegeRequest request = new PrivilegeRequest()
+                    {
+                        RequestType = "System Type Update",
+                        MemberID = selectedTeamMember.ID,
+                        SystemType = selectedTeamMember.SystemType, // Include the current system type in the request
+                        Approved = false // Set to true if the request is approved immediately
+                    };
+                
+
+                privilegeRequestService.AddRequest(request);
+                DisplayAlert("System Type Update", "System type update requested - Pending approval", "OK");
+                }
+                    selectedTeamMember.AccessPrivilegeLevel =
                     selectedTeamMember.AccessPrivilegeLevel == null
                     ? selectedTeamMember.AccessPrivilegeLevel = "0"
                     : selectedTeamMember.AccessPrivilegeLevel = selectedTeamMember.AccessPrivilegeLevel;
+                    selectedTeamMember.SystemType = (string)pickerSystemType.SelectedItem;
 
                 if (selectedTeamMember.AccessPrivilegeLevel.Equals("disabled") || privilegeLevel <= int.Parse(selectedTeamMember.AccessPrivilegeLevel))
                 {
@@ -75,10 +119,13 @@ public partial class TeamMemberPage : ContentPage
                     var teamMember = teamMembers.FirstOrDefault(x => x.ID == selectedTeamMember.ID);
                     teamMember.Name = txe_teamMember.Text;
                     teamMember.AccessPrivilegeLevel = txe_privilegeLevel.Text;
+
                 }
+               
+                
                 else
                 {
-
+                   
                     PrivilegeRequest request = new PrivilegeRequest() { RequestType = "Privilege Escalation", MemberID = selectedTeamMember.ID, PrivilegeLevel = txe_privilegeLevel.Text, Approved = false };
                     privilegeRequestService.AddRequest(request);
                     DisplayAlert("Failure", "Unable to increase privileges without Deputy Team Leader approval - Sending for approval", "OK");
@@ -122,6 +169,8 @@ public partial class TeamMemberPage : ContentPage
     private async void RemoveAccessButton_Clicked(object sender, EventArgs e)
     {
         selectedTeamMember.AccessPrivilegeLevel = "disabled";
+        selectedTeamMember.SystemType = null;
+        selectedTeamMember.IsSystemTypeUpdatePending = false;
         await teamMemberService.Update(selectedTeamMember);
         await Shell.Current.DisplayAlert("Team member access removed", "Team member access has been removed", "OK");
         return;

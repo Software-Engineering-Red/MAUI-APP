@@ -45,6 +45,10 @@ public partial class PrivilegeRequestsPage : ContentPage
             await memberService.Update(teamMember);
             selectedRequest.Approved = true;
             await requestService.UpdatePrivilegeRequest(selectedRequest);
+
+            /*
+            requests.Remove(selectedRequest);
+            ltv_privilegeRequests.ItemsSource = requests;*/
         }
     }
 

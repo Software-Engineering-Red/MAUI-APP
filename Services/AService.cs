@@ -6,7 +6,7 @@ namespace UndacApp.Services
 {
     public abstract class AService<T> : IService<T> where T : AModel,new()
     {
-        private SQLiteAsyncConnection _database;
+        protected SQLiteAsyncConnection _database;
 
         public AService()
         {

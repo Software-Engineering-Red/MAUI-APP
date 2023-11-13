@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sys="clr-namespace:System;assembly=netstandard"
+             x:Class="UndacApp.Views.AddResourcePage"
+             Title="AddResources">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="30" Padding="30,20" VerticalOptions="Center">
+            <!-- Title -->
+
+            <Label Text="Add Resources" FontSize="26" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
+
+            <Frame CornerRadius="10" Padding="20">
+                <VerticalStackLayout Spacing="5">
+                    <Label Text="Select resource type:" FontSize="20" FontAttributes="Bold"/>
+                    <Picker x:Name="ResourceTypePicker" ItemDisplayBinding="{Binding Name}" BackgroundColor="White" TextColor="Black" TitleColor="Black"/>
+
+                    <Label Text="Select Location:" FontSize="20" FontAttributes="Bold"/>
+                    <Picker x:Name="BuildingTypePicker" ItemDisplayBinding="{Binding Name}" BackgroundColor="White" TextColor="Black" TitleColor="Black"/>
+
+                    <Label Text="Resource Name and Quantity:" FontSize="20" FontAttributes="Bold"/>
+                    <Entry Placeholder="Resource Name:" x:Name="ResourceName" />
+                    <Entry Placeholder="Quantity" x:Name="NumberRequiredEntry" Keyboard="Numeric"/>
+                    
+                    <Grid ColumnDefinitions="*,*,*" ColumnSpacing="3">
+                        <Button Text="Add Record" Grid.Column="0" Clicked="OnAddRecordClicked" BackgroundColor="#4CAF50" CornerRadius="8" />
+                        <Button Text="Update Record" Grid.Column="1" Clicked="OnUpdateClicked" BackgroundColor="blue" CornerRadius="8" />
+                        <Button Text="Remove Record" Grid.Column="2" Clicked="OnRemoveClicked" BackgroundColor="MediumVioletRed" CornerRadius="8" />
+                    </Grid>
+                </VerticalStackLayout>
+     
+            </Frame>
+            <Label Text="Resource List" FontSize="26" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
+
+            <StackLayout Orientation="Horizontal">
+                <Entry x:Name="searchEntry" Placeholder="Search" Text="{Binding SearchText}" HorizontalOptions="FillAndExpand" TextChanged="OnEntryTextChanged" />
+                <Picker x:Name="filterPicker" TextColor="White">
+                    <Picker.Title>Filter Resource Status</Picker.Title>
+                    
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Name</x:String>
+                            <x:String>Type</x:String>
+                            <x:String>Location</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                    <Picker.SelectedItem>Name</Picker.SelectedItem>
+                </Picker>
+            </StackLayout>
+            <Button Text="Filter" Clicked="Button_Clicked" CornerRadius="8" />
+            <ListView x:Name="ltv_resources" Background="white" ItemSelected="ltv_resources_ItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0" Text="{Binding Type}" TextColor="Black" FontAttributes="Bold"/>
+                                <Label Grid.Row="1" Text="{Binding Name}" TextColor="Black"/>
+                                <Label Grid.Row="2" Text="{Binding Quantity}" TextColor="Black"/>
+                                <Label Grid.Row="3" Text="{Binding Location}" TextColor="Black"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

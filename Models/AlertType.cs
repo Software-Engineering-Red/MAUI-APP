@@ -1,7 +1,5 @@
 ﻿using SQLite;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations.Schema;
-using Windows.System;
 
 namespace UndacApp.Models
 {

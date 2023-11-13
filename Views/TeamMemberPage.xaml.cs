@@ -44,7 +44,7 @@ public partial class TeamMemberPage : ContentPage
     }
 
     /*! <summary>
-            Method responsible for saving TeamMember into SQLite database, triggered by selection of save button.
+            Method responsible for saving TeamMember and System Type into SQLite database, triggered by selection of save button.
         </summary> 
         <param name="sender">Details about the element that triggered the event.</param>
         <param name="e">Event details, passed by eventHandler due to clicking event button.</param> */
@@ -72,13 +72,13 @@ public partial class TeamMemberPage : ContentPage
             }
             else if (teamMember.IsSystemTypeUpdatePending)
             {
-                // Create a privilege request for system type update
+                
                 PrivilegeRequest request = new PrivilegeRequest()
                 {
                     RequestType = "System Type Update",
                     MemberID = teamMember.ID,
-                    SystemType = teamMember.SystemType, // Include the current system type in the request
-                    Approved = false // Set to true if the request is approved immediately
+                    SystemType = teamMember.SystemType, 
+                    Approved = false 
                 };
 
                 privilegeRequestService.AddRequest(request);
@@ -92,13 +92,13 @@ public partial class TeamMemberPage : ContentPage
             {
                 if (selectedTeamMember.IsSystemTypeUpdatePending)
                 {
-                    // Create a privilege request for system type update
+                   
                     PrivilegeRequest request = new PrivilegeRequest()
                     {
                         RequestType = "System Type Update",
                         MemberID = selectedTeamMember.ID,
-                        SystemType = selectedTeamMember.SystemType, // Include the current system type in the request
-                        Approved = false // Set to true if the request is approved immediately
+                        SystemType = selectedTeamMember.SystemType, 
+                        Approved = false 
                     };
                 
 

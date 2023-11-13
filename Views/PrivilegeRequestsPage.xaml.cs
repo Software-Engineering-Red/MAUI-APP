@@ -20,7 +20,7 @@ public partial class PrivilegeRequestsPage : ContentPage
         this.BindingContext = new PrivilegeRequest();
 
         
-    }
+    }    
 
     private async Task LoadRequests()
     {
@@ -48,10 +48,10 @@ public partial class PrivilegeRequestsPage : ContentPage
                 await memberService.Update(teamMember);
                 selectedRequest.Approved = true;
                 await requestService.UpdatePrivilegeRequest(selectedRequest);
-
                 requests.Remove(selectedRequest);
                 await requestService.DeleteRequest(selectedRequest);
-                
+               
+
                 ltv_privilegeRequests.ItemsSource = requests;
             }
             else

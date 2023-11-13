@@ -75,7 +75,7 @@
 	  <MauiXaml Update="Views\OperationResourceRequestStatusPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\OperationRessourceRequestPage.xaml">
+	  <MauiXaml Update="Views\OperationResourceRequestPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\ResorceType.xaml">
@@ -133,6 +133,9 @@
 		</Compile>
 		<Compile Update="Views\AddResourcePage.xaml.cs">
 		  <DependentUpon>AddResourcePage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\OperationResourceRequestPage.xaml.cs">
+		  <DependentUpon>OperationResourceRequestPage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Views\ResorceType.xaml.cs">
 		  <DependentUpon>ResorceType.xaml</DependentUpon>

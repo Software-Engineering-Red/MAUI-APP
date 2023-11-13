@@ -31,4 +31,4 @@ namespace UndacApp.Models
         public event PropertyChangedEventHandler? PropertyChanged;
     }
 }
-}
+

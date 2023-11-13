@@ -15,8 +15,8 @@ public partial class TeamMemberPage : ContentPage
     /*! <summary>
         An instance of ITeamMemberService
      </summary> */
-    ITeamMemberService teamMemberService;
-    IPrivilegeRequestService privilegeRequestService;
+    ITeamMemberService teamMemberService = new TeamMemberService();
+    IPrivilegeRequestService privilegeRequestService = new PrivilegeRequestService();
 
     /*! <summary>
         Collection of current TeamMembers.
@@ -29,11 +29,8 @@ public partial class TeamMemberPage : ContentPage
     public TeamMemberPage()
 	{
         InitializeComponent();
-        this.BindingContext = new TeamMember();
-        this.teamMemberService = new TeamMemberService();
-        this.privilegeRequestService = new PrivilegeRequestService();
-
-        Task.Run(async () => await LoadTeamMembers());
+        BindingContext = new TeamMember();
+        Task.Run(LoadTeamMembers);
     }
 
     /*! <summary>
@@ -42,7 +39,7 @@ public partial class TeamMemberPage : ContentPage
         <returns>Task promise, informing about the status of its' completion.</returns> */
     private async Task LoadTeamMembers()
     {
-        teamMembers = new ObservableCollection<TeamMember>(await teamMemberService.GetTeamMemberList());
+        teamMembers = new ObservableCollection<TeamMember>(await teamMemberService.GetAll());
         ltv_teamMembers.ItemsSource = teamMembers;
     }
 
@@ -58,7 +55,7 @@ public partial class TeamMemberPage : ContentPage
         if (selectedTeamMember == null && int.TryParse(txe_privilegeLevel.Text, out privilegeLevel) == true)
         {
             var teamMember = new TeamMember() { Name = txe_teamMember.Text, AccessPrivilegeLevel = txe_privilegeLevel.Text };
-            teamMemberService.AddTeamMember(teamMember);
+            teamMemberService.Add(teamMember);
             teamMembers.Add(teamMember);
         }
         else
@@ -70,11 +67,11 @@ public partial class TeamMemberPage : ContentPage
                     ? selectedTeamMember.AccessPrivilegeLevel = "0"
                     : selectedTeamMember.AccessPrivilegeLevel = selectedTeamMember.AccessPrivilegeLevel;
 
-                if (privilegeLevel <= int.Parse(selectedTeamMember.AccessPrivilegeLevel))
+                if (selectedTeamMember.AccessPrivilegeLevel.Equals("disabled") || privilegeLevel <= int.Parse(selectedTeamMember.AccessPrivilegeLevel))
                 {
                     selectedTeamMember.Name = txe_teamMember.Text;
                     selectedTeamMember.AccessPrivilegeLevel = txe_privilegeLevel.Text;
-                    teamMemberService.UpdateTeamMember(selectedTeamMember);
+                    teamMemberService.Update(selectedTeamMember);
                     var teamMember = teamMembers.FirstOrDefault(x => x.ID == selectedTeamMember.ID);
                     teamMember.Name = txe_teamMember.Text;
                     teamMember.AccessPrivilegeLevel = txe_privilegeLevel.Text;
@@ -114,12 +111,20 @@ public partial class TeamMemberPage : ContentPage
             return;
         }
 
-        await teamMemberService.DeleteTeamMember(selectedTeamMember);
+        await teamMemberService.Remove(selectedTeamMember);
         teamMembers.Remove(selectedTeamMember);
 
         ltv_teamMembers.SelectedItem = null;
         txe_teamMember.Text = null;
         txe_privilegeLevel.Text = null;
+    }
+
+    private async void RemoveAccessButton_Clicked(object sender, EventArgs e)
+    {
+        selectedTeamMember.AccessPrivilegeLevel = "disabled";
+        await teamMemberService.Update(selectedTeamMember);
+        await Shell.Current.DisplayAlert("Team member access removed", "Team member access has been removed", "OK");
+        return;
     }
 
     /*! <summary>

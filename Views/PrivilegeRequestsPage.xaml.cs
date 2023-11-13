@@ -42,15 +42,24 @@ public partial class PrivilegeRequestsPage : ContentPage
             var teamMembers = new ObservableCollection<TeamMember>(await memberService.GetAll());
             var teamMember = teamMembers.FirstOrDefault(x => x.ID == updatedID);
 
+            if (teamMember != null)
+            {
+                teamMember.AccessPrivilegeLevel = selectedRequest.PrivilegeLevel;
+                await memberService.Update(teamMember);
+                selectedRequest.Approved = true;
+                await requestService.UpdatePrivilegeRequest(selectedRequest);
 
-            teamMember.AccessPrivilegeLevel = selectedRequest.PrivilegeLevel;
-            await memberService.Update(teamMember);
-            selectedRequest.Approved = true;
-            await requestService.UpdatePrivilegeRequest(selectedRequest);
-
+                requests.Remove(selectedRequest);
+                await requestService.DeleteRequest(selectedRequest);
+                
+                ltv_privilegeRequests.ItemsSource = requests;
+            }
+            else
+        {
             
-            requests.Clear();
-            ltv_privilegeRequests.ItemsSource = requests;
+            await Shell.Current.DisplayAlert("Member not found", "The selected member was not found in the team members collection", "OK");
+              
+            }
         }
     }
 

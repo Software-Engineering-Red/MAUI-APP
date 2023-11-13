@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Security.Cryptography;
 using System.Windows.Input;
 using UndacApp.Models;
 using UndacApp.Services;
@@ -8,16 +9,19 @@ namespace UndacApp.ViewModels
 {
 	public class OperationalTeamViewModel : INotifyPropertyChanged
 	{
-
 		private IOperationalTeamService operationalTeamService;
+		private OperationalTeam selectedOperationalTeam;
+
 		private string name;
 		private int createdBy;
 		private int teamId;
 		private int status;
 
+
 		public OperationalTeamViewModel()
 		{
 			operationalTeamService = new OperationalTeamService();
+			Task.Run(async () => await LoadData());
 		}
 
 		public ObservableCollection<OperationalTeam> OperationalTeamList { get; set; }
@@ -74,20 +78,109 @@ namespace UndacApp.ViewModels
 			}
 		}
 
+		public OperationalTeam SelectedOperationalTeam
+		{
+			get => selectedOperationalTeam;
+			set
+			{
+				if (selectedOperationalTeam != value)
+				{
+					selectedOperationalTeam = value;
+					OnPropertyChanged(nameof(SelectedOperationalTeam));
+
+					if (selectedOperationalTeam != null)
+					{
+						Name = selectedOperationalTeam.Name;
+						CreatedBy = selectedOperationalTeam.CreatedBy;
+						TeamId = selectedOperationalTeam.TeamId;
+						Status = selectedOperationalTeam.Status;
+					}
+				}
+			}
+		}
+
 		public ICommand SaveCommand => new Command(Save);
 		public ICommand DeleteCommand => new Command(Delete);
 
-		// Add other necessary properties, commands, and methods here
-
-		private void Save()
+		private async void Save()
 		{
-			// Implement save logic here
+			if (string.IsNullOrWhiteSpace(Name))
+			{
+				return;
+			}
+
+			if (SelectedOperationalTeam == null)
+			{
+				add();
+			}
+			else
+			{
+				update();
+			}
+			await LoadData();
+			resetValues();
 		}
 
-		private void Delete()
+		private async void add()
 		{
-			// Implement delete logic here
+			OperationalTeam operationalTeam = new OperationalTeam
+			{
+				Name = Name,
+				CreatedBy = CreatedBy,
+				TeamId = TeamId,
+				Status = Status
+			};
+
+			await operationalTeamService.Add(operationalTeam);
 		}
+
+		private async void update()
+		{
+			SelectedOperationalTeam.Name = Name;
+			SelectedOperationalTeam.CreatedBy = CreatedBy;
+			SelectedOperationalTeam.TeamId = TeamId;
+			SelectedOperationalTeam.Status = Status;
+
+			await operationalTeamService.Update(SelectedOperationalTeam);
+		}
+		private void resetValues()
+		{
+			SelectedOperationalTeam = null;
+
+			Name = string.Empty;
+			CreatedBy = 0;
+			TeamId = 0;
+			Status = 0;
+
+		}
+
+		private async void remove()
+		{
+			var result = await operationalTeamService.Remove(SelectedOperationalTeam);
+		}
+
+		private async void Delete()
+		{
+			if (SelectedOperationalTeam != null)
+			{
+				remove();
+				resetValues();
+			}
+			await LoadData();
+		}
+
+	
+
+
+		private async Task LoadData()
+		{
+			ObservableCollection<OperationalTeam> newData = new ObservableCollection<OperationalTeam>(await operationalTeamService.GetAll());
+
+			// Update the property and notify the UI
+			OperationalTeamList = newData;
+			OnPropertyChanged(nameof(OperationalTeamList));
+		}
+
 
 		public event PropertyChangedEventHandler PropertyChanged;
 

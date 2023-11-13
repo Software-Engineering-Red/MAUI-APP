@@ -93,9 +93,8 @@
            Title="Add Resource"
            ContentTemplate="{DataTemplate views:AddResourcePage}" />
         <ShellContent
-            Title="OperationalTeam"
-            ContentTemplate="{DataTemplate views:OperationalTeamPage}" />
-
+           Title="Operational Team"
+           ContentTemplate="{DataTemplate views:OperationalTeamPage}" />
     </TabBar>
 
 </Shell>

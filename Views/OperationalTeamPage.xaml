@@ -6,39 +6,42 @@
              Title="OperationalTeamPage"
              x:DataType="viewmodel:OperationalTeamViewModel"
              >
-    <VerticalStackLayout>
-        <Label Text="For Test Purposes only"></Label>
-        
-        <Entry Placeholder="Name" Text="{Binding Name}"/>
-        <Entry Placeholder="Created By" Text="{Binding CreatedBy}" Keyboard="Numeric"/>
-        <Entry Placeholder="Team ID" Text="{Binding TeamId}" Keyboard="Numeric"/>
-        <Entry Placeholder="Status" Text="{Binding Status}" Keyboard="Numeric"/>
+    <ScrollView>
+        <VerticalStackLayout>
+            <Label Text="For Test Purposes only"></Label>
 
-        <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
-            <Button Text="Save"
-                    Clicked="SaveButton_Clicked" />
+            <Entry Placeholder="Name" Text="{Binding Name}"/>
+            <Entry Placeholder="Created By" Text="{Binding CreatedBy}" Keyboard="Numeric"/>
+            <Entry Placeholder="Team ID" Text="{Binding TeamId}" Keyboard="Numeric"/>
+            <Entry Placeholder="Status" Text="{Binding Status}" Keyboard="Numeric"/>
 
-            <Button Grid.Column="1"
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
+                <Button Text="Save"
+                    Command="{Binding SaveCommand}"/>
+
+                <Button Grid.Column="1"
                     Text="Delete"
-                    Clicked="DeleteButton_Clicked" />
-        </Grid>
+                    Command="{Binding DeleteCommand}"/>
+            </Grid>
 
-        <ListView x:Name="operationalTeamListView"
-                  ItemsSource="{Binding OperationalTeams}"
-                  ItemSelected="select_Item_from_ListView" Margin="20"
-                      SelectionMode="Single" >
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Padding="10">
-                            <Label Text="{Binding Name}" FontAttributes="Bold"/>
-                            <Label Text="{Binding CreatedBy, StringFormat='Created By: {0}'}"/>
-                            <Label Text="{Binding TeamId, StringFormat='Team ID: {0}'}"/>
-                            <Label Text="{Binding Status, StringFormat='Status: {0}'}"/>
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </VerticalStackLayout>
+            <ListView x:Name="operationalTeamListView"
+                  ItemsSource="{Binding OperationalTeamList}"
+                  Margin="20"
+                  SelectionMode="Single"
+                  SelectedItem="{Binding SelectedOperationalTeam, Mode=TwoWay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="10">
+                                <Label Text="{Binding Name}" FontAttributes="Bold"/>
+                                <Label Text="{Binding CreatedBy, StringFormat='Created By: {0}'}"/>
+                                <Label Text="{Binding TeamId, StringFormat='Team ID: {0}'}"/>
+                                <Label Text="{Binding Status, StringFormat='Status: {0}'}"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

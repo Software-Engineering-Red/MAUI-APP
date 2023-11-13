@@ -52,12 +52,6 @@ namespace UndacApp.Models
             set => Utils.SetProperty(ref _raisedBy, value, this);
         }
 
-        // public Person RaisedBy { get; set; } 
-
-
-
-
-
         public event PropertyChangedEventHandler? PropertyChanged;
 
     }

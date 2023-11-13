@@ -138,8 +138,4 @@ public partial class AlertTypesPage : ContentPage
     {
         UpdateAlertTypes();
     }
-
-
-
-
 }

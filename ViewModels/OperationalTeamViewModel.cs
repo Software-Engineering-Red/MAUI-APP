@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Security.Cryptography;
 using System.Windows.Input;
 using UndacApp.Models;
 using UndacApp.Services;
@@ -176,7 +175,6 @@ namespace UndacApp.ViewModels
 		{
 			ObservableCollection<OperationalTeam> newData = new ObservableCollection<OperationalTeam>(await operationalTeamService.GetAll());
 
-			// Update the property and notify the UI
 			OperationalTeamList = newData;
 			OnPropertyChanged(nameof(OperationalTeamList));
 		}

@@ -16,7 +16,11 @@ namespace UndacApp.Services.NameDiscriminator
 
 		public async Task<int> Add(T entity)
 		{
-			return await _database.InsertAsync(entity);
+			if (!await Exists(entity.Name))
+			{
+				return await _database.InsertAsync(entity);
+			}
+			return 1; 
 		}
 
 		public async Task<bool> Exists(string name)

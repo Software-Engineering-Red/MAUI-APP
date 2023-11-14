@@ -8,5 +8,7 @@ using System.Threading.Tasks;
 
 namespace UndacApp.Models
 {
-    public class ResourceType : AModel { }
+	public class OperationResourceRequestStatus : ANameModel
+	{
+	}
 }

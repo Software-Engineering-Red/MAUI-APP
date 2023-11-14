@@ -5,7 +5,7 @@ namespace UndacApp.Services
     /// <summary>
     /// Interface exposing the methods for CRUD-Interface of OperationalTeamStatusService.
     /// </summary>
-    internal interface IOperationalTeamStatusService
+    public interface IOperationalTeamStatusService
     {
         /// <summary>
         /// Adds a instance of OperationalTeamStatus to the Database.

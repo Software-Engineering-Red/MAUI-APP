@@ -8,5 +8,6 @@ namespace UndacApp.Services
 	/// </summary>
 	public class SkillRequestService : AService<SkillRequest>, ISkillRequestService
 	{
+
 	}
 }

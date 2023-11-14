@@ -35,5 +35,7 @@ namespace UndacApp.Services
         /// <returns>Task promise to update certain Status</returns>
         Task<int> UpdateStatusAsync(OperationalTeamStatus status);
 
+        Task<OperationalTeamStatus> GetStatusOfSingleMember(String name);
+
     }
 }

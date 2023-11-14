@@ -43,6 +43,11 @@ namespace UndacApp.Services
             return await _dbConnection.InsertAsync(status);
         }
 
+        public async Task<OperationalTeamStatus> GetStatusOfSingleMember(string name)
+        {
+           return await _dbConnection.Table<OperationalTeamStatus>().Where(t => t.Name == name).FirstOrDefaultAsync();
+        }
+
         /// <summary>
         /// Deletes a certain instance of OperationalTeamStatus from the Database.
         /// </summary>

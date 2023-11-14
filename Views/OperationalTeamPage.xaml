@@ -4,9 +4,9 @@
              x:Class="UndacApp.Views.OperationalTeamPage"
              Title="OperationalTeamPage">
     <VerticalStackLayout Spacing="10" Margin="5">
-        <Editor x:Name="txe_operational_team"
-            Placeholder="Add a Operation Team Name"
-            HeightRequest="10" />
+        <Picker x:Name="picker_teams"
+            Title = "Select a team" 
+            ItemDisplayBinding="{Binding Name}"/>
 
         <Editor x:Name="txe_operational_team_authorised"
             Placeholder="Enter username to authorise creation"

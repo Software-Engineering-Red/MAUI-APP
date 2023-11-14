@@ -9,19 +9,15 @@ public partial class OperationalTeamPage : ContentPage
 {
     private IOperationalTeamService operationalTeamService = new OperationalTeamService();
     private IOperationalTeamStatusService operationalTeamStatusService = new OperationalTeamStatusService();
+    private ITeamService teamService = new TeamService();
     ObservableCollection<OperationalTeam> operationalTeams = new ObservableCollection<OperationalTeam>();
     ObservableCollection<OperationalTeamStatus> operationalTeamStatuses = new ObservableCollection<OperationalTeamStatus>();
+    ObservableCollection<Team> teams = new ObservableCollection<Team>();
     public OperationalTeamPage()
 	{
 		InitializeComponent();
-        Task.Run(async () => await LoadOperationalTeams());
         Task.Run(async () => await LoadOperationalTeamStatuses());
-    }
-
-    private async Task LoadOperationalTeams()
-    {
-        operationalTeams = new ObservableCollection<OperationalTeam>(await operationalTeamService.GetAll());
-        ltv_operationalTeam.ItemsSource = operationalTeams;
+        Task.Run(async () => await LoadTeams());
     }
 
     private async Task LoadOperationalTeamStatuses()
@@ -30,20 +26,26 @@ public partial class OperationalTeamPage : ContentPage
         picker_team_statuses.ItemsSource = operationalTeamStatuses;
     }
 
+    private async Task LoadTeams()
+    {
+        teams = new ObservableCollection<Team>(await teamService.GetAll());
+        picker_teams.ItemsSource = teams;
+    }
+
     private void SaveButton_Clicked(object sender, EventArgs e)
     {
-        if (String.IsNullOrEmpty(txe_operational_team.Text) || String.IsNullOrEmpty(txe_operational_team_authorised.Text)) return;
+        if (String.IsNullOrEmpty(txe_operational_team_authorised.Text)) return;
 
         if (ltv_operationalTeam.SelectedItem == null)
         {
             OperationalTeamStatus pickerSelected = picker_team_statuses.SelectedItem as OperationalTeamStatus;
-            OperationalTeam operationalTeam = new OperationalTeam() { Name = txe_operational_team.Text, CreatedBy = txe_operational_team_authorised.Text, TeamStatus = pickerSelected };
+            string teamName = picker_teams.SelectedItem as string;
+            OperationalTeam operationalTeam = new OperationalTeam() { Name = teamName, CreatedBy = txe_operational_team_authorised.Text, TeamStatus = pickerSelected };
             operationalTeamService.Add(operationalTeam);
             operationalTeams.Add(operationalTeam);
         }
 
         ltv_operationalTeam.SelectedItem = null;
-        txe_operational_team.Text = null;
         txe_operational_team_authorised.Text = null;
     }
 
@@ -59,7 +61,6 @@ public partial class OperationalTeamPage : ContentPage
         operationalTeams.Remove(ltv_operationalTeam.SelectedItem as OperationalTeam);
 
         ltv_operationalTeam.SelectedItem = null;
-        txe_operational_team.Text = null;
         txe_operational_team_authorised.Text = null;
     }
 }

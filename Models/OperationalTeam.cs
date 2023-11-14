@@ -16,9 +16,9 @@ namespace UndacApp.Models
         }
 
         [ForeignKey(typeof(OperationalTeamStatus))]     // Specify the foreign key
-        public int OperationalStatusID { get; set; }
+        public int TeamStatusID { get; set; }
 
-        [OneToMany(CascadeOperations = CascadeOperation.All)]
+        [ManyToOne(CascadeOperations = CascadeOperation.All)]
         public OperationalTeamStatus TeamStatus { get; set; }
 
         private string _createdBy;

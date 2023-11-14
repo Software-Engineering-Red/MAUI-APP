@@ -22,11 +22,17 @@ namespace UndacApp.Models
             get => name;
             set => Utils.SetProperty(ref name, value, this);
         }
-        public string type;
-        public string Type
+        public string email;
+        public string Email
         {
-            get => type;
-            set => Utils.SetProperty(ref type, value, this);
+            get => email;
+            set => Utils.SetProperty(ref email, value, this);
+        }
+        public string media;
+        public string Media
+        {
+            get => media;
+            set => Utils.SetProperty(ref media, value, this);
         }
         public event PropertyChangedEventHandler? PropertyChanged;
     }

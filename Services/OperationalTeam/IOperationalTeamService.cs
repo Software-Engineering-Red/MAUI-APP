@@ -2,7 +2,7 @@
 
 namespace UndacApp.Services
 {
-	internal interface IOperationalTeamService : IService<OperationalTeam>
+	public interface IOperationalTeamService : IService<OperationalTeam>
 	{
 	}
 }

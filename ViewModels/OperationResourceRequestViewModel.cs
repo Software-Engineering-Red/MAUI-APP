@@ -32,6 +32,18 @@ namespace UndacApp.ViewModels
 			Task.Run(async () => await LoadData());
 		}
 
+		public OperationResourceRequestViewModel(OperationResourceRequestService operationResourceRequestService,
+			OperationalTeamService operationalTeamService, ResourceService resourceService, 
+			OperationResourceRequestStatusService operationResourceRequestStatusService)
+		{
+			this.operationResourceRequestService = operationResourceRequestService;
+			this.operationalteamService = operationalTeamService;
+			this.resourceService = resourceService;
+			this.operationResourceRequestStatusService = operationResourceRequestStatusService;
+
+			Task.Run(async () => await LoadData());
+		}
+
 		public ObservableCollection<OperationResourceRequest> OperationResourceRequestList { get; set; }
 
 		public OperationResourceRequest SelectedOperationResourceRequest

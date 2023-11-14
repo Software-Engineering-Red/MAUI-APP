@@ -21,7 +21,7 @@ public partial class AlertTypesPage : ContentPage
 
         Task.Run(async () => await LoadAlertTypes());
         txe_alert.Text = "";
-
+        
        
 
     }
@@ -45,8 +45,8 @@ public partial class AlertTypesPage : ContentPage
 
         if (_selectedAlertType == null)
         {
-            
-            var alert = new AlertType() { Name = txe_alert.Text, Status = selectedStatus };
+
+            var alert = new AlertType() { Name = txe_alert.Text, Status = selectedStatus, DateCreated = DateTime.Now, RaisedBy = txe_RequestedBy.Text };
             _alertTypeService.AddAlertType(alert);
             _alertTypes.Add(alert);
         }
@@ -58,6 +58,7 @@ public partial class AlertTypesPage : ContentPage
             
             var alert = _alertTypes.FirstOrDefault(x => x.ID == _selectedAlertType.ID);
             alert.Name = txe_alert.Text;
+            alert.RaisedBy = txe_RequestedBy.Text;
             alert.Status = selectedStatus; 
         }
 
@@ -65,6 +66,7 @@ public partial class AlertTypesPage : ContentPage
         _selectedAlertType = null;
         ltv_alerttypes.SelectedItem = null;
         txe_alert.Text = "";
+        txe_RequestedBy.Text = "";
     }
 
     private async void DeleteButton_Clicked(object sender, EventArgs e)
@@ -82,6 +84,18 @@ public partial class AlertTypesPage : ContentPage
         txe_alert.Text = "";
     }
 
+
+    private async void OnClearAllClicked(object sender, EventArgs e)
+    {
+        bool answer = await DisplayAlert("Confirmation", "Are you sure you want to delete all items?", "Yes", "No");
+
+        if (answer)
+        {
+            await _alertTypeService.DeleteAllAlertType();
+            _alertTypes.Clear();
+        }
+    }
+
     private void ltv_alerttypes_ItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
         _selectedAlertType = e.SelectedItem as AlertType;
@@ -95,18 +109,27 @@ public partial class AlertTypesPage : ContentPage
     private void UpdateAlertTypes()
     {
         string selectedFilter = filterPicker.SelectedItem.ToString();
+        string searchText = searchEntry.Text;
         if (_alertTypes == null)
         {
             return;
         }
 
-        if (selectedFilter == "All")
+        if (string.IsNullOrWhiteSpace(searchText))
         {
-            ltv_alerttypes.ItemsSource = _alertTypes; 
+            if (selectedFilter == "All")
+            {
+                ltv_alerttypes.ItemsSource = _alertTypes;
+            }
+            else
+            {
+                ltv_alerttypes.ItemsSource = _alertTypes.Where(item => item.Status == selectedFilter);
+            }
         }
         else
         {
-            ltv_alerttypes.ItemsSource = _alertTypes.Where(item => item.Status == selectedFilter);
+            ltv_alerttypes.ItemsSource = _alertTypes
+                .Where(item => (selectedFilter == "All" || item.Status == selectedFilter) && item.Name.ToLower().Contains(searchText));
         }
     }
 
@@ -115,5 +138,4 @@ public partial class AlertTypesPage : ContentPage
     {
         UpdateAlertTypes();
     }
-
 }

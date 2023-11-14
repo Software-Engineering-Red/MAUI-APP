@@ -67,13 +67,13 @@ namespace UndacApp.ViewModels
 			if (SelectedOperationResourceRequestStatus == null)
 			{
 				add();
+				resetValues();
 			}
 			else
 			{
 				update();
 			}
 			await LoadData();
-			resetValues();
 		}
 
 		private async void add()
@@ -124,7 +124,7 @@ namespace UndacApp.ViewModels
 		}
 
 
-		public event PropertyChangedEventHandler PropertyChanged;
+		public event PropertyChangedEventHandler? PropertyChanged;
 
 		protected virtual void OnPropertyChanged(string propertyName)
 		{

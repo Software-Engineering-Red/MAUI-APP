@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLiteNetExtensions.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,8 +16,8 @@ namespace UndacApp.Models
 			set => SetField(ref operational_team_Id, value);
 		}
 
-		private int requestedBy;
-		public int RequestedBy
+		private int? requestedBy;
+		public int? RequestedBy
 		{
 			get => requestedBy;
 			set => SetField(ref requestedBy, value);
@@ -50,18 +51,22 @@ namespace UndacApp.Models
 			set => SetField(ref status, value);
 		}
 
-		private int confirmed_by;
-		public int confirmedBy
+		private int? confirmed_by;
+		public int? confirmedBy
 		{
 			get => confirmed_by;
 			set => SetField(ref confirmed_by, value);
 		}
 
-		private DateTime confirmedDate;
-		public DateTime ConfirmedDate
+		private DateTime? confirmedDate;
+		public DateTime? ConfirmedDate
 		{
 			get => confirmedDate;
 			set => SetField(ref confirmedDate, value);
 		}
+
+
+		[OneToMany]
+		public List<OperationResourceRequest>  { get; set; }
 	}
 }

@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Windows.Input;
 using UndacApp.Models;
 using UndacApp.Services;
-using static Microsoft.Maui.Controls.Device;
 
 namespace UndacApp.ViewModels
 {
@@ -171,14 +170,13 @@ namespace UndacApp.ViewModels
 			if (SelectedOperationResourceRequest == null)
 			{
 				Add();
+				ResetValues();
 			}
 			else
 			{
 				Update();
 			}
-
 			await LoadData();
-			ResetValues();
 		}
 
 		private async void Add()

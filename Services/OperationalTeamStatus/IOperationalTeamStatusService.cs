@@ -34,5 +34,6 @@ namespace UndacApp.Services
         /// <param name="status">entry of OperationalTeamStatus</param>
         /// <returns>Task promise to update certain Status</returns>
         Task<int> UpdateStatusAsync(OperationalTeamStatus status);
+
     }
 }

@@ -76,7 +76,7 @@
         <ShellContent
             Title="Operational Team Status"
             ContentTemplate="{DataTemplate views:OperationalTeamStatusPage}" />
-
+        
         <ShellContent
             Title="PositionStatusPage"
             ContentTemplate="{DataTemplate views:position_status}" />

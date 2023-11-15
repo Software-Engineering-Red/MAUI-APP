@@ -26,7 +26,7 @@
                 <Entry Placeholder="Search by Email" x:Name="EmailFilter" TextChanged="Mediafilter_TextChanged" />
                 <Entry Placeholder="Search by Media" x:Name="MediaFilter" TextChanged="Mediafilter_TextChanged" />
                 <Button Text="Clear Filter" Clicked="ClearFilter_Clicked" />
-                <Button Text="Copy" Clicked="OnCopyClicked" />
+                
             </StackLayout>
             <Label Text="Local Media List"></Label>
             <ListView x:Name="MediaListView" ItemSelected="MediaListView_ItemSelected">

@@ -103,8 +103,19 @@
            Title="Add Resource"
            ContentTemplate="{DataTemplate views:AddResourcePage}" />
         <ShellContent
+
             Title="Local Media's"
              ContentTemplate="{DataTemplate views:LocalMediaPage}" />
+
+<ShellContent
+           Title="Operational-Team"
+           ContentTemplate="{DataTemplate views:OperationalTeamPage}" />
+        <ShellContent
+            Title="Operation-Resource-Request-Status"
+            ContentTemplate="{DataTemplate views:OperationResourceRequestStatusPage}" />
+        <ShellContent
+            Title="Operation-Resource-Request"
+            ContentTemplate="{DataTemplate views:OperationRessourceRequestPage}" />
 
     </TabBar>
 

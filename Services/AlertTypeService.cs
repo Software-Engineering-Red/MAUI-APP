@@ -36,6 +36,12 @@ namespace UndacApp.Services
             await SetUpDb();
             return await _dbConnection.DeleteAsync(alert);
         }
+        public async Task<int> DeleteAllAlertType()
+        {
+            await SetUpDb(); 
+
+            return await _dbConnection.DeleteAllAsync<AlertType>();
+        }
 
         public async Task<List<AlertType>> GetAlertTypesByStatus(string status)
         {

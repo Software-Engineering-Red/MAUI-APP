@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UndacApp.Views.OperationalTeamPage"
+             xmlns:viewmodel="clr-namespace:UndacApp.ViewModels"
+             Title="OperationalTeamPage"
+             x:DataType="viewmodel:OperationalTeamViewModel"
+             >
+    <ScrollView>
+        <VerticalStackLayout>
+            <Label Text="For Test Purposes only"></Label>
+
+            <Entry Placeholder="Name" Text="{Binding Name}"/>
+            <Entry Placeholder="Created By" Text="{Binding CreatedBy}" Keyboard="Numeric"/>
+            <Entry Placeholder="Team ID" Text="{Binding TeamId}" Keyboard="Numeric"/>
+            <Entry Placeholder="Status" Text="{Binding Status}" Keyboard="Numeric"/>
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
+                <Button Text="Save"
+                    Command="{Binding SaveCommand}"/>
+
+                <Button Grid.Column="1"
+                    Text="Delete"
+                    Command="{Binding DeleteCommand}"/>
+            </Grid>
+
+            <ListView x:Name="operationalTeamListView"
+                  ItemsSource="{Binding OperationalTeamList}"
+                  Margin="20"
+                  SelectionMode="Single"
+                  SelectedItem="{Binding SelectedOperationalTeam, Mode=TwoWay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="10">
+                                <Label Text="{Binding Name}" FontAttributes="Bold"/>
+                                <Label Text="{Binding CreatedBy, StringFormat='Created By: {0}'}"/>
+                                <Label Text="{Binding TeamId, StringFormat='Team ID: {0}'}"/>
+                                <Label Text="{Binding Status, StringFormat='Status: {0}'}"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

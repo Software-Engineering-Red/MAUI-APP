@@ -6,6 +6,9 @@
              xmlns:local="clr-namespace:UndacApp.Models">
     <ScrollView>
         <VerticalStackLayout Spacing="10" Margin="5">
+            <Editor x:Name="txe_RequestedBy"
+        Placeholder="Requested by"
+        HeightRequest="10" />
         <Editor x:Name="txe_alert"
                 Placeholder="Add an alert type"
                 HeightRequest="100" />
@@ -43,6 +46,7 @@
                 </Picker>
         </StackLayout>
             <Button Text="Filter" Clicked="FilterPicker_SelectedIndexChanged"></Button>
+            
         <ListView x:Name="ltv_alerttypes" Background="white" ItemSelected="ltv_alerttypes_ItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -51,16 +55,24 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
-                            <Label Grid.Row="0" Text="{Binding Name}" TextColor="Black" FontAttributes="Bold"/>
-                            <Label Grid.Row="1" Text="{Binding Status}" TextColor="Black"/>
-                        </Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Label FontAttributes="Bold" Grid.Row="0" Grid.Column="0" Text="{Binding RaisedBy, StringFormat='Raised by {0}'}" TextColor="Black" Margin="0,0,10,0" />
+                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding DateCreated, StringFormat='Created on {0}'}" TextColor="Black" Margin="10,0,0,0" />
+                                <Label Grid.Row="1" Text="{Binding Name , StringFormat='Issue: {0}'}" TextColor="Black"/>
+                                <Label Grid.Row="2" Text="{Binding Status , StringFormat='Current Status: {0}'}" TextColor="Black"/>
+                            
+                            </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        
+        <Button Text="Clear All" Clicked="OnClearAllClicked"></Button>
 
-    </VerticalStackLayout>
+        </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

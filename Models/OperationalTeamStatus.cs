@@ -1,5 +1,4 @@
 ﻿using SQLite;
-using SQLiteNetExtensions.Attributes;
 using System.ComponentModel;
 
 namespace UndacApp.Models

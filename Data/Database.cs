@@ -48,7 +48,6 @@ namespace UndacApp.Data
                 await _database.CreateTableAsync<Models.PrivilegeRequest>();
                 await _database.CreateTableAsync<Models.ResourceType>();
                 await _database.CreateTableAsync<Models.Resource>();
-                await _database.CreateTableAsync<Models.OperationalTeam>();
             }
             catch (Exception ex)
             {

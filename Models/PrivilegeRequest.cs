@@ -11,6 +11,7 @@ namespace UndacApp.Models
         private int memberID;
         private string privilegeLevel;
         private bool approved;
+        private string systemType;
 
         public bool Approved
         {
@@ -35,7 +36,10 @@ namespace UndacApp.Models
             get => memberID;
             set => Utils.SetProperty(ref  memberID, value, this);
         }
-
+        public string SystemType
+        {        get => systemType;
+                 set => Utils.SetProperty(ref systemType, value, this);
+        }
         public event PropertyChangedEventHandler? PropertyChanged;
     }
 }

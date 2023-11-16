@@ -17,12 +17,12 @@
                 Title = "Select a status" 
                 ItemDisplayBinding="{Binding Name}"/>
 
-        <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
-            <Button Text="Save"
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
+                <Button Text="Save"
                 Clicked="SaveButton_Clicked" />
 
-            <Button Grid.Column="1"
-                Text="Delete"
+                <Button Grid.Column="1"
+                    Text="Delete"
                 Clicked="DeleteButton_Clicked" />
         </Grid>
         <ListView x:Name="ltv_teamMembers" Background="White">
@@ -34,15 +34,15 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Label Grid.Row="0" Text="{Binding Name}" TextColor="Black" />
-                        </Grid>
+            </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
         <ListView x:Name="ltv_operationalTeam" Background="White" ItemSelected="ltv_operationalTeam_ItemSelected">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
                         <Grid Padding="10">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
@@ -53,9 +53,10 @@
                             <Label Grid.Row="1" Text="{Binding CreatedBy}" TextColor="Black" />
                             <Label Grid.Row="2" Text="{Binding TeamStatus}" TextColor="Black" />
                         </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </VerticalStackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

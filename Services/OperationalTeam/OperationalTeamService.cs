@@ -8,7 +8,7 @@ using SQLite;
 
 namespace UndacApp.Services
 {
-    public class OperationalTeamService : AService<OperationalTeam>, IOperationalTeamService
-    {
-    }
+	public class OperationalTeamService : AService<OperationalTeam>, IOperationalTeamService
+	{
+	}
 }

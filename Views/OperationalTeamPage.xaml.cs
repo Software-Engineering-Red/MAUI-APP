@@ -13,9 +13,9 @@ public partial class OperationalTeamPage : ContentPage
     ObservableCollection<OperationalTeamStatus> operationalTeamStatuses = new ObservableCollection<OperationalTeamStatus>();
     ObservableCollection<Team> teams = new ObservableCollection<Team>();
     private OperationalTeam selectedOperation = null;
-    public OperationalTeamPage()
+	public OperationalTeamPage()
 	{
-        InitializeComponent();
+		InitializeComponent();
         Task.Run(async () => await LoadOperationalTeamStatuses());
         Task.Run(async () => await LoadTeams());
         Task.Run(async () => await LoadTeamStatuses());
@@ -102,5 +102,5 @@ public partial class OperationalTeamPage : ContentPage
 
         ltv_operationalTeam.SelectedItem = null;
         txe_operational_team_authorised.Text = null;
-    }
+	}
 }

@@ -1,8 +1,4 @@
-﻿using SQLite;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Xml.Linq;
+﻿using System.ComponentModel;
 
 
 namespace UndacApp.Models

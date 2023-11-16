@@ -12,9 +12,9 @@ namespace UndacApp.ViewModels
 		private OperationalTeam selectedOperationalTeam;
 
 		private string name;
-		private int createdBy;
+		private string createdBy;
 		private int teamId;
-		private int status;
+		private string status;
 
 
 		public OperationalTeamViewModel()
@@ -38,7 +38,7 @@ namespace UndacApp.ViewModels
 			}
 		}
 
-		public int CreatedBy
+		public string CreatedBy
 		{
 			get => createdBy;
 			set
@@ -64,7 +64,7 @@ namespace UndacApp.ViewModels
 			}
 		}
 
-		public int Status
+		public string Status
 		{
 			get => status;
 			set
@@ -91,8 +91,8 @@ namespace UndacApp.ViewModels
 					{
 						Name = selectedOperationalTeam.Name;
 						CreatedBy = selectedOperationalTeam.CreatedBy;
-						TeamId = selectedOperationalTeam.TeamId;
-						Status = selectedOperationalTeam.Status;
+						TeamId = selectedOperationalTeam.ID;
+						Status = selectedOperationalTeam.TeamStatus;
 					}
 				}
 			}
@@ -126,8 +126,8 @@ namespace UndacApp.ViewModels
 			{
 				Name = Name,
 				CreatedBy = CreatedBy,
-				TeamId = TeamId,
-				Status = Status
+				ID = TeamId,
+				TeamStatus = Status
 			};
 
 			await operationalTeamService.Add(operationalTeam);
@@ -137,8 +137,8 @@ namespace UndacApp.ViewModels
 		{
 			SelectedOperationalTeam.Name = Name;
 			SelectedOperationalTeam.CreatedBy = CreatedBy;
-			SelectedOperationalTeam.TeamId = TeamId;
-			SelectedOperationalTeam.Status = Status;
+			SelectedOperationalTeam.ID = TeamId;
+			SelectedOperationalTeam.TeamStatus = Status;
 
 			await operationalTeamService.Update(SelectedOperationalTeam);
 		}
@@ -147,9 +147,9 @@ namespace UndacApp.ViewModels
 			SelectedOperationalTeam = null;
 
 			Name = string.Empty;
-			CreatedBy = 0;
+			CreatedBy = string.Empty;
 			TeamId = 0;
-			Status = 0;
+			Status = string.Empty;
 
 		}
 

@@ -87,15 +87,15 @@
 		</MauiXaml>
 	  <MauiXaml Update="Views\PositionStatusPage.xaml">
 	  </MauiXaml>
-        <MauiXaml Update="Views\ContinentPage.xaml">
+     <MauiXaml Update="Views\ContinentPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-        <MauiXaml Update="Views\PrivilegeRequestsPage.xaml">
-          <Generator>MSBuild:Compile</Generator>
-        </MauiXaml>
-        <MauiXaml Update="Views\RequestSpecialists.xaml">
-          <Generator>MSBuild:Compile</Generator>
-        </MauiXaml>
+    <MauiXaml Update="Views\PrivilegeRequestsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\RequestSpecialists.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
 		<MauiXaml Update="Views\RolesPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>

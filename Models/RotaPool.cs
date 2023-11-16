@@ -11,30 +11,41 @@ using System.Xml.Linq;
 namespace MauiApp1.Models
 {
     /// <summary>
-    /// Represents a Rota object.
+    /// Represents a RotaPool object.
     /// </summary>
-    public class Rota : INotifyPropertyChanged
+    public class RotaPool : INotifyPropertyChanged
     {
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
 
-        private string _name;
-        public string Name
-        {
-            get => _name;
-            set => SetProperty(ref _name, value);
+        private string _rota;
+        public string Rota {
+            get => _rota;
+            set => SetProperty(ref _rota, value);
         }
 
-        private string _location;
-        public string Location {
-            get => _location;
-            set => SetProperty(ref _location, value);
+        private string _member;
+        public string Member {
+            get => _member;
+            set => SetProperty(ref _member, value);
         }
 
-        private bool _valid;
-        public bool Valid {
-            get => _valid;
-            set => SetProperty(ref _valid, value);
+        private bool _assigned;
+        public bool Assigned {
+            get => _assigned;
+            set => SetProperty(ref _assigned, value);
+        }
+
+        private string _start_date;
+        public string StartDate {
+            get => _start_date;
+            set => SetProperty(ref _start_date, value);
+        }
+
+        private string _end_date;
+        public string EndDate {
+            get => _end_date;
+            set => SetProperty(ref _end_date, value);
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

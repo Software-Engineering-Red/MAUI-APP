@@ -6,7 +6,8 @@
     <VerticalStackLayout Spacing="10" Margin="5">
         <Picker x:Name="picker_teams"
             Title = "Select a team" 
-            ItemDisplayBinding="{Binding Name}"/>
+            ItemDisplayBinding="{Binding Name}"
+            SelectedIndexChanged="teamSelected"/>
 
         <Editor x:Name="txe_operational_team_authorised"
             Placeholder="Enter username to authorise creation"
@@ -24,7 +25,21 @@
                 Text="Delete"
                 Clicked="DeleteButton_Clicked" />
         </Grid>
-        <ListView x:Name="ltv_operationalTeam" Background="White">
+        <ListView x:Name="ltv_teamMembers" Background="White">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Text="{Binding Name}" TextColor="Black" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <ListView x:Name="ltv_operationalTeam" Background="White" ItemSelected="ltv_operationalTeam_ItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -36,7 +51,7 @@
                             </Grid.RowDefinitions>
                             <Label Grid.Row="0" Text="{Binding Name}" TextColor="Black" />
                             <Label Grid.Row="1" Text="{Binding CreatedBy}" TextColor="Black" />
-                            <Label Grid.Row="2" Text="{Binding TeamStatus.Name}" TextColor="Black" />
+                            <Label Grid.Row="2" Text="{Binding TeamStatus}" TextColor="Black" />
                         </Grid>
                     </ViewCell>
                 </DataTemplate>

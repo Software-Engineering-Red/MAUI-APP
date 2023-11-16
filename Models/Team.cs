@@ -13,13 +13,6 @@ namespace UndacApp.Models
             TeamMembers = new();
         }
 
-        private string _name;
-        public string Name
-        {
-            get => _name;
-            set => SetField(ref _name, value);
-        }
-
         private List<TeamMember> _teamMembers;
         public List<TeamMember> TeamMembers
         {

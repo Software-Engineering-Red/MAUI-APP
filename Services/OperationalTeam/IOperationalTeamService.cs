@@ -8,6 +8,5 @@ using System.Threading.Tasks;
 namespace UndacApp.Services
 {
     public interface IOperationalTeamService : IService<OperationalTeam> {
-        
     }
 }

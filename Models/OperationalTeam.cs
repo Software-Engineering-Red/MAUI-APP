@@ -13,13 +13,15 @@ namespace UndacApp.Models
         public OperationalTeam()
         {
             _createdBy = string.Empty;
+            _teamStatus = string.Empty;
         }
 
-        [ForeignKey(typeof(OperationalTeamStatus))]     // Specify the foreign key
-        public int TeamStatusID { get; set; }
-
-        [ManyToOne(CascadeOperations = CascadeOperation.All)]
-        public OperationalTeamStatus TeamStatus { get; set; }
+        private string _teamStatus;
+        public string TeamStatus
+        {
+            get => _teamStatus;
+            set => SetField(ref _teamStatus, value);
+        }
 
         private string _createdBy;
         public string CreatedBy

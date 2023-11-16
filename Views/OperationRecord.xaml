@@ -46,7 +46,7 @@
                     <ListView x:Name="LW_OperationsRequests" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" Grid.RowSpan="5">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <TextCell Text="{Binding Id}"></TextCell>
+                                <TextCell Text="{Binding}"></TextCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>

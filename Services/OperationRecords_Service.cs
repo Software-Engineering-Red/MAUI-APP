@@ -13,6 +13,7 @@ using System.Net.NetworkInformation;
 using System.Diagnostics.CodeAnalysis;
 using System.Collections.Immutable;
 
+
 namespace UndacApp.Services
 {
 	internal class OperationRecords_Service : IOperation_Records//note unfinished build
@@ -249,33 +250,21 @@ namespace UndacApp.Services
 		#endregion
 
 		#region task to create a displayable item
-	    public async Task<List<string>> OperationRecordsRquest()
+		public async Task<List<string>>OperationRecordsRquest()
 		{
-			/*List<int> ID;
+			List<int> ID;
 			List<int> OppTID;
 			List<string> reqestByName;
 
 			List<string> requestRecordsName = new List<string>();
 			ID = await GetOperationRecordsIDL();
-			OppTID = await  GetOperationalTeamStatusesIDL();
+			OppTID = await GetOperationalTeamStatusesIDL();
 			reqestByName = await GetOperationRecordsRequested_ByL();
 
-			foreach(int id in ID)
-			{
-                if (id >= ID.Count)
-                {
-                    break;
-                }
-                requestRecordsName[id] = ID[id].ToString() + ", " + OppTID[id].ToString() + ", " + reqestByName[id];
-                if (id >= ID.Count)
-                {
-                    break;
-                }
-            }
-			return requestRecordsName;*/
-			List<string> placeholder = new List<string>();
-			placeholder.Add("placeholder");
-			return placeholder;
+			
+			
+            return requestRecordsName;
+			
 		}
 		#endregion
 	}

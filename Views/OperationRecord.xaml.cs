@@ -1,6 +1,7 @@
 using UndacApp.Models;
 using UndacApp.Services;
 using System.Collections.ObjectModel;
+using Microsoft.Maui.Controls;
 
 namespace UndacApp.Views
 {
@@ -10,22 +11,23 @@ namespace UndacApp.Views
 
         IOperation_Records operationRecords_Service;
 
-		ObservableCollection<OperationRecords> OperationRequests = new ObservableCollection<OperationRecords>();
+		OperationRecords_Service operationRecords_Service_Service = new OperationRecords_Service();
+
+		List<string> OperationRequests = new List<string>();
 		
 
 		public OperationRecord()
 		{
 			InitializeComponent();
-			BindingContext = new OperationRecords();
-			operationRecords_Service = new OperationRecords_Service();
-            Task.Run(async () => await LoadOperationRecords());
+			LW_OperationsRequests.ItemsSource = operationRecords_Service.GetOperationalTeamStatusesID()
         }
 
-        private async Task LoadOperationRecords()
+		
+        /*private void LoadOperationRecords()
         {
-			OperationRequests = new ObservableCollection<OperationRecords>(await operationRecords_Service.GetOperationRecordsTable());
+			OperationRequests = new List<string>(operationRecords_Service.GetOperationalTeamStatusesIDL().Result.ToString().ToList());
 			LW_OperationsRequests.ItemsSource = OperationRequests;
-		}
+		}*/
 
 
     }

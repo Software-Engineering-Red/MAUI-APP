@@ -71,7 +71,7 @@ namespace UndacApp.Services
         /*task for combined lists of ID of the table, Opperational Team ID, and requested By. name */
         //Task<int> addOperationRecordrquest(OperationRecords operationRecords);
 
-        Task<List<string>> OperationRecordsRquest();
+        
         Task<List<OperationRecords>> GetOperationRecordsTable();
         #endregion
     }

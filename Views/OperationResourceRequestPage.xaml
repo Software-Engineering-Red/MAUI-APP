@@ -11,7 +11,7 @@
                 ItemDisplayBinding="{Binding Name}"
                 SelectedItem="{Binding SelectedOperationalTeam, Mode=TwoWay}"/>
 
-        <Label Text="Select Ressource"></Label>
+        <Label Text="Select Resource"></Label>
         <Picker ItemsSource="{Binding Resources}"
                 ItemDisplayBinding="{Binding Name}"
                 SelectedItem="{Binding SelectedResource, Mode=TwoWay}"/>

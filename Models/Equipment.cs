@@ -32,7 +32,7 @@ namespace UndacApp.Models
         public bool Reserved
         {
             get => _reserved;
-            set => SetProperty(ref _reserved, value);
+            set => Utils.SetProperty(ref _reserved, value, this);
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

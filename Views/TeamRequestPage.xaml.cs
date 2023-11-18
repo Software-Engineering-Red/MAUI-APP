@@ -1,9 +1,9 @@
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using MauiApp1.Models;
+using UndacApp.Models;
 using Microsoft.Maui.Controls;
 
-namespace MauiApp1.Views
+namespace UndacApp.Views
 {
     public partial class TeamRequestPage : ContentPage
     {

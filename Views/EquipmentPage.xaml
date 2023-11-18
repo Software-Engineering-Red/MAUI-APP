@@ -21,9 +21,18 @@
         <ListView x:Name="ltv_equipment" Background="white" ItemSelected="ltv_equipment_ItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell TextColor="Black" Text="{Binding Name}"/>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Padding="10">
+                            <Label Text="{Binding Name}" VerticalOptions="Center" />
+                            <Label Text="{Binding Reserved, Converter={StaticResource ReservedStatusConverter}}" VerticalOptions="Center" />
+                            <Label Text="{Binding Reserved, Converter={StaticResource BooleanToReservedConverter}}" VerticalOptions="Center" />
+                            <Button Text="Reserve" Clicked="ReserveButton_Clicked" CommandParameter="{Binding ID}" />
+                        </StackLayout>
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+
     </VerticalStackLayout>
 </ContentPage>

@@ -65,9 +65,6 @@
 	  <MauiXaml Update="Views\BuildingTypePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\EquipmentRequestPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Views\PositionStatusPage.xaml">
 	  </MauiXaml>
         <MauiXaml Update="Views\ContinentPage.xaml">
@@ -108,9 +105,6 @@
 		</Compile>
 		<Compile Update="Views\ContinentPage.xaml.cs">
 			<DependentUpon>ContinentPage.xaml</DependentUpon>
-		</Compile>
-		<Compile Update="Views\EquipmentRequestPage.xaml.cs">
-		  <DependentUpon>EquipmentRequestPage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Views\RolesPage.xaml.cs">
 			<DependentUpon>RolesPage.xaml</DependentUpon>

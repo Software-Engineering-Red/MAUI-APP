@@ -1,9 +1,9 @@
 ﻿
-using MauiApp1.Models;
-using MauiApp1.Services;
+using UndacApp.Models;
+using UndacApp.Services;
 using System.Collections.ObjectModel;
 
-namespace MauiApp1.Views;
+namespace UndacApp.Views;
 /*! <summary>
         EquipmentPage class extending ContentPage, responsible for functionality on EquipmentPage view.
     </summary> */

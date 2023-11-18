@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UndacApp.Views.LocalMediaPage"
+             Title="LocalMediaPage"
+             xmlns:local="clr-namespace:UndacApp.Models">
+    <StackLayout Spacing="10" Margin="5">
+    <VerticalStackLayout>
+            <Label Text="Add local media"></Label>
+            <Entry Placeholder="Enter Media Name" x:Name="NameEntry" />
+            <Entry Placeholder="Enter Email address" x:Name="EmailEntry" />
+            <Picker Title="Select Media Type" x:Name="LocalMediaPicker">
+            <Picker.Items>
+                <x:String>Press</x:String>
+                <x:String>TV</x:String>
+                <x:String>Radio</x:String>
+            </Picker.Items>
+            </Picker>
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="2">                       
+            <Button Grid.Column="0" Text="Add" Clicked="OnAddClicked" />
+            <Button Grid.Column="1" Text="Delete" Clicked="DeleteButton_Clicker" />
+         
+        </Grid>
+            <StackLayout Orientation="Horizontal">
+                <Entry Placeholder="Search by Name" x:Name="NameFilter" TextChanged="Mediafilter_TextChanged" />
+                <Entry Placeholder="Search by Email" x:Name="EmailFilter" TextChanged="Mediafilter_TextChanged" />
+                <Entry Placeholder="Search by Media" x:Name="MediaFilter" TextChanged="Mediafilter_TextChanged" />
+                <Button Text="Clear Filter" Clicked="ClearFilter_Clicked" />
+                
+            </StackLayout>
+            <Label Text="Local Media List"></Label>
+            <ListView x:Name="MediaListView" ItemSelected="MediaListView_ItemSelected">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                             </Grid.ColumnDefinitions>
+
+                            <Label Grid.Column="0" Text="{Binding Name}" />
+                            <Label Grid.Column="1" Text="{Binding Email}" />
+                            <Label Grid.Column="2" Text="{Binding Media}" />
+                            
+
+
+                        </Grid>
+                    </ViewCell>
+                    </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </VerticalStackLayout>
+    </StackLayout>
+</ContentPage>

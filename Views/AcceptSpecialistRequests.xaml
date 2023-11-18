@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:UndacApp.Views"
+             x:Class="UndacApp.Views.AcceptSpecialistRequests"
+             BackgroundColor="#252525"
+             Title="AcceptSpecialistRequests">
+    <ScrollView>
+        <VerticalStackLayout Spacing="30" Padding="30,20" VerticalOptions="Center">
+            <Frame CornerRadius="10" Padding="20" BackgroundColor="#373737">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Select your Organisation:" FontSize="20" FontAttributes="Bold" TextColor="White" />
+                    <Picker x:Name="OrganisationPicker" TextColor="White" BackgroundColor="#454545" 
+                            ItemDisplayBinding="{Binding Name}"/>
+                </VerticalStackLayout>
+            </Frame>
+            <ListView x:Name="SkillsRequestsListView" BackgroundColor="#373737" SeparatorColor="Gray">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Vertical" Padding="20" BackgroundColor="#373737">
+                                <Label FontSize="20" FontAttributes="Bold" TextColor="White">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Request#" />
+                                            <Span Text="{Binding ID}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label Text="" />
+                                <Label FontSize="16" TextColor="White">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Skill required: " FontAttributes="Bold"/>
+                                            <Span Text="{Binding SkillId}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label FontSize="16" TextColor="White">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Requested on the: " FontAttributes="Bold"/>
+                                            <Span Text="{Binding RequestDate, StringFormat='{0:d/M/yyyy}'}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label FontSize="16" TextColor="White">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="By: " FontAttributes="Bold"/>
+                                            <Span Text="{Binding RequestedBy}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label FontSize="16" TextColor="White">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Requires that many Helpers: " FontAttributes="Bold"/>
+                                            <Span Text="{Binding NumberRequired}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label FontSize="16" TextColor="White">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Start Date: " FontAttributes="Bold"/>
+                                            <Span Text="{Binding StartDate, StringFormat='{0:d/M/yyyy}'}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label FontSize="16" TextColor="White">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="End Date: " FontAttributes="Bold" />
+                                            <Span Text="{Binding EndDate, StringFormat='{0:d/M/yyyy}'}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label FontSize="16" TextColor="White">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Current Status: " FontAttributes="Bold" />
+                                            <Span Text="{Binding Status}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label FontSize="9" TextColor="White">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Confirmed: " FontAttributes="Bold"/>
+                                            <Span Text="{Binding ConfirmedDate, StringFormat='{0:d/M/yyyy}'}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Button Text="Approve with my company" Clicked="OnButtonClickApprove" BackgroundColor="#4CAF50" TextColor="White" CornerRadius="8"  />
+                                <Button Text="Delete Request" Clicked="OnButtonClickDelete" BackgroundColor="OrangeRed" TextColor="White" CornerRadius="8"  />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

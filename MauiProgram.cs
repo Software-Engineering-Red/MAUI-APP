@@ -1,8 +1,8 @@
-﻿using MauiApp1.Data;
-using MauiApp1.Services;
+﻿using UndacApp.Data;
+using UndacApp.Services;
 using Microsoft.Extensions.Logging;
 
-namespace MauiApp1;
+namespace UndacApp;
 
 public static class MauiProgram
 {
@@ -16,22 +16,28 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
+		builder.Services.AddSingleton<Database>();
+        builder.Services.AddSingleton<ISecurityAlertService, SecurityAlertService>();
+        builder.Services.AddSingleton<IContinentService, ContinentService>();
+		builder.Services.AddSingleton<ISkillService, SkillService>();
+		builder.Services.AddSingleton<IAlertTypeService, AlertTypeService>();
+		builder.Services.AddSingleton<IBuildingTypeService, BuildingTypeService>();
+		builder.Services.AddSingleton<IRoleService, RoleService>();
+		builder.Services.AddSingleton<IOrganisationService, OrganisationService>();
+		builder.Services.AddSingleton<IOperationalTeamStatusService, OperationalTeamStatusService>();
+		builder.Services.AddSingleton<IRotaService, RotaService>();
+		builder.Services.AddSingleton<IOrderStatusService, OrderStatusService>();
+        builder.Services.AddSingleton<IPersonService, PersonService>();
+        builder.Services.AddSingleton<ISpecialistRequestService, SpecialistRequestService>();
+        builder.Services.AddSingleton<ILogisticsService, LogisticsService>();
+        builder.Services.AddSingleton<IResourceTypeService, ResourceTypeService>();
+        builder.Services.AddSingleton<IResourceService, ResourceService>();
+        builder.Services.AddSingleton<IVolunteerService, VolunteerService>();
+
 
 #if DEBUG
         builder.Logging.AddDebug();
 #endif
-
-    builder.Services.AddSingleton<Database>();
-        builder.Services.AddSingleton<IContinentService, ContinentService>();
-        builder.Services.AddSingleton<ISkillService, SkillService>();
-	    builder.Services.AddSingleton<IAlertTypeService, AlertTypeService>();
-        builder.Services.AddSingleton<IBuildingTypeService, BuildingTypeService>();
-        builder.Services.AddSingleton<IRoleService, RoleService>();
-        builder.Services.AddSingleton<IOrganisationService, OrganisationService>();
-        builder.Services.AddSingleton<OperationalTeamStatusService>();
-        builder.Services.AddSingleton<IRotaService, RotaService>();
-        builder.Services.AddSingleton<IOrderStatusService, OrderStatusService>();
-        builder.Services.AddSingleton<BasicExpertService>();
 
 
         return builder.Build();

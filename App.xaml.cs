@@ -1,4 +1,4 @@
-﻿namespace MauiApp1;
+﻿namespace UndacApp;
 
 public partial class App : Application
 {

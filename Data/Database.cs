@@ -1,8 +1,24 @@
-﻿using System;
+﻿using SQLite;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
-using SQLite;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace MauiApp1.Data
+namespace UndacApp.Data
 {
     public class Database
     {
@@ -21,40 +37,44 @@ namespace MauiApp1.Data
             _database = new SQLiteAsyncConnection(dbPath);
         }
 
-        public async Task InitialiseAsync()
-        {
-            // If the database has already been set up, there's no need to repeat the process.
-            if (_isInitialised)
-            {
-                return;
-            }
-
-            // Proceed to create the database tables asynchronously, avoiding the blocking of the calling thread.
-            await CreateTablesAsync();
-            _isInitialised = true; // Indicate that initialisation has completed to prevent it from running again.
-        }
-
-        private async Task CreateTablesAsync()
-        {
+                // Create your database tables here
+                await _database.CreateTableAsync<Models.AlertType>();
+                await _database.CreateTableAsync<Models.OperationalTeamStatus>();
+                await _database.CreateTableAsync<Models.OperationalTeam>();
+                await _database.CreateTableAsync<Models.BuildingType>();
+                await _database.CreateTableAsync<Models.Continent>();
+                await _database.CreateTableAsync<Models.Equipment>();
+                await _database.CreateTableAsync<Models.OrderStatus>();
+                await _database.CreateTableAsync<Models.Organisation>();
+                await _database.CreateTableAsync<Models.position_statuses>();
+                await _database.CreateTableAsync<Models.Role>();
+                await _database.CreateTableAsync<Models.RoomType>();
+                await _database.CreateTableAsync<Models.Rota>();
+                await _database.CreateTableAsync<Models.Skill>();
+                await _database.CreateTableAsync<Models.SystemType>();
+                await _database.CreateTableAsync<Models.TeamMember>();
+                await _database.CreateTableAsync<Models.PrivilegeRequest>();
+                await _database.CreateTableAsync<Models.ResourceType>();
+                await _database.CreateTableAsync<Models.Resource>();
+                await _database.CreateTableAsync<Models.LocalMedia>();
             // Try to create the tables based on the specified model types.
             try
             {
-                await _database.CreateTablesAsync(CreateFlags.None, new[] {
-                    typeof(Models.AlertType),
-                    typeof(Models.OperationalTeamStatus),
-                    typeof(Models.BuildingType),
-                    typeof(Models.Continent),
-                    typeof(Models.Equipment),
-                    typeof(Models.OrderStatus),
-                    typeof(Models.Organisation),
-                    typeof(Models.position_statuses),
-                    typeof(Models.Role),
-                    typeof(Models.RoomType),
-                    typeof(Models.Rota),
-                    typeof(Models.Skill),
-                    typeof(Models.SystemType),
-                    typeof(Models.Expert)
-                }).ConfigureAwait(false); // Using ConfigureAwait(false) to avoid capturing the synchronisation context and thus prevent deadlocks.
+                // Create your database tables here
+                await _database.CreateTableAsync<Models.AlertType>();
+                await _database.CreateTableAsync<Models.OperationalTeamStatus>();
+                await _database.CreateTableAsync<Models.BuildingType>();
+                await _database.CreateTableAsync<Models.Continent>();
+                await _database.CreateTableAsync<Models.Equipment>();
+                await _database.CreateTableAsync<Models.OrderStatus>();
+                await _database.CreateTableAsync<Models.Organisation>();
+                await _database.CreateTableAsync<Models.position_statuses>();
+                await _database.CreateTableAsync<Models.Role>();
+                await _database.CreateTableAsync<Models.RoomType>();
+                await _database.CreateTableAsync<Models.Rota>();
+                await _database.CreateTableAsync<Models.Skill>();
+                await _database.CreateTableAsync<Models.SystemType>();
+                
             }
             catch (Exception ex)
             {

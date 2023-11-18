@@ -1,14 +1,9 @@
 ﻿using SQLite;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace MauiApp1.Models
+namespace UndacApp.Models
 {
+
     public class AlertType : INotifyPropertyChanged
     {
         [PrimaryKey, AutoIncrement]
@@ -18,26 +13,44 @@ namespace MauiApp1.Models
         public string Name
         {
             get => _name;
-            set => SetProperty(ref _name, value);
+            set => Utils.SetProperty(ref _name, value, this);
+        }
+        private string _status;
+        public string Status
+        {
+            get => _status;
+            set => Utils.SetProperty(ref _status, value, this);
+        }
+
+        private DateTime _dateCreated;
+        public DateTime DateCreated
+        {
+            get => _dateCreated;
+            set => Utils.SetProperty(ref _dateCreated, value, this);    
+        }
+
+        private string _detail;
+        public string Detail
+        {
+            get => _detail;
+            set => Utils.SetProperty(ref _detail, value, this);
+        }
+
+        private int _type;
+        public int Type
+        {
+            get => _type;
+            set => Utils.SetProperty(ref _type, value, this);
+        }
+
+        private string _raisedBy;
+        public string RaisedBy
+        {
+            get => _raisedBy;
+            set => Utils.SetProperty(ref _raisedBy, value, this);
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
-        {
-            if (EqualityComparer<T>.Default.Equals(storage, value))
-            {
-                return false;
-            }
-
-            storage = value;
-            OnPropertyChanged(propertyName);
-            return true;
-        }
 
     }
 }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="YourNamespace.EquipmentRequestPage">
+    <StackLayout>
+        <Entry x:Name="equipmentTypeEntry" Placeholder="Equipment Type" />
+        <Entry x:Name="quantityEntry" Placeholder="Quantity" Keyboard="Numeric" />
+        <Button Text="Request Equipment" Clicked="OnRequestEquipmentClicked" />
+        <ListView x:Name="requestsListView">
+        </ListView>
+    </StackLayout>
+</ContentPage>
+

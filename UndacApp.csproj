@@ -122,6 +122,9 @@
 	  </MauiXaml>		
 	  <MauiXaml Update="Views\TeamPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>		
+	  <MauiXaml Update="Views\WeatherAnomalyNotificationsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\WelcomePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>

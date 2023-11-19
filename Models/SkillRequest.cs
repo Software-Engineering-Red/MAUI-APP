@@ -1,7 +1,4 @@
-﻿using System.ComponentModel;
-
-
-namespace UndacApp.Models
+﻿namespace UndacApp.Models
 {
 	public class SkillRequest : AModel
 	{

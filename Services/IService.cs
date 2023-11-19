@@ -7,13 +7,15 @@ using System.Threading.Tasks;
 
 namespace UndacApp.Services
 {
-    public interface IService<T> where T : AModel,new()
+    public interface IService<T> where T : AModel, new()
     {
         Task<T> GetOne(int id);
         Task<List<T>> GetAll();
         Task<int> Add(T entity);
         Task<int> Update(T entity);
         Task<int> Remove(T entity);
+
+        Task<int> RemoveAll();
         Task<int> RemoveByID(int id);
 		Task<bool> Exists(int id);
     }

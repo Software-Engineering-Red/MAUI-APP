@@ -39,7 +39,7 @@ namespace UndacApp.Data
                 await _database.CreateTableAsync<Models.Equipment>();
                 await _database.CreateTableAsync<Models.OrderStatus>();
                 await _database.CreateTableAsync<Models.Organisation>();
-                await _database.CreateTableAsync<Models.position_statuses>();
+                await _database.CreateTableAsync<Models.PositionStatuses>();
                 await _database.CreateTableAsync<Models.Role>();
                 await _database.CreateTableAsync<Models.RoomType>();
                 await _database.CreateTableAsync<Models.Rota>();
@@ -48,7 +48,7 @@ namespace UndacApp.Data
                 await _database.CreateTableAsync<Models.TeamMember>();
                 await _database.CreateTableAsync<Models.PrivilegeRequest>();
                 await _database.CreateTableAsync<Models.ResourceType>();
-                await _database.CreateTableAsync<Models.Resource>();
+                await _database.CreateTableAsync<Models.AResource>();
                 await _database.CreateTableAsync<Models.LocalMedia>();
             }
             catch (Exception ex)

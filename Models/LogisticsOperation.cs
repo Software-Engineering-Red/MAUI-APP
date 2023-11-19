@@ -1,7 +1,3 @@
-
-using System.ComponentModel;
-using SQLite;
-
 namespace UndacApp.Models
 {
     public class LogisticsOperation : AModel
@@ -10,18 +6,18 @@ namespace UndacApp.Models
         public string VehicleAssigned
         {
             get => _vehicleAssigned;
-            set => Utils.SetProperty(ref _vehicleAssigned, value, this);
+            set => SetField(ref _vehicleAssigned, value);
         }
         private string _equipmentAssigned = String.Empty;
         public string EquipmentAssigned 
         {
             get => _equipmentAssigned;
-            set => Utils.SetProperty(ref _equipmentAssigned, value, this);
+            set => SetField(ref _equipmentAssigned, value);
         }
         private DateTime _createdAt;
         public DateTime createdAt {
             get => _createdAt;
-            set => Utils.SetProperty(ref _createdAt, value, this);
+            set => SetField(ref _createdAt, value);
         }
     }
 }

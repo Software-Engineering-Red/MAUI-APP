@@ -13,18 +13,18 @@ namespace UndacApp.Services
     internal interface IPositionStatusesServices
     {
         /*this task deifines that there should be a class called position_statuses and has a task function called GetPosition_StatusesList() that returns a list*/
-        Task<List<position_statuses>> GetPosition_StatusesList();
+        Task<List<PositionStatuses>> GetPosition_StatusesList();
 
         /*this task deifnes that there should be a class called position_statuses and has a task function called AddStatus()*/
         /*this task function should have a caller for position_statuses and a parameter called status */
-        Task<int> AddStatus(position_statuses status);
+        Task<int> AddStatus(PositionStatuses status);
 
         /*this task deifnes that there should be a class called position_statuses and has a task function called DeleteStatus()*/
         /*this task function should have a caller for position_statuses and a parameter called status */
-        Task<int> DeleteStatus(position_statuses status);
+        Task<int> DeleteStatus(PositionStatuses status);
 
         /*this task deifnes that there should be a class called position_statuses and has a task function called UpdateStatus()*/
         /*this task function should have a caller for position_statuses and a parameter called status */
-        Task<int> UpdateStatus(position_statuses status);
+        Task<int> UpdateStatus(PositionStatuses status);
     }
 }

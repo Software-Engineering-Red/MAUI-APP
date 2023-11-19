@@ -24,7 +24,7 @@ public partial class PrivilegeRequestsPage : ContentPage
 
     private async Task LoadRequests()
     {
-        requests = new ObservableCollection<PrivilegeRequest>(await requestService.GetPrivilegeRequestList());
+        requests = new ObservableCollection<PrivilegeRequest>(await requestService.GetAll());
         ltv_privilegeRequests.ItemsSource = requests;
     }
 
@@ -47,9 +47,9 @@ public partial class PrivilegeRequestsPage : ContentPage
                 teamMember.AccessPrivilegeLevel = selectedRequest.PrivilegeLevel;
                 await memberService.Update(teamMember);
                 selectedRequest.Approved = true;
-                await requestService.UpdatePrivilegeRequest(selectedRequest);
+                await requestService.Update(selectedRequest);
                 requests.Remove(selectedRequest);
-                await requestService.DeleteRequest(selectedRequest);
+                await requestService.Remove(selectedRequest);
                
 
                 ltv_privilegeRequests.ItemsSource = requests;
@@ -73,7 +73,7 @@ public partial class PrivilegeRequestsPage : ContentPage
         else
         {
             var selectedRequest = ltv_privilegeRequests.SelectedItem as PrivilegeRequest;
-            await requestService.DeleteRequest(selectedRequest);
+            await requestService.Remove(selectedRequest);
             await Shell.Current.DisplayAlert("Request denied", "Denied request", "OK");
             return;
         }

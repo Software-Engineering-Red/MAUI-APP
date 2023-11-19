@@ -4,24 +4,15 @@ using SQLite;
 
 namespace UndacApp.Models
 {
-    public class LogisticsOperation : INotifyPropertyChanged
+    public class LogisticsOperation : AModel
     {
-        [PrimaryKey, AutoIncrement]
-        public int ID { get; set; }
-
-        private string _name;
-        public string Name
-        {
-            get => _name;
-            set => Utils.SetProperty(ref _name, value, this);
-        }
-        private string _vehicleAssigned;
+        private string _vehicleAssigned = String.Empty;
         public string VehicleAssigned
         {
             get => _vehicleAssigned;
             set => Utils.SetProperty(ref _vehicleAssigned, value, this);
         }
-        private string _equipmentAssigned;
+        private string _equipmentAssigned = String.Empty;
         public string EquipmentAssigned 
         {
             get => _equipmentAssigned;
@@ -32,8 +23,5 @@ namespace UndacApp.Models
             get => _createdAt;
             set => Utils.SetProperty(ref _createdAt, value, this);
         }
-        
-
-        public event PropertyChangedEventHandler? PropertyChanged;
     }
 }

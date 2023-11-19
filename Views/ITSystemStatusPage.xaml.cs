@@ -27,7 +27,7 @@ public partial class ITSystemStatusPage : ContentPage
         ltv_systemStatusItems.ItemsSource = itemList;
     }
 
-    private async Task SaveButton_Clicked(object sender, EventArgs e)
+    private async void SaveButton_Clicked(object sender, EventArgs e)
     {
         string name = txe_ITSystemStatusName.Text;
         string status = txe_ITSystemStatusStatus.Text;
@@ -56,7 +56,7 @@ public partial class ITSystemStatusPage : ContentPage
     }
 
 
-    private async Task DeleteButton_Clicked(object sender, EventArgs e)
+    private async void DeleteButton_Clicked(object sender, EventArgs e)
     {
         if (ltv_systemStatusItems.SelectedItem == null)
         {

@@ -146,7 +146,7 @@ public partial class RequestSpecialists : ContentPage
 	{
 		try
 		{
-			Skills = new ObservableCollection<Skill>(await skillService.GetSkillList());
+			Skills = new ObservableCollection<Skill>(await skillService.GetAll());
 			SkillNamePicker.ItemsSource = Skills;
 		}
 		catch (Exception ex)

@@ -81,7 +81,7 @@ public partial class TeamMemberPage : ContentPage
                     Approved = false 
                 };
 
-                privilegeRequestService.AddRequest(request);
+                privilegeRequestService.Add(request);
                 DisplayAlert("System Type Update", "System type update requested - Pending approval", "OK");
             }
         }
@@ -102,7 +102,7 @@ public partial class TeamMemberPage : ContentPage
                     };
                 
 
-                privilegeRequestService.AddRequest(request);
+                privilegeRequestService.Add(request);
                 DisplayAlert("System Type Update", "System type update requested - Pending approval", "OK");
                 }
                     selectedTeamMember.AccessPrivilegeLevel =
@@ -127,7 +127,7 @@ public partial class TeamMemberPage : ContentPage
                 {
                    
                     PrivilegeRequest request = new PrivilegeRequest() { RequestType = "Privilege Escalation", MemberID = selectedTeamMember.ID, PrivilegeLevel = txe_privilegeLevel.Text, Approved = false };
-                    privilegeRequestService.AddRequest(request);
+                    privilegeRequestService.Add(request);
                     DisplayAlert("Failure", "Unable to increase privileges without Deputy Team Leader approval - Sending for approval", "OK");
                 }
             }

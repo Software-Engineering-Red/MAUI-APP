@@ -39,7 +39,7 @@ public partial class BuildingTypePage : ContentPage {
     /// Load building types from the database.
     /// </summary>
     private async Task LoadBuildingTypes() {
-        buildingTypes = new ObservableCollection<BuildingType>(await buildingTypeService.GetBuildingTypeList());
+        buildingTypes = new ObservableCollection<BuildingType>(await buildingTypeService.GetAll());
         ltv_buildingtype.ItemsSource = buildingTypes;
     }
 
@@ -54,11 +54,11 @@ public partial class BuildingTypePage : ContentPage {
 
         if(selectedBuildingType == null) {
             var continent = new BuildingType() { Name = txe_buildingtype.Text};
-            buildingTypeService.AddBuildingType(continent);
+            buildingTypeService.Add(continent);
             buildingTypes.Add(continent);
         } else {
             selectedBuildingType.Name = txe_buildingtype.Text;
-            buildingTypeService.UpdateBuildingType(selectedBuildingType);
+            buildingTypeService.Update(selectedBuildingType);
             var continent = buildingTypes.FirstOrDefault(x => x.ID == selectedBuildingType.ID);
             continent.Name = txe_buildingtype.Text;
         }
@@ -80,7 +80,7 @@ public partial class BuildingTypePage : ContentPage {
             return;
         }
 
-        await buildingTypeService.DeleteBuildingType(selectedBuildingType);
+        await buildingTypeService.Remove(selectedBuildingType);
         buildingTypes.Remove(selectedBuildingType);
 
         ltv_buildingtype.SelectedItem = null;

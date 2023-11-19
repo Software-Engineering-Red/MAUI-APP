@@ -26,7 +26,7 @@ public partial class RoomTypePage : ContentPage
     // Load room types from the database
     private async Task LoadRoomTypes()
     {
-        roomTypes = new ObservableCollection<RoomType>(await roomTypeService.GetRoomTypeList());
+        roomTypes = new ObservableCollection<RoomType>(await roomTypeService.GetAll());
         ltv_roomtype.ItemsSource = roomTypes;
     }
     // Save button click event handler 
@@ -38,14 +38,14 @@ public partial class RoomTypePage : ContentPage
         {
             // Add a new room type to the database/collection
             var newRoom = new RoomType() { Name = txe_roomtype.Text };
-            roomTypeService.AddRoomType(newRoom);
+            roomTypeService.Add(newRoom);
             roomTypes.Add(newRoom);
         }
         else
         {
             // Update existing room type in the database 
             selectedRoomType.Name = txe_roomtype.Text;
-            roomTypeService.UpdateRoomType(selectedRoomType);
+            roomTypeService.Update(selectedRoomType);
 
             // Update the room type in the collection
             var room = roomTypes.FirstOrDefault(x => x.ID == selectedRoomType.ID);
@@ -67,7 +67,7 @@ public partial class RoomTypePage : ContentPage
             return;
         }
         // Delete the selected room type from the database/collection
-        await roomTypeService.DeleteRoomType(selectedRoomType);
+        await roomTypeService.Remove(selectedRoomType);
         roomTypes.Remove(selectedRoomType);
 
         // Reset selectedRoomType and input field

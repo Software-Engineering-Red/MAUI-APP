@@ -19,7 +19,7 @@ namespace UndacApp.ViewModels
 
 		private string requestedDetail;
 		private ObservableCollection<OperationalTeam> operationalTeams;
-		private ObservableCollection<Resource> resources;
+		private ObservableCollection<AResource> resources;
 		private ObservableCollection<OperationResourceRequestStatus> states;
 
 		public OperationResourceRequestViewModel()
@@ -90,7 +90,7 @@ namespace UndacApp.ViewModels
 			}
 		}
 
-		public ObservableCollection<Resource> Resources
+		public ObservableCollection<AResource> Resources
 		{
 			get => resources;
 			set
@@ -143,8 +143,8 @@ namespace UndacApp.ViewModels
 			}
 		}
 
-		private Resource selectedResource;
-		public Resource SelectedResource
+		private AResource selectedResource;
+		public AResource SelectedResource
 		{
 			get => selectedResource;
 			set
@@ -253,7 +253,7 @@ namespace UndacApp.ViewModels
 
 		private async Task LoadResources()
 		{
-			ObservableCollection<Resource> resourcesData = new ObservableCollection<Resource>(await resourceService.GetAll());
+			ObservableCollection<AResource> resourcesData = new ObservableCollection<AResource>(await resourceService.GetAll());
 			Resources = resourcesData;
 			OnPropertyChanged(nameof(Resources));
 		}

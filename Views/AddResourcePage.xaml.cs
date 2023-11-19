@@ -10,10 +10,10 @@ public partial class AddResourcePage : ContentPage
 	private IBuildingTypeService buildingTypeService;
 
     private ObservableCollection<ResourceType> ResourceTypes { get; set; } = new ObservableCollection<ResourceType>();
-    private ObservableCollection<Resource> ResourceList { get; set; } = new ObservableCollection<Resource>();
+    private ObservableCollection<AResource> ResourceList { get; set; } = new ObservableCollection<AResource>();
     private ObservableCollection<BuildingType> BuildingList { get; set; } = new ObservableCollection<BuildingType>();
 
-	private Resource? selectedResource = null;
+	private AResource? selectedResource = null;
 
     public AddResourcePage()
 	{
@@ -99,7 +99,7 @@ public partial class AddResourcePage : ContentPage
                 || String.IsNullOrEmpty(ResourceName.Text)
                 || String.IsNullOrEmpty(NumberRequiredEntry.Text)) return;
 
-            Resource resource = new Resource();
+            AResource resource = new AResource();
 				
             resource.Name = ResourceName.Text;
 			resource.Type = type.Name;
@@ -140,7 +140,7 @@ public partial class AddResourcePage : ContentPage
 			ResourceTypePicker.ItemsSource = ResourceTypes;
 			if (ResourceTypes.Count > 0) ResourceTypePicker.SelectedIndex = 0;
 
-            ResourceList = new ObservableCollection<Resource>(await resourceService.GetAll());
+            ResourceList = new ObservableCollection<AResource>(await resourceService.GetAll());
 			ltv_resources.ItemsSource = ResourceList;
 
 			BuildingList = new ObservableCollection<BuildingType>(await buildingTypeService.GetBuildingTypeList());
@@ -156,7 +156,7 @@ public partial class AddResourcePage : ContentPage
 
 	private void ltv_resources_ItemSelected(object sender, EventArgs e)
 	{
-		selectedResource = ltv_resources.SelectedItem as Resource;
+		selectedResource = ltv_resources.SelectedItem as AResource;
 		if (selectedResource is null) return;
 
 		ResourceName.Text = selectedResource.Name;

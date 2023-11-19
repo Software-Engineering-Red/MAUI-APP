@@ -7,7 +7,8 @@ namespace UndacApp.Models
     /// this class is for setting up the table for the database and implemetns INotifyPropertyChanged functions
     /// by retrieving the name of the table and the index for the database
     /// </summary>
-    internal class position_statuses : INotifyPropertyChanged
+    [Table("position_statuses")]
+    internal class PositionStatuses : AModel
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
@@ -16,9 +17,7 @@ namespace UndacApp.Models
         public string Name
         {
             get => _name;
-            set => Utils.SetProperty(ref _name, value, this);
+            set => SetField(ref _name, value);
         }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
     }
 }

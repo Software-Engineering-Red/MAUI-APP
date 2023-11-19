@@ -30,7 +30,7 @@ public partial class AlertTypesPage : ContentPage
 
     private async Task LoadAlertTypes()
     {
-        _alertTypes = new ObservableCollection<AlertType>(await _alertTypeService.GetAlertTypes());
+        _alertTypes = new ObservableCollection<AlertType>(await _alertTypeService.GetAll());
         ltv_alerttypes.ItemsSource = _alertTypes;
 
 
@@ -47,14 +47,14 @@ public partial class AlertTypesPage : ContentPage
         {
 
             var alert = new AlertType() { Name = txe_alert.Text, Status = selectedStatus, DateCreated = DateTime.Now, RaisedBy = txe_RequestedBy.Text };
-            _alertTypeService.AddAlertType(alert);
+            _alertTypeService.Add(alert);
             _alertTypes.Add(alert);
         }
         else
         {
             _selectedAlertType.Name = txe_alert.Text;
             _selectedAlertType.Status = selectedStatus;
-            _alertTypeService.UpdateAlertType(_selectedAlertType);
+            _alertTypeService.Update(_selectedAlertType);
             
             var alert = _alertTypes.FirstOrDefault(x => x.ID == _selectedAlertType.ID);
             alert.Name = txe_alert.Text;
@@ -77,7 +77,7 @@ public partial class AlertTypesPage : ContentPage
             return;
         }
 
-        await _alertTypeService.DeleteAlertType(_selectedAlertType);
+        await _alertTypeService.Remove(_selectedAlertType);
         _alertTypes.Remove(_selectedAlertType);
 
         ltv_alerttypes.SelectedItem = null;
@@ -91,7 +91,7 @@ public partial class AlertTypesPage : ContentPage
 
         if (answer)
         {
-            await _alertTypeService.DeleteAllAlertType();
+            await _alertTypeService.RemoveAll();
             _alertTypes.Clear();
         }
     }

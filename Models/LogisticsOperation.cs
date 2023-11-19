@@ -1,39 +1,23 @@
-
-using System.ComponentModel;
-using SQLite;
-
 namespace UndacApp.Models
 {
-    public class LogisticsOperation : INotifyPropertyChanged
+    public class LogisticsOperation : AModel
     {
-        [PrimaryKey, AutoIncrement]
-        public int ID { get; set; }
-
-        private string _name;
-        public string Name
-        {
-            get => _name;
-            set => Utils.SetProperty(ref _name, value, this);
-        }
         private string _vehicleAssigned;
         public string VehicleAssigned
         {
             get => _vehicleAssigned;
-            set => Utils.SetProperty(ref _vehicleAssigned, value, this);
+            set => SetField(ref _vehicleAssigned, value);
         }
         private string _equipmentAssigned;
         public string EquipmentAssigned 
         {
             get => _equipmentAssigned;
-            set => Utils.SetProperty(ref _equipmentAssigned, value, this);
+            set => SetField(ref _equipmentAssigned, value);
         }
         private DateTime _createdAt;
         public DateTime createdAt {
             get => _createdAt;
-            set => Utils.SetProperty(ref _createdAt, value, this);
+            set => SetField(ref _createdAt, value);
         }
-        
-
-        public event PropertyChangedEventHandler? PropertyChanged;
     }
 }

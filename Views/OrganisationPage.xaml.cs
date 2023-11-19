@@ -43,7 +43,7 @@ public partial class OrganisationPage : ContentPage
         <returns>Task promise, informing about the status of its' completion.</returns> */
     private async Task LoadOrganisations()
     {
-        orgs = new ObservableCollection<Organisation>(await organisationService.GetOrganisationList());
+        orgs = new ObservableCollection<Organisation>(await organisationService.GetAll());
         ltv_organisations.ItemsSource = orgs;
     }
 
@@ -59,15 +59,15 @@ public partial class OrganisationPage : ContentPage
         if (selectedOrg == null)
         {
             var org = new Organisation() { Name = txe_organisation.Text };
-            organisationService.AddOrganisation(org);
+            organisationService.Add(org);
             orgs.Add(org);
         }
         else
         {
             selectedOrg.Name = txe_organisation.Text;
-            organisationService.UpdateOrganisation(selectedOrg);
+            organisationService.Update(selectedOrg);
 
-            var org = orgs.FirstOrDefault(x => x.id == selectedOrg.id);
+            var org = orgs.FirstOrDefault(x => x.ID == selectedOrg.ID);
             org.Name = txe_organisation.Text;
 
         }
@@ -91,7 +91,7 @@ public partial class OrganisationPage : ContentPage
             return;
         }
 
-        await organisationService.DeleteOrganisation(selectedOrg);
+        await organisationService.Remove(selectedOrg);
         orgs.Remove(selectedOrg);
 
         ltv_organisations.SelectedItem = null;

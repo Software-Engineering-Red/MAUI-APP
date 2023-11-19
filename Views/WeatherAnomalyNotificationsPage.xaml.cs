@@ -18,9 +18,16 @@ namespace UndacApp.Views
             LoadNotifications();
         }
 
-        private async void LoadNotifications()
+        public async void LoadNotifications()
         {
             var notifications = await _weatherAnomalyNotificationService.GetAll();
+            CategorizeNotifications(notifications);
+            cv_currentNotifications.ItemsSource = _currentNotifications;
+            ltv_clearedNotifications.ItemsSource = _clearedNotifications;
+        }
+
+        public void CategorizeNotifications(IEnumerable<WeatherAnomalyNotification> notifications)
+        {
             foreach (var notification in notifications)
             {
                 if (notification.Cleared)
@@ -28,12 +35,9 @@ namespace UndacApp.Views
                 else
                     _currentNotifications.Add(notification);
             }
-
-            cv_currentNotifications.ItemsSource = _currentNotifications;
-            ltv_clearedNotifications.ItemsSource = _clearedNotifications;
         }
 
-        private async void ReportNotificationButton_Clicked(object sender, EventArgs e)
+        public async void ReportNotificationButton_Clicked(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txe_weatherAnomalyNotification.Text))
                 return;
@@ -50,20 +54,35 @@ namespace UndacApp.Views
             txe_weatherAnomalyNotification.Text = "";
         }
 
-        private void cv_currentNotifications_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public void cv_currentNotifications_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            _selectedNotification = e.CurrentSelection.FirstOrDefault() as WeatherAnomalyNotification;
+            UpdateUIForSelectedNotification(e.CurrentSelection.FirstOrDefault() as WeatherAnomalyNotification);
+        }
+
+        public void UpdateUIForSelectedNotification(WeatherAnomalyNotification selectedNotification)
+        {
+            _selectedNotification = selectedNotification;
             btnClear.IsVisible = _selectedNotification != null;
         }
 
-        private async void ClearButton_Clicked(object sender, EventArgs e)
+        public async void ClearButton_Clicked(object sender, EventArgs e)
         {
             if (_selectedNotification == null)
                 return;
 
-            _selectedNotification.Cleared = true;
-            await _weatherAnomalyNotificationService.Update(_selectedNotification);
+            await UpdateNotificationStatus(_selectedNotification);
 
+            UpdateUIAfterClearingNotification();
+        }
+
+        public async Task UpdateNotificationStatus(WeatherAnomalyNotification notification)
+        {
+            notification.Cleared = true;
+            await _weatherAnomalyNotificationService.Update(notification);
+        }
+
+        public void UpdateUIAfterClearingNotification()
+        {
             _currentNotifications.Remove(_selectedNotification);
             _clearedNotifications.Add(_selectedNotification);
             cv_currentNotifications.SelectedItem = null;

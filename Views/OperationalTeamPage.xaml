@@ -25,6 +25,20 @@
                 Text="Delete"
             Clicked="DeleteButton_Clicked" />
         </Grid>
+        <ListView x:Name="ltv_teamMembers" Background="White">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Text="{Binding Name}" TextColor="Black" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
         <ListView x:Name="ltv_operationalTeam" Background="White" ItemSelected="ltv_operationalTeam_ItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>

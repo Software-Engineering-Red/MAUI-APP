@@ -4,9 +4,25 @@
              x:Class="UndacApp.Views.OperationPage"
              Title="OperationPage">
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <ListView x:Name="operationListView"
+          ItemsSource="{Binding OperationList}"
+          Margin="20"
+          SelectionMode="Single"
+          SelectedItem="{Binding SelectedOperation, Mode=TwoWay}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="10">
+                            <Label Text="{Binding Name, StringFormat='Operation Name: {0}'}" FontAttributes="Bold"/>
+                            <Label Text="{Binding Type, StringFormat='Operational Team ID: {0}'}"/>
+                            <Label Text="{Binding RequestedBy, StringFormat='Requested By: {0}'}"/>
+                            <Label Text="{Binding RequestDate, StringFormat='Request Date: {0:yyyy-MM-dd}'}"/>
+                            <Label Text="{Binding ResourceId, StringFormat='Resource ID: {0}'}"/>
+                            <Label Text="{Binding Status, StringFormat='Status: {0}'}"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </VerticalStackLayout>
 </ContentPage>

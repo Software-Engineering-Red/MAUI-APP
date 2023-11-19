@@ -107,11 +107,13 @@
            Title="Add Resource"
            ContentTemplate="{DataTemplate views:AddResourcePage}" />
         <ShellContent
-
             Title="Local Media's"
              ContentTemplate="{DataTemplate views:LocalMediaPage}" />
+        <ShellContent
+            Title="Logistic Operation"
+             ContentTemplate="{DataTemplate views:LogisticOperationPage}" />
 
-<ShellContent
+        <ShellContent
            Title="Operational-Team"
            ContentTemplate="{DataTemplate views:OperationalTeamPage}" />
         <ShellContent

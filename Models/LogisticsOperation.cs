@@ -2,13 +2,13 @@ namespace UndacApp.Models
 {
     public class LogisticsOperation : AModel
     {
-        private string _vehicleAssigned;
+        private string _vehicleAssigned = String.Empty;
         public string VehicleAssigned
         {
             get => _vehicleAssigned;
             set => SetField(ref _vehicleAssigned, value);
         }
-        private string _equipmentAssigned;
+        private string _equipmentAssigned = String.Empty;
         public string EquipmentAssigned 
         {
             get => _equipmentAssigned;

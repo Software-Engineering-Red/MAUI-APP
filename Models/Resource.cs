@@ -1,6 +1,6 @@
 ﻿namespace UndacApp.Models
 {
-    public class Resource : AModel
+    public class AResource : AModel
     {
         private string? _type = String.Empty;
         public string? Type

@@ -8,7 +8,7 @@
     Shell.FlyoutBehavior="Disabled">
 
     <TabBar>
-        
+
         <ShellContent 
             Title="Welcome"
             ContentTemplate="{DataTemplate views:WelcomePage}"/>
@@ -56,15 +56,15 @@
         <ShellContent
             Title="Continents"
             ContentTemplate="{DataTemplate views:ContinentPage}" />
-        
+
         <ShellContent
             Title="Building Types"
             ContentTemplate="{DataTemplate views:BuildingTypePage}"/>
-        
+
         <ShellContent
             Title="Role"
             ContentTemplate="{DataTemplate views:RolesPage}" />
-    
+
         <ShellContent
                 Title="Organisations"
                 ContentTemplate="{DataTemplate views:OrganisationPage}" />
@@ -76,7 +76,7 @@
         <ShellContent
             Title="Operational Team"
             ContentTemplate="{DataTemplate views:OperationalTeamPage}" />
-        
+
         <ShellContent
             Title="Operational Team Status"
             ContentTemplate="{DataTemplate views:OperationalTeamStatusPage}" />
@@ -107,11 +107,10 @@
            Title="Add Resource"
            ContentTemplate="{DataTemplate views:AddResourcePage}" />
         <ShellContent
-
             Title="Local Media's"
              ContentTemplate="{DataTemplate views:LocalMediaPage}" />
 
-<ShellContent
+        <ShellContent
            Title="Operational-Team"
            ContentTemplate="{DataTemplate views:OperationalTeamPage}" />
         <ShellContent
@@ -120,6 +119,10 @@
         <ShellContent
             Title="Operation-Resource-Request"
             ContentTemplate="{DataTemplate views:OperationRessourceRequestPage}" />
+
+        <ShellContent
+            Title="Methodological Documentation"
+            ContentTemplate="{DataTemplate views:MethodologicalDocumentationPage}" />
 
     </TabBar>
 

@@ -20,7 +20,17 @@ namespace UndacApp.Models
             set => SetField(ref _teamStatus, value);
 		}
 
-        private string _createdBy;
+		/// <summary>
+		/// The attribute is described a bit confusing as operationId in the ERD
+		/// </summary>
+		private int _operationId;
+		public int OperationId
+		{
+			get => _operationId;
+			set => SetField(ref _operationId, value);
+		}
+
+		private string _createdBy;
         public string CreatedBy
 		{
             get => _createdBy;

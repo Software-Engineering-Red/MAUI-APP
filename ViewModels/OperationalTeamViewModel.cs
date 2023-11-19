@@ -13,7 +13,7 @@ namespace UndacApp.ViewModels
 
 		private string name;
 		private string createdBy;
-		private int teamId;
+		private int operationId;
 		private string status;
 
 
@@ -51,15 +51,15 @@ namespace UndacApp.ViewModels
 			}
 		}
 
-		public int TeamId
+		public int OperationId
 		{
-			get => teamId;
+			get => operationId;
 			set
 			{
-				if (teamId != value)
+				if (operationId != value)
 				{
-					teamId = value;
-					OnPropertyChanged(nameof(TeamId));
+					operationId = value;
+					OnPropertyChanged(nameof(OperationId));
 				}
 			}
 		}
@@ -91,7 +91,7 @@ namespace UndacApp.ViewModels
 					{
 						Name = selectedOperationalTeam.Name;
 						CreatedBy = selectedOperationalTeam.CreatedBy;
-						TeamId = selectedOperationalTeam.ID;
+						OperationId = selectedOperationalTeam.ID;
 						Status = selectedOperationalTeam.TeamStatus;
 					}
 				}
@@ -126,7 +126,7 @@ namespace UndacApp.ViewModels
 			{
 				Name = Name,
 				CreatedBy = CreatedBy,
-				ID = TeamId,
+				ID = OperationId,
 				TeamStatus = Status
 			};
 
@@ -137,7 +137,7 @@ namespace UndacApp.ViewModels
 		{
 			SelectedOperationalTeam.Name = Name;
 			SelectedOperationalTeam.CreatedBy = CreatedBy;
-			SelectedOperationalTeam.ID = TeamId;
+			SelectedOperationalTeam.OperationId = OperationId;
 			SelectedOperationalTeam.TeamStatus = Status;
 
 			await operationalTeamService.Update(SelectedOperationalTeam);
@@ -148,7 +148,7 @@ namespace UndacApp.ViewModels
 
 			Name = string.Empty;
 			CreatedBy = string.Empty;
-			TeamId = 0;
+			OperationId = 0;
 			Status = string.Empty;
 
 		}

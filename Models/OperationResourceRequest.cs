@@ -66,7 +66,6 @@ namespace UndacApp.Models
 		}
 
 
-		[OneToMany]
-		public List<OperationResourceRequest>  { get; set; }
+
 	}
 }

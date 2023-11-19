@@ -6,7 +6,7 @@ namespace UndacApp.Views;
 public partial class LogisticOperationPage : ContentPage
 {
 
-	private ILogisticService logisticService;
+	private ILogisticsService logisticService;
     private ObservableCollection<LogisticsOperation> OperationList { get; set; } = new ObservableCollection<LogisticsOperation>();
 
     private LogisticsOperation? selectedOperation = null;

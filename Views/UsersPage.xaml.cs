@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using UndacApp.Models;
 using UndacApp.Services;
 using Microsoft.Maui.Controls;
+using System.Xml.Serialization;
 
 namespace UndacApp.Views
 {
@@ -32,6 +33,13 @@ namespace UndacApp.Views
             adminCredentialsLayout.IsVisible = true;
         }
 
+        private void ClearFilters()
+        {
+            txtName.Text = string.Empty;
+            txtEmail.Text = string.Empty;
+            pickerAccessLevel.SelectedIndex = -1;
+            adminCredentialsLayout.IsVisible = false;
+        }
         private async void CheckCredentialsButton_Clicked(object sender, EventArgs e)
         {
             // Check credentials
@@ -48,10 +56,7 @@ namespace UndacApp.Views
                 users.Add(newUser);
 
                 // Clear the input fields
-                txtName.Text = string.Empty;
-                txtEmail.Text = string.Empty;
-                pickerAccessLevel.SelectedIndex = -1;
-                adminCredentialsLayout.IsVisible = false;
+                ClearFilters();
 
                 await DisplayAlert("Success", $"User {newUser.Name} added!", "OK");
             }

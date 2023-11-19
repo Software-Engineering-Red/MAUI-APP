@@ -2,7 +2,7 @@
 
 namespace UndacApp.Services
 {
-    public class ResourceService : AService<Resource>, IResourceService
+    public class ResourceService : AService<AResource>, IResourceService
     {
     }
 }

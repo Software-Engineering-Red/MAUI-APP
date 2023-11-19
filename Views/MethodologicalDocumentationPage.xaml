@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UndacApp.Views.MethodologicalDocumentationPage"
+             Title="MethodologicalDocumentationPage"
+             xmlns:local="clr-namespace:Undac.Models">
+    <VerticalStackLayout Spacing="10" Margin="5">
+        <Entry Placeholder="Title" x:Name="NameEntry" />
+        <Entry Placeholder="Author" x:Name="AuthorEntry" />
+        <DatePicker x:Name="CreatedAtEntry" />
+        <DatePicker x:Name="LastModifiedAtEntry" />
+        <Editor x:Name="txe_methodological_documentation"
+                Placeholder="Add a Methodological Document"
+                HeightRequest="100" />
+
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
+            <Button Text="Save"
+                    Clicked="SaveButton_Clicked" />
+
+            <Button Grid.Column="1"
+                    Text="Delete"
+                    Clicked="DeleteButton_Clicked" />
+        </Grid>
+
+        <ListView x:Name="ltv_methodological_documents" Background="white" ItemSelected="ltv_methodological_documents_ItemSelected">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell TextColor="Black" Text="{Binding Name}"/>
+                </DataTemplate>
+             </ListView.ItemTemplate>
+        </ListView>
+    </VerticalStackLayout>
+</ContentPage>

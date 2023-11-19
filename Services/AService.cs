@@ -35,7 +35,12 @@ namespace UndacApp.Services
         {
             return await _database.DeleteAsync(entity);
         }
-		public async Task<int> RemoveByID(int id)
+        public async Task<int> RemoveAll()
+        {
+            return await _database.DeleteAllAsync<T>();
+        }
+
+        public async Task<int> RemoveByID(int id)
 		{
 			var entity = await GetOne(id);
 			if (entity != null)

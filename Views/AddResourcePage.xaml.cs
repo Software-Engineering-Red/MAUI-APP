@@ -143,7 +143,7 @@ public partial class AddResourcePage : ContentPage
             ResourceList = new ObservableCollection<AResource>(await resourceService.GetAll());
 			ltv_resources.ItemsSource = ResourceList;
 
-			BuildingList = new ObservableCollection<BuildingType>(await buildingTypeService.GetBuildingTypeList());
+			BuildingList = new ObservableCollection<BuildingType>(await buildingTypeService.GetAll());
 			BuildingTypePicker.ItemsSource = BuildingList;
             if (BuildingList.Count > 0) BuildingTypePicker.SelectedIndex = 0;
         }

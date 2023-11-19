@@ -1,9 +1,6 @@
 using UndacApp.Models;
 using UndacApp.Services;
-using System;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace UndacApp.Views;
 
@@ -26,11 +23,11 @@ public partial class ITSystemStatusPage : ContentPage
     //! Task to load teamMembers into a variable
     private async Task LoadTeamMembers()
     {
-        itemList = new ObservableCollection<ITSystemStatus>(await service.GetITSystemStatuses());
+        itemList = new ObservableCollection<ITSystemStatus>(await service.GetAll());
         ltv_systemStatusItems.ItemsSource = itemList;
     }
 
-    private void SaveButton_Clicked(object sender, EventArgs e)
+    private async void SaveButton_Clicked(object sender, EventArgs e)
     {
         string name = txe_ITSystemStatusName.Text;
         string status = txe_ITSystemStatusStatus.Text;
@@ -51,7 +48,7 @@ public partial class ITSystemStatusPage : ContentPage
             Avaliable = avaliable,
         };
 
-        service.AddITSystemStatus(item);
+        await service.Add(item);
         itemList.Add(item);
 
         // Reset fields
@@ -69,7 +66,7 @@ public partial class ITSystemStatusPage : ContentPage
 
         ITSystemStatus item = (ITSystemStatus)ltv_systemStatusItems.SelectedItem;
 
-        await service.DeleteITSystemStatus(item);
+        await service.Remove(item);
         itemList.Remove(item);
 
         resetFields();

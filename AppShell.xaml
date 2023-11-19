@@ -83,7 +83,7 @@
 
         <ShellContent
             Title="PositionStatusPage"
-            ContentTemplate="{DataTemplate views:position_status}" />
+            ContentTemplate="{DataTemplate views:PositionStatusPage}" />
         <ShellContent
             Title="Rooms Types"
             ContentTemplate="{DataTemplate views:RoomTypePage}" />

@@ -1,5 +1,4 @@
 ﻿using SQLite;
-using System.ComponentModel;
 
 namespace UndacApp.Models
 /*! <summary>
@@ -8,13 +7,8 @@ A model structure for Order Status data
 <details>Data is stored in database.</details> */
 {
     [Table("order_status")]
-    public class OrderStatus : INotifyPropertyChanged
+    public class OrderStatus : AModel
     {
-        /*! <summary>
-         Unique primary key. Manages relationships in DB
-        </summary> */
-        [PrimaryKey, AutoIncrement]
-        public int ID { get; set; }
 
         /*! <summary>
             A private variable, storing order status name
@@ -23,9 +17,7 @@ A model structure for Order Status data
         public string Name
         {
             get => _name;
-            set => Utils.SetProperty(ref _name, value, this);
+            set => SetField(ref _name, value);
         }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
     }
 }

@@ -1,12 +1,9 @@
-﻿using SQLite;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace UndacApp.Models
 {
-    public class PrivilegeRequest : INotifyPropertyChanged
+    public class PrivilegeRequest : AModel
     {
-        [PrimaryKey, AutoIncrement]
-        public int ID { get; set; }
         private string requestType;
         private int memberID;
         private string privilegeLevel;
@@ -16,30 +13,29 @@ namespace UndacApp.Models
         public bool Approved
         {
             get => approved;
-            set => Utils.SetProperty(ref approved, value, this);
+            set => SetField(ref approved, value);
         }
 
         public string RequestType
         {
             get => requestType;
-            set => Utils.SetProperty(ref requestType, value, this);
+            set => SetField(ref requestType, value);
         }
 
         public string PrivilegeLevel
         {
             get => privilegeLevel;
-            set => Utils.SetProperty(ref privilegeLevel, value, this);
+            set => SetField(ref privilegeLevel, value);
         }
 
         public int MemberID
         {
             get => memberID;
-            set => Utils.SetProperty(ref  memberID, value, this);
+            set => SetField(ref  memberID, value);
         }
         public string SystemType
         {        get => systemType;
-                 set => Utils.SetProperty(ref systemType, value, this);
+                 set => SetField(ref systemType, value);
         }
-        public event PropertyChangedEventHandler? PropertyChanged;
     }
 }

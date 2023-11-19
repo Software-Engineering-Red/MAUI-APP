@@ -36,7 +36,7 @@ namespace UndacApp.Views
         /// </summary>
         private async Task LoadRotas()
         {
-            _rotaCollection = new ObservableCollection<Rota>(await _rotaService.GetRotaList());
+            _rotaCollection = new ObservableCollection<Rota>(await _rotaService.GetAll());
             RotaListView.ItemsSource = _rotaCollection;
         }
 
@@ -65,7 +65,7 @@ namespace UndacApp.Views
         private void AddNewRota()
         {
             var newRota = CreateRotaFromInput();
-            _rotaService.AddRota(newRota);
+            _rotaService.Add(newRota);
             _rotaCollection.Add(newRota);
         }
 
@@ -75,7 +75,7 @@ namespace UndacApp.Views
         private void UpdateExistingRota()
         {
             _selectedRota.Name = RotaNameEditor.Text;
-            _rotaService.UpdateRota(_selectedRota);
+            _rotaService.Update(_selectedRota);
             var existingRota = _rotaCollection.FirstOrDefault(x => x.ID == _selectedRota.ID);
             existingRota.Name = RotaNameEditor.Text;
         }
@@ -110,7 +110,7 @@ namespace UndacApp.Views
                 return;
             }
 
-            await _rotaService.DeleteRota(_selectedRota);
+            await _rotaService.Remove(_selectedRota);
             _rotaCollection.Remove(_selectedRota);
 
             ClearUIComponents();

@@ -24,7 +24,7 @@ public partial class LocalMediaPage : ContentPage
     /*Asynchronously load local media*/
     private async Task LoadLocalMedias()
     { 
-        localMedias = new ObservableCollection<LocalMedia>(await localMediaService.GetLocalMediaList());
+        localMedias = new ObservableCollection<LocalMedia>(await localMediaService.GetAll());
         MediaListView.ItemsSource= localMedias;
     }
     /*Handle the "Add" button click event, create a new LocalMedia object and add it to the collection and update the selected local media if it already exists  then clear input fields and selection*/
@@ -41,7 +41,7 @@ public partial class LocalMediaPage : ContentPage
 
             string selectedPickerItem = LocalMediaPicker.SelectedItem as string;
             localMedia.Media = selectedPickerItem;
-            localMediaService.AddLocalMedia(localMedia);
+            localMediaService.Add(localMedia);
             localMedias.Add(localMedia);
         }
         else
@@ -50,7 +50,7 @@ public partial class LocalMediaPage : ContentPage
             selectedLocalMedia.Email = EmailEntry.Text;
             string selectedPickerItem = LocalMediaPicker.SelectedItem as string;                      
             selectedLocalMedia.Media = selectedPickerItem;
-            localMediaService.UpdateLocalMedia(selectedLocalMedia);
+            localMediaService.Update(selectedLocalMedia);
         }
         NameEntry.Text = null;
         EmailEntry.Text = null;
@@ -101,7 +101,7 @@ public partial class LocalMediaPage : ContentPage
             
             LocalMediaPicker.Items.Remove(selectedPickerItem);
         }
-        await localMediaService.DeleteLocalMedia(selectedLocalMedia);                    
+        await localMediaService.Remove(selectedLocalMedia);
         localMedias.Remove(selectedLocalMedia);        
         MediaListView.SelectedItem = null;
         NameEntry.Text = null;

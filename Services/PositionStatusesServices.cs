@@ -31,11 +31,11 @@ namespace UndacApp.Services
             }
 
             _dbConnection = new SQLiteAsyncConnection(DatabaseSettings.DBPath, DatabaseSettings.Flags);
-                await _dbConnection.CreateTableAsync<position_statuses>();
+                await _dbConnection.CreateTableAsync<PositionStatuses>();
         }
         /*this task function is to await for the databse to be set up after waiting to add the object to the database*/
         /*as well as increase the incremental intiger for primary key if it is auto incremental(which it is) then returns the result */
-        public async Task<int> AddStatus(position_statuses status)
+        public async Task<int> AddStatus(PositionStatuses status)
         {
             await SetUpDb();
             return await _dbConnection.InsertAsync(status);
@@ -43,7 +43,7 @@ namespace UndacApp.Services
 
         /*this task function is to await the for the databas to be set up after wating delete the object that is in the database */
         /*while using the index of the object then returns the result*/
-        public async Task<int> DeleteStatus(position_statuses status)
+        public async Task<int> DeleteStatus(PositionStatuses status)
         {
             await SetUpDb();
             return await _dbConnection.DeleteAsync(status);
@@ -51,15 +51,15 @@ namespace UndacApp.Services
 
         /*this task function is to await the database to be set up after wating creates a list from the database table*/
         /*then returns the result*/
-        public async Task<List<position_statuses>> GetPosition_StatusesList()
+        public async Task<List<PositionStatuses>> GetPosition_StatusesList()
         {
             await SetUpDb();
-            return await _dbConnection.Table<position_statuses>().ToListAsync();
+            return await _dbConnection.Table<PositionStatuses>().ToListAsync();
         }
 
         /*this task function is to await the database to be set up after update the position status to the database*/
         /*while useing the primary key then return the results*/
-        public async Task<int> UpdateStatus(position_statuses status)
+        public async Task<int> UpdateStatus(PositionStatuses status)
         {
             await SetUpDb();
             return await _dbConnection.InsertAsync(status);

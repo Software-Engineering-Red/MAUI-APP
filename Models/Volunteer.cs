@@ -1,15 +1,8 @@
-﻿using SQLite;
-using System;
-using System.ComponentModel;
-
-namespace UndacApp.Models
+﻿namespace UndacApp.Models
 {
-    public class Volunteer : INotifyPropertyChanged
+    public class Volunteer : AModel
     {
-        [PrimaryKey, AutoIncrement]
-        public int ID { get; set; }
 
-        private string name;
         private string email;
         private string skill;
         private string geographicalLocation;
@@ -17,47 +10,40 @@ namespace UndacApp.Models
         private DateTime? dateOfArrival = null;
         private DateTime? dateOfDeparture = null;
 
-        public string Name
-        {
-            get => name;
-            set => Utils.SetProperty(ref name, value, this);
-        }
         public string Email
         {
             get => email;
-            set => Utils.SetProperty(ref email, value, this);
+            set => SetField(ref email, value);
         }
 
         public string Skill
         {
             get => skill;
-            set => Utils.SetProperty(ref skill, value, this);
+            set => SetField(ref skill, value);
         }
 
         public string GeographicalLocation
         {
             get => geographicalLocation;
-            set => Utils.SetProperty(ref geographicalLocation, value, this);
+            set => SetField(ref geographicalLocation, value);
         }
 
         public string Status
         {
             get => status;
-            set => Utils.SetProperty(ref status, value, this);
+            set => SetField(ref status, value);
         }
 
         public DateTime? DateOfArrival
         {
             get => dateOfArrival;
-            set => Utils.SetProperty(ref dateOfArrival, value, this);
+            set => SetField(ref dateOfArrival, value);
         }
 
         public DateTime? DateOfDeparture
         {
             get => dateOfDeparture;
-            set => Utils.SetProperty(ref dateOfDeparture, value, this);
+            set => SetField(ref dateOfDeparture, value);
         }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
     }
 }

@@ -1,30 +1,9 @@
 using SQLite;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
 namespace UndacApp.Models {
     [Table("it_system_status")]
-    public class ITSystemStatus : INotifyPropertyChanged
+    public class ITSystemStatus : AModel
     {
-        /// <summary>
-        /// Unique primary key ID.
-        /// </summary>
-        [PrimaryKey, AutoIncrement]
-        public int ID { get; set; }
-
-        /// <summary>
-        /// Name Stored private for ITStatus. 
-        /// </summary>
-        private string name;
-
-        /// <summary>
-        /// The Public getter and setter. 
-        /// </summary>
-        public string Name
-        {
-            get => name;
-            set => SetField(ref name, value);
-        }
 
         /// <summary>
         /// status stored for ITStatus
@@ -52,22 +31,6 @@ namespace UndacApp.Models {
         {
             get => avaliable;
             set => SetField(ref avaliable, value);
-        }
-
-        /// <summary>
-        /// Event handling PropertyChange.
-        /// </summary>
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        protected void OnPropertyChanged(string propertyName) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
-        protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
-        {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-            field = value;
-            OnPropertyChanged(propertyName);
-            return true;
         }
     }
 

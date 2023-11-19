@@ -33,6 +33,7 @@ namespace UndacApp.Data
                 // Create your database tables here
                 await _database.CreateTableAsync<Models.AlertType>();
                 await _database.CreateTableAsync<Models.OperationalTeamStatus>();
+                await _database.CreateTableAsync<Models.OperationalTeam>();
                 await _database.CreateTableAsync<Models.BuildingType>();
                 await _database.CreateTableAsync<Models.Continent>();
                 await _database.CreateTableAsync<Models.Equipment>();
@@ -48,6 +49,7 @@ namespace UndacApp.Data
                 await _database.CreateTableAsync<Models.PrivilegeRequest>();
                 await _database.CreateTableAsync<Models.ResourceType>();
                 await _database.CreateTableAsync<Models.Resource>();
+                await _database.CreateTableAsync<Models.LocalMedia>();
             }
             catch (Exception ex)
             {

@@ -176,7 +176,7 @@ public partial class VolunteerRequestPage : ContentPage
 
         
 
-        private void RequestDatesButton_Clicked(object sender, EventArgs e)
+    private void RequestDatesButton_Clicked(object sender, EventArgs e)
         {
             if (_selectedVolunteer != null)
             {

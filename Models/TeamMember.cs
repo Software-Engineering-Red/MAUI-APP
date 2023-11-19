@@ -23,5 +23,18 @@ namespace UndacApp.Models
             get => _available;
             set => SetField(ref _available, value);
         }
+        private string systemType;
+        public string SystemType
+        {
+            get => systemType;
+            set => SetField(ref systemType, value);
+        }
+        public bool isSystemTypeUpdatePending;
+        public bool IsSystemTypeUpdatePending
+        {
+            get => isSystemTypeUpdatePending;
+            set => SetField(ref isSystemTypeUpdatePending, value);
+
+        }
     }
 }

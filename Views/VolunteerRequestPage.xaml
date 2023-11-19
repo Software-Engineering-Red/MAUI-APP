@@ -2,10 +2,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UndacApp.Views.VolunteerRequestPage"
              Title="Volunteer Request Page">
-
     <StackLayout Spacing="10" Margin="5">
         <VerticalStackLayout>
-            <Label Text="Add Volunteer"></Label>
+        <Label Text="Add Volunteer"></Label>
         <Entry Placeholder="Name" x:Name="NameEntry" />
         <Entry Placeholder="Email" x:Name="EmailEntry" />
         <Entry Placeholder="Skill" x:Name="SkillEntry" />

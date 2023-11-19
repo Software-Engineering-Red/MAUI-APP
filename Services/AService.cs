@@ -11,7 +11,7 @@ namespace UndacApp.Services
         public AService()
         {
             _database = new SQLiteAsyncConnection(DatabaseSettings.DBPath, DatabaseSettings.Flags);
-            _database.CreateTableAsync<T>().Wait();
+            _database.CreateTableAsync<T>();
         }
 
         public async Task<T> GetOne(int id)

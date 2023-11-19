@@ -70,15 +70,18 @@
 	  <MauiXaml Update="Views\BuildingTypePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	   <MauiXaml Update="Views\LocalMediaPage.xaml">
+     <Generator>MSBuild:Compile</Generator>
+     </MauiXaml>
 	  <MauiXaml Update="Views\OperationalTeamPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\OperationResourceRequestStatusPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\OperationResourceRequestPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
+    <MauiXaml Update="Views\OperationResourceRequestStatusPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\OperationResourceRequestPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
 	  <MauiXaml Update="Views\ResorceType.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -87,15 +90,15 @@
 		</MauiXaml>
 	  <MauiXaml Update="Views\PositionStatusPage.xaml">
 	  </MauiXaml>
-        <MauiXaml Update="Views\ContinentPage.xaml">
+     <MauiXaml Update="Views\ContinentPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-        <MauiXaml Update="Views\PrivilegeRequestsPage.xaml">
-          <Generator>MSBuild:Compile</Generator>
-        </MauiXaml>
-        <MauiXaml Update="Views\RequestSpecialists.xaml">
-          <Generator>MSBuild:Compile</Generator>
-        </MauiXaml>
+    <MauiXaml Update="Views\PrivilegeRequestsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\RequestSpecialists.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
 		<MauiXaml Update="Views\RolesPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>

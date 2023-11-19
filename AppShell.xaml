@@ -64,7 +64,11 @@
         <ShellContent
             Title="Role"
             ContentTemplate="{DataTemplate views:RolesPage}" />
-    
+
+        <ShellContent
+            Title="Weather Anomaly Notifications"
+            ContentTemplate="{DataTemplate views:WeatherAnomalyNotificationsPage}" />
+
         <ShellContent
                 Title="Organisations"
                 ContentTemplate="{DataTemplate views:OrganisationPage}" />

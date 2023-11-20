@@ -47,7 +47,7 @@ public partial class OperationalTeamStatusPage : ContentPage
     /// <returns>Task promise</returns>
     private async Task LoadStates()
     {
-        states = new ObservableCollection<OperationalTeamStatus>(await statusService.GetStatesListAsync());
+        states = new ObservableCollection<OperationalTeamStatus>(await statusService.GetAll());
         list_view_states.ItemsSource = states;
     }
 
@@ -88,7 +88,7 @@ public partial class OperationalTeamStatusPage : ContentPage
             return;
         }
 
-        await statusService.DeleteStatusAsync(selectedStatus);
+        await statusService.Remove(selectedStatus);
         states.Remove(selectedStatus);
 
         reset_SelectedStatus_and_Text();
@@ -114,7 +114,7 @@ public partial class OperationalTeamStatusPage : ContentPage
     private void updateStatus()
     {
         selectedStatus.Name = text_editor_status.Text;
-        statusService.UpdateStatusAsync(selectedStatus);
+        statusService.Update(selectedStatus);
         var status = states.FirstOrDefault(x => x.ID == selectedStatus.ID);
         status.Name = text_editor_status.Text;
     }
@@ -125,7 +125,7 @@ public partial class OperationalTeamStatusPage : ContentPage
     private void createNewStatus()
     {
         var status = new OperationalTeamStatus() { Name = text_editor_status.Text };
-        statusService.AddStatus(status);
+        statusService.Add(status);
         states.Add(status);
     }
 

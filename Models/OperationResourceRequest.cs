@@ -10,6 +10,7 @@ namespace UndacApp.Models
 	public class OperationResourceRequest : AModel
 	{
 		private int operational_team_Id;
+		[ForeignKey(typeof(OperationalTeam))]
 		public int OperationalTeamId
 		{
 			get => operational_team_Id;
@@ -64,8 +65,5 @@ namespace UndacApp.Models
 			get => confirmedDate;
 			set => SetField(ref confirmedDate, value);
 		}
-
-
-
 	}
 }

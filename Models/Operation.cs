@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SQLite;
+using SQLiteNetExtensions.Attributes;
 
 namespace UndacApp.Models
 {
@@ -45,5 +44,8 @@ namespace UndacApp.Models
 			get => _created_Date;
 			set => SetField(ref _created_Date, value);
 		}
+
+		[OneToMany]
+		public List<OperationalTeam> OperationalTeams { get; set; }
 	}
 }

@@ -65,6 +65,9 @@
 	  <MauiXaml Update="Views\AcceptSpecialistRequests.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\FindOperationResourceRequestPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\LogisticOperationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -113,6 +116,9 @@
 		</MauiXaml>
 		<MauiXaml Update="Views\RotaPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\SingleResourceRequestPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\SkillPage.xaml">
 			<Generator>MSBuild:Compile</Generator>

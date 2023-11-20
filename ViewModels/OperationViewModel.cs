@@ -1,7 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Windows.Input;
-using System.Xml.Linq;
 using UndacApp.Models;
 using UndacApp.Services;
 
@@ -35,6 +32,7 @@ namespace UndacApp.ViewModels
 
 					if (selectedOperation != null)
 					{
+						Name = selectedOperation.Name;
 						Type = selectedOperation.Type;
 						Purpose = selectedOperation.Purpose;
 						Location = selectedOperation.Location;

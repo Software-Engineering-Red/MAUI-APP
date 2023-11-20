@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UndacApp.Views.FindOperationResourceRequestPage"
+             Title="FindOperationResourceRequestPage">
+    <VerticalStackLayout>
+
+        <Label Text="Filter By the Following: " FontAttributes="Bold" />
+        <Entry Placeholder="Filter Name" Text="{Binding FilterName}"/>
+        <Entry Placeholder="Filter Type" Text="{Binding FilterType}"/>
+        <Entry Placeholder="Filter Purpose" Text="{Binding FilterPurpose}"/>
+        <Entry Placeholder="Filter Location" Text="{Binding FilterLocation}"/>
+        <Entry Placeholder="Filter Created By" Text="{Binding FilterCreatedBy}"/>
+
+        <ListView x:Name="operationListView"
+                  ItemsSource="{Binding OperationList}"
+                  Margin="20"
+                  SelectionMode="Single"
+                  SelectedItem="{Binding SelectedOperation, Mode=TwoWay}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="10">
+                            <StackLayout.Triggers>
+                                <DataTrigger TargetType="StackLayout" Binding="{Binding IsHighlighted}" Value="True">
+                                    <Setter Property="BackgroundColor" Value="Yellow" />
+                                </DataTrigger>
+                            </StackLayout.Triggers>
+                            <Label Text="{Binding Operation.Name, StringFormat='Type: {0}'}" FontAttributes="Bold" />
+                            <Label Text="{Binding Operation.Type, StringFormat='Type: {0}'}" />
+                            <Label Text="{Binding Operation.Purpose, StringFormat='Purpose: {0}'}"/>
+                            <Label Text="{Binding Operation.Location, StringFormat='Location: {0}'}"/>
+                            <Label Text="{Binding Operation.CreatedBy, StringFormat='Created By: {0}'}"/>
+                            <Label Text="{Binding Operation.CreatedDate, StringFormat='Created Date: {0:yyyy-MM-dd}'}"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </VerticalStackLayout>
+</ContentPage>

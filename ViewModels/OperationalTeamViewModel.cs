@@ -188,7 +188,7 @@ namespace UndacApp.ViewModels
 
 		private async Task LoadStates()
 		{
-			ObservableCollection<OperationalTeamStatus> stateData = new ObservableCollection<OperationalTeamStatus>(await operationalTeamStatusService.GetStatesListAsync());
+			ObservableCollection<OperationalTeamStatus> stateData = new ObservableCollection<OperationalTeamStatus>(await operationalTeamStatusService.GetAll());
 			States = stateData;
 			OnPropertyChanged(nameof(States));
 		}

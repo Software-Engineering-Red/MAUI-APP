@@ -111,7 +111,7 @@
             Title="Local Media's"
              ContentTemplate="{DataTemplate views:LocalMediaPage}" />
 
-<ShellContent
+        <ShellContent
            Title="Operational-Team"
            ContentTemplate="{DataTemplate views:OperationalTeamPage}" />
         <ShellContent
@@ -120,6 +120,9 @@
         <ShellContent
             Title="Operation-Resource-Request"
             ContentTemplate="{DataTemplate views:OperationRessourceRequestPage}" />
+        <ShellContent
+            Title="Operations"
+            ContentTemplate="{DataTemplate views:OperationPage}" />
 
     </TabBar>
 

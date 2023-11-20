@@ -4,21 +4,32 @@
              x:Class="UndacApp.Views.OperationPage"
              Title="OperationPage">
     <VerticalStackLayout>
+        <Entry Placeholder="Name" Text="{Binding Name}"/>
+        <Entry Placeholder="Type" Text="{Binding Type}"/>
+        <Entry Placeholder="Purpose" Text="{Binding Purpose}"/>
+        <Entry Placeholder="Location" Text="{Binding Location}"/>
+        <Entry Placeholder="Created By" Text="{Binding CreatedBy}"/>
+
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
+            <Button Text="Save" Command="{Binding SaveCommand}"/>
+            <Button Grid.Column="1" Text="Delete" Command="{Binding DeleteCommand}"/>
+        </Grid>
+
         <ListView x:Name="operationListView"
-          ItemsSource="{Binding OperationList}"
-          Margin="20"
-          SelectionMode="Single"
-          SelectedItem="{Binding SelectedOperation, Mode=TwoWay}">
+                  ItemsSource="{Binding OperationList}"
+                  Margin="20"
+                  SelectionMode="Single"
+                  SelectedItem="{Binding SelectedOperation, Mode=TwoWay}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Padding="10">
-                            <Label Text="{Binding Name, StringFormat='Operation Name: {0}'}" FontAttributes="Bold"/>
-                            <Label Text="{Binding Type, StringFormat='Operational Team ID: {0}'}"/>
-                            <Label Text="{Binding RequestedBy, StringFormat='Requested By: {0}'}"/>
-                            <Label Text="{Binding RequestDate, StringFormat='Request Date: {0:yyyy-MM-dd}'}"/>
-                            <Label Text="{Binding ResourceId, StringFormat='Resource ID: {0}'}"/>
-                            <Label Text="{Binding Status, StringFormat='Status: {0}'}"/>
+                            <Label Text="{Binding Name, StringFormat='Type: {0}'}" FontAttributes="Bold"/>
+                            <Label Text="{Binding Type, StringFormat='Type: {0}'}" />
+                            <Label Text="{Binding Purpose, StringFormat='Purpose: {0}'}"/>
+                            <Label Text="{Binding Location, StringFormat='Location: {0}'}"/>
+                            <Label Text="{Binding CreatedBy, StringFormat='Created By: {0}'}"/>
+                            <Label Text="{Binding CreatedDate, StringFormat='Created Date: {0:yyyy-MM-dd}'}"/>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

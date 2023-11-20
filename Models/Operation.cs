@@ -8,13 +8,7 @@ namespace UndacApp.Models
 {
 	public class Operation : AModel
 	{
-		public Operation()
-		{
-			_createdBy = string.Empty;
-			_type = string.Empty;
-			_purpose = string.Empty;
-			_location = string.Empty;
-		}
+
 
 		private string _type;
 		public string Type

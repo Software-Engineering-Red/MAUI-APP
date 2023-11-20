@@ -33,10 +33,10 @@ public static class MauiProgram
         builder.Services.AddSingleton<IResourceTypeService, ResourceTypeService>();
         builder.Services.AddSingleton<IResourceService, ResourceService>();
         builder.Services.AddSingleton<IVolunteerService, VolunteerService>();
-
+		builder.Services.AddSingleton<IOperationService, OperationService>();
 
 #if DEBUG
-        builder.Logging.AddDebug();
+		builder.Logging.AddDebug();
 #endif
 
 

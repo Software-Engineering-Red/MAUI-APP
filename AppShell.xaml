@@ -110,6 +110,13 @@
             Title="Local Media's"
              ContentTemplate="{DataTemplate views:LocalMediaPage}" />
         <ShellContent
+            Title="Logistic Operation"
+             ContentTemplate="{DataTemplate views:LogisticOperationPage}" />
+
+        <ShellContent
+           Title="Operational-Team"
+           ContentTemplate="{DataTemplate views:OperationalTeamPage}" />
+        <ShellContent
             Title="Operation-Resource-Request-Status"
             ContentTemplate="{DataTemplate views:OperationResourceRequestStatusPage}" />
         <ShellContent

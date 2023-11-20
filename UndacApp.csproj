@@ -65,6 +65,9 @@
 	  <MauiXaml Update="Views\AcceptSpecialistRequests.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\LogisticOperationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
       <MauiXaml Update="Views\AlertTypesPage.xaml">
 	  </MauiXaml>
 	  <MauiXaml Update="Views\BuildingTypePage.xaml">
@@ -129,6 +132,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\LogisticOperationPage.xaml.cs">
+	    <DependentUpon>LogisticOperationPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\AlertTypePage.xaml.cs">
 	    <DependentUpon>AlertTypePage.xaml</DependentUpon>
     </Compile>

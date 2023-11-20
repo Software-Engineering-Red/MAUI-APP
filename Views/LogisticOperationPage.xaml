@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sys="clr-namespace:System;assembly=netstandard"
+             x:Class="UndacApp.Views.LogisticOperationPage"
+             Title="AddOperations">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="30" Padding="30,20" VerticalOptions="Center">
+            <!-- Title -->
+            
+            <Label Text="Operation List" FontSize="26" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
+
+            <StackLayout Orientation="Horizontal">
+                <Entry x:Name="searchEntry" Placeholder="Search" Text="{Binding SearchText}" HorizontalOptions="FillAndExpand" TextChanged="OnEntryTextChanged" />
+                <Picker x:Name="filterPicker" TextColor="White">
+                    <Picker.Title>Filter Operation Status</Picker.Title>
+                    
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Name</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                    <Picker.SelectedItem>Name</Picker.SelectedItem>
+                </Picker>
+            </StackLayout>
+            <Button Text="Filter" Clicked="Button_Clicked" CornerRadius="8" />
+            <ListView x:Name="ltv_operations" Background="white" ItemSelected="ltv_operations_ItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0" Text="{Binding Name, StringFormat='OP Name: {0}'}" TextColor="Black"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Label Text="Create Logistic Operation" FontSize="26" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
+
+            <Frame CornerRadius="10" Padding="20">
+                <VerticalStackLayout Spacing="5">
+                    <Label Text="Operatio Name:" FontSize="20" FontAttributes="Bold"/>
+                    <Entry Placeholder="Name:" x:Name="OperationName" />
+
+                    <Grid ColumnDefinitions="*,*,*" ColumnSpacing="3">
+                        <Button Text="Add Record" Grid.Column="0" Clicked="OnAddRecordClicked" BackgroundColor="#4CAF50" CornerRadius="8" />
+                        <Button Text="Update Record" Grid.Column="1" Clicked="OnUpdateClicked" BackgroundColor="blue" CornerRadius="8" />
+                        <Button Text="Remove Record" Grid.Column="2" Clicked="OnRemoveClicked" BackgroundColor="MediumVioletRed" CornerRadius="8" />
+                    </Grid>
+                </VerticalStackLayout>
+
+            </Frame>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

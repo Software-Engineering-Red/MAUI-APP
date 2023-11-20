@@ -3,56 +3,43 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UndacApp.Views.OperationalTeamPage"
              Title="OperationalTeamPage">
-    <VerticalStackLayout Spacing="10" Margin="5">
-        <Picker x:Name="picker_teams"
-            Title = "Select a team" 
-            ItemDisplayBinding="{Binding Name}"
-            SelectedIndexChanged="teamSelected"/>
+    <VerticalStackLayout>
+        <Entry Placeholder="Name" Text="{Binding Name}"/>
+        <Entry Placeholder="Created By" Text="{Binding CreatedBy}"/>
 
-        <Editor x:Name="txe_operational_team_authorised"
-            Placeholder="Enter username to authorise creation"
-            HeightRequest="10" />
+        <Label Text="Select Operation"></Label>
+        <Picker ItemsSource="{Binding Operations}"
+                ItemDisplayBinding="{Binding Name}"
+                SelectedItem="{Binding SelectedOperation, Mode=TwoWay}"/>
 
-        <Picker x:Name="picker_team_statuses"
-                Title = "Select a status" 
-                ItemDisplayBinding="{Binding Name}"/>
+        <Label Text="Select Status"></Label>
+        <Picker ItemsSource="{Binding States}"
+                ItemDisplayBinding="{Binding Name}"
+                SelectedItem="{Binding SelectedStatus, Mode=TwoWay}"/>
 
         <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
             <Button Text="Save"
-            Clicked="SaveButton_Clicked" />
+                Command="{Binding SaveCommand}"/>
 
             <Button Grid.Column="1"
                 Text="Delete"
-            Clicked="DeleteButton_Clicked" />
+                Command="{Binding DeleteCommand}"/>
         </Grid>
-        <ListView x:Name="ltv_teamMembers" Background="White">
+
+        <ListView x:Name="operationalTeamListView"
+                  ItemsSource="{Binding OperationalTeamList}"
+                  Margin="20"
+                  SelectionMode="Single"
+                  SelectedItem="{Binding SelectedOperationalTeam, Mode=TwoWay}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Grid Padding="10">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Label Grid.Row="0" Text="{Binding Name}" TextColor="Black" />
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <ListView x:Name="ltv_operationalTeam" Background="White" ItemSelected="ltv_operationalTeam_ItemSelected">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Grid Padding="10">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Label Grid.Row="0" Text="{Binding Name}" TextColor="Black" />
-                            <Label Grid.Row="1" Text="{Binding CreatedBy}" TextColor="Black" />
-                            <Label Grid.Row="2" Text="{Binding TeamStatus}" TextColor="Black" />
-                        </Grid>
+                        <StackLayout Padding="10">
+                            <Label Text="{Binding Name, StringFormat='Name: {0}'}" FontAttributes="Bold"/>
+                            <Label Text="{Binding CreatedBy, StringFormat='Created By: {0}'}"/>
+                            <Label Text="{Binding OperationId, StringFormat='Operation ID: {0}'}"/>
+                            <Label Text="{Binding TeamStatus, StringFormat='Team Status: {0}'}"/>
+                        </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>

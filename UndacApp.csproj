@@ -73,6 +73,9 @@
 	  <MauiXaml Update="Views\BuildingTypePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\MethodologicalDocumentationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	   <MauiXaml Update="Views\LocalMediaPage.xaml">
      <Generator>MSBuild:Compile</Generator>
      </MauiXaml>
@@ -122,6 +125,9 @@
 	  </MauiXaml>		
 	  <MauiXaml Update="Views\TeamPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>		
+	  <MauiXaml Update="Views\WeatherAnomalyNotificationsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\WelcomePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
@@ -140,6 +146,9 @@
     </Compile>
 		<Compile Update="Views\BuildingTypePage.xaml.cs">
 			<DependentUpon>BuildingTypePage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\MethodologicalDocumentationPage.xaml.cs">
+		  <DependentUpon>MethodologicalDocumentationPage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Views\ContinentPage.xaml.cs">
 			<DependentUpon>ContinentPage.xaml</DependentUpon>

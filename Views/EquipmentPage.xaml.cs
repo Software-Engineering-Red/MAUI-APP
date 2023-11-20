@@ -39,7 +39,7 @@ public partial class EquipmentPage : ContentPage
     <returns>Task promise, informing about the status of its' completion.</returns> */
     private async Task LoadEquipment()
     {
-        equipments = new ObservableCollection<Equipment>(await equipmentService.GetEquipmentList());
+        equipments = new ObservableCollection<Equipment>(await equipmentService.GetAll());
         ltv_equipment.ItemsSource = equipments;
     }
     /*! <summary>
@@ -54,13 +54,13 @@ public partial class EquipmentPage : ContentPage
         if (selectedEquipment == null)
         {
             var role = new Equipment() { Name = txe_equipment.Text };
-            equipmentService.AddEquipment(role);
+            equipmentService.Add(role);
             equipments.Add(role);
         }
         else
         {
             selectedEquipment.Name = txe_equipment.Text;
-            equipmentService.UpdateEquipment(selectedEquipment);
+            equipmentService.Update(selectedEquipment);
             var equipment = equipments.FirstOrDefault(x => x.ID == selectedEquipment.ID);
             equipment.Name = txe_equipment.Text;
         }
@@ -84,7 +84,7 @@ public partial class EquipmentPage : ContentPage
             return;
         }
 
-        await equipmentService.DeleteEquipment(selectedEquipment);
+        await equipmentService.Remove(selectedEquipment);
         equipments.Remove(selectedEquipment);
 
         ltv_equipment.SelectedItem = null;

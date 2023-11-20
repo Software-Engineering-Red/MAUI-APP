@@ -26,7 +26,7 @@ namespace UndacApp.Views
 
         private async Task LoadSkills()
         {
-            skills = new ObservableCollection<Skill>(await skillService.GetSkillList());
+            skills = new ObservableCollection<Skill>(await skillService.GetAll());
             ltv_skills.ItemsSource = skills;
         }
 
@@ -37,13 +37,13 @@ namespace UndacApp.Views
             if (selectedSkill == null)
             {
                 var skill = new Skill() { Name = txe_skill.Text };
-                skillService.AddSkill(skill);
+                skillService.Add(skill);
                 skills.Add(skill);
             }
             else
             {
                 selectedSkill.Name = txe_skill.Text;
-                skillService.UpdateSkill(selectedSkill);
+                skillService.Remove(selectedSkill);
                 var skill = skills.FirstOrDefault(x => x.ID == selectedSkill.ID);
                 skill.Name = txe_skill.Text;
             }
@@ -62,7 +62,7 @@ namespace UndacApp.Views
                 return;
             }
 
-            await skillService.DeleteSkill(selectedSkill);
+            await skillService.Remove(selectedSkill);
             skills.Remove(selectedSkill);
 
             ltv_skills.SelectedItem = null;

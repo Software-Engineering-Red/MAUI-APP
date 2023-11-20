@@ -1,56 +1,42 @@
-﻿using SQLite;
-using System.ComponentModel;
-
-namespace UndacApp.Models
+﻿namespace UndacApp.Models
 {
 
-    public class AlertType : INotifyPropertyChanged
+    public class AlertType : AModel
     {
-        [PrimaryKey, AutoIncrement]
-        public int ID { get; set; }
-
-        private string _name;
-        public string Name
-        {
-            get => _name;
-            set => Utils.SetProperty(ref _name, value, this);
-        }
         private string _status;
         public string Status
         {
             get => _status;
-            set => Utils.SetProperty(ref _status, value, this);
+            set => SetField(ref _status, value);
         }
 
         private DateTime _dateCreated;
         public DateTime DateCreated
         {
             get => _dateCreated;
-            set => Utils.SetProperty(ref _dateCreated, value, this);    
+            set => SetField(ref _dateCreated, value);
         }
 
         private string _detail;
         public string Detail
         {
             get => _detail;
-            set => Utils.SetProperty(ref _detail, value, this);
+            set => SetField(ref _detail, value);
         }
 
         private int _type;
         public int Type
         {
             get => _type;
-            set => Utils.SetProperty(ref _type, value, this);
+            set => SetField(ref _type, value);
         }
 
         private string _raisedBy;
         public string RaisedBy
         {
             get => _raisedBy;
-            set => Utils.SetProperty(ref _raisedBy, value, this);
+            set => SetField(ref _raisedBy, value);
         }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
 
     }
 }

@@ -1,7 +1,4 @@
-﻿using SQLite;
-using System.ComponentModel;
-
-namespace UndacApp.Models
+﻿namespace UndacApp.Models
 {
     public class TeamMember : AModel {
 

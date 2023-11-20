@@ -45,7 +45,7 @@ namespace UndacApp.Views
         </summary> */
         private async Task LoadOrderStatus()
         {
-            orderStatuses = new ObservableCollection<OrderStatus>(await orderStatusService.GetOrderStatusList());
+            orderStatuses = new ObservableCollection<OrderStatus>(await orderStatusService.GetAll());
             ltv_order_statuses.ItemsSource = orderStatuses;
         }
 
@@ -66,13 +66,13 @@ namespace UndacApp.Views
                 {
                     Name = newStatusName
                 };
-                orderStatusService.AddStatus(orderStatus);
+                orderStatusService.Add(orderStatus);
                 orderStatuses.Add(orderStatus);
             }
             else
             {
                 selectedOrderStatus.Name = newStatusName;
-                orderStatusService.UpdateStatus(selectedOrderStatus);
+                orderStatusService.Update(selectedOrderStatus);
                 var updatedOrderStatus = orderStatuses.FirstOrDefault(x => x.ID == selectedOrderStatus.ID);
                 if (updatedOrderStatus != null)
                     updatedOrderStatus.Name = newStatusName;
@@ -95,7 +95,7 @@ namespace UndacApp.Views
                 return;
             }
 
-            await orderStatusService.DeleteStatus(selectedOrderStatus);
+            await orderStatusService.Remove(selectedOrderStatus);
             orderStatuses.Remove(selectedOrderStatus);
 
             ltv_order_statuses.SelectedItem = null;

@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-
 namespace UndacApp.Models
 {
 	public class OperationalTeam : AModel

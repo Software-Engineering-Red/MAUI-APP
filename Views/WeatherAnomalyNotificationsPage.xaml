@@ -1,0 +1,52 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UndacApp.Views.WeatherAnomalyNotificationsPage"
+             Title="Weather Anomaly Notifications"
+             BackgroundColor="LightSkyBlue">
+
+    <ScrollView>
+        <StackLayout Spacing="15" Margin="20">
+            <Editor x:Name="txe_weatherAnomalyNotification"
+                    Placeholder="Describe the weather anomaly..."
+                    HeightRequest="120" 
+                    BackgroundColor="AliceBlue" />
+
+            <Button Text="Report Notification"
+                    BackgroundColor="SteelBlue"
+                    TextColor="White"
+                    Clicked="ReportNotificationButton_Clicked" />
+
+            <Label Text="Weather Notifications" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
+
+            <CollectionView x:Name="cv_currentNotifications" SelectionMode="Single" 
+                            SelectionChanged="cv_currentNotifications_SelectionChanged">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BorderColor="SteelBlue" Padding="10" Margin="5">
+                            <StackLayout>
+                                <Label Text="{Binding Message}" FontSize="16" />
+                                <Label Text="{Binding CreatedAt, StringFormat='Reported on {0:MM/dd/yyyy}'}" FontSize="14" TextColor="Gray" />
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button x:Name="btnClear"
+                    Text="Mark as Cleared"
+                    BackgroundColor="DarkCyan"
+                    TextColor="White"
+                    Clicked="ClearButton_Clicked"
+                    IsVisible="False" />
+
+            <Label Text="Cleared Notifications" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
+            <ListView x:Name="ltv_clearedNotifications" BackgroundColor="AliceBlue">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Message}" Detail="{Binding CreatedAt, StringFormat='Cleared on {0:MM/dd/yyyy}'}" TextColor="DarkSlateGray"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

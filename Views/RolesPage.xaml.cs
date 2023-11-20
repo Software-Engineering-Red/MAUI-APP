@@ -1,9 +1,6 @@
 using UndacApp.Models;
 using UndacApp.Services;
-using System;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
 
 /*! The RolesPage class allows for the basic functions 
  *  implemented in the RoleService class to be used within
@@ -32,7 +29,7 @@ public partial class RolesPage : ContentPage
     //! Task to load roles into a variable
     private async Task LoadRoles()
     {
-        roles = new ObservableCollection<Role>(await roleService.GetRoleList());
+        roles = new ObservableCollection<Role>(await roleService.GetAll());
         ltv_roles.ItemsSource = roles;
     }
 
@@ -48,13 +45,13 @@ public partial class RolesPage : ContentPage
         if (selectedRole == null)
         {
             var role = new Role() { Name = txe_role.Text };
-            roleService.AddRole(role);
+            roleService.Add(role);
             roles.Add(role);
         }
         else
         {
             selectedRole.Name = txe_role.Text;
-            roleService.UpdateRole(selectedRole);
+            roleService.Update(selectedRole);
             var role = roles.FirstOrDefault(x => x.ID == selectedRole.ID);
             role.Name = txe_role.Text;
         }
@@ -78,7 +75,7 @@ public partial class RolesPage : ContentPage
             return;
         }
 
-        await roleService.DeleteRole(selectedRole);
+        await roleService.Remove(selectedRole);
         roles.Remove(selectedRole);
 
         ltv_roles.SelectedItem = null;

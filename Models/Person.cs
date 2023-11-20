@@ -1,6 +1,4 @@
-﻿
-
-namespace UndacApp.Models
+﻿namespace UndacApp.Models
 {
 	public class Person : AModel
 	{

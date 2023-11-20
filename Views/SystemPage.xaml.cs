@@ -52,7 +52,7 @@ public partial class SystemPage : ContentPage
        */
     private async Task LoadSystemType()
     {
-        systemTypes = new ObservableCollection<SystemType>(await systemTypeService.GetSystemTypeList());
+        systemTypes = new ObservableCollection<SystemType>(await systemTypeService.GetAll());
         ltv_systemType.ItemsSource = systemTypes;
     }
 
@@ -75,7 +75,7 @@ public partial class SystemPage : ContentPage
         if (selectedSystem == null)
         {            
             var systemType = new SystemType() { Name = txe_systemType.Text };
-            systemTypeService.AddSystemType(systemType);
+            systemTypeService.Add(systemType);
             systemTypes.Add(systemType);
         }
         /*! <summary>
@@ -85,8 +85,8 @@ public partial class SystemPage : ContentPage
         else
         {
             selectedSystem.Name = txe_systemType.Text;
-            systemTypeService.UpdateSystemType(selectedSystem);
-            var systemType = systemTypes.FirstOrDefault(x => x.type == selectedSystem.type);
+            systemTypeService.Update(selectedSystem);
+            var systemType = systemTypes.FirstOrDefault(x => x.ID == selectedSystem.ID);
             systemType.Name = txe_systemType.Text;
         }
         /*! <summary>
@@ -117,7 +117,7 @@ public partial class SystemPage : ContentPage
              * Delete the selected SystemType from the service and ObservableCollection.
              * </summary>
              */
-        await systemTypeService.DeleteSystemType(selectedSystem);
+        await systemTypeService.Remove(selectedSystem);
         systemTypes.Remove(selectedSystem);
 
 

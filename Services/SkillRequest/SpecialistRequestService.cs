@@ -65,7 +65,7 @@ namespace UndacApp.Services
 		{
 			await SetUpDb();
 			SkillRequest skillRequest = await GetOne(id);
-			skillRequest.OrganisationId = organisation.id;
+			skillRequest.OrganisationId = organisation.ID;
 			skillRequest.ConfirmedDate = DateTime.Today;
 			skillRequest.Status = "Approved";
 			return await Update(skillRequest);

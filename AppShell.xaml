@@ -8,10 +8,15 @@
     Shell.FlyoutBehavior="Disabled">
 
     <TabBar>
-        
+
         <ShellContent 
             Title="Welcome"
             ContentTemplate="{DataTemplate views:WelcomePage}"/>
+        <ShellContent
+Title="User Management"
+ContentTemplate="{DataTemplate views:UsersPage}"
+Icon="{OnPlatform 'icon_about.png', iOS='icon_about_ios.png', MacCatalyst='icon_about_ios.png'}" />
+
 
         <ShellContent
         Title="Volunteer Requests"
@@ -56,15 +61,19 @@
         <ShellContent
             Title="Continents"
             ContentTemplate="{DataTemplate views:ContinentPage}" />
-        
+
         <ShellContent
             Title="Building Types"
             ContentTemplate="{DataTemplate views:BuildingTypePage}"/>
-        
+
         <ShellContent
             Title="Role"
             ContentTemplate="{DataTemplate views:RolesPage}" />
-    
+
+        <ShellContent
+            Title="Weather Anomaly Notifications"
+            ContentTemplate="{DataTemplate views:WeatherAnomalyNotificationsPage}" />
+      
         <ShellContent
                 Title="Organisations"
                 ContentTemplate="{DataTemplate views:OrganisationPage}" />
@@ -76,14 +85,14 @@
         <ShellContent
             Title="Operational Team"
             ContentTemplate="{DataTemplate views:OperationalTeamPage}" />
-        
+
         <ShellContent
             Title="Operational Team Status"
             ContentTemplate="{DataTemplate views:OperationalTeamStatusPage}" />
 
         <ShellContent
             Title="PositionStatusPage"
-            ContentTemplate="{DataTemplate views:position_status}" />
+            ContentTemplate="{DataTemplate views:PositionStatusPage}" />
         <ShellContent
             Title="Rooms Types"
             ContentTemplate="{DataTemplate views:RoomTypePage}" />
@@ -125,6 +134,10 @@
         <ShellContent
             Title="Operations"
             ContentTemplate="{DataTemplate views:OperationPage}" />
+
+        <ShellContent
+            Title="Methodological Documentation"
+            ContentTemplate="{DataTemplate views:MethodologicalDocumentationPage}" />
 
     </TabBar>
 

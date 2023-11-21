@@ -5,9 +5,14 @@
              Title="Room type page"
              xmlns:local="clr-namespace:UndacApp.Models">
     <VerticalStackLayout Spacing="10" Margin="5">
-        <Editor x:Name="txe_roomtype"
-                Placeholder="Describe room use"
-                HeightRequest="100" />
+        
+        <Entry x:Name="txe_roomtype_name" Placeholder="Name" Text="{Binding Name}" />
+        <Entry x:Name="txe_roomtype_buildingId" Placeholder="Building Id" Keyboard="Numeric" Text="{Binding BuildingId}" />
+        <Entry x:Name="txe_roomtype_number" Placeholder="Number" Text="{Binding Number}" />
+        <Entry x:Name="txe_roomtype_typeId" Placeholder="Type" Keyboard="Numeric" Text="{Binding TypeId}" />
+        <Entry x:Name="txe_roomtype_floor" Placeholder="Floor" Keyboard="Numeric" Text="{Binding Floor}" />
+        <Entry x:Name="txe_roomtype_capacity" Placeholder="Capacity" Keyboard="Numeric" Text="{Binding Capacity}" />
+       
 
         <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
             <Button Text="Save"

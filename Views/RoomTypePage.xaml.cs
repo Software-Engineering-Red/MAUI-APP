@@ -8,8 +8,8 @@ namespace UndacApp.Views;
 
 public partial class RoomTypePage : ContentPage
 {
-	RoomType selectedRoomType = null;
-	IRoomTypeService roomTypeService;
+    RoomType selectedRoomType = null;
+    IRoomTypeService roomTypeService;
     ObservableCollection<RoomType> roomTypes = new ObservableCollection<RoomType>();
     public RoomTypePage()
 	{
@@ -21,7 +21,13 @@ public partial class RoomTypePage : ContentPage
 
         // Load room types and initialize the text input 
         Task.Run(async () => await LoadRoomTypes());
-        txe_roomtype.Text = "";
+        txe_roomtype_name.Text = "";
+        txe_roomtype_buildingId.Text = "";
+        txe_roomtype_capacity.Text = "";
+        txe_roomtype_floor.Text = "";
+        txe_roomtype_number.Text = "";
+        txe_roomtype_typeId.Text = "";
+
     }
 
     // Load room types from the database
@@ -33,30 +39,30 @@ public partial class RoomTypePage : ContentPage
     // Save button click event handler 
     private void SaveButton_Clicked(object sender, EventArgs e)
     {
-        if (String.IsNullOrEmpty(txe_roomtype.Text)) return;
+        if (String.IsNullOrEmpty(txe_roomtype_name.Text)) return;
 
         if (selectedRoomType == null)
         {
             // Add a new room type to the database/collection
-            var newRoom = new RoomType() { Name = txe_roomtype.Text };
+            var newRoom = new RoomType() { Name = txe_roomtype_name.Text };
             roomTypeService.Add(newRoom);
             roomTypes.Add(newRoom);
         }
         else
         {
             // Update existing room type in the database 
-            selectedRoomType.Name = txe_roomtype.Text;
+            selectedRoomType.Name = txe_roomtype_name.Text;
             roomTypeService.Update(selectedRoomType);
 
             // Update the room type in the collection
             var room = roomTypes.FirstOrDefault(x => x.ID == selectedRoomType.ID);
-            room.Name = txe_roomtype.Text;
+            room.Name = txe_roomtype_name.Text;
         }
 
         // Reset selectedRoomType and input field
         selectedRoomType = null;
         ltv_roomtype.SelectedItem = null;
-        txe_roomtype.Text = "";
+        txe_roomtype_name.Text = "";
     }
 
     // Delete button click event handler
@@ -73,7 +79,7 @@ public partial class RoomTypePage : ContentPage
 
         // Reset selectedRoomType and input field
         ltv_roomtype.SelectedItem = null;
-        txe_roomtype.Text = "";
+        txe_roomtype_name.Text = "";
     }
 
     // Handle selection of an room type item
@@ -82,7 +88,7 @@ public partial class RoomTypePage : ContentPage
         selectedRoomType = e.SelectedItem as RoomType;
         if (selectedRoomType == null) return;
         // Populate the input field with the selected room types name
-        txe_roomtype.Text = selectedRoomType.Name;
+        txe_roomtype_name.Text = selectedRoomType.Name;
     }
 
 

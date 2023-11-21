@@ -8,6 +8,7 @@ namespace UndacApp.Models
 {
     public class ErrorResourcePair
     {
+        public int Id { get; set; }
         public string Error { get; set; }
         public string Resource { get; set; }
 

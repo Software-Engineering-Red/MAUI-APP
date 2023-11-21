@@ -31,6 +31,7 @@ public partial class TeamMemberPage : ContentPage
         InitializeComponent();
         BindingContext = new TeamMember();
         Task.Run(LoadTeamMembers);
+        this.Appearing += OnPageAppearing;
     }
 
     /*! <summary>
@@ -41,6 +42,11 @@ public partial class TeamMemberPage : ContentPage
     {
         teamMembers = new ObservableCollection<TeamMember>(await teamMemberService.GetAll());
         ltv_teamMembers.ItemsSource = teamMembers;
+    }
+
+    private async void OnPageAppearing(object sender, EventArgs e)
+    {
+        await LoadTeamMembers();
     }
 
     /*! <summary>
@@ -111,7 +117,7 @@ public partial class TeamMemberPage : ContentPage
                     : selectedTeamMember.AccessPrivilegeLevel = selectedTeamMember.AccessPrivilegeLevel;
                     selectedTeamMember.SystemType = (string)pickerSystemType.SelectedItem;
 
-                if (selectedTeamMember.AccessPrivilegeLevel.Equals("disabled") || privilegeLevel <= int.Parse(selectedTeamMember.AccessPrivilegeLevel))
+                if (int.TryParse(selectedTeamMember.AccessPrivilegeLevel, out int result) && privilegeLevel <= result)
                 {
                     selectedTeamMember.Name = txe_teamMember.Text;
                     selectedTeamMember.AccessPrivilegeLevel = txe_privilegeLevel.Text;
@@ -121,8 +127,12 @@ public partial class TeamMemberPage : ContentPage
                     teamMember.AccessPrivilegeLevel = txe_privilegeLevel.Text;
 
                 }
-               
-                
+                else if (selectedTeamMember.AccessPrivilegeLevel.Equals("disabled"))
+                {
+                    PrivilegeRequest request = new PrivilegeRequest() { RequestType = "Privilege Reinstatement", MemberID = selectedTeamMember.ID, PrivilegeLevel = txe_privilegeLevel.Text, Approved = false };
+                    privilegeRequestService.Add(request);
+                    DisplayAlert("Failure", "Unable to reinstate privileges without Deputy Team Leader approval - Sending for approval", "OK");
+                }
                 else
                 {
                    

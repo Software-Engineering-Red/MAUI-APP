@@ -44,9 +44,9 @@ public partial class TeamMemberPage : ContentPage
         ltv_teamMembers.ItemsSource = teamMembers;
     }
 
-    private void OnPageAppearing(object sender, EventArgs e)
+    private async void OnPageAppearing(object sender, EventArgs e)
     {
-        LoadTeamMembers();
+        await LoadTeamMembers();
     }
 
     /*! <summary>

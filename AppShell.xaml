@@ -136,6 +136,10 @@ Icon="{OnPlatform 'icon_about.png', iOS='icon_about_ios.png', MacCatalyst='icon_
             Title="Methodological Documentation"
             ContentTemplate="{DataTemplate views:MethodologicalDocumentationPage}" />
 
+        <ShellContent
+            Title="Error Resource Reservation"
+            ContentTemplate="{DataTemplate views:ResourceRequestPage}"/>
+
     </TabBar>
 
 </Shell>

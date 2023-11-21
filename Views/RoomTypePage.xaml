@@ -4,6 +4,7 @@
              x:Class="UndacApp.Views.RoomTypePage"
              Title="Room type page"
              xmlns:local="clr-namespace:UndacApp.Models">
+    <ScrollView>
     <VerticalStackLayout Spacing="10" Margin="5">
         
         <Entry x:Name="txe_roomtype_name" Placeholder="Name" Text="{Binding Name}" />
@@ -27,10 +28,31 @@
         <ListView x:Name="ltv_roomtype" Background="white" ItemSelected="ltv_roomtypes_ItemSelected">
             <ListView.ItemTemplate  >
                 <DataTemplate>
-                    <TextCell TextColor="Black" Text="{Binding Name}"/>
+                    <ViewCell>
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0" FontAttributes="Bold" Text="{Binding Name, StringFormat='Name: {0}'}" TextColor="Black" VerticalOptions="Center"/>
+                                <Label Grid.Row="1" Text="{Binding BuildingId, StringFormat='Building Id: {0}'}" TextColor="Black" VerticalOptions="Center"/>
+                                <Label Grid.Row="2" Text="{Binding Number, StringFormat='Number: {0}'}" TextColor="Black" VerticalOptions="Center"/>
+                                <Label Grid.Row="3" Text="{Binding TypeId, StringFormat='Type: {0}'}" TextColor="Black" VerticalOptions="Center"/>
+                                <Label Grid.Row="4" Text="{Binding Floor, StringFormat='Floor: {0}'}" TextColor="Black" VerticalOptions="Center"/>
+                                <Label Grid.Row="5" Text="{Binding Capacity, StringFormat='Capacity: {0}'}" TextColor="Black" VerticalOptions="Center"/>
+                            </Grid>
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
     </VerticalStackLayout>
+        </ScrollView>
 </ContentPage>

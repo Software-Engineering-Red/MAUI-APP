@@ -19,8 +19,8 @@
             set => SetField(ref _buildingId, value);
         }
 
-        private string _number;
-        public string Number
+        private int _number;
+        public int Number
         {
             get => _number;
             set => SetField(ref _number, value);

@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	
 	<PropertyGroup>
-		<TargetFrameworks>net7.0-android;net7.0-ios;net7.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks>net7.0; net7.0-android;net7.0-ios;net7.0-maccatalyst</TargetFrameworks>
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
-		<OutputType>Exe</OutputType>
+		<OutputType Condition="'$(TargetFramework)' != 'net7.0'">Exe</OutputType>
 		<RootNamespace>UndacApp</RootNamespace>
 		<UseMaui>true</UseMaui>
 		<SingleProject>true</SingleProject>
@@ -15,7 +15,7 @@
 		<ApplicationTitle>UndacApp</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.UndacApp</ApplicationId>
+		<ApplicationId>com.companyname.mauiapp1</ApplicationId>
 		<ApplicationIdGuid>d4a6cad1-6f15-4f8e-a35b-6d1328733e54</ApplicationIdGuid>
 
 		<!-- Versions -->
@@ -51,8 +51,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
+		<PackageReference Include="SQLiteNetExtensions" Version="2.1.0" />
+		<PackageReference Include="System.Windows.Extensions" Version="7.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -62,25 +65,46 @@
 	  <MauiXaml Update="Views\AcceptSpecialistRequests.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\LogisticOperationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
       <MauiXaml Update="Views\AlertTypesPage.xaml">
 	  </MauiXaml>
 	  <MauiXaml Update="Views\BuildingTypePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\OperationRecord.xaml">
+	  <MauiXaml Update="Views\MethodologicalDocumentationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	   <MauiXaml Update="Views\LocalMediaPage.xaml">
+     <Generator>MSBuild:Compile</Generator>
+     </MauiXaml>
+	  <MauiXaml Update="Views\OperationalTeamPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+    <MauiXaml Update="Views\OperationResourceRequestStatusPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\OperationResourceRequestPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+	  <MauiXaml Update="Views\ResorceType.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+		<MauiXaml Update="Views\AddResourcePage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 	  <MauiXaml Update="Views\PositionStatusPage.xaml">
 	  </MauiXaml>
-        <MauiXaml Update="Views\ContinentPage.xaml">
+     <MauiXaml Update="Views\ContinentPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-        <MauiXaml Update="Views\PrivilegeRequestsPage.xaml">
-          <Generator>MSBuild:Compile</Generator>
-        </MauiXaml>
-        <MauiXaml Update="Views\RequestSpecialists.xaml">
-          <Generator>MSBuild:Compile</Generator>
-        </MauiXaml>
+    <MauiXaml Update="Views\PrivilegeRequestsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\RequestSpecialists.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
 		<MauiXaml Update="Views\RolesPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
@@ -95,6 +119,12 @@
 	  </MauiXaml>		
 	  <MauiXaml Update="Views\TeamMemberPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>		
+	  <MauiXaml Update="Views\TeamPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>		
+	  <MauiXaml Update="Views\WeatherAnomalyNotificationsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\WelcomePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
@@ -105,14 +135,29 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\LogisticOperationPage.xaml.cs">
+	    <DependentUpon>LogisticOperationPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\AlertTypePage.xaml.cs">
 	    <DependentUpon>AlertTypePage.xaml</DependentUpon>
     </Compile>
 		<Compile Update="Views\BuildingTypePage.xaml.cs">
 			<DependentUpon>BuildingTypePage.xaml</DependentUpon>
 		</Compile>
+		<Compile Update="Views\MethodologicalDocumentationPage.xaml.cs">
+		  <DependentUpon>MethodologicalDocumentationPage.xaml</DependentUpon>
+		</Compile>
 		<Compile Update="Views\ContinentPage.xaml.cs">
 			<DependentUpon>ContinentPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\AddResourcePage.xaml.cs">
+		  <DependentUpon>AddResourcePage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\OperationResourceRequestPage.xaml.cs">
+		  <DependentUpon>OperationResourceRequestPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\ResorceType.xaml.cs">
+		  <DependentUpon>ResorceType.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Views\PrivilegeRequestsPage.xaml.cs">
 		  <DependentUpon>PrivilegeRequestsPage.xaml</DependentUpon>

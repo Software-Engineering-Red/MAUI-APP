@@ -6,12 +6,12 @@ namespace UndacApp.Services
 {
     public abstract class AService<T> : IService<T> where T : AModel,new()
     {
-        private SQLiteAsyncConnection _database;
+        protected SQLiteAsyncConnection _database;
 
         public AService()
         {
             _database = new SQLiteAsyncConnection(DatabaseSettings.DBPath, DatabaseSettings.Flags);
-            _database.CreateTableAsync<T>().Wait();
+            _database.CreateTableAsync<T>();
         }
 
         public async Task<T> GetOne(int id)
@@ -35,7 +35,12 @@ namespace UndacApp.Services
         {
             return await _database.DeleteAsync(entity);
         }
-		public async Task<int> RemoveByID(int id)
+        public async Task<int> RemoveAll()
+        {
+            return await _database.DeleteAllAsync<T>();
+        }
+
+        public async Task<int> RemoveByID(int id)
 		{
 			var entity = await GetOne(id);
 			if (entity != null)

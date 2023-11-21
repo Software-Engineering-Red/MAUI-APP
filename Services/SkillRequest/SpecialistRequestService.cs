@@ -38,6 +38,8 @@ namespace UndacApp.Services
 		async Task<int> ISpecialistRequestService.AddUnapprovedSkillRequest(int skillId, int numberRequired, 
 			DateTime startDate, DateTime endDate)
 		{
+			await SetUpDb();
+
 			SkillRequest skillRequest = new SkillRequest()
 			{
 				SkillId = skillId,
@@ -61,8 +63,9 @@ namespace UndacApp.Services
 		/// <param name="organisation">Approving Organisation</param>
 		async Task<int> ISpecialistRequestService.approveSkillRequest(int id, Organisation organisation)
 		{
+			await SetUpDb();
 			SkillRequest skillRequest = await GetOne(id);
-			skillRequest.OrganisationId = organisation.id;
+			skillRequest.OrganisationId = organisation.ID;
 			skillRequest.ConfirmedDate = DateTime.Today;
 			skillRequest.Status = "Approved";
 			return await Update(skillRequest);

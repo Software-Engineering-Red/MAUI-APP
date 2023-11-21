@@ -1,11 +1,4 @@
-﻿using SQLite;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Xml.Linq;
-
-
-namespace UndacApp.Models
+﻿namespace UndacApp.Models
 {
 	public class SkillRequest : AModel
 	{
@@ -71,7 +64,5 @@ namespace UndacApp.Models
 			get => confirmedDate;
 			set => SetField(ref confirmedDate, value);
 		}
-
-		public event PropertyChangedEventHandler PropertyChanged;
 	}
 }

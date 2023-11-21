@@ -13,18 +13,18 @@ public partial class PrivilegeRequestsPage : ContentPage
 
     public PrivilegeRequestsPage()
     {
-        Task.Run(async () => await LoadRequests());
-        
-        this.BindingContext = new PrivilegeRequest();
-        this.requestService = new PrivilegeRequestService();
-        this.memberService = new TeamMemberService();
-
         InitializeComponent();
-    }
+        this.requestService = new PrivilegeRequestService();              
+        this.memberService = new TeamMemberService();
+        Task.Run(async () => await LoadRequests());
+        this.BindingContext = new PrivilegeRequest();
+
+        
+    }    
 
     private async Task LoadRequests()
     {
-        requests = new ObservableCollection<PrivilegeRequest>(await requestService.GetPrivilegeRequestList());
+        requests = new ObservableCollection<PrivilegeRequest>(await requestService.GetAll());
         ltv_privilegeRequests.ItemsSource = requests;
     }
 
@@ -39,12 +39,27 @@ public partial class PrivilegeRequestsPage : ContentPage
         {
             var selectedRequest = ltv_privilegeRequests.SelectedItem as PrivilegeRequest;
             int updatedID = selectedRequest.MemberID;
-            var teamMembers = new ObservableCollection<TeamMember>(await memberService.GetTeamMemberList());
+            var teamMembers = new ObservableCollection<TeamMember>(await memberService.GetAll());
             var teamMember = teamMembers.FirstOrDefault(x => x.ID == updatedID);
-            teamMember.AccessPrivilegeLevel = selectedRequest.PrivilegeLevel;
-            await memberService.UpdateTeamMember(teamMember);
-            selectedRequest.Approved = true;
-            await requestService.UpdatePrivilegeRequest(selectedRequest);
+
+            if (teamMember != null)
+            {
+                teamMember.AccessPrivilegeLevel = selectedRequest.PrivilegeLevel;
+                await memberService.Update(teamMember);
+                selectedRequest.Approved = true;
+                await requestService.Update(selectedRequest);
+                requests.Remove(selectedRequest);
+                await requestService.Remove(selectedRequest);
+               
+
+                ltv_privilegeRequests.ItemsSource = requests;
+            }
+            else
+        {
+            
+            await Shell.Current.DisplayAlert("Member not found", "The selected member was not found in the team members collection", "OK");
+              
+            }
         }
     }
 
@@ -58,7 +73,7 @@ public partial class PrivilegeRequestsPage : ContentPage
         else
         {
             var selectedRequest = ltv_privilegeRequests.SelectedItem as PrivilegeRequest;
-            await requestService.DeleteRequest(selectedRequest);
+            await requestService.Remove(selectedRequest);
             await Shell.Current.DisplayAlert("Request denied", "Denied request", "OK");
             return;
         }

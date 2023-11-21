@@ -167,7 +167,7 @@ public partial class AcceptSpecialistRequests : ContentPage
 	{
 		try
 		{
-			Organisations = new ObservableCollection<Organisation>(await organisationService.GetOrganisationList());
+			Organisations = new ObservableCollection<Organisation>(await organisationService.GetAll());
 			OrganisationPicker.ItemsSource = Organisations;
 		}
 		catch 

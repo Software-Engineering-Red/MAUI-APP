@@ -10,29 +10,29 @@ namespace UndacApp.Views;
 /// <summary>
 /// this page displays, saves and deletes the data from the database via user interaction and inherits ContentPage
 /// </summary>
- partial class position_status : ContentPage
+ partial class PositionStatusPage : ContentPage
 {
 
-	position_statuses selectedPostionStatus = null;
+	PositionStatuses selectedPostionStatus = null;
 	IPositionStatusesServices statusesServices;
-	ObservableCollection<position_statuses> PStatus = new ObservableCollection<position_statuses>();
+	ObservableCollection<PositionStatuses> PStatus = new ObservableCollection<PositionStatuses>();
 
     /*this is the contructor initialize the code on the page*/
-    public position_status()
+    public PositionStatusPage()
 	{
 		InitializeComponent();
-		BindingContext = new position_statuses();
+		BindingContext = new PositionStatuses();
 		this.statusesServices = new PositionStatusesServices();
 
-		Task.Run(async () => await LoadpostionSatus());
+		Task.Run(async () => await LoadPositionStatuses());
 		TBX_PositionStatus.Text = "";
 	}
 
 	/*this task function get the list of positions statuses in the model Position Statuses.cs
 	 * it will wait for the task to be done before moveing on with the next instruction*/
-    private async Task LoadpostionSatus()
+    private async Task LoadPositionStatuses()
 	{
-		PStatus = new ObservableCollection<position_statuses>(await statusesServices.GetPosition_StatusesList());
+		PStatus = new ObservableCollection<PositionStatuses>(await statusesServices.GetPosition_StatusesList());
 		LS_PositionStatuses.ItemsSource = PStatus;
 	}
 	
@@ -51,7 +51,7 @@ namespace UndacApp.Views;
 
 		if (selectedPostionStatus == null)
 		{
-			var status = new position_statuses() { Name = TBX_PositionStatus.Text };
+			var status = new PositionStatuses() { Name = TBX_PositionStatus.Text };
 			statusesServices.AddStatus(status);
             PStatus.Add(status);
         }
@@ -95,7 +95,7 @@ namespace UndacApp.Views;
 	/*otherwise set the text box to the selected item clicked on*/
 	private void LS_PositionStatuses_ItemSelected(object sender, SelectedItemChangedEventArgs e)
 	{
-		selectedPostionStatus = e.SelectedItem as position_statuses;
+		selectedPostionStatus = e.SelectedItem as PositionStatuses;
 		if (selectedPostionStatus == null) return;
 
 		TBX_PositionStatus.Text = selectedPostionStatus.Name;

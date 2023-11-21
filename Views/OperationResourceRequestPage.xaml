@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UndacApp.Views.OperationRessourceRequestPage"
+             Title="OperationRessourceRequestPage">
+    <VerticalStackLayout>
+        <Entry Placeholder="Requested Detail" Text="{Binding RequestedDetail}"/>
+        
+        <Label Text="Select Operational Team"></Label>
+        <Picker ItemsSource="{Binding OperationalTeams}"
+                ItemDisplayBinding="{Binding Name}"
+                SelectedItem="{Binding SelectedOperationalTeam, Mode=TwoWay}"/>
+
+        <Label Text="Select Resource"></Label>
+        <Picker ItemsSource="{Binding Resources}"
+                ItemDisplayBinding="{Binding Name}"
+                SelectedItem="{Binding SelectedResource, Mode=TwoWay}"/>
+
+        <Label Text="Select Status"></Label>
+        <Picker ItemsSource="{Binding States}"
+                ItemDisplayBinding="{Binding Name}"
+                SelectedItem="{Binding SelectedStatus, Mode=TwoWay}"/>
+
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
+            <Button Text="Save"
+                Command="{Binding SaveCommand}"/>
+
+            <Button Grid.Column="1"
+                Text="Delete"
+                Command="{Binding DeleteCommand}"/>
+        </Grid>
+        
+        <ListView x:Name="operationResourceRequestListView"
+                  ItemsSource="{Binding OperationResourceRequestList}"
+                  Margin="20"
+                  SelectionMode="Single"
+                  SelectedItem="{Binding SelectedOperationResourceRequest, Mode=TwoWay}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="10">
+                            <Label Text="{Binding RequestedDetail, StringFormat='Requested Detail: {0}'}" FontAttributes="Bold"/>
+                            <Label Text="{Binding OperationalTeamId, StringFormat='Operational Team ID: {0}'}"/>
+                            <Label Text="{Binding RequestedBy, StringFormat='Requested By: {0}'}"/>
+                            <Label Text="{Binding RequestDate, StringFormat='Request Date: {0:yyyy-MM-dd}'}"/>
+                            <Label Text="{Binding ResourceId, StringFormat='Resource ID: {0}'}"/>
+                            <Label Text="{Binding Status, StringFormat='Status: {0}'}"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </VerticalStackLayout>
+</ContentPage>

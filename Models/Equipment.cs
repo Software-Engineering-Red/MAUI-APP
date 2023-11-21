@@ -1,19 +1,11 @@
-﻿using SQLite;
-using System.ComponentModel;
-
-namespace UndacApp.Models
+﻿namespace UndacApp.Models
 {
     /*! <summary>
         A model structure for Equipment data
     </summary> 
     <details>Data is stored in SQLite database.</details> */
-    public class Equipment : INotifyPropertyChanged
+    public class Equipment : AModel
     {
-        /*! <summary>
-          An unique primary key used to manage database entries
-       </summary> */
-        [PrimaryKey, AutoIncrement]
-        public int ID { get; set; }
 
         /*! <summary>
        A private variable, storing Equipment name
@@ -22,9 +14,7 @@ namespace UndacApp.Models
         public string Name
         {
             get => _name;
-            set => Utils.SetProperty(ref _name, value, this);
+            set => SetField(ref _name, value);
         }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
     }
 }

@@ -33,12 +33,13 @@ namespace UndacApp.Data
                 // Create your database tables here
                 await _database.CreateTableAsync<Models.AlertType>();
                 await _database.CreateTableAsync<Models.OperationalTeamStatus>();
+                await _database.CreateTableAsync<Models.OperationalTeam>();
                 await _database.CreateTableAsync<Models.BuildingType>();
                 await _database.CreateTableAsync<Models.Continent>();
                 await _database.CreateTableAsync<Models.Equipment>();
                 await _database.CreateTableAsync<Models.OrderStatus>();
                 await _database.CreateTableAsync<Models.Organisation>();
-                await _database.CreateTableAsync<Models.position_statuses>();
+                await _database.CreateTableAsync<Models.PositionStatuses>();
                 await _database.CreateTableAsync<Models.Role>();
                 await _database.CreateTableAsync<Models.RoomType>();
                 await _database.CreateTableAsync<Models.Rota>();
@@ -46,10 +47,9 @@ namespace UndacApp.Data
                 await _database.CreateTableAsync<Models.SystemType>();
                 await _database.CreateTableAsync<Models.TeamMember>();
                 await _database.CreateTableAsync<Models.PrivilegeRequest>();
-                await _database.CreateTableAsync<Models.OperationRecords>();
-                await _database.CreateTableAsync<Models.Temp_Models.Temp_Operatartion_Resourse_Request>();
-                await _database.CreateTableAsync<Models.Temp_Models.Temp_Operation_Team>();
-                await _database.CreateTableAsync<Models.Temp_Models.Temp_Resource>();
+                await _database.CreateTableAsync<Models.ResourceType>();
+                await _database.CreateTableAsync<Models.AResource>();
+                await _database.CreateTableAsync<Models.LocalMedia>();
             }
             catch (Exception ex)
             {

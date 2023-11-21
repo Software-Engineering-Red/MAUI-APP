@@ -8,10 +8,21 @@
     Shell.FlyoutBehavior="Disabled">
 
     <TabBar>
-        
+
         <ShellContent 
             Title="Welcome"
             ContentTemplate="{DataTemplate views:WelcomePage}"/>
+        <ShellContent
+Title="User Management"
+ContentTemplate="{DataTemplate views:UsersPage}"
+Icon="{OnPlatform 'icon_about.png', iOS='icon_about_ios.png', MacCatalyst='icon_about_ios.png'}" />
+
+
+        <ShellContent
+        Title="Volunteer Requests"
+        ContentTemplate="{DataTemplate views:VolunteerRequestPage}"
+        Icon="{OnPlatform 'icon_about.png', iOS='icon_about_ios.png', MacCatalyst='icon_about_ios.png'}" />
+
 
         <ShellContent
              Title="Security Alerts"
@@ -32,6 +43,10 @@
             ContentTemplate="{DataTemplate views:TeamMemberPage}"/>
 
         <ShellContent
+            Title="Teams"
+            ContentTemplate="{DataTemplate views:TeamPage}"/>
+
+        <ShellContent
             Title="Privilege Requests"
             ContentTemplate="{DataTemplate views:PrivilegeRequestsPage}"/>
 
@@ -46,22 +61,81 @@
         <ShellContent
             Title="Continents"
             ContentTemplate="{DataTemplate views:ContinentPage}" />
-        
+
         <ShellContent
             Title="Building Types"
             ContentTemplate="{DataTemplate views:BuildingTypePage}"/>
-        
+
         <ShellContent
             Title="Role"
             ContentTemplate="{DataTemplate views:RolesPage}" />
-        
-        <ShellContent
-            Title="OperationRecord"
-            ContentTemplate="{DataTemplate views:OperationRecord}"/>
 
+        <ShellContent
+            Title="Weather Anomaly Notifications"
+            ContentTemplate="{DataTemplate views:WeatherAnomalyNotificationsPage}" />
+      
         <ShellContent
                 Title="Organisations"
                 ContentTemplate="{DataTemplate views:OrganisationPage}" />
+
+        <ShellContent
+            Title="System Type"
+            ContentTemplate="{DataTemplate views:SystemPage}"/>
+
+        <ShellContent
+            Title="Operational Team"
+            ContentTemplate="{DataTemplate views:OperationalTeamPage}" />
+
+        <ShellContent
+            Title="Operational Team Status"
+            ContentTemplate="{DataTemplate views:OperationalTeamStatusPage}" />
+
+        <ShellContent
+            Title="PositionStatusPage"
+            ContentTemplate="{DataTemplate views:PositionStatusPage}" />
+        <ShellContent
+            Title="Rooms Types"
+            ContentTemplate="{DataTemplate views:RoomTypePage}" />
+        <ShellContent
+           Title="OrderStatusPage"
+           ContentTemplate="{DataTemplate views:OrderStatusPage}" />
+
+        <ShellContent
+            Title="ITSystemStatusPage"
+            ContentTemplate="{DataTemplate views:ITSystemStatusPage}" />
+        <ShellContent
+           Title="Request Specialists"
+           ContentTemplate="{DataTemplate views:RequestSpecialists}" />
+        <ShellContent
+           Title="Accept Specialist Requests"
+           ContentTemplate="{DataTemplate views:AcceptSpecialistRequests}" />
+        <ShellContent
+           Title="Resource Type"
+           ContentTemplate="{DataTemplate views:ResourceTypePage}" />
+        <ShellContent
+           Title="Add Resource"
+           ContentTemplate="{DataTemplate views:AddResourcePage}" />
+        <ShellContent
+            Title="Local Media's"
+             ContentTemplate="{DataTemplate views:LocalMediaPage}" />
+        <ShellContent
+            Title="Logistic Operation"
+             ContentTemplate="{DataTemplate views:LogisticOperationPage}" />
+
+        <ShellContent
+           Title="Operational-Team"
+           ContentTemplate="{DataTemplate views:OperationalTeamPage}" />
+        <ShellContent
+            Title="Operation-Resource-Request-Status"
+            ContentTemplate="{DataTemplate views:OperationResourceRequestStatusPage}" />
+        <ShellContent
+            Title="Operation-Resource-Request"
+            ContentTemplate="{DataTemplate views:OperationRessourceRequestPage}" />
+
+        <ShellContent
+            Title="Methodological Documentation"
+            ContentTemplate="{DataTemplate views:MethodologicalDocumentationPage}" />
+
     </TabBar>
 
 </Shell>

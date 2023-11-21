@@ -7,6 +7,11 @@
              xmlns:local="clr-namespace:UndacApp.Models">
     <ContentPage.Resources>
         <converters:BoolToAvailabilityConverter x:Key="boolToAvailability" />
+        <x:Array x:Key="systemTypes" Type="{x:Type x:String}">
+            <x:String>Windows</x:String>
+            <x:String>Linux</x:String>
+            <x:String>iOS</x:String>
+        </x:Array>
     </ContentPage.Resources>
     <VerticalStackLayout Spacing="10" Margin="5">
         <Editor x:Name="txe_teamMember"
@@ -17,13 +22,23 @@
             Placeholder="Add a team member privilege level"
             HeightRequest="100" />
 
-        <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
-            <Button Text="Save"
-                    Clicked="SaveButton_Clicked" />
+        <Grid ColumnSpacing="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0"
+                Text="Save"
+                Clicked="SaveButton_Clicked" />
 
             <Button Grid.Column="1"
-                    Text="Delete"
-                    Clicked="DeleteButton_Clicked" />
+                Text="Remove Access"
+                Clicked="RemoveAccessButton_Clicked" />
+
+            <Button Grid.Column="2"
+                Text="Delete"
+                Clicked="DeleteButton_Clicked" />
         </Grid>
 
         <ListView x:Name="ltv_teamMembers" Background="White" ItemSelected="ltv_teamMembers_ItemSelected">
@@ -35,19 +50,20 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
-                            <Label Grid.Row="0"
-                           Text="{Binding Name}"
+                            <Label Grid.Row="0" Text="{Binding Name}"
                            FontAttributes="Bold" />
                             <Label Grid.Row="1" Text="{Binding AccessPrivilegeLevel}" TextColor="Black" />
-                            <Label Grid.Row="2"
-                           Text="{Binding Available,Converter={StaticResource boolToAvailability}}" 
-                           FontAttributes="Italic"/>
+                            <Label Grid.Row="2" Text="{Binding Available,Converter={StaticResource boolToAvailability}}" FontAttributes="Italic"/>
+                            <Label Grid.Row="3" Text="{Binding SystemType}"   FontAttributes="Italic"/>
                         </Grid>
+                        
                     </ViewCell>
+                    
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-
+        <Picker x:Name="pickerSystemType" Title="System Type" SelectedItem="{Binding SystemType}" ItemsSource="{StaticResource systemTypes}" />
     </VerticalStackLayout>
 </ContentPage>

@@ -105,6 +105,9 @@
     <MauiXaml Update="Views\RequestSpecialists.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
+    <MauiXaml Update="Views\ResourceRequestPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
 		<MauiXaml Update="Views\RolesPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>

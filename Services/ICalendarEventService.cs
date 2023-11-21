@@ -15,13 +15,3 @@ namespace UndacApp.Services
         Task<int> UpdateCalendarEvent(CalendarEvent e);
     }
 }
-
-
-
-
-
-
-
-
-
-

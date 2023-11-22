@@ -1,25 +1,31 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UndacApp.Views.WeatherAnomalyNotificationsPage"
+             xmlns:vm="clr-namespace:UndacApp.ViewModels"
              Title="Weather Anomaly Notifications"
              BackgroundColor="LightSkyBlue">
 
+    <ContentPage.BindingContext>
+        <vm:WeatherAnomalyNotificationsViewModel />
+    </ContentPage.BindingContext>
+
     <ScrollView>
         <StackLayout Spacing="15" Margin="20">
-            <Editor x:Name="txe_weatherAnomalyNotification"
-                    Placeholder="Describe the weather anomaly..."
+            <Editor Placeholder="Describe the weather anomaly..."
                     HeightRequest="120" 
+                    Text="{Binding NotificationMessage, Mode=TwoWay}" 
                     BackgroundColor="AliceBlue" />
 
             <Button Text="Report Notification"
                     BackgroundColor="SteelBlue"
                     TextColor="White"
-                    Clicked="ReportNotificationButton_Clicked" />
+                    Command="{Binding ReportNotificationCommand}" />
 
             <Label Text="Weather Notifications" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
 
             <CollectionView x:Name="cv_currentNotifications" SelectionMode="Single" 
-                            SelectionChanged="cv_currentNotifications_SelectionChanged">
+                            ItemsSource="{Binding CurrentNotifications}"
+                            SelectionChangedCommand="{Binding CurrentNotificationSelectionChangedCommand}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame BorderColor="SteelBlue" Padding="10" Margin="5">
@@ -36,11 +42,12 @@
                     Text="Mark as Cleared"
                     BackgroundColor="DarkCyan"
                     TextColor="White"
-                    Clicked="ClearButton_Clicked"
-                    IsVisible="False" />
+                    Command="{Binding ClearNotificationCommand}"
+                    IsVisible="{Binding IsClearButtonVisible}" />
 
             <Label Text="Cleared Notifications" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
-            <ListView x:Name="ltv_clearedNotifications" BackgroundColor="AliceBlue">
+            <ListView x:Name="ltv_clearedNotifications" BackgroundColor="AliceBlue"
+                      ItemsSource="{Binding ClearedNotifications}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextCell Text="{Binding Message}" Detail="{Binding CreatedAt, StringFormat='Cleared on {0:MM/dd/yyyy}'}" TextColor="DarkSlateGray"/>

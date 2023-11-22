@@ -27,7 +27,6 @@ public partial class RoomTypePage : ContentPage
         txe_roomtype_floor.Text = "";
         txe_roomtype_number.Text = "";
         txe_roomtype_typeId.Text = "";
-
     }
 
     // Load room types from the database
@@ -94,7 +93,6 @@ public partial class RoomTypePage : ContentPage
         // Delete the selected room type from the database/collection
         await roomTypeService.Remove(selectedRoomType);
         roomTypes.Remove(selectedRoomType);
-
         // Reset selectedRoomType and input field
         ltv_roomtype.SelectedItem = null;
         txe_roomtype_name.Text = "";
@@ -119,6 +117,4 @@ public partial class RoomTypePage : ContentPage
         txe_roomtype_number.Text = selectedRoomType.Number.ToString();
         txe_roomtype_typeId.Text = selectedRoomType.TypeId.ToString();
     }
-
-
 }

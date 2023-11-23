@@ -37,29 +37,43 @@ namespace UndacApp.Views
 
         private async void LoginButton_Clicked(object sender, EventArgs e)
         {
-            string email = txtLoginEmail.Text;
-            string password = txtLoginPassword.Text;
+            string email = txtLoginEmail.Text; string password = txtLoginPassword.Text;
             var user = users.FirstOrDefault(u => u.Email == email && PasswordHasher.VerifyPassword(password, u.Password));
 
-            bool isAdmin = email == "1" && password == "1";
-            if (user != null || isAdmin)
+            if (user != null)
             {
-                if (user?.Role == "User" && !isAdmin)
+                if (user.Role == "User")
                 {
-                    await DisplayAlert("Notice", "Please contact your manager for how to gain access", "OK");
+                    await DisplayAlert("Notice", "Contact manager", "OK");
                 }
                 else
                 {
-                    // Hide the login section
-                    HideLoginSection();
-                    userManagementSection.IsVisible = true;
+                    if (user.Role != "Admin")
+                    {
+                        userManagementSection.IsVisible = true;
+                    }
+                    else
+                    {
+                        if (email == "admin@example.com")
+                        {
+                            userManagementSection.IsVisible = true;
+                        }
+                    }
                 }
             }
             else
             {
-                await DisplayAlert("Login Failed", "Invalid email or password.", "OK");
+                if (email == "1" && password == "1")
+                {
+                    userManagementSection.IsVisible = true;
+                }
+                else
+                {
+                    await DisplayAlert("Login Failed", "Invalid credentials", "OK");
+                }
             }
         }
+
 
         private void HideLoginSection()
         {
@@ -73,25 +87,49 @@ namespace UndacApp.Views
 
         private async void AddUserButton_Clicked(object sender, EventArgs e)
         {
-            if (!ValidateUserInput()) return;
-
-            var newUser = new User
+            if (txtName.Text != null)
             {
-                Name = txtName.Text,
-                Email = txtEmail.Text,
-                Password = PasswordHasher.HashPassword(txtPassword.Text),
-                Team = txtTeam.Text,
-                Role = (string)pickerRole.SelectedItem,
-                AccessLevel = (string)pickerAccessLevel.SelectedItem,
-                Employed = true
-            };
-
-            await userService.Add(newUser);
-            users.Add(newUser);
-
-            ClearUserInputFields();
-            await DisplayAlert("Success", $"{newUser.Name} added!", "OK");
+                if (txtEmail.Text != null)
+                {
+                    if (txtPassword.Text != null)
+                    {
+                        if (txtTeam.Text != null)
+                        {
+                            if (IsValidEmail(txtEmail.Text))
+                            {
+                                var newUser = new User
+                                {
+                                    Name = txtName.Text,
+                                    Email = txtEmail.Text,
+                                    Password = PasswordHasher.HashPassword(txtPassword.Text),
+                                    Team = txtTeam.Text
+                                };
+                                if (pickerRole.SelectedItem != null)
+                                {
+                                    newUser.Role = (string)pickerRole.SelectedItem;
+                                    if (pickerAccessLevel.SelectedItem != null)
+                                    {
+                                        newUser.AccessLevel = (string)pickerAccessLevel.SelectedItem;
+                                        await userService.Add(newUser);
+                                        users.Add(newUser);
+                                        ClearUserInputFields();
+                                        await DisplayAlert("Success", $"{newUser.Name} added!", "OK");
+                                    }
+                                    else await DisplayAlert("Error", "Access Level not selected", "OK");
+                                }
+                                else await DisplayAlert("Error", "Role not selected", "OK");
+                            }
+                            else await DisplayAlert("Error", "Invalid Email", "OK");
+                        }
+                        else await DisplayAlert("Error", "Team is empty", "OK");
+                    }
+                    else await DisplayAlert("Error", "Password is empty", "OK");
+                }
+                else await DisplayAlert("Error", "Email is empty", "OK");
+            }
+            else await DisplayAlert("Error", "Name is empty", "OK");
         }
+
 
         private void OnUserSelected(object sender, SelectedItemChangedEventArgs e)
         {

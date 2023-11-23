@@ -65,6 +65,9 @@
 	  <MauiXaml Update="Views\AcceptSpecialistRequests.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\DisasterManagementCoordination.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\LogisticOperationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

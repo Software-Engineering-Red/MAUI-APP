@@ -1,31 +1,45 @@
-<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UndacApp.Views.UsersPage"
              Title="User Management">
 
-    <VerticalStackLayout Spacing="10" Margin="5">
-        <Entry x:Name="txtName" Placeholder="Name"/>
-        <Entry x:Name="txtEmail" Placeholder="Email"/>
-        <Picker x:Name="pickerAccessLevel" Title="Access Level">
-            <Picker.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>Low</x:String>
-                    <x:String>Medium</x:String>
-                    <x:String>High</x:String>
-                </x:Array>
-            </Picker.ItemsSource>
-        </Picker>
-        <Button Text="Add User" Clicked="AddUserButton_Clicked"/>
+    <ScrollView>
+        <VerticalStackLayout Spacing="10" Margin="5">
+            <!-- Login Section -->
+            <VerticalStackLayout Spacing="10">
+                <Entry x:Name="txtLoginEmail" Placeholder="Email"/>
+                <Entry x:Name="txtLoginPassword" Placeholder="Password" IsPassword="True"/>
+                <Button Text="Login" Clicked="LoginButton_Clicked"/>
+            </VerticalStackLayout>
 
-        <!-- Admin Credentials Section (Initially Hidden) -->
-        <StackLayout x:Name="adminCredentialsLayout" IsVisible="False">
-            <Label Text="Enter your credentials to add user" />
-            <Entry x:Name="txtAdminUsername" Placeholder="Admin Username"/>
-            <Entry x:Name="txtAdminPassword" Placeholder="Admin Password" IsPassword="True"/>
-            <Button Text="Check" Clicked="CheckCredentialsButton_Clicked"/>
-        </StackLayout>
+            <!-- User Management Section (Initially Hidden) -->
+            <StackLayout x:Name="userManagementSection" IsVisible="False">
+                <!-- User Addition Form -->
+                <VerticalStackLayout Spacing="10">
+                    <Entry x:Name="txtName" Placeholder="Name"/>
+                    <Entry x:Name="txtEmail" Placeholder="Email"/>
+                    <Entry x:Name="txtPassword" Placeholder="Password" IsPassword="True"/>
+                    <Entry x:Name="txtTeam" Placeholder="Team"/>
+                    <Picker x:Name="pickerRole" Title="Role"/>
+                    <Picker x:Name="pickerAccessLevel" Title="Access Level"/>
+                    <Button x:Name="AddUserButton" Text="Add User" Clicked="AddUserButton_Clicked"/>
+                </VerticalStackLayout>
 
-        <!-- ListView to display users -->
-    </VerticalStackLayout>
+                <!-- User List and Selection -->
+                <ListView x:Name="listViewUsers" ItemSelected="OnUserSelected">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding Name}" Detail="{Binding Email}" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <!-- Edit and Delete Buttons -->
+                <StackLayout Orientation="Horizontal">
+                    <Button x:Name="btnEdit" Text="Edit" Clicked="EditUserButton_Clicked" IsEnabled="False"/>
+                    <Button x:Name="btnDelete" Text="Delete" Clicked="DeleteUserButton_Clicked" IsEnabled="False"/>
+                </StackLayout>
+            </StackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

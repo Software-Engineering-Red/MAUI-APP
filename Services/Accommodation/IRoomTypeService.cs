@@ -1,6 +1,6 @@
 ﻿using UndacApp.Models;
 
-namespace UndacApp.Services
+namespace UndacApp.Services.Accommodation
 {
     /// <summary>
     /// Interface used for managing rooms 
@@ -8,6 +8,6 @@ namespace UndacApp.Services
 
     public interface IRoomTypeService : IService<RoomType>
     {
-
+       
     }
 }

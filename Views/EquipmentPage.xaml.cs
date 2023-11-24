@@ -1,9 +1,9 @@
 ﻿
-using MauiApp1.Models;
-using MauiApp1.Services;
+using UndacApp.Models;
+using UndacApp.Services;
 using System.Collections.ObjectModel;
 
-namespace MauiApp1.Views;
+namespace UndacApp.Views;
 /*! <summary>
         EquipmentPage class extending ContentPage, responsible for functionality on EquipmentPage view.
     </summary> */
@@ -27,7 +27,7 @@ public partial class EquipmentPage : ContentPage
     public EquipmentPage()
     {
         InitializeComponent();
-        BindingContext =new Equipment();
+        BindingContext = new Equipment();
         this.equipmentService = new EquipmentService();
 
         Task.Run(async () => await LoadEquipment());
@@ -102,5 +102,51 @@ public partial class EquipmentPage : ContentPage
         if (selectedEquipment == null) return;
 
         txe_equipment.Text = selectedEquipment.Name;
+    }
+
+    /// <summary>
+    /// Handles the click event of the Reserve button for each equipment item.
+    /// </summary>
+    /// <remarks>
+    /// When the Reserve button is clicked, this method retrieves the equipment ID from the button's
+    /// CommandParameter. It then calls the ReserveEquipment method to attempt to reserve the equipment.
+    /// An alert is displayed to the user indicating whether the reservation was successful.
+    /// </remarks>
+    /// <param name="sender">The source of the event, typically the Reserve button.</param>
+    /// <param name="e">Event data that provides information and event data associated with routed events.</param>
+    private async void ReserveButton_Clicked(object sender, EventArgs e)
+    {
+        var button = sender as Button;
+        if (button != null)
+        {
+            var equipmentId = (int)button.CommandParameter;
+
+            // Simulate reservation logic
+            var isReserved = ReserveEquipment(equipmentId);
+
+            var message = isReserved ? "Equipment reserved for you" : "Reservation failed";
+            await DisplayAlert("Reservation", message, "OK");
+        }
+    }
+
+    /// <summary>
+    /// Simulates the reservation of an equipment item.
+    /// </summary>
+    /// <remarks>
+    /// This method is a placeholder for actual reservation logic. It should be replaced with
+    /// a real implementation, such as updating the reservation status in a database.
+    /// </remarks>
+    /// <param name="equipmentId">The ID of the equipment to be reserved.</param>
+    /// <returns>Returns true if the reservation is successful, false otherwise.</returns>
+    private bool ReserveEquipment(int equipmentId)
+    {
+        var equipment = equipments.FirstOrDefault(e => e.ID == equipmentId);
+        if (equipment != null && !equipment.Reserved)
+        {
+            equipment.Reserved = true;
+            equipmentService.UpdateEquipment(equipment); // Update the equipment in your service or database
+            return true; // Reservation successful
+        }
+        return false; // Reservation failed
     }
 }

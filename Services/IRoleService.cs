@@ -1,4 +1,4 @@
-﻿using MauiApp1.Models;
+﻿using UndacApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
  *  to be used to run basic CRUD commands on a role from the RoleService class
  */
 
-namespace MauiApp1.Services
+namespace UndacApp.Services
 {
     public interface IRoleService
     {

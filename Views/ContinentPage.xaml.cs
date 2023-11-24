@@ -1,9 +1,9 @@
 
-using MauiApp1.Models;
-using MauiApp1.Services;
+using UndacApp.Models;
+using UndacApp.Services;
 using System.Collections.ObjectModel;
 
-namespace MauiApp1.Views;
+namespace UndacApp.Views;
 
 /*! <summary>
         ContinentPage class extending ContentPage, responsible for functionality on ContinentPage view.
@@ -29,7 +29,7 @@ public partial class ContinentPage : ContentPage {
     </summary> */
     public ContinentPage() {
         InitializeComponent();
-        BindingContext = new Continent();
+        this.BindingContext = new Continent();
         this.continentService = new ContinentService();
 
         Task.Run(async () => await LoadContinents());
@@ -41,7 +41,7 @@ public partial class ContinentPage : ContentPage {
         </summary> 
         <returns>Task promise, informing about the status of its' completion.</returns> */
     private async Task LoadContinents() {
-        continents = new ObservableCollection<Continent>(await continentService.GetContinentList());
+        continents = new ObservableCollection<Continent>(await continentService.GetAll());
         ltv_continents.ItemsSource = continents;
     }
 
@@ -55,11 +55,11 @@ public partial class ContinentPage : ContentPage {
 
         if(selectedContinent == null) {
             var continent = new Continent() { Name=txe_continent.Text};
-            continentService.AddContinent(continent);
+            continentService.Add(continent);
             continents.Add(continent);
         } else {
             selectedContinent.Name = txe_continent.Text;
-            continentService.UpdateContinent(selectedContinent);
+            continentService.Update(selectedContinent);
             var continent = continents.FirstOrDefault(x => x.ID == selectedContinent.ID);
             continent.Name = txe_continent.Text;
         }
@@ -82,7 +82,7 @@ public partial class ContinentPage : ContentPage {
             return;
         }
 
-        await continentService.DeleteContinent(selectedContinent);
+        await continentService.Remove(selectedContinent);
         continents.Remove(selectedContinent);
 
         ltv_continents.SelectedItem = null;

@@ -1,4 +1,4 @@
-﻿namespace MauiApp1.Views;
+﻿namespace UndacApp.Views;
 
 public partial class WelcomePage : ContentPage
 {

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace MauiApp1.Models {
+namespace UndacApp.Models {
     /*! <summary>
      * The Expert data model class.
      * </summary>

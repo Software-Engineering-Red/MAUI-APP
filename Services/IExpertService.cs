@@ -1,6 +1,6 @@
-﻿using MauiApp1.Models;
+﻿using UndacApp.Models;
 
-namespace MauiApp1.Services {
+namespace UndacApp.Services {
     public interface IExpertService {
         Task<List<Expert>> GetExpertsList();
         Task<int> AddExpert(Expert expert);

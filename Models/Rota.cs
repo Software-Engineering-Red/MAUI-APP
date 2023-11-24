@@ -1,23 +1,20 @@
-﻿using SQLite;
-using System.ComponentModel;
-
-namespace UndacApp.Models
+﻿namespace UndacApp.Models
 {
     /// <summary>
     /// Represents a Rota object.
     /// </summary>
-    public class Rota : INotifyPropertyChanged
+    public class Rota : AModel
     {
-        [PrimaryKey, AutoIncrement]
-        public int ID { get; set; }
-
-        private string _name;
-        public string Name
-        {
-            get => _name;
-            set => Utils.SetProperty(ref _name, value, this);
+        private string _location = string.Empty;
+        public string Location {
+            get => _location;
+            set => SetField(ref _location, value);
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+        private bool _valid = false;
+        public bool Valid {
+            get => _valid;
+            set => SetField(ref _valid, value);
+        }
     }
 }

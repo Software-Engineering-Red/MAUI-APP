@@ -24,7 +24,6 @@ namespace UndacApp.Models
 		/// The attribute is described a bit confusing as operationId in the ERD
 		/// </summary>
 		private int _operationId;
-		[ForeignKey(typeof(Operation))]
 		public int OperationId
 		{
 			get => _operationId;
@@ -37,8 +36,5 @@ namespace UndacApp.Models
             get => _createdBy;
             set => SetField(ref _createdBy, value);
 		}
-
-		[OneToMany]
-		public List<OperationResourceRequest> OperationResourceRequests { get; set; }
 	}
 }

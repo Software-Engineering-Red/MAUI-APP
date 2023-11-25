@@ -44,8 +44,5 @@ namespace UndacApp.Models
 			get => _created_Date;
 			set => SetField(ref _created_Date, value);
 		}
-
-		[OneToMany]
-		public List<OperationalTeam> OperationalTeams { get; set; }
 	}
 }

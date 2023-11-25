@@ -199,9 +199,6 @@ namespace UndacApp.ViewModels
 			SelectedOperationResourceRequest.RequestedDetail = RequestedDetail;
 			SelectedOperationResourceRequest.OperationalTeamId = SelectedOperationalTeam.ID;
 			SelectedOperationResourceRequest.ResourceId = SelectedResource.ID;
-			
-	
-
 			await operationResourceRequestService.Update(SelectedOperationResourceRequest);
 		}
 

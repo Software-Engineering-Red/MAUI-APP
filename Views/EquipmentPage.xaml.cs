@@ -1,3 +1,4 @@
+using CommunityToolkit.Mvvm.DependencyInjection;
 using System.Collections.ObjectModel;
 using UndacApp.Models;
 using UndacApp.Services;
@@ -50,26 +51,14 @@ public partial class EquipmentPage : ContentPage
 	{
 		try
 		{
-            if (selectedEquipment is null) return;
+            AnEquipment eq = GetCurrentEquipment();
+            if (selectedEquipment is null || eq is null) return;
 
-            String? type = EquipmentTypePicker.SelectedItem as String;
-            BuildingType? loc = BuildingTypePicker.SelectedItem as BuildingType;
-            LogisticsOperation? op = OperationListPicker.SelectedItem as LogisticsOperation;
-
-            if (String.IsNullOrEmpty(type)
-                || String.IsNullOrEmpty(op.Name)
-                || String.IsNullOrEmpty(loc.Name)
-                || String.IsNullOrEmpty(EquipmentName.Text)
-                || String.IsNullOrEmpty(NumberRequiredEntry.Text)) return;
-
-            AnEquipment eq = new AnEquipment();
-
-            selectedEquipment.Name = EquipmentName.Text;
-            selectedEquipment.Type = type;
-            selectedEquipment.Location = loc.Name;
-            selectedEquipment.CurrentOperation = op.Name;
-            selectedEquipment.Quantity = Int32.Parse(NumberRequiredEntry.Text);
-
+            selectedEquipment.Name = eq.Name;
+            selectedEquipment.Type = eq.Type; ;
+            selectedEquipment.Location = eq.Location;
+            selectedEquipment.CurrentOperation = eq.CurrentOperation;
+            selectedEquipment.Quantity = eq.Quantity;
             equipmentService.Update(selectedEquipment);
         }
         catch (Exception ex)
@@ -95,31 +84,38 @@ public partial class EquipmentPage : ContentPage
 
     }
 
+    private AnEquipment GetCurrentEquipment()
+    {
+        String? type = EquipmentTypePicker.SelectedItem as String;
+        BuildingType? loc = BuildingTypePicker.SelectedItem as BuildingType;
+        LogisticsOperation? op = OperationListPicker.SelectedItem as LogisticsOperation;
+
+        if (String.IsNullOrEmpty(type)
+            || String.IsNullOrEmpty(op.Name)
+            || String.IsNullOrEmpty(loc.Name)
+            || String.IsNullOrEmpty(EquipmentName.Text)
+            || String.IsNullOrEmpty(NumberRequiredEntry.Text)) return null;
+
+        AnEquipment eq = new AnEquipment();
+
+        eq.Name = EquipmentName.Text;
+        eq.Type = type;
+        eq.Location = loc.Name;
+        eq.CurrentOperation = op.Name;
+        eq.Quantity = Int32.Parse(NumberRequiredEntry.Text);
+
+        return eq;
+    }
+
     private void AddNewEquipmentTypeRequest()
 	{
 		try
 		{
-            String? type = EquipmentTypePicker.SelectedItem as String;
-            BuildingType? loc = BuildingTypePicker.SelectedItem as BuildingType;
-            LogisticsOperation? op = OperationListPicker.SelectedItem as LogisticsOperation;
+            AnEquipment eq = GetCurrentEquipment();
+            if (eq == null) return;
 
-            if (String.IsNullOrEmpty(type)
-                || String.IsNullOrEmpty(op.Name)
-                || String.IsNullOrEmpty(loc.Name)
-                || String.IsNullOrEmpty(EquipmentName.Text)
-                || String.IsNullOrEmpty(NumberRequiredEntry.Text)) return;
-
-            AnEquipment eq = new AnEquipment();
-
-            eq.Name = EquipmentName.Text;
-            eq.Type = type;
-            eq.Location = loc.Name;
-            eq.CurrentOperation = op.Name;
-            eq.Quantity = Int32.Parse(NumberRequiredEntry.Text);
-
-			equipmentService.Add(eq);
+            equipmentService.Add(eq);
 			EquipmentList.Add(eq);
-
             DisplayAlert("Success", $"Successfully inserted record.", "OK");
 		}
 		catch (Exception ex)

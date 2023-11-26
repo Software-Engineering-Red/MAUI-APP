@@ -16,7 +16,8 @@
                   ItemsSource="{Binding OperationList}"
                   Margin="20"
                   SelectionMode="Single"
-                  SelectedItem="{Binding SelectedOperation, Mode=TwoWay}">
+                  SelectedItem="{Binding SelectedOperation, Mode=TwoWay}"
+                  ItemSelected="OnItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

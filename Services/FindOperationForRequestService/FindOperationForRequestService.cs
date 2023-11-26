@@ -89,7 +89,7 @@ namespace UndacApp.Services
 				return new List<OperationalTeam>();
 
 			var teamsWithOperationID = allTeams.Where(team => team.OperationId == operationalId).ToList();
-			if (teamsWithOperationID == null)
+			if (teamsWithOperationID != null)
 				return teamsWithOperationID;
 			return new List<OperationalTeam>();
 		}
@@ -107,7 +107,7 @@ namespace UndacApp.Services
 				return new List<OperationResourceRequest>();
 
 			var teamsWithOperationID = allRequests.Where(request => operationalTeamIds.Contains(request.OperationalTeamId)).ToList();
-			if (teamsWithOperationID == null)
+			if (teamsWithOperationID != null)
 				return teamsWithOperationID;
 			return new List<OperationResourceRequest>();
 		}

@@ -13,7 +13,6 @@ namespace UndacApp.ViewModels
 		private readonly IResourceService resourceService;
 		private readonly IOperationResourceRequestStatusService operationResourceRequestStatusService;
 		private OperationResourceRequest selectedOperationResourceRequest;
-		private OperationResourceRequestStatus selectedStatus;
 
 
 		private string requestedDetail;
@@ -26,7 +25,6 @@ namespace UndacApp.ViewModels
 			operationResourceRequestService = new OperationResourceRequestService();
 			operationalteamService	= new OperationalTeamService();
 			resourceService = new ResourceService();
-			operationResourceRequestStatusService = new OperationResourceRequestStatusService();
 
 			Task.Run(async () => await LoadData());
 		}
@@ -114,19 +112,6 @@ namespace UndacApp.ViewModels
 			}
 		}
 
-		public ObservableCollection<OperationResourceRequestStatus> States
-		{
-			get => states;
-			set
-			{
-				if (states != value)
-				{
-					states = value;
-					OnPropertyChanged(nameof(States));
-				}
-			}
-		}
-
 
 		private OperationalTeam selectedOperationalTeam;
 		public OperationalTeam SelectedOperationalTeam
@@ -162,7 +147,7 @@ namespace UndacApp.ViewModels
 
 		private async void Save()
 		{
-			if (string.IsNullOrWhiteSpace(RequestedDetail) || SelectedOperationalTeam == null || SelectedResource == null || SelectedStatus == null)
+			if (string.IsNullOrWhiteSpace(RequestedDetail) || SelectedOperationalTeam == null || SelectedResource == null)
 			{
 				return;
 			}
@@ -188,7 +173,7 @@ namespace UndacApp.ViewModels
 				RequestDate = DateTime.Today,
 				OperationalTeamId = SelectedOperationalTeam.ID,
 				ResourceId = SelectedResource.ID, 
-				Status = SelectedStatus.Name,						
+				Status = "Pending",						
 			};
 
 			await operationResourceRequestService.Add(newOperationResourceRequest);
@@ -229,7 +214,6 @@ namespace UndacApp.ViewModels
 			await LoadOperationResourceRequests();
 			await LoadOperationalTeams();
 			await LoadResources();
-			await LoadStates();
 		}
 
 		private async Task LoadOperationResourceRequests()
@@ -251,12 +235,6 @@ namespace UndacApp.ViewModels
 			ObservableCollection<AResource> resourcesData = new ObservableCollection<AResource>(await resourceService.GetAll());
 			Resources = resourcesData;
 			OnPropertyChanged(nameof(Resources));
-		}
-		private async Task LoadStates()
-		{
-			ObservableCollection<OperationResourceRequestStatus> statesData = new ObservableCollection<OperationResourceRequestStatus>(await operationResourceRequestStatusService.GetAll());
-			States = statesData;
-			OnPropertyChanged(nameof(States));
 		}
 
 

@@ -4,6 +4,7 @@ using System.Windows.Input;
 using System.Xml.Linq;
 using UndacApp.Models;
 using UndacApp.Services;
+using UndacApp.Views;
 
 namespace UndacApp.ViewModels
 {
@@ -115,6 +116,7 @@ namespace UndacApp.ViewModels
 			findOperationForRequestService = new FindOperationForRequestService();
 			ApplyFilter();
 			Task.Run(async () => await LoadOperations());
+			ViewRequestsCommand = new Command(async () => await ViewRequestsAsync());
 		}
 
 		private async void ApplyFilter()
@@ -128,6 +130,19 @@ namespace UndacApp.ViewModels
 			OperationList = operationData;
 			OnPropertyChanged(nameof(OperationList));
 		}
+
+		public ICommand ViewRequestsCommand { get; }
+
+		 private async Task ViewRequestsAsync()
+		 {
+			 if (SelectedOperation != null && SelectedOperation.IsHighlighted == true)
+			 {
+				await Application.Current.MainPage.Navigation.PushAsync(new ResourceRequestListPage
+					(new RequestListViewModel(SelectedOperation.Operation, findOperationForRequestService)));
+			 }
+	    
+		 }
+
 
 		private async Task<List<HighlightedOperation>> GetFilteredOperations()
 		{

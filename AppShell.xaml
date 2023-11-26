@@ -30,6 +30,7 @@ Icon="{OnPlatform 'icon_about.png', iOS='icon_about_ios.png', MacCatalyst='icon_
              Icon="{OnPlatform 'icon_about.png', iOS='icon_about_ios.png', MacCatalyst='icon_about_ios.png'}" />
 
 
+        
         <ShellContent
             Title="Equipment"
             ContentTemplate="{DataTemplate views:EquipmentPage}" />
@@ -141,6 +142,15 @@ Icon="{OnPlatform 'icon_about.png', iOS='icon_about_ios.png', MacCatalyst='icon_
         <ShellContent
             Title="Methodological Documentation"
             ContentTemplate="{DataTemplate views:MethodologicalDocumentationPage}" />
+
+
+        <ShellContent
+            Title="Add member request's"
+            ContentTemplate="{DataTemplate views:DisasterManagementCoordination}" />
+
+        <ShellContent
+            Title="Error Resource Reservation"
+            ContentTemplate="{DataTemplate views:ResourceRequestPage}"/>
 
 
     </TabBar>

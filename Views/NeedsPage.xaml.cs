@@ -21,6 +21,7 @@ namespace UndacApp.Views
 
             Task.Run(async () => await LoadNeeds());
             txe_need.Text = "";
+            txe_priority.Text = "";
         }
 
         private async Task LoadNeeds()
@@ -32,24 +33,17 @@ namespace UndacApp.Views
         private void SaveButton_Clicked(object sender, EventArgs e)
         {
             if (String.IsNullOrEmpty(txe_need.Text)) return;
-
+            if (String.IsNullOrEmpty(txe_priority.Text)) return;
             if (selectedNeed == null)
             {
-                var need = new Need() { Description = txe_need.Text };
+                var need = new Need() { Name = txe_need.Text, Priority = txe_priority.Text };
                 needService.AddNeed(need);
                 needs.Add(need);
             }
-            else
-            {
-                selectedNeed.Description = txe_need.Text;
-                needService.UpdateNeed(selectedNeed);
-                var need = needs.FirstOrDefault(x => x.Id == selectedNeed.Id);
-                need.Description = txe_need.Text;
-            }
-
             selectedNeed = null;
             ltv_needs.SelectedItem = null;
             txe_need.Text = "";
+            txe_priority.Text = "";
         }
 
         private async void DeleteButton_Clicked(object sender, EventArgs e)
@@ -65,6 +59,7 @@ namespace UndacApp.Views
 
             ltv_needs.SelectedItem = null;
             txe_need.Text = "";
+            txe_priority.Text = "";
         }
 
         private void ltv_needs_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -72,7 +67,8 @@ namespace UndacApp.Views
             selectedNeed = e.SelectedItem as Need;
             if (selectedNeed == null) return;
 
-            txe_need.Text = selectedNeed.Description;
+            txe_need.Text = selectedNeed.Name;
+            txe_priority.Text = selectedNeed.Priority;
         }
     }
 }

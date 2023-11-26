@@ -9,6 +9,10 @@
                 Placeholder="Add a Need"
                 HeightRequest="100" />
 
+        <Editor x:Name="txe_priority"
+                Placeholder="Type Priority (high,med,low)"
+                HeightRequest="100" />
+
         <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
             <Button Text="Save"
                     Clicked="SaveButton_Clicked" />
@@ -21,7 +25,7 @@
         <ListView x:Name="ltv_needs" Background="white" ItemSelected="ltv_needs_ItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell TextColor="Black" Text="{Binding Description}"/>
+                    <TextCell TextColor="Black" Text="{Binding Name}"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

@@ -1,6 +1,6 @@
 ﻿using UndacApp.Models;
 
-namespace UndacApp.Services.Accommodation
+namespace UndacApp.Services
 {
     /// <summary>
     /// service class for managing room types in a SQLite database

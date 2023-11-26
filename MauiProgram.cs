@@ -1,8 +1,6 @@
 ﻿using UndacApp.Data;
 using UndacApp.Services;
 using Microsoft.Extensions.Logging;
-using UndacApp.Services.Accommodation;
-
 namespace UndacApp;
 
 public static class MauiProgram

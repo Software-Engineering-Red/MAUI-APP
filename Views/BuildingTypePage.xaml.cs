@@ -1,7 +1,7 @@
 
 using UndacApp.Models;
 using System.Collections.ObjectModel;
-using UndacApp.Services.Accommodation;
+using UndacApp.Services;
 
 namespace UndacApp.Views;
 

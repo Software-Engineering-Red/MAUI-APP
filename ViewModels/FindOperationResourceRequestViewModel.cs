@@ -10,8 +10,7 @@ namespace UndacApp.ViewModels
 	public class FindOperationResourceRequestViewModel : INotifyPropertyChanged
 	{
 		private readonly IOperationService operationService;
-		private readonly IOperationalTeamService teamService;
-		private readonly IOperationResourceRequestService operationRequestService;
+		private readonly IFindOperationForRequestService findOperationForRequestService;
 
 		public ObservableCollection<HighlightedOperation> OperationList { get; set; }
 		private List<int> highlighedIds = new List<int>(); 
@@ -113,15 +112,14 @@ namespace UndacApp.ViewModels
 		public FindOperationResourceRequestViewModel()
 		{
 			operationService = new OperationService();
-			teamService = new OperationalTeamService();
-			operationRequestService = new OperationResourceRequestService();
-
-			GetHighlightedIds();
+			findOperationForRequestService = new FindOperationForRequestService();
+			ApplyFilter();
 			Task.Run(async () => await LoadOperations());
 		}
 
 		private async void ApplyFilter()
 		{
+			this.highlighedIds = await findOperationForRequestService.GetOperationIdsWithRequests();
 			await LoadOperations();
 		}
 		private async Task LoadOperations()
@@ -153,37 +151,6 @@ namespace UndacApp.ViewModels
 
 			return highlightedOperations;
 		}
-
-
-		private async Task GetHighlightedIds()
-		{
-			try
-			{
-				var allRequests = await operationRequestService.GetAll();
-				if (allRequests == null)
-					return;
-
-				var teamTasks = allRequests.Select(async request => await teamService.GetOne(request.OperationalTeamId)).ToList();
-				var teams = await Task.WhenAll(teamTasks);
-				if (teams == null)
-					return;
-
-				var operationTasks = teams.Select(async team => await operationService.GetOne(team.OperationId)).ToList();
-				var operations = await Task.WhenAll(operationTasks);
-				if (operations == null)
-					return;
-
-				var ids = operations.Where(operation => operation != null).Select(operation => operation.ID).ToList();
-				if (ids != null)
-					highlighedIds = ids;
-			}
-			catch (Exception ex)
-			{
-				// Handle or log the exception as needed.
-				Console.WriteLine($"Error in GetHighlightedIds: {ex.Message}");
-			}
-		}
-
 
 
 		public event PropertyChangedEventHandler? PropertyChanged;

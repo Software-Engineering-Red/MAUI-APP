@@ -29,22 +29,5 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Label Text="Needs Breakdown by Priority" FontSize="Large" HorizontalOptions="Center" Margin="0,20,0,10"/>
-        <ListView x:Name="ltv_needsBreakdown" BackgroundColor="White" HasUnevenRows="True">
-            <ListView.GroupHeaderTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout BackgroundColor="#2196F3" Padding="10">
-                            <Label Text="{Binding Key}" TextColor="White" FontSize="Medium"/>
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.GroupHeaderTemplate>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextCell TextColor="Black" Text="{Binding Name}"/>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
     </VerticalStackLayout>
 </ContentPage>

@@ -4,6 +4,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Collections.Immutable;
 
 namespace UndacApp.Views
 {
@@ -28,6 +29,8 @@ namespace UndacApp.Views
         {
             needs = new ObservableCollection<Need>(await needService.GetAllNeeds());
             ltv_needs.ItemsSource = needs;
+            var groupedNeeds = needs.GroupBy(n => n.Priority).Select(group => new ObservableCollection<Need>(group)).ToList();
+            ltv_needsBreakdown.ItemsSource = groupedNeeds;
         }
 
         private void SaveButton_Clicked(object sender, EventArgs e)

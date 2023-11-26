@@ -1,106 +1,208 @@
-﻿
+using System.Collections.ObjectModel;
 using UndacApp.Models;
 using UndacApp.Services;
-using System.Collections.ObjectModel;
+using UndacApp.Services.Accommodation;
 
 namespace UndacApp.Views;
-/*! <summary>
-        EquipmentPage class extending ContentPage, responsible for functionality on EquipmentPage view.
-    </summary> */
 public partial class EquipmentPage : ContentPage
 {
-    /*! <summary>
-        A reference pointer for storing currently selected Equipment.
-     </summary> */
-    Equipment selectedEquipment = null;
-    /*! <summary>
-        An instance of IEquipmentService
-     </summary> */
-    IEquipmentService equipmentService;
-    /*! <summary>
-        Collection of current Equipments.
-    </summary> */
-    ObservableCollection<Equipment> equipments = new ObservableCollection<Equipment>();
-    /*! <summary>
-        Constructor class, setting the binding context and initiating the equipment service, as well as loading the equipment list.
-    </summary> */
+	private ILogisticsService logisticsService;
+    private IBuildingTypeService buildingTypeService;
+	private IEquipmentService equipmentService;
+
+
+    private ObservableCollection<AnEquipment> EquipmentList { get; set; } = new ObservableCollection<AnEquipment>();
+    private ObservableCollection<BuildingType> BuildingList { get; set; } = new ObservableCollection<BuildingType>();
+    private ObservableCollection<LogisticsOperation> OperationList { get; set; } = new ObservableCollection<LogisticsOperation>();
+
+    private AnEquipment? selectedEquipment = null;
+
     public EquipmentPage()
-    {
-        InitializeComponent();
-        BindingContext =new Equipment();
+	{
+		InitializeComponent();
+		BindingContext = this;
+
         this.equipmentService = new EquipmentService();
-
-        Task.Run(async () => await LoadEquipment());
-        txe_equipment.Text = "";
+        this.buildingTypeService = new BuildingTypeService();
+		this.logisticsService = new LogisticsService();
     }
-    /*! <summary>
-        Private method loading the Equipment list using equipmentService getter.
-    </summary> 
-    <returns>Task promise, informing about the status of its' completion.</returns> */
-    private async Task LoadEquipment()
-    {
-        equipments = new ObservableCollection<Equipment>(await equipmentService.GetAll());
-        ltv_equipment.ItemsSource = equipments;
-    }
-    /*! <summary>
-         Method responsible for saving equipment into SQLite database, triggered by selection of save button.
-     </summary> 
-     <param name="sender">Details about the element that triggered the event.</param>
-     <param name="e">Event details, passed by eventHandler due to clicking event button.</param> */
-    private void SaveButton_Clicked(object sender, EventArgs e)
-    {
-        if (String.IsNullOrEmpty(txe_equipment.Text)) return;
 
-        if (selectedEquipment == null)
-        {
-            var role = new Equipment() { Name = txe_equipment.Text };
-            equipmentService.Add(role);
-            equipments.Add(role);
-        }
-        else
-        {
-            selectedEquipment.Name = txe_equipment.Text;
+	protected async override void OnAppearing()
+	{
+		ClearInput();
+
+        base.OnAppearing();
+		await PopulateEquipmentTypes();
+	}
+
+	private void ClearInput()
+	{
+        EquipmentName.Text = String.Empty;
+        NumberRequiredEntry.Text = String.Empty;
+        EquipmentTypePicker.SelectedIndex = 0;
+    }
+
+	private void OnAddRecordClicked(object sender, EventArgs e)
+	{
+		AddNewEquipmentTypeRequest();
+	}
+
+	private void OnUpdateClicked(object sender, EventArgs e)
+	{
+		try
+		{
+            if (selectedEquipment is null) return;
+
+            String? type = EquipmentTypePicker.SelectedItem as String;
+            BuildingType? loc = BuildingTypePicker.SelectedItem as BuildingType;
+            LogisticsOperation? op = OperationListPicker.SelectedItem as LogisticsOperation;
+
+            if (String.IsNullOrEmpty(type)
+                || String.IsNullOrEmpty(op.Name)
+                || String.IsNullOrEmpty(loc.Name)
+                || String.IsNullOrEmpty(EquipmentName.Text)
+                || String.IsNullOrEmpty(NumberRequiredEntry.Text)) return;
+
+            AnEquipment eq = new AnEquipment();
+
+            selectedEquipment.Name = EquipmentName.Text;
+            selectedEquipment.Type = type;
+            selectedEquipment.Location = loc.Name;
+            selectedEquipment.CurrentOperation = op.Name;
+            selectedEquipment.Quantity = Int32.Parse(NumberRequiredEntry.Text);
+
             equipmentService.Update(selectedEquipment);
-            var equipment = equipments.FirstOrDefault(x => x.ID == selectedEquipment.ID);
-            equipment.Name = txe_equipment.Text;
         }
-
-
-        selectedEquipment = null;
-        ltv_equipment.SelectedItem = null;
-        txe_equipment.Text = "";
-    }
-    /*! <summary>
-         Method responsible for removing organisation from SQLite database, triggered by selection of delete button.
-         Note: If no Organisation is selected, no organisation will be removed.
-    </summary> 
-    <param name="sender">Details about the element that triggered the event.</param>
-    <param name="e">Event details, passed by eventHandler due to clicking event button.</param> */
-    private async void DeleteButton_Clicked(object sender, EventArgs e)
-    {
-        if (ltv_equipment.SelectedItem == null)
+        catch (Exception ex)
         {
-            await Shell.Current.DisplayAlert("No Equipment Selected", "Select the role you want to delete from the list", "OK");
+            DisplayAlert("Error", $"Failed to update record. Error: {ex.Message}", "OK");
+            return;
+        }
+    }
+
+    private void OnRemoveClicked(object sender, EventArgs e)
+    {
+        try
+        {
+            if (selectedEquipment is null) return;
+            equipmentService.Remove(selectedEquipment);
+			EquipmentList.Remove(selectedEquipment);
+        }
+        catch (Exception ex)
+        {
+            DisplayAlert("Error", $"Failed to remove record. Error: {ex.Message}", "OK");
             return;
         }
 
-        await equipmentService.Remove(selectedEquipment);
-        equipments.Remove(selectedEquipment);
-
-        ltv_equipment.SelectedItem = null;
-        txe_equipment.Text = "";
     }
 
-    /*! <summary>
-            Method responsible for updating currently selected item, integrating UI and Backend functionality.
-        </summary> 
-        <param name="sender">Details about the element that triggered the event.</param>
-        <param name="e">Event details, passed by eventHandler due to clicking event button.</param> */
-    private void ltv_equipment_ItemSelected(object sender, SelectedItemChangedEventArgs e)
-    {
-        selectedEquipment = e.SelectedItem as Equipment;
-        if (selectedEquipment == null) return;
+    private void AddNewEquipmentTypeRequest()
+	{
+		try
+		{
+            String? type = EquipmentTypePicker.SelectedItem as String;
+            BuildingType? loc = BuildingTypePicker.SelectedItem as BuildingType;
+            LogisticsOperation? op = OperationListPicker.SelectedItem as LogisticsOperation;
 
-        txe_equipment.Text = selectedEquipment.Name;
+            if (String.IsNullOrEmpty(type)
+                || String.IsNullOrEmpty(op.Name)
+                || String.IsNullOrEmpty(loc.Name)
+                || String.IsNullOrEmpty(EquipmentName.Text)
+                || String.IsNullOrEmpty(NumberRequiredEntry.Text)) return;
+
+            AnEquipment eq = new AnEquipment();
+
+            eq.Name = EquipmentName.Text;
+            eq.Type = type;
+            eq.Location = loc.Name;
+            eq.CurrentOperation = op.Name;
+            eq.Quantity = Int32.Parse(NumberRequiredEntry.Text);
+
+			equipmentService.Add(eq);
+			EquipmentList.Add(eq);
+
+            DisplayAlert("Success", $"Successfully inserted record.", "OK");
+		}
+		catch (Exception ex)
+		{
+			DisplayAlert("Error", $"Failed to insert record. Error: {ex.Message}", "OK");
+			return;
+		}
+	}
+
+	private async Task PopulateEquipmentTypes()
+	{
+		try
+		{
+			OperationList = new ObservableCollection<LogisticsOperation>(await logisticsService.GetAll());
+
+			LogisticsOperation defaultOperation = new LogisticsOperation();
+			defaultOperation.Name = "No Logistic Mission Assigned";
+
+			OperationList.Insert(0, defaultOperation);
+            OperationListPicker.ItemsSource = OperationList;
+            OperationListPicker.SelectedIndex = 0;
+
+
+			BuildingList = new ObservableCollection<BuildingType>(await buildingTypeService.GetAll());
+			BuildingTypePicker.ItemsSource = BuildingList;
+            if (BuildingList.Count > 0) BuildingTypePicker.SelectedIndex = 0;
+
+            EquipmentList = new ObservableCollection<AnEquipment>(await equipmentService.GetAll());
+            ltv_equipments.ItemsSource = EquipmentList;
+        }
+		catch (Exception ex)
+		{
+			await DisplayAlert("Error", $"Failed to load EquipmentTypeRequests. Error: {ex.Message}", "OK");
+			return;
+		}
+	}
+
+	private void ltv_equipments_ItemSelected(object sender, EventArgs e)
+	{
+        selectedEquipment = ltv_equipments.SelectedItem as AnEquipment;
+		if (selectedEquipment is null) return;
+
+		EquipmentName.Text = selectedEquipment.Name;
+		NumberRequiredEntry.Text = selectedEquipment.Quantity.ToString();
+
+        EquipmentTypePicker.SelectedIndex = EquipmentTypePicker.Items.IndexOf(selectedEquipment.Type);
+		BuildingTypePicker.SelectedIndex = BuildingTypePicker.Items.IndexOf(selectedEquipment.Location);
+        OperationListPicker.SelectedIndex = OperationListPicker.Items.IndexOf(selectedEquipment.CurrentOperation);
+    }
+
+    private void UpdateFilter()
+    {
+		string? filterType = filterPicker.SelectedItem.ToString();
+        string? selectedFilter = searchEntry.Text;
+        if (EquipmentList.Count < 1 || String.IsNullOrEmpty(searchEntry.Text) 
+			|| String.IsNullOrEmpty(filterType))
+        {
+            ltv_equipments.ItemsSource = EquipmentList;
+            return;
+        }
+
+		if (filterType.Equals("Type"))
+        {
+            ltv_equipments.ItemsSource = EquipmentList.Where(r => r.Type.ToLower().Contains(selectedFilter.ToLower()));
+        }
+		else if (filterType.Equals("Location"))
+		{
+            ltv_equipments.ItemsSource = EquipmentList.Where(r => r.Location.ToLower().Contains(selectedFilter.ToLower()));
+        }
+		else
+		{
+            ltv_equipments.ItemsSource = EquipmentList.Where(r => r.Name.ToLower().Contains(selectedFilter.ToLower()));
+        }
+    }
+
+	void OnEntryTextChanged(object sender, TextChangedEventArgs e)
+	{
+		UpdateFilter();
+	}
+
+   private void Button_Clicked(object sender, EventArgs e)
+    {
+        UpdateFilter();
     }
 }

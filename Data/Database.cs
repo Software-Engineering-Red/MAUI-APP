@@ -36,7 +36,7 @@ namespace UndacApp.Data
                 await _database.CreateTableAsync<Models.OperationalTeam>();
                 await _database.CreateTableAsync<Models.BuildingType>();
                 await _database.CreateTableAsync<Models.Continent>();
-                await _database.CreateTableAsync<Models.Equipment>();
+                await _database.CreateTableAsync<Models.AnEquipment>();
                 await _database.CreateTableAsync<Models.OrderStatus>();
                 await _database.CreateTableAsync<Models.Organisation>();
                 await _database.CreateTableAsync<Models.PositionStatuses>();

@@ -34,11 +34,9 @@ public static class MauiProgram
         builder.Services.AddSingleton<IResourceTypeService, ResourceTypeService>();
         builder.Services.AddSingleton<IResourceService, ResourceService>();
         builder.Services.AddSingleton<IVolunteerService, VolunteerService>();
-
         builder.Services.AddSingleton<IMethodologicalDocumentationService, MethodologicalDocumentationService>();    
-        
         builder.Services.AddSingleton<ICalendarEventService, CalendarEventService>();
-
+        builder.Services.AddSingleton<IEquipmentService, EquipmentService>();
 
 #if DEBUG
         builder.Logging.AddDebug();

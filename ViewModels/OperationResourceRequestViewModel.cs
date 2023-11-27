@@ -145,6 +145,7 @@ namespace UndacApp.ViewModels
 			else
 			{
 				Update();
+				ResetValues();
 			}
 			await LoadData();
 		}
@@ -175,6 +176,7 @@ namespace UndacApp.ViewModels
 		private void ResetValues()
 		{
 			RequestedDetail = string.Empty;
+			SelectedOperationResourceRequest = null;
 		}
 
 		private async void Remove()

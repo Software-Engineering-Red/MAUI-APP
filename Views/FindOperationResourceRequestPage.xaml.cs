@@ -3,10 +3,12 @@ using UndacApp.ViewModels;
 
 public partial class FindOperationResourceRequestPage : ContentPage
 {
+	private readonly FindOperationResourceRequestViewModel viewModel;
 	public FindOperationResourceRequestPage()
 	{
+		this.viewModel = new FindOperationResourceRequestViewModel();
 		InitializeComponent();
-		BindingContext = new FindOperationResourceRequestViewModel();
+		BindingContext = viewModel;
 	}
 
 	private void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -18,5 +20,11 @@ public partial class FindOperationResourceRequestPage : ContentPage
 				viewModel.ViewRequestsCommand.Execute(null);
 			}
 		}
+	}
+
+	protected override void OnAppearing()
+	{
+		base.OnAppearing();
+		Task.Run(() => viewModel.ApplyFilter());
 	}
 }

@@ -4,7 +4,7 @@
              x:Class="UndacApp.Views.ResourceRequestListPage"
              Title="Requests">
     <StackLayout>
-        <Label Text="Hello:" FontSize="20" FontAttributes="Bold" />
+        <Label Text="{Binding SelectedOperation.Name, StringFormat='All Request for Operation: {0}'}" FontAttributes="Bold" FontSize="20" />
         <ListView x:Name="requestListView"
                   ItemsSource="{Binding RequestList}"
                   Margin="20">
@@ -18,6 +18,16 @@
                             <Label Text="{Binding RequestDate, StringFormat='Request Date: {0:yyyy-MM-dd}'}"/>
                             <Label Text="{Binding ResourceId, StringFormat='Resource ID: {0}'}"/>
                             <Label Text="{Binding Status, StringFormat='Status: {0}'}"/>
+                            <Button Text="Approve" Command="{Binding BindingContext.ApproveRequestCommand, Source={x:Reference requestListView}}" CommandParameter="{Binding .}" >
+                                <Button.Triggers>
+                                    <DataTrigger TargetType="Button" Binding="{Binding Status}" Value="Pending">
+                                        <Setter Property="IsVisible" Value="True" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Button" Binding="{Binding Status}" Value="Approved">
+                                        <Setter Property="IsVisible" Value="False" />
+                                    </DataTrigger>
+                                </Button.Triggers>
+                            </Button>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

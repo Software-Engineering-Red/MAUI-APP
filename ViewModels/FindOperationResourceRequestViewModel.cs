@@ -119,7 +119,7 @@ namespace UndacApp.ViewModels
 			ViewRequestsCommand = new Command(async () => await ViewRequestsAsync());
 		}
 
-		private async void ApplyFilter()
+		public async void ApplyFilter()
 		{
 			this.highlighedIds = await findOperationForRequestService.GetOperationIdsWithPendingRequests();
 			await LoadOperations();

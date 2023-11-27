@@ -1,7 +1,6 @@
 using System.Collections.ObjectModel;
 using UndacApp.Models;
 using UndacApp.Services;
-using UndacApp.Services.Accommodation;
 
 namespace UndacApp.Views;
 public partial class AddResourcePage : ContentPage

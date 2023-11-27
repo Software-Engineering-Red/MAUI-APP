@@ -1,29 +1,86 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sys="clr-namespace:System;assembly=netstandard"
              x:Class="UndacApp.Views.EquipmentPage"
-             Title="EquipmentPage"
-             xmlns:local="clr-namespace:Undac.Models">
-    <VerticalStackLayout Spacing="10" Margin="5">
-        <Editor x:Name="txe_equipment"
-                Placeholder="Add "
-                HeightRequest="100" />
+             Title="AddEquipments">
 
-        <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
-            <Button Text="Save"
-                    Clicked="SaveButton_Clicked" />
+    <ScrollView>
+        <VerticalStackLayout Spacing="30" Padding="30,20" VerticalOptions="Center">
+            <!-- Title -->
 
-            <Button Grid.Column="1"
-                    Text="Delete"
-                    Clicked="DeleteButton_Clicked" />
-        </Grid>
+            <Label Text="Add Equipments" FontSize="26" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
 
-        <ListView x:Name="ltv_equipment" Background="white" ItemSelected="ltv_equipment_ItemSelected">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextCell TextColor="Black" Text="{Binding Name}"/>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </VerticalStackLayout>
+            <Frame CornerRadius="10" Padding="20">
+                <VerticalStackLayout Spacing="5">
+                    <Label Text="Select equipment type:" FontSize="20" FontAttributes="Bold"/>
+                    <Picker x:Name="EquipmentTypePicker" BackgroundColor="White" TextColor="Black" TitleColor="Black">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Vehicles</x:String>
+                                <x:String>Communication</x:String>
+                                <x:String>Shelter and Bedding</x:String>
+                                <x:String>Power Generation</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                    <Label Text="Select Location:" FontSize="20" FontAttributes="Bold"/>
+                    <Picker x:Name="BuildingTypePicker" ItemDisplayBinding="{Binding Name}" BackgroundColor="White" TextColor="Black" TitleColor="Black"/>
+
+                    <Label Text="Equipment Name and Quantity:" FontSize="20" FontAttributes="Bold"/>
+                    <Entry Placeholder="Equipment Name:" x:Name="EquipmentName" />
+                    <Entry Placeholder="Quantity" x:Name="NumberRequiredEntry" Keyboard="Numeric"/>
+
+                    <Label Text="Assign Operation" FontSize="20" FontAttributes="Bold"/>
+                    <Picker x:Name="OperationListPicker" ItemDisplayBinding="{Binding Name}" BackgroundColor="White" TextColor="Black" TitleColor="Black"/>
+
+                    <Grid ColumnDefinitions="*,*,*" ColumnSpacing="3">
+                        <Button Text="Add Record" Grid.Column="0" Clicked="OnAddRecordClicked" BackgroundColor="#4CAF50" CornerRadius="8" />
+                        <Button Text="Update Record" Grid.Column="1" Clicked="OnUpdateClicked" BackgroundColor="blue" CornerRadius="8" />
+                        <Button Text="Remove Record" Grid.Column="2" Clicked="OnRemoveClicked" BackgroundColor="MediumVioletRed" CornerRadius="8" />
+                    </Grid>
+                </VerticalStackLayout>
+     
+            </Frame>
+            <Label Text="Equipment List" FontSize="26" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
+
+            <StackLayout Orientation="Horizontal">
+                <Entry x:Name="searchEntry" Placeholder="Search" HorizontalOptions="FillAndExpand" TextChanged="OnEntryTextChanged" />
+                <Picker x:Name="filterPicker" TextColor="White">
+                    <Picker.Title>Filter Equipment Status</Picker.Title>
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Name</x:String>
+                            <x:String>Type</x:String>
+                            <x:String>Location</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                    <Picker.SelectedItem>Name</Picker.SelectedItem>
+                </Picker>
+            </StackLayout>
+            <Button Text="Filter" Clicked="Button_Clicked" CornerRadius="8" />
+            <ListView x:Name="ltv_equipments" Background="white" ItemSelected="ltv_equipments_ItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0" Text="{Binding CurrentOperation}" TextColor="Black" FontAttributes="Bold"/>
+                                <Label Grid.Row="1" Text="{Binding Type}" TextColor="Black"/>
+                                <Label Grid.Row="2" Text="{Binding Name}" TextColor="Black"/>
+                                <Label Grid.Row="3" Text="{Binding Location}" TextColor="Black"/>
+                                <Label Grid.Row="4" Text="{Binding Quantity}" TextColor="Black"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

@@ -1,8 +1,6 @@
 ﻿using UndacApp.Data;
 using UndacApp.Services;
 using Microsoft.Extensions.Logging;
-using UndacApp.Services.Accommodation;
-
 namespace UndacApp;
 
 public static class MauiProgram
@@ -34,11 +32,9 @@ public static class MauiProgram
         builder.Services.AddSingleton<IResourceTypeService, ResourceTypeService>();
         builder.Services.AddSingleton<IResourceService, ResourceService>();
         builder.Services.AddSingleton<IVolunteerService, VolunteerService>();
-
         builder.Services.AddSingleton<IMethodologicalDocumentationService, MethodologicalDocumentationService>();    
-        
         builder.Services.AddSingleton<ICalendarEventService, CalendarEventService>();
-
+        builder.Services.AddSingleton<IEquipmentService, EquipmentService>();
 
 #if DEBUG
         builder.Logging.AddDebug();

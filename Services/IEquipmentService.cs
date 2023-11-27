@@ -5,7 +5,7 @@ namespace UndacApp.Services
     /*! <summary>
        Interface that exposes methods of EquipmentService
    </summary> */
-    public interface IEquipmentService : IService<Equipment>
+    public interface IEquipmentService : IService<AnEquipment>
     {
         
     }

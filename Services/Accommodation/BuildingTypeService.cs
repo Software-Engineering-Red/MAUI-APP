@@ -1,6 +1,6 @@
 ﻿using UndacApp.Models;
 
-namespace UndacApp.Services.Accommodation
+namespace UndacApp.Services
 {
     public class BuildingTypeService : AService<BuildingType>, IBuildingTypeService
     {

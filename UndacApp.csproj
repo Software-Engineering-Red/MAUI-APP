@@ -65,6 +65,9 @@
 	  <MauiXaml Update="Views\AcceptSpecialistRequests.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\EquipmentPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\DisasterManagementCoordination.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -144,6 +147,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\EquipmentPage.xaml.cs">
+	    <DependentUpon>EquipmentPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\LogisticOperationPage.xaml.cs">
 	    <DependentUpon>LogisticOperationPage.xaml</DependentUpon>
 	  </Compile>
@@ -195,8 +201,8 @@
 	  <Compile Update="Views\RotaPage.xaml.cs">
 	    <DependentUpon>RotaPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\EquipmentPage.xaml.cs">
-	    <DependentUpon>EquipmentPage.xaml</DependentUpon>
+	  <Compile Update="Views\EquipmentPage_Old.xaml.cs">
+	    <DependentUpon>EquipmentPage_Old.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\WelcomePage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>

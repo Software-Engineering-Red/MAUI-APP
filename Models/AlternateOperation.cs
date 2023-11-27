@@ -1,6 +1,6 @@
 ﻿namespace UndacApp.Models
 {
-    public class Operation : AModel
+    public class AlternateOperation : AModel
     {
         private OperationStatus _status;
         public OperationStatus Status

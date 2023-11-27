@@ -5,20 +5,20 @@ using System.Collections.ObjectModel;
 
 namespace UndacApp.Views;
 
-public partial class OperationPage : ContentPage
+public partial class AlternateOperationPage : ContentPage
 {
 
-    private Operation? selectedOperation = null;
+    private AlternateOperation? selectedOperation = null;
 
-    OperationService operationService;
+    AlternateOperationService operationService;
 
-    ObservableCollection<Operation> operations = new ObservableCollection<Operation>();
+    ObservableCollection<AlternateOperation> operations = new ObservableCollection<AlternateOperation>();
 
-    public OperationPage()
+    public AlternateOperationPage()
     {
         InitializeComponent();
-        this.BindingContext = new Operation();
-        this.operationService = new OperationService();
+        this.BindingContext = new AlternateOperation();
+        this.operationService = new AlternateOperationService();
         
     }
 
@@ -30,7 +30,7 @@ public partial class OperationPage : ContentPage
 
     private async Task LoadOperations()
     {
-        operations = new ObservableCollection<Operation>(await operationService.GetAll());
+        operations = new ObservableCollection<AlternateOperation>(await operationService.GetAll());
         ltv_operations.ItemsSource = operations;
     }
 
@@ -50,7 +50,7 @@ public partial class OperationPage : ContentPage
 
         if (selectedOperation == null)
         {
-            var operation = new Operation()
+            var operation = new AlternateOperation()
             {
                 Name = NameEntry.Text,
                 Status = Enum.Parse<OperationStatus>(StatusEntry.SelectedItem as string),
@@ -104,7 +104,7 @@ public partial class OperationPage : ContentPage
 
     private void ltv_operations_ItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
-        selectedOperation = e.SelectedItem as Operation;
+        selectedOperation = e.SelectedItem as AlternateOperation;
         if (selectedOperation == null) return;
 
         NameEntry.Text = selectedOperation.Name;

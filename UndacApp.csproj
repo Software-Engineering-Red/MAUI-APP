@@ -76,7 +76,7 @@
 	  <MauiXaml Update="Views\BuildingTypePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\OperationPage.xaml">
+	  <MauiXaml Update="Views\AlternateOperationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\MethodologicalDocumentationPage.xaml">
@@ -153,8 +153,8 @@
 		<Compile Update="Views\BuildingTypePage.xaml.cs">
 			<DependentUpon>BuildingTypePage.xaml</DependentUpon>
 		</Compile>
-		<Compile Update="Views\OperationPage.xaml.cs">
-		  <DependentUpon>OperationPage.xaml</DependentUpon>
+		<Compile Update="Views\AlternateOperationPage.xaml.cs">
+		  <DependentUpon>AlternateOperationPage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Views\MethodologicalDocumentationPage.xaml.cs">
 		  <DependentUpon>MethodologicalDocumentationPage.xaml</DependentUpon>

@@ -21,15 +21,11 @@ namespace UndacApp.Services
 			operationRequestService = new OperationResourceRequestService();
 		}
 
-		public async Task<List<int>> GetOperationIdsWithRequests()
+		public async Task<List<int>> GetOperationIdsWithPendingRequests()
 		{
 			try
 			{
-				var allRequests = await operationRequestService.GetAll();
-				if (allRequests == null)
-					return new List<int>();
-
-				var teams = await FindTeamsWithRequestIds(allRequests.ToArray());
+				var teams = await FindTeamsWithRequestIds();
 				if (teams == null)
 					return new List<int>();
 
@@ -48,9 +44,15 @@ namespace UndacApp.Services
 			return new List<int>();
 		}
 
-		private async Task<OperationalTeam[]> FindTeamsWithRequestIds(OperationResourceRequest[] requests)
+
+		private async Task<OperationalTeam[]> FindTeamsWithRequestIds()
 		{
-			var teamTasks = requests.Select(async request => await teamService.GetOne(request.OperationalTeamId)).ToList();
+			var allRequests = await operationRequestService.GetAll();
+			if (allRequests == null)
+				return new OperationalTeam[] {};
+
+			var teamTasks = allRequests.Where(request => request.Status == OperationResourceRequestStatus.Pending).
+				Select(async request => await teamService.GetOne(request.OperationalTeamId)).ToList();
 			return await Task.WhenAll(teamTasks); ;
 		}
 
@@ -112,5 +114,9 @@ namespace UndacApp.Services
 			return new List<OperationResourceRequest>();
 		}
 
+		public async Task<int> ApproveRequest(OperationResourceRequest request)
+		{
+			return await operationRequestService.ApproveRequest(request);
+		}
 	}
 }

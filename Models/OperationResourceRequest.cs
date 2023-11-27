@@ -44,8 +44,8 @@ namespace UndacApp.Models
 			set => SetField(ref resource_Id, value);
 		}
 
-		private string status;
-		public string Status
+		private OperationResourceRequestStatus status;
+		public OperationResourceRequestStatus Status
 		{
 			get => status;
 			set => SetField(ref status, value);

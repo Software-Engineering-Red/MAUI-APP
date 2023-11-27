@@ -121,7 +121,7 @@ namespace UndacApp.ViewModels
 
 		private async void ApplyFilter()
 		{
-			this.highlighedIds = await findOperationForRequestService.GetOperationIdsWithRequests();
+			this.highlighedIds = await findOperationForRequestService.GetOperationIdsWithPendingRequests();
 			await LoadOperations();
 		}
 		private async Task LoadOperations()

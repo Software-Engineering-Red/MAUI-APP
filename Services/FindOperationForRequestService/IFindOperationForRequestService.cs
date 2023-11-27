@@ -9,7 +9,8 @@ namespace UndacApp.Services
 {
 	public interface IFindOperationForRequestService
 	{
-		Task<List<int>> GetOperationIdsWithRequests();
+		Task<List<int>> GetOperationIdsWithPendingRequests();
 		Task<List<OperationResourceRequest>> GetRequestsByOperation(Operation operation);
+		Task<int> ApproveRequest(OperationResourceRequest request);
 	}
 }

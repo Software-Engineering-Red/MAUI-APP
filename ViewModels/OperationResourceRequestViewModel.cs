@@ -11,14 +11,13 @@ namespace UndacApp.ViewModels
 		private readonly IOperationResourceRequestService operationResourceRequestService;
 		private readonly IOperationalTeamService operationalteamService;
 		private readonly IResourceService resourceService;
-		private readonly IOperationResourceRequestStatusService operationResourceRequestStatusService;
 		private OperationResourceRequest selectedOperationResourceRequest;
 
 
 		private string requestedDetail;
 		private ObservableCollection<OperationalTeam> operationalTeams;
 		private ObservableCollection<AResource> resources;
-		private ObservableCollection<OperationResourceRequestStatus> states;
+
 
 		public OperationResourceRequestViewModel()
 		{
@@ -30,13 +29,11 @@ namespace UndacApp.ViewModels
 		}
 
 		public OperationResourceRequestViewModel(OperationResourceRequestService operationResourceRequestService,
-			OperationalTeamService operationalTeamService, ResourceService resourceService, 
-			OperationResourceRequestStatusService operationResourceRequestStatusService)
+			OperationalTeamService operationalTeamService, ResourceService resourceService)
 		{
 			this.operationResourceRequestService = operationResourceRequestService;
 			this.operationalteamService = operationalTeamService;
 			this.resourceService = resourceService;
-			this.operationResourceRequestStatusService = operationResourceRequestStatusService;
 
 			Task.Run(async () => await LoadData());
 		}
@@ -96,18 +93,6 @@ namespace UndacApp.ViewModels
 				{
 					resources = value;
 					OnPropertyChanged(nameof(Resources));
-				}
-			}
-		}
-		public OperationResourceRequestStatus SelectedStatus
-		{
-			get => selectedStatus;
-			set
-			{
-				if (selectedStatus != value)
-				{
-					selectedStatus = value;
-					OnPropertyChanged(nameof(SelectedStatus));
 				}
 			}
 		}
@@ -173,7 +158,7 @@ namespace UndacApp.ViewModels
 				RequestDate = DateTime.Today,
 				OperationalTeamId = SelectedOperationalTeam.ID,
 				ResourceId = SelectedResource.ID, 
-				Status = "Pending",						
+				Status = OperationResourceRequestStatus.Pending,						
 			};
 
 			await operationResourceRequestService.Add(newOperationResourceRequest);

@@ -68,7 +68,7 @@
 	  <MauiXaml Update="Views\DisasterManagementCoordination.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\FindOperationResourceRequestPage.xaml">
+	  <MauiXaml Update="Views\FindPendingOperationResourceRequestPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\LogisticOperationPage.xaml">
@@ -111,7 +111,7 @@
     <MauiXaml Update="Views\RequestSpecialists.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
-    <MauiXaml Update="Views\ResourceRequestListPage.xaml">
+    <MauiXaml Update="Views\PendingResourceRequestListPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="Views\ResourceRequestPage.xaml">
@@ -150,6 +150,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\FindPendingOperationResourceRequestPage.xaml.cs">
+	    <DependentUpon>FindPendingOperationResourceRequestPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\LogisticOperationPage.xaml.cs">
 	    <DependentUpon>LogisticOperationPage.xaml</DependentUpon>
 	  </Compile>
@@ -176,6 +179,9 @@
 		</Compile>
 		<Compile Update="Views\PrivilegeRequestsPage.xaml.cs">
 		  <DependentUpon>PrivilegeRequestsPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\PendingResourceRequestListPage.xaml.cs">
+		  <DependentUpon>PendingResourceRequestListPage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Views\RolesPage.xaml.cs">
 			<DependentUpon>RolesPage.xaml</DependentUpon>

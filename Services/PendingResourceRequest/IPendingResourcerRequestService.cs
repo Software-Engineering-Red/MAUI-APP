@@ -7,10 +7,10 @@ using UndacApp.Models;
 
 namespace UndacApp.Services
 {
-	public interface IFindOperationForRequestService
+	public interface IPendingResourcerRequestService
 	{
 		Task<List<int>> GetOperationIdsWithPendingRequests();
-		Task<List<OperationResourceRequest>> GetRequestsByOperation(Operation operation);
+		Task<List<OperationResourceRequest>> GetPendingRequestsByOperation(Operation operation);
 		Task<int> ApproveRequest(OperationResourceRequest request);
 	}
 }

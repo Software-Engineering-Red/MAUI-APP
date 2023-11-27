@@ -7,14 +7,14 @@ using UndacApp.Models;
 
 namespace UndacApp.Services
 {
-	public class FindOperationForRequestService : IFindOperationForRequestService
+	public class PendingResourceRequestService : IPendingResourcerRequestService
 	{
 		private readonly IOperationService operationService;
 		private readonly IOperationalTeamService teamService;
 		private readonly IOperationResourceRequestService operationRequestService;
 
 
-		public FindOperationForRequestService()
+		public PendingResourceRequestService()
 		{
 			operationService = new OperationService();
 			teamService = new OperationalTeamService();
@@ -63,7 +63,7 @@ namespace UndacApp.Services
 			return await Task.WhenAll(operationTasks);
 		}
 
-		public async Task<List<OperationResourceRequest>> GetRequestsByOperation(Operation operation)
+		public async Task<List<OperationResourceRequest>> GetPendingRequestsByOperation(Operation operation)
 		{
 			try
 			{
@@ -71,7 +71,7 @@ namespace UndacApp.Services
 				if (teamsWithOperationID == null || teamsWithOperationID.Count == 0)
 					return new List<OperationResourceRequest>();
 
-				var operationRequests = await GetRequestsByTeams(teamsWithOperationID);
+				var operationRequests = await GetPendingRequestsByTeams(teamsWithOperationID);
 				if (operationRequests == null || operationRequests.Count == 0)
 					return new List<OperationResourceRequest>();
 
@@ -79,7 +79,7 @@ namespace UndacApp.Services
 			}
 			catch (Exception ex)
 			{
-				Console.WriteLine($"Error in GetRequestsByOperation: {ex.Message}");
+				Console.WriteLine($"Error in GetPendingRequestsByOperation: {ex.Message}");
 				return new List<OperationResourceRequest>();
 			}
 		}
@@ -98,7 +98,7 @@ namespace UndacApp.Services
 
 
 
-		private async Task<List<OperationResourceRequest>> GetRequestsByTeams(List<OperationalTeam> teams)
+		private async Task<List<OperationResourceRequest>> GetPendingRequestsByTeams(List<OperationalTeam> teams)
 		{
 			var allRequests = await operationRequestService.GetAll();
 			if (allRequests == null)
@@ -108,7 +108,8 @@ namespace UndacApp.Services
 			if (operationalTeamIds == null)
 				return new List<OperationResourceRequest>();
 
-			var teamsWithOperationID = allRequests.Where(request => operationalTeamIds.Contains(request.OperationalTeamId)).ToList();
+			var teamsWithOperationID = allRequests.Where(request => operationalTeamIds.Contains(request.OperationalTeamId) && 
+			request.Status == OperationResourceRequestStatus.Pending).ToList();
 			if (teamsWithOperationID != null)
 				return teamsWithOperationID;
 			return new List<OperationResourceRequest>();

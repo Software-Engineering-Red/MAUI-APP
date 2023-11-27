@@ -7,9 +7,9 @@ using UndacApp.Services;
 
 namespace UndacApp.ViewModels
 {
-	public class RequestListViewModel : INotifyPropertyChanged
+	public class PendingResourceRequestListViewModel : INotifyPropertyChanged
 	{
-		private readonly IFindOperationForRequestService findOperationForRequestService;
+		private readonly IPendingResourcerRequestService findOperationForRequestService;
 		private Operation selectedOperation;
 
 		public Operation SelectedOperation
@@ -29,7 +29,7 @@ namespace UndacApp.ViewModels
 		public ObservableCollection<OperationResourceRequest> RequestList { get; set; }
 		public ICommand ApproveRequestCommand { get; }
 
-		public RequestListViewModel(Operation selectedOperation, IFindOperationForRequestService service)
+		public PendingResourceRequestListViewModel(Operation selectedOperation, IPendingResourcerRequestService service)
 		{
 			this.selectedOperation = selectedOperation;
 			findOperationForRequestService = service;
@@ -41,7 +41,7 @@ namespace UndacApp.ViewModels
 		{
 			if (SelectedOperation != null)
 			{
-				var requests = await findOperationForRequestService.GetRequestsByOperation(SelectedOperation);
+				var requests = await findOperationForRequestService.GetPendingRequestsByOperation(SelectedOperation);
 				RequestList = new ObservableCollection<OperationResourceRequest>(requests);
 				OnPropertyChanged(nameof(RequestList));
 			}

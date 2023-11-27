@@ -8,10 +8,10 @@ using UndacApp.Views;
 
 namespace UndacApp.ViewModels
 {
-	public class FindOperationResourceRequestViewModel : INotifyPropertyChanged
+	public class FindPendingOperationResourceRequestViewModel : INotifyPropertyChanged
 	{
 		private readonly IOperationService operationService;
-		private readonly IFindOperationForRequestService findOperationForRequestService;
+		private readonly IPendingResourcerRequestService findOperationForRequestService;
 
 		public ObservableCollection<HighlightedOperation> OperationList { get; set; }
 		private List<int> highlighedIds = new List<int>(); 
@@ -110,10 +110,10 @@ namespace UndacApp.ViewModels
 		}
 
 
-		public FindOperationResourceRequestViewModel()
+		public FindPendingOperationResourceRequestViewModel()
 		{
 			operationService = new OperationService();
-			findOperationForRequestService = new FindOperationForRequestService();
+			findOperationForRequestService = new PendingResourceRequestService();
 			ApplyFilter();
 			Task.Run(async () => await LoadOperations());
 			ViewRequestsCommand = new Command(async () => await ViewRequestsAsync());
@@ -138,7 +138,7 @@ namespace UndacApp.ViewModels
 			 if (SelectedOperation != null && SelectedOperation.IsHighlighted == true)
 			 {
 				await Application.Current.MainPage.Navigation.PushAsync(new ResourceRequestListPage
-					(new RequestListViewModel(SelectedOperation.Operation, findOperationForRequestService)));
+					(new PendingResourceRequestListViewModel(SelectedOperation.Operation, findOperationForRequestService)));
 			 }
 	    
 		 }

@@ -3,10 +3,10 @@ using UndacApp.ViewModels;
 
 public partial class FindOperationResourceRequestPage : ContentPage
 {
-	private readonly FindOperationResourceRequestViewModel viewModel;
+	private readonly FindPendingOperationResourceRequestViewModel viewModel;
 	public FindOperationResourceRequestPage()
 	{
-		this.viewModel = new FindOperationResourceRequestViewModel();
+		this.viewModel = new FindPendingOperationResourceRequestViewModel();
 		InitializeComponent();
 		BindingContext = viewModel;
 	}
@@ -15,7 +15,7 @@ public partial class FindOperationResourceRequestPage : ContentPage
 	{
 		if (e.SelectedItem is HighlightedOperation highlightedOperation)
 		{
-			if (BindingContext is FindOperationResourceRequestViewModel viewModel)
+			if (BindingContext is FindPendingOperationResourceRequestViewModel viewModel)
 			{
 				viewModel.ViewRequestsCommand.Execute(null);
 			}

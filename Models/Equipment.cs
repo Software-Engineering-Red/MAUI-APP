@@ -10,11 +10,11 @@
         /*! <summary>
        A private variable, storing Equipment name
           </summary> */
-        private string _name;
-        public string Name
+        private string equip;
+        public string Equip
         {
-            get => _name;
-            set => SetField(ref _name, value);
+            get => equip;
+            set => SetField(ref equip, value);
         }
     }
 }

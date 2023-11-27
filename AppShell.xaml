@@ -150,8 +150,17 @@ Icon="{OnPlatform 'icon_about.png', iOS='icon_about_ios.png', MacCatalyst='icon_
             ContentTemplate="{DataTemplate views:ResourceRequestPage}"/>
 
         <ShellContent
-            Title="Alternate Operations"
+            Title="Operations"
+            ContentTemplate="{DataTemplate views:OperationPage}"/>
+      
+        <ShellContent
+    Title="Request Equipment"
+    ContentTemplate="{DataTemplate views:RequestEquipment}"/>
+      
+<ShellContent
+              Title="Alternate Operations"
             ContentTemplate="{DataTemplate views:AlternateOperationPage}"/>
+
 
     </TabBar>
 

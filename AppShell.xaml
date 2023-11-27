@@ -149,6 +149,9 @@ Icon="{OnPlatform 'icon_about.png', iOS='icon_about_ios.png', MacCatalyst='icon_
         <ShellContent
             Title="Operations"
             ContentTemplate="{DataTemplate views:OperationPage}"/>
+        <ShellContent
+    Title="Request Equipment"
+    ContentTemplate="{DataTemplate views:RequestEquipment}"/>
 
     </TabBar>
 

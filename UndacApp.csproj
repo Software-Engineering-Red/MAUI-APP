@@ -94,6 +94,9 @@
     <MauiXaml Update="Views\OperationResourceRequestPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
+    <MauiXaml Update="Views\RequestEquipment.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
 	  <MauiXaml Update="Views\ResorceType.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

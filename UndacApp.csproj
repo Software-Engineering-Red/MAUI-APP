@@ -68,6 +68,9 @@
 	  <MauiXaml Update="Views\DisasterManagementCoordination.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\FindPendingOperationResourceRequestPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\LogisticOperationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -88,9 +91,9 @@
 	  <MauiXaml Update="Views\OperationalTeamPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-    <MauiXaml Update="Views\OperationResourceRequestStatusPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </MauiXaml>
+	  <MauiXaml Update="Views\OperationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
     <MauiXaml Update="Views\OperationResourceRequestPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
@@ -111,6 +114,9 @@
     <MauiXaml Update="Views\RequestSpecialists.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
+    <MauiXaml Update="Views\PendingResourceRequestListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
     <MauiXaml Update="Views\ResourceRequestPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
@@ -119,6 +125,9 @@
 		</MauiXaml>
 		<MauiXaml Update="Views\RotaPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\SingleResourceRequestPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\SkillPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
@@ -144,6 +153,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\FindPendingOperationResourceRequestPage.xaml.cs">
+	    <DependentUpon>FindPendingOperationResourceRequestPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\LogisticOperationPage.xaml.cs">
 	    <DependentUpon>LogisticOperationPage.xaml</DependentUpon>
 	  </Compile>
@@ -173,6 +185,9 @@
 		</Compile>
 		<Compile Update="Views\PrivilegeRequestsPage.xaml.cs">
 		  <DependentUpon>PrivilegeRequestsPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\PendingResourceRequestListPage.xaml.cs">
+		  <DependentUpon>PendingResourceRequestListPage.xaml</DependentUpon>
 		</Compile>
 		<Compile Update="Views\RolesPage.xaml.cs">
 			<DependentUpon>RolesPage.xaml</DependentUpon>

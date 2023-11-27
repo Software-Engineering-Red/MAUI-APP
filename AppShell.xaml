@@ -127,11 +127,14 @@ Icon="{OnPlatform 'icon_about.png', iOS='icon_about_ios.png', MacCatalyst='icon_
            Title="Operational-Team"
            ContentTemplate="{DataTemplate views:OperationalTeamPage}" />
         <ShellContent
-            Title="Operation-Resource-Request-Status"
-            ContentTemplate="{DataTemplate views:OperationResourceRequestStatusPage}" />
-        <ShellContent
             Title="Operation-Resource-Request"
             ContentTemplate="{DataTemplate views:OperationRessourceRequestPage}" />
+        <ShellContent
+            Title="Operations"
+            ContentTemplate="{DataTemplate views:OperationPage}" />
+        <ShellContent
+            Title="Find Resource-Request for Operations"
+            ContentTemplate="{DataTemplate views:FindOperationResourceRequestPage}" />
 
         <ShellContent
             Title="Methodological Documentation"

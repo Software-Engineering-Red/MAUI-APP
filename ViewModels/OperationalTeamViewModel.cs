@@ -6,24 +6,86 @@ using UndacApp.Services;
 
 namespace UndacApp.ViewModels
 {
-	public class OperationalTeamViewModel : INotifyPropertyChanged
+	public class OperationalTeamViewModel : AStandardViewModel
 	{
-		private IOperationalTeamService operationalTeamService;
+		private readonly IOperationalTeamService operationalTeamService;
+		private readonly IOperationService operationService;
+		private readonly IOperationalTeamStatusService operationalTeamStatusService;
 		private OperationalTeam selectedOperationalTeam;
 
 		private string name;
 		private string createdBy;
-		private int teamId;
-		private string status;
+		private Operation selectedOperation;
+		private OperationalTeamStatus selectedStatus;
 
 
 		public OperationalTeamViewModel()
 		{
 			operationalTeamService = new OperationalTeamService();
+			operationService = new OperationService();
+			operationalTeamStatusService = new OperationalTeamStatusService();
 			Task.Run(async () => await LoadData());
 		}
 
 		public ObservableCollection<OperationalTeam> OperationalTeamList { get; set; }
+		private ObservableCollection<Operation> operations;
+		private ObservableCollection<OperationalTeamStatus> states;
+
+
+		public ObservableCollection<Operation> Operations
+        {
+            get => operations;
+            set
+            {
+                if (operations != value)
+                {
+                    operations = value;
+                    OnPropertyChanged(nameof(Operations));
+                }
+            }
+        }
+
+        public ObservableCollection<OperationalTeamStatus> States
+        {
+            get => states;
+            set
+            {
+                if (states != value)
+                {
+                    states = value;
+                    OnPropertyChanged(nameof(States));
+                }
+            }
+        }
+
+
+		public Operation SelectedOperation
+		{
+			get => selectedOperation;
+			set
+			{
+				if (selectedOperation != value)
+				{
+					selectedOperation = value;
+					OnPropertyChanged(nameof(selectedOperation));
+				}
+			}
+		}
+
+
+		// Just for Testpurposes Please Introduce OperationalTeamStatusHistory if needed
+		public OperationalTeamStatus SelectedStatus
+		{
+			get => selectedStatus;
+			set
+			{
+				if (selectedStatus != value)
+				{
+					selectedStatus = value;
+					OnPropertyChanged(nameof(selectedStatus));
+				}
+			}
+		}
 
 		public string Name
 		{
@@ -51,32 +113,6 @@ namespace UndacApp.ViewModels
 			}
 		}
 
-		public int TeamId
-		{
-			get => teamId;
-			set
-			{
-				if (teamId != value)
-				{
-					teamId = value;
-					OnPropertyChanged(nameof(TeamId));
-				}
-			}
-		}
-
-		public string Status
-		{
-			get => status;
-			set
-			{
-				if (status != value)
-				{
-					status = value;
-					OnPropertyChanged(nameof(Status));
-				}
-			}
-		}
-
 		public OperationalTeam SelectedOperationalTeam
 		{
 			get => selectedOperationalTeam;
@@ -91,19 +127,18 @@ namespace UndacApp.ViewModels
 					{
 						Name = selectedOperationalTeam.Name;
 						CreatedBy = selectedOperationalTeam.CreatedBy;
-						TeamId = selectedOperationalTeam.ID;
-						Status = selectedOperationalTeam.TeamStatus;
 					}
 				}
 			}
 		}
 
-		public ICommand SaveCommand => new Command(Save);
-		public ICommand DeleteCommand => new Command(Delete);
 
-		private async void Save()
+
+		
+
+		protected override async void Save()
 		{
-			if (string.IsNullOrWhiteSpace(Name))
+			if (string.IsNullOrWhiteSpace(Name) || string.IsNullOrWhiteSpace(CreatedBy) || SelectedStatus == null || selectedOperation == null )
 			{
 				return;
 			}
@@ -120,45 +155,7 @@ namespace UndacApp.ViewModels
 			resetValues();
 		}
 
-		private async void add()
-		{
-			OperationalTeam operationalTeam = new OperationalTeam
-			{
-				Name = Name,
-				CreatedBy = CreatedBy,
-				ID = TeamId,
-				TeamStatus = Status
-			};
-
-			await operationalTeamService.Add(operationalTeam);
-		}
-
-		private async void update()
-		{
-			SelectedOperationalTeam.Name = Name;
-			SelectedOperationalTeam.CreatedBy = CreatedBy;
-			SelectedOperationalTeam.ID = TeamId;
-			SelectedOperationalTeam.TeamStatus = Status;
-
-			await operationalTeamService.Update(SelectedOperationalTeam);
-		}
-		private void resetValues()
-		{
-			SelectedOperationalTeam = null;
-
-			Name = string.Empty;
-			CreatedBy = string.Empty;
-			TeamId = 0;
-			Status = string.Empty;
-
-		}
-
-		private async void remove()
-		{
-			var result = await operationalTeamService.Remove(SelectedOperationalTeam);
-		}
-
-		private async void Delete()
+		protected override async void Delete()
 		{
 			if (SelectedOperationalTeam != null)
 			{
@@ -168,23 +165,71 @@ namespace UndacApp.ViewModels
 			await LoadData();
 		}
 
-	
+		protected override async Task LoadData()
+		{
+			await LoadOperationalTeam();
+			await LoadOperations();
+			await LoadStates();
+		}
 
-
-		private async Task LoadData()
+		private async Task LoadOperationalTeam()
 		{
 			ObservableCollection<OperationalTeam> newData = new ObservableCollection<OperationalTeam>(await operationalTeamService.GetAll());
-
 			OperationalTeamList = newData;
 			OnPropertyChanged(nameof(OperationalTeamList));
 		}
 
-
-		public event PropertyChangedEventHandler PropertyChanged;
-
-		protected virtual void OnPropertyChanged(string propertyName)
+		private async Task LoadOperations()
 		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+			ObservableCollection<Operation> operationData = new ObservableCollection<Operation>(await operationService.GetAll());
+			Operations = operationData;
+			OnPropertyChanged(nameof(Operations));
+		}
+
+		private async Task LoadStates()
+		{
+			ObservableCollection<OperationalTeamStatus> stateData = new ObservableCollection<OperationalTeamStatus>(await operationalTeamStatusService.GetAll());
+			States = stateData;
+			OnPropertyChanged(nameof(States));
+		}
+
+		protected override async void add()
+		{
+			OperationalTeam operationalTeam = new OperationalTeam
+			{
+				Name = Name,
+				CreatedBy = CreatedBy,
+				OperationId = SelectedOperation.ID,
+				TeamStatus = SelectedStatus.Name
+			};
+
+			await operationalTeamService.Add(operationalTeam);
+		}
+
+		protected override async void update()
+		{
+			SelectedOperationalTeam.Name = Name;
+			SelectedOperationalTeam.CreatedBy = CreatedBy;
+			SelectedOperationalTeam.OperationId = SelectedOperation.ID;
+			SelectedOperationalTeam.TeamStatus = SelectedStatus.Name;
+
+			await operationalTeamService.Update(SelectedOperationalTeam);
+		}
+
+
+		protected override void resetValues()
+		{
+			SelectedOperationalTeam = null;
+
+			Name = string.Empty;
+			CreatedBy = string.Empty;
+			SelectedOperation = null;
+			SelectedStatus = null;
+		}
+
+		protected override async void remove()
+		{
+			await operationalTeamService.Remove(SelectedOperationalTeam);
 		}
 	}
 }

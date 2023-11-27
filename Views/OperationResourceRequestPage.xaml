@@ -16,11 +16,6 @@
                 ItemDisplayBinding="{Binding Name}"
                 SelectedItem="{Binding SelectedResource, Mode=TwoWay}"/>
 
-        <Label Text="Select Status"></Label>
-        <Picker ItemsSource="{Binding States}"
-                ItemDisplayBinding="{Binding Name}"
-                SelectedItem="{Binding SelectedStatus, Mode=TwoWay}"/>
-
         <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
             <Button Text="Save"
                 Command="{Binding SaveCommand}"/>

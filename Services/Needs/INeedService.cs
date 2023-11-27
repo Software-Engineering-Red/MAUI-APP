@@ -5,12 +5,8 @@ using UndacApp.Models;
 
 namespace UndacApp.Services
 {
-    internal interface INeedService
+    internal interface INeedService: IService<Need>
     {
-        Task<List<Need>> GetAllNeeds();
-        Task<int> AddNeed(Need need);
-        Task<int> DeleteNeed(Need need);
-        Task<int> UpdateNeed(Need need);
         Task<Dictionary<string, int>> GetPriorityCounts();
     }
 }

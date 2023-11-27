@@ -27,7 +27,7 @@ namespace UndacApp.Views
 
         private async Task LoadNeeds()
         {
-            needs = new ObservableCollection<Need>(await needService.GetAllNeeds());
+            needs = new ObservableCollection<Need>(await needService.GetAll());
             ltv_needs.ItemsSource = needs;
         }
 
@@ -38,7 +38,7 @@ namespace UndacApp.Views
             if (selectedNeed == null)
             {
                 var need = new Need() { Name = txe_need.Text, Priority = txe_priority.Text };
-                needService.AddNeed(need);
+                needService.Add(need);
                 needs.Add(need);
             }
             selectedNeed = null;
@@ -55,7 +55,7 @@ namespace UndacApp.Views
                 return;
             }
 
-            await needService.DeleteNeed(selectedNeed);
+            await needService.Remove(selectedNeed);
             needs.Remove(selectedNeed);
 
             ltv_needs.SelectedItem = null;

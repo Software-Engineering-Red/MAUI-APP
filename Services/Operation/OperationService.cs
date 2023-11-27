@@ -1,16 +1,13 @@
-﻿using UndacApp.Data;
-using UndacApp.Models;
+﻿using UndacApp.Models;
+using System.Collections.Generic;
+using System.Linq;
 using SQLite;
+using SQLiteNetExtensions.Extensions;
+
 
 namespace UndacApp.Services
 {
-    public class OperationService : AService<Operation>, IOperationService
-    {
-
-        public async Task<List<Operation>> GetOperationsByStatus(OperationStatus status)
-        {
-            return await _database.Table<Operation>().Where(a => a.Status == status).ToListAsync();
-        }
-        
-    }
+	public class OperationService : AService<Operation>, IOperationService
+	{
+	}
 }

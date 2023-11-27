@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UndacApp.Views.ResourceRequestListPage"
+             Title="Requests">
+    <StackLayout>
+        <Label Text="{Binding SelectedOperation.Name, StringFormat='All Request for Operation: {0}'}" FontAttributes="Bold" FontSize="20" />
+        <ListView x:Name="requestListView"
+                  ItemsSource="{Binding RequestList}"
+                  Margin="20">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="10">
+                            <Label Text="{Binding RequestedDetail, StringFormat='Requested Detail: {0}'}" FontAttributes="Bold"/>
+                            <Label Text="{Binding OperationalTeamId, StringFormat='Operational Team ID: {0}'}"/>
+                            <Label Text="{Binding RequestedBy, StringFormat='Requested By: {0}'}"/>
+                            <Label Text="{Binding RequestDate, StringFormat='Request Date: {0:yyyy-MM-dd}'}"/>
+                            <Label Text="{Binding ResourceId, StringFormat='Resource ID: {0}'}"/>
+                            <Label Text="{Binding Status, StringFormat='Status: {0}'}"/>
+                            <Button Text="Approve" Command="{Binding BindingContext.ApproveRequestCommand, Source={x:Reference requestListView}}" CommandParameter="{Binding .}" >
+                                <Button.Triggers>
+                                    <DataTrigger TargetType="Button" Binding="{Binding Status}" Value="Pending">
+                                        <Setter Property="IsVisible" Value="True" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Button" Binding="{Binding Status}" Value="Approved">
+                                        <Setter Property="IsVisible" Value="False" />
+                                    </DataTrigger>
+                                </Button.Triggers>
+                            </Button>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

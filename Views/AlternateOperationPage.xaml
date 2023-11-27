@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UndacApp.Views.AlternateOperationPage"
+             Title="OperationPage"
+             xmlns:local="clr-namespace:Undac.Models">
+    <VerticalStackLayout Spacing="10" Margin="5">
+        <Entry Placeholder="Name" x:Name="NameEntry" />
+        <Picker Title="Status" x:Name="StatusEntry">
+
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>NotStarted</x:String>
+                    <x:String>InProgress</x:String>
+                    <x:String>Completed</x:String>
+                    <x:String>Aborted</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+        <DatePicker x:Name="DateStartedEntry" />
+        <Entry Placeholder="Location" x:Name="LocationEntry" />
+        <Entry Placeholder="NumberOfPersonnel" x:Name="NumberOfPersonnelEntry" />
+        <Entry Placeholder="FinalReport" x:Name="FinalReportEntry" />
+
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
+            <Button Text="Save"
+                    Clicked="SaveButton_Clicked" />
+
+            <Button Grid.Column="1"
+                    Text="Delete"
+                    Clicked="DeleteButton_Clicked" />
+        </Grid>
+
+        <ListView x:Name="ltv_operations" Background="white" ItemSelected="ltv_operations_ItemSelected">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell TextColor="Black" Text="{Binding Name}"/>
+                </DataTemplate>
+             </ListView.ItemTemplate>
+        </ListView>
+    </VerticalStackLayout>
+</ContentPage>

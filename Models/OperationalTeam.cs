@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using SQLite;
+using SQLiteNetExtensions.Attributes;
+
 namespace UndacApp.Models
 {
 	public class OperationalTeam : AModel
@@ -18,7 +20,17 @@ namespace UndacApp.Models
             set => SetField(ref _teamStatus, value);
 		}
 
-        private string _createdBy;
+		/// <summary>
+		/// The attribute is described a bit confusing as operationId in the ERD
+		/// </summary>
+		private int _operationId;
+		public int OperationId
+		{
+			get => _operationId;
+			set => SetField(ref _operationId, value);
+		}
+
+		private string _createdBy;
         public string CreatedBy
 		{
             get => _createdBy;

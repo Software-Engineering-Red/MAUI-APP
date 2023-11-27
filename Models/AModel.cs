@@ -28,5 +28,5 @@ namespace UndacApp.Models
             OnPropertyChanged(propertyName);
             return true;
         }
-}
+    }
 }

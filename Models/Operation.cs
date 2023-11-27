@@ -1,49 +1,48 @@
-﻿namespace UndacApp.Models
+﻿using System;
+using System.Collections.Generic;
+using SQLite;
+using SQLiteNetExtensions.Attributes;
+
+namespace UndacApp.Models
 {
-    public class Operation : AModel
-    {
-        private OperationStatus _status;
-        public OperationStatus Status
-        {
-            get => _status;
-            set => SetField(ref _status, value);
-        }
+	public class Operation : AModel
+	{
 
-        private DateTime _dateStarted;
-        public DateTime DateStarted
-        {
-            get => _dateStarted;
-            set => SetField(ref _dateStarted, value);
-        }
 
-        private string _location;
-        public string Location
-        {
-            get => _location;
-            set => SetField(ref _location, value);
-        }
+		private string _type;
+		public string Type
+		{
+			get => _type;
+			set => SetField(ref _type, value);
+		}
 
-        private int _numberOfPersonnel;
-        public int NumberOfPersonnel
-        {
-            get => _numberOfPersonnel;
-            set => SetField(ref _numberOfPersonnel, value);
-        }
+		private string _purpose;
+		public string Purpose
+		{
+			get => _purpose;
+			set => SetField(ref _purpose, value);
+		}
 
-        private string _finalReport;
-        public string FinalReport
-        {
-            get => _finalReport;
-            set => SetField(ref _finalReport, value);
-        }
+		private string _location;
+		public string Location
+		{
+			get => _location;
+			set => SetField(ref _location, value);
+		}
 
-    }
 
-    public enum OperationStatus
-    {
-        NotStarted,
-        InProgress,
-        Completed,
-        Aborted
-    }
+		private string _createdBy;
+		public string CreatedBy
+		{
+			get => _createdBy;
+			set => SetField(ref _createdBy, value);
+		}
+
+		private DateTime? _created_Date;
+		public DateTime? CreatedDate
+		{
+			get => _created_Date;
+			set => SetField(ref _created_Date, value);
+		}
+	}
 }

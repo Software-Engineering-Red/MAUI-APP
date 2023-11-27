@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Windows.Input;
 using UndacApp.Models;
 using UndacApp.Services;
-using static Microsoft.Maui.Controls.Device;
 
 namespace UndacApp.ViewModels
 {
@@ -12,34 +11,29 @@ namespace UndacApp.ViewModels
 		private readonly IOperationResourceRequestService operationResourceRequestService;
 		private readonly IOperationalTeamService operationalteamService;
 		private readonly IResourceService resourceService;
-		private readonly IOperationResourceRequestStatusService operationResourceRequestStatusService;
 		private OperationResourceRequest selectedOperationResourceRequest;
-		private OperationResourceRequestStatus selectedStatus;
 
 
 		private string requestedDetail;
 		private ObservableCollection<OperationalTeam> operationalTeams;
 		private ObservableCollection<AResource> resources;
-		private ObservableCollection<OperationResourceRequestStatus> states;
+
 
 		public OperationResourceRequestViewModel()
 		{
 			operationResourceRequestService = new OperationResourceRequestService();
 			operationalteamService	= new OperationalTeamService();
 			resourceService = new ResourceService();
-			operationResourceRequestStatusService = new OperationResourceRequestStatusService();
 
 			Task.Run(async () => await LoadData());
 		}
 
 		public OperationResourceRequestViewModel(OperationResourceRequestService operationResourceRequestService,
-			OperationalTeamService operationalTeamService, ResourceService resourceService, 
-			OperationResourceRequestStatusService operationResourceRequestStatusService)
+			OperationalTeamService operationalTeamService, ResourceService resourceService)
 		{
 			this.operationResourceRequestService = operationResourceRequestService;
 			this.operationalteamService = operationalTeamService;
 			this.resourceService = resourceService;
-			this.operationResourceRequestStatusService = operationResourceRequestStatusService;
 
 			Task.Run(async () => await LoadData());
 		}
@@ -102,31 +96,6 @@ namespace UndacApp.ViewModels
 				}
 			}
 		}
-		public OperationResourceRequestStatus SelectedStatus
-		{
-			get => selectedStatus;
-			set
-			{
-				if (selectedStatus != value)
-				{
-					selectedStatus = value;
-					OnPropertyChanged(nameof(SelectedStatus));
-				}
-			}
-		}
-
-		public ObservableCollection<OperationResourceRequestStatus> States
-		{
-			get => states;
-			set
-			{
-				if (states != value)
-				{
-					states = value;
-					OnPropertyChanged(nameof(States));
-				}
-			}
-		}
 
 
 		private OperationalTeam selectedOperationalTeam;
@@ -163,7 +132,7 @@ namespace UndacApp.ViewModels
 
 		private async void Save()
 		{
-			if (string.IsNullOrWhiteSpace(RequestedDetail) || SelectedOperationalTeam == null || SelectedResource == null || SelectedStatus == null)
+			if (string.IsNullOrWhiteSpace(RequestedDetail) || SelectedOperationalTeam == null || SelectedResource == null)
 			{
 				return;
 			}
@@ -171,14 +140,14 @@ namespace UndacApp.ViewModels
 			if (SelectedOperationResourceRequest == null)
 			{
 				Add();
+				ResetValues();
 			}
 			else
 			{
 				Update();
+				ResetValues();
 			}
-
 			await LoadData();
-			ResetValues();
 		}
 
 		private async void Add()
@@ -190,7 +159,7 @@ namespace UndacApp.ViewModels
 				RequestDate = DateTime.Today,
 				OperationalTeamId = SelectedOperationalTeam.ID,
 				ResourceId = SelectedResource.ID, 
-				Status = SelectedStatus.Name,						
+				Status = OperationResourceRequestStatus.Pending,						
 			};
 
 			await operationResourceRequestService.Add(newOperationResourceRequest);
@@ -201,15 +170,13 @@ namespace UndacApp.ViewModels
 			SelectedOperationResourceRequest.RequestedDetail = RequestedDetail;
 			SelectedOperationResourceRequest.OperationalTeamId = SelectedOperationalTeam.ID;
 			SelectedOperationResourceRequest.ResourceId = SelectedResource.ID;
-			
-	
-
 			await operationResourceRequestService.Update(SelectedOperationResourceRequest);
 		}
 
 		private void ResetValues()
 		{
 			RequestedDetail = string.Empty;
+			SelectedOperationResourceRequest = null;
 		}
 
 		private async void Remove()
@@ -234,7 +201,6 @@ namespace UndacApp.ViewModels
 			await LoadOperationResourceRequests();
 			await LoadOperationalTeams();
 			await LoadResources();
-			await LoadStates();
 		}
 
 		private async Task LoadOperationResourceRequests()
@@ -257,15 +223,9 @@ namespace UndacApp.ViewModels
 			Resources = resourcesData;
 			OnPropertyChanged(nameof(Resources));
 		}
-		private async Task LoadStates()
-		{
-			ObservableCollection<OperationResourceRequestStatus> statesData = new ObservableCollection<OperationResourceRequestStatus>(await operationResourceRequestStatusService.GetAll());
-			States = statesData;
-			OnPropertyChanged(nameof(States));
-		}
 
 
-		public event PropertyChangedEventHandler PropertyChanged;
+		public event PropertyChangedEventHandler? PropertyChanged;
 
 		protected virtual void OnPropertyChanged(string propertyName)
 		{

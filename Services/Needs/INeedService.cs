@@ -11,5 +11,6 @@ namespace UndacApp.Services
         Task<int> AddNeed(Need need);
         Task<int> DeleteNeed(Need need);
         Task<int> UpdateNeed(Need need);
+        Task<Dictionary<string, int>> GetPriorityCounts();
     }
 }

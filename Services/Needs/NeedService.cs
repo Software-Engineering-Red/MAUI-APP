@@ -50,5 +50,14 @@ namespace UndacApp.Services
             await SetUpDb();
             return await _dbConnection.UpdateAsync(need);
         }
+        // Get the count of each priority
+        public async Task<Dictionary<string, int>> GetPriorityCounts()
+        {
+            await SetUpDb();
+            var needs = await _dbConnection.Table<Need>().ToListAsync();
+            var priorityCounts = needs.GroupBy(n => n.Priority)
+                                      .ToDictionary(group => group.Key, group => group.Count());
+            return priorityCounts;
+        }
     }
 }
